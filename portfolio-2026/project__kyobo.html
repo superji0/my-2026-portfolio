@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교보문고 모바일 웹 리뉴얼 | 장지영 포트폴리오</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./sub__projectpage.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="header" role="banner">
+        <div class="inner">
+            <h1 class="logo">
+                <a href="./index.html" aria-label="포트폴리오 메인으로 이동">
+                    <img src="images/logo.png" alt="장지영 포트폴리오 로고">
+                </a>
+            </h1>
+            <p class="header__tagline">Jiyeong's Portfolio</p>
+            <nav role="navigation" aria-label="주요 메뉴">
+                <ul>
+                    <li><a href="./index.html#header">Home</a></li>
+                    <li><a href="./index.html#projects">Projects</a></li>
+                    <li><a href="./index.html#about">About (me)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="kyobo__bg">
+        <div class="inner">
+            <div class="project__title">
+                <h2>
+                    교보문고 <br>
+                    모바일웹 <br>
+                    리뉴얼
+                </h2>
+            </div>
+            <div class="project__item">
+                <ul>
+                    <li>사용툴</li>
+                    <li>
+                        <img src="images/html5.png" alt="HTML5">
+                        <img src="images/Css3.png" alt="CSS3">
+                        <img src="images/JavaScript.png" alt="JavaScript">
+                        <img src="images/Figma.png" alt="Figma">
+                    </li>
+                    <li>
+                        <strong>피그마 툴을 사용하여 리디자인하였습니다.</strong>
+                    </li>
+                    <li class="bar">
+                        <div class="graph">
+                            <div class="fill">디자인 - 개인 100%</div>
+                        </div>
+                    </li>
+                    <strong>시맨틱 태그를 사용하여 구조적인 마크업 진행</strong>
+                    <li class="bar">
+                        <div class="graph">
+                            <div class="fill">퍼블리싱 - 개인 100%</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <section class="project__link inner" aria-label="교보문고 프로젝트 페이지 링크">
+        <ul>
+            <li>
+                <img src="./images/kybo_screen.png" alt="교보문고 메인페이지 스크린샷" loading="lazy">
+                <a target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/mobile_kyobo/" class="site__link">메인페이지 바로보기</a>
+            </li>
+            <li>
+                <img src="./images/kybo_screen03.png" alt="교보문고 서브페이지 스크린샷" loading="lazy">
+                <a target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/mobile_kyobo/sub.html" class="site__link">서브페이지 바로보기</a>
+            </li>
+            <li>
+                <img src="./images/kybo_screen02.png" alt="교보문고 메뉴 스크린샷" loading="lazy">
+                <a target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/mobile_kyobo/menu.html" class="site__link">메뉴 바로보기</a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="project__visual" aria-label="교보문고 프로젝트 전체 목업">
+        <img src="images/mockup_kyobo.jpg" alt="교보문고 모바일웹 전체 목업 이미지" loading="lazy">
+    </section>
+
+    <script>
+    const header = document.querySelector('#header');
+    const gnbLinks = document.querySelectorAll('#header nav li a');
+
+    window.addEventListener('scroll', function () {
+        const scrollPosition = window.scrollY;
+        if (scrollPosition > 0) {
+            header.classList.add('on');
+            header.style.transition = '0.2s ease-in';
+            document.querySelector('.logo').style.display = 'none';
+            gnbLinks.forEach(function (link) { link.classList.add('on'); });
+        } else {
+            header.classList.remove('on');
+            document.querySelector('.logo').style.display = 'block';
+            gnbLinks.forEach(function (link) { link.classList.remove('on'); });
+        }
+    });
+    </script>
+</body>
+</html>

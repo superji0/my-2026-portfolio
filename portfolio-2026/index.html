@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장지영 | 웹 퍼블리셔 &amp; 프론트엔드 개발자 포트폴리오</title>
+    <meta name="description" content="웹 퍼블리셔 장지영의 포트폴리오. HTML, CSS, JavaScript, React를 활용한 웹 프로젝트를 소개합니다.">
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+            "@type": "Person",
+            "name": "장지영",
+            "jobTitle": "웹 퍼블리셔 / 프론트엔드 개발자",
+            "url": "https://github.com/superji0",
+            "knowsAbout": ["HTML5", "CSS3", "SCSS", "JavaScript", "React", "Git", "Figma", "Photoshop"]
+        }
+    }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <!-- ============================
+         헤더 / 네비게이션
+    ============================ -->
+    <header id="header" role="banner">
+        <div class="inner">
+            <h1 class="logo">
+                <a href="#header" aria-label="포트폴리오 홈으로 이동">
+                    <img src="images/logo.png" alt="장지영 포트폴리오 로고" width="100" height="auto">
+                </a>
+            </h1>
+            <p class="header__tagline">Jiyeong's Portfolio</p>
+            <nav role="navigation" aria-label="주요 메뉴">
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About (me)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ============================
+         비주얼 히어로 영역
+    ============================ -->
+    <main id="visual">
+        <div class="visual__title">
+            <div>
+                <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
+                <span>&nbsp;</span>
+                <span>t</span><span>o</span>
+                <span>&nbsp;</span>
+                <span>m</span><span>y</span>
+            </div>
+            <div>
+                <span>P</span><span>o</span><span>r</span><span>t</span><span>f</span><span>o</span><span>l</span><span>i</span><span>o</span>
+            </div>
+        </div>
+        <svg aria-hidden="true">
+            <path class="v1" fill="none" stroke="#0084CE" stroke-width="0.8" stroke-dasharray="750"
+                  d="M879.59-197.47l585.98,585.98l-455.52,455.52L96.86-69.15"/>
+        </svg>
+        <div class="visual__bg"></div>
+    </main>
+
+
+    <!-- ============================
+         01. 웹 퍼블리싱 프로젝트
+    ============================ -->
+    <section id="projects" class="index__publishing">
+        <div class="index__publishing__overlay"></div>
+        <div class="text__block">
+            <div class="text__container">
+                <div class="text__effect">
+                    <p class="t1">꾸준히 발전하는</p>
+                    <p class="t2">웹 퍼블리셔 장지영입니다.</p>
+                    <p class="t3">실용적이고 최적화된 웹/모바일 구현을 목표로합니다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="index__publishing__text">
+            <p class="project__num">01</p>
+            <h2>Web publishing <br>Projects</h2>
+        </div>
+    </section>
+
+    <section class="publising__wrap inner" aria-label="웹 퍼블리싱 프로젝트 목록">
+        <ul class="publishing__con on">
+            <!-- 교보문고 -->
+            <li class="con__tilte">
+                <h3>
+                    교보문고<br>
+                    모바일웹 리뉴얼
+                </h3>
+                <span>메인페이지</span>
+                <span>서브페이지 1page</span>
+                <span>메뉴</span>
+            </li>
+            <li class="con__sum">
+                <a target="_blank" rel="noopener noreferrer" href="./project__kyobo.html" aria-label="교보문고 프로젝트 상세 보기">
+                    <div class="menu">
+                        <img src="images/mockup_kyobo.jpg" alt="교보문고 모바일웹 리뉴얼 목업 이미지" loading="lazy">
+                        <div class="con_logo">
+                            <img src="images/proj_kyobo.png" alt="교보문고 로고" loading="lazy">
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <!-- 레어로우 -->
+            <li class="con__sum">
+                <a target="_blank" rel="noopener noreferrer" href="./project__rareraw.html" aria-label="레어로우 프로젝트 상세 보기">
+                    <div class="menu">
+                        <img src="images/mockup_rareraw.jpg" alt="레어로우 웹사이트 리뉴얼 목업 이미지" loading="lazy">
+                        <div class="con_logo">
+                            <img src="images/proj_rareraw.jpg" alt="레어로우 로고" loading="lazy">
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="con__tilte">
+                <h3>
+                    레어로우<br>
+                    웹 페이지 리뉴얼
+                </h3>
+                <span>메인페이지</span>
+                <span>로그인/회원가입 페이지</span>
+            </li>
+        </ul>
+        <div class="cursor ball"><div class="bg">Click</div></div>
+    </section>
+
+
+    <!-- ============================
+         React 프로젝트 (프론트엔드 성장)
+    ============================ -->
+    <section class="featured-project" aria-label="프론트엔드 개발 프로젝트">
+        <div class="inner">
+            <div class="featured-project__header">
+                <p class="project__num">React</p>
+                <h2>Frontend Development</h2>
+            </div>
+            <div class="featured-project__card">
+                <div class="featured-project__info">
+                    <h3 class="featured-project__title">
+                        보험 보상 청구<br>
+                        관리 대시보드
+                    </h3>
+                    <p class="featured-project__desc">
+                        프론트엔드 개발자로 성장하기 위해 진행한 React 학습 프로젝트입니다.<br>
+                        보험 보상 청구 어드민 시스템을 컴포넌트 기반으로 설계하고,
+                        실무 수준의 UI/UX를 구현했습니다.
+                    </p>
+                    <ul class="featured-project__stack">
+                        <li>React</li>
+                        <li>Vite</li>
+                        <li>CSS Variables</li>
+                        <li>Component Architecture</li>
+                    </ul>
+                    <div class="featured-project__links">
+                        <a href="./dashboard-react/" target="_blank" rel="noopener noreferrer" class="featured-project__btn featured-project__btn--primary" aria-label="대시보드 프로젝트 라이브 데모 보기">
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/superji0" target="_blank" rel="noopener noreferrer" class="featured-project__btn featured-project__btn--secondary" aria-label="대시보드 프로젝트 GitHub 저장소 보기">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="featured-project__preview">
+                    <div class="featured-project__mockup">
+                        <div class="mockup__sidebar"></div>
+                        <div class="mockup__content">
+                            <div class="mockup__bar"></div>
+                            <div class="mockup__grid">
+                                <div class="mockup__card"></div>
+                                <div class="mockup__card"></div>
+                                <div class="mockup__card"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================
+         02. 디자인 프로젝트
+    ============================ -->
+    <section class="index__design">
+        <div class="index__design__overlay"></div>
+        <div class="index__design__text">
+            <p class="project__num">02</p>
+            <h2>Design <br>Projects</h2>
+        </div>
+    </section>
+
+    <!-- 디자인 팝업 모달 -->
+    <div class="pop_group">
+        <div class="pop" role="dialog" aria-label="가구 브랜드 타이포그래피 상세">
+            <div class="in">
+                <strong>가구 브랜드 타이포그래피</strong>
+                <p>디자인 툴</p>
+                <span>Photoshop</span>
+                <div class="mockup">
+                    <div class="item2">
+                        <img src="./images/design_typo2.jpg" alt="가구 브랜드 타이포그래피 디자인 시안" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="close" role="button" aria-label="팝업 닫기">close</a>
+        </div>
+        <div class="pop" role="dialog" aria-label="플르부아 웹사이트 리디자인 상세">
+            <div class="in">
+                <strong>플르부아 웹사이트 리디자인</strong>
+                <p>디자인 툴</p>
+                <span>Photoshop</span>
+                <div class="mockup">
+                    <div class="item">
+                        <img src="./images/design_site_01.jpg" alt="플르부아 웹사이트 메인 시안" loading="lazy">
+                    </div>
+                    <img src="./images/iMacMockup.png" alt="iMac 목업 프레임" loading="lazy">
+                </div>
+            </div>
+            <a href="#" class="close" role="button" aria-label="팝업 닫기">close</a>
+        </div>
+        <div class="pop" role="dialog" aria-label="페이스 갤러리 웹사이트 리디자인 상세">
+            <div class="in">
+                <strong>페이스 갤러리 웹사이트 리디자인</strong>
+                <p>디자인 툴</p>
+                <span>Photoshop</span>
+                <div class="mockup">
+                    <div class="item">
+                        <img src="./images/design_pace.jpg" alt="페이스 갤러리 웹사이트 시안" loading="lazy">
+                    </div>
+                    <img src="./images/iMacMockup.png" alt="iMac 목업 프레임" loading="lazy">
+                </div>
+            </div>
+            <a href="#" class="close" role="button" aria-label="팝업 닫기">close</a>
+        </div>
+        <div class="pop" role="dialog" aria-label="H&M 웹사이트 리디자인 상세">
+            <div class="in">
+                <strong>H&amp;M 웹사이트 리디자인</strong>
+                <p>디자인 툴</p>
+                <span>Photoshop</span>
+                <div class="mockup">
+                    <p>main page</p>
+                    <div class="item">
+                        <img src="./images/design_hmmain.jpg" alt="H&M 웹사이트 메인페이지 시안" loading="lazy">
+                    </div>
+                    <img src="./images/iMacMockup.png" alt="iMac 목업 프레임" loading="lazy">
+                </div>
+                <div class="mockup">
+                    <p>sub page</p>
+                    <div class="item">
+                        <img src="./images/design_hmsub.jpg" alt="H&M 웹사이트 서브페이지 시안" loading="lazy">
+                    </div>
+                    <img src="./images/iMacMockup.png" alt="iMac 목업 프레임" loading="lazy">
+                </div>
+            </div>
+            <a href="#" class="close" role="button" aria-label="팝업 닫기">close</a>
+        </div>
+    </div><!-- /.pop_group -->
+
+    <section id="design" class="design__wrap" aria-label="디자인 프로젝트 갤러리">
+        <div class="inner">
+            <ul>
+                <li class="menu" data-idx="0">
+                    <img src="./images/design_typo_mok.jpg" alt="가구 브랜드 타이포그래피 디자인" loading="lazy">
+                    <p class="project__num">01</p>
+                    <h3>Typography</h3>
+                </li>
+                <li class="menu" data-idx="1">
+                    <img src="./images/design_site_01.jpg" alt="플르부아 웹사이트 디자인" loading="lazy">
+                    <p class="project__num">02</p>
+                    <h3>Web site design</h3>
+                </li>
+                <li class="menu" data-idx="2">
+                    <img src="./images/design_pace.jpg" alt="페이스 갤러리 웹사이트 디자인" loading="lazy">
+                    <p class="project__num">03</p>
+                    <h3>Web site design</h3>
+                </li>
+                <li class="menu" data-idx="3">
+                    <img src="./images/design_h&m.png" alt="H&M 웹사이트 디자인" loading="lazy">
+                    <p class="project__num">04</p>
+                    <h3>Web site design</h3>
+                </li>
+                <li>
+                    <a target="_blank" rel="noopener noreferrer" href="./images/design_graphic_2.jpg" aria-label="북커버 그래픽 디자인 원본 보기">
+                        <img src="./images/design_bookcover.png" alt="북커버 그래픽 디자인" loading="lazy">
+                        <p class="project__num">05</p>
+                        <h3>Graphic design</h3>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" rel="noopener noreferrer" href="./images/design_graphic.jpg" aria-label="그래픽 포스터 디자인 원본 보기">
+                        <img src="./images/design_graphic_mok.png" alt="그래픽 포스터 디자인" loading="lazy">
+                        <p class="project__num">06</p>
+                        <h3>Graphic design</h3>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ============================
+         03. About (Me)
+    ============================ -->
+    <section id="about" class="index__about">
+        <div class="index__about__overlay"></div>
+        <div class="index__about__text">
+            <p class="project__num">03</p>
+            <h2>about <br>(Me)</h2>
+        </div>
+    </section>
+
+    <section class="about__wrap" aria-label="프로필 소개">
+        <div class="inner about__con">
+            <div class="about__profile">
+                <img src="images/me.png" alt="장지영 프로필 사진" loading="lazy">
+            </div>
+            <div class="about__info">
+                <div class="about__career">
+                    <strong class="about__name">장지영<span>Jang Ji Yeong</span></strong>
+                    <p class="about__role">Web Publisher &amp; Frontend Developer</p>
+                    <ul class="about__list">
+                        <li><span class="about__label">경력</span>웹 퍼블리셔 경력 1년 5개월</li>
+                        <li><span class="about__label">전공</span>컴퓨터 정보과 졸업</li>
+                        <li><span class="about__label">자격</span>정보처리산업기사 취득</li>
+                        <li><span class="about__label">자격</span>컴퓨터그래픽스운용기능사 취득</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================
+         Skills
+    ============================ -->
+    <section class="skills__wrap" aria-label="보유 기술">
+        <div class="inner">
+            <div class="skills__header">
+                <p class="project__num">Skills</p>
+                <h2>What I do</h2>
+            </div>
+            <ul class="skills__grid">
+                <li class="skill-card">
+                    <img src="images/html5.png" alt="HTML5" loading="lazy">
+                    <h3>HTML5</h3>
+                    <p>시맨틱 태그와 웹 접근성을 고려한 구조적 마크업</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/Css3.png" alt="CSS3" loading="lazy">
+                    <h3>CSS3</h3>
+                    <p>Flex, Grid, 반응형 단위를 활용한 레이아웃 구현</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/scss.png" alt="SCSS" loading="lazy">
+                    <h3>SCSS</h3>
+                    <p>변수, 믹스인, 중첩으로 유지보수 용이한 스타일 작성</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/JavaScript.png" alt="JavaScript" loading="lazy">
+                    <h3>JavaScript</h3>
+                    <p>ES6+, DOM 조작, 이벤트 핸들링, 비동기 처리</p>
+                </li>
+                <li class="skill-card skill-card--highlight">
+                    <img src="images/react.png" alt="React" loading="lazy">
+                    <h3>React</h3>
+                    <p>컴포넌트 아키텍처, 상태 관리, Props 기반 개발 학습 중</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/Git.png" alt="Git" loading="lazy">
+                    <h3>Git</h3>
+                    <p>브랜치 전략과 협업 기반 형상관리</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/Figma.png" alt="Figma" loading="lazy">
+                    <h3>Figma</h3>
+                    <p>와이어프레임, 프로토타입, UI 디자인 기획</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/photoshop.png" alt="Photoshop" loading="lazy">
+                    <h3>Photoshop</h3>
+                    <p>시안 제작, 사진 편집, 웹 이미지 최적화</p>
+                </li>
+                <li class="skill-card">
+                    <img src="images/Illustrator.png" alt="Illustrator" loading="lazy">
+                    <h3>Illustrator</h3>
+                    <p>로고 디자인, 아이콘, 기초 일러스트 작업</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ============================
+         푸터
+    ============================ -->
+    <footer id="footer" role="contentinfo">
+        <div class="inner footer__inner">
+            <div class="footer__brand">
+                <img src="images/logo_footer.png" alt="장지영 포트폴리오 로고" loading="lazy">
+                <p class="footer__copy">&copy; JJY 2026. All rights reserved.</p>
+            </div>
+            <div class="footer__contact">
+                <p class="footer__section-label">Contact</p>
+                <a href="tel:+821041727389" class="footer__contact-link">+82-10-4172-7389</a>
+                <a href="mailto:o_o0789@naver.com" class="footer__contact-link">o_o0789@naver.com</a>
+            </div>
+            <div class="footer__nav-group">
+                <nav class="footer__nav" aria-label="푸터 사이트맵">
+                    <a href="#header">Home</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#about">About</a>
+                </nav>
+                <a class="footer__github" target="_blank" rel="noopener noreferrer"
+                   href="https://github.com/superji0" aria-label="GitHub 프로필">
+                    <img src="./images/github.png" alt="GitHub" loading="lazy">
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+        <a href="#header" class="top_icon" aria-label="페이지 최상단으로 이동">
+            <img src="images/top_icon.svg" alt="" aria-hidden="true">
+        </a>
+    </footer>
+</div>
+
+<script src="./js/index.js"></script>
+</body>
+</html>
