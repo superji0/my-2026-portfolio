@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>보험 보상 청구 대시보드</title>
+  <style>
+    /* ==========================
+       0. 기본 설정 / 리셋
+    =========================== */
+    :root {
+      --bg-app: #f3f6fc;
+      --bg-sidebar: #172b55;
+      --bg-card: #ffffff;
+      --bg-notice: #e8f2ff;
+
+      --border-subtle: #dde4f5;
+      --border-strong: #c3d0f0;
+
+      --text-main: #111827;
+      --text-muted: #9ca3af;
+      --text-accent: #2563eb;
+      --text-success: #1aa36b;
+
+      --radius-lg: 10px;
+      --radius-xl: 16px;
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR",
+        system-ui, sans-serif;
+      background: var(--bg-app);
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ==========================
+       1. 전체 레이아웃
+    =========================== */
+    .app {
+      max-width: 1440px;
+      min-width: 1440px; /* PC 고정 폭 */
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      background: var(--bg-app);
+    }
+
+    /* ==========================
+       2. 사이드바
+    =========================== */
+    .sidebar {
+      width: 240px;
+      background: var(--bg-sidebar);
+      color: #fff;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar__logo {
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+      margin-bottom: 32px;
+    }
+
+    .sidebar__section {
+      margin-top: 8px;
+    }
+
+    .sidebar__nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar__item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s, transform 0.1s;
+      opacity: 0.8;
+      color: var(--bg-app);
+    }
+
+    .sidebar__item:hover {
+      background: rgba(37, 99, 235, 0.2);
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .sidebar__item--active {
+      background: var(--text-accent);
+      color: #fff;
+      opacity: 1;
+    }
+
+    /* ==========================
+       3. 메인 영역
+    =========================== */
+    .main {
+      flex: 1;
+      padding: 24px 28px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ----- Notice ----- */
+    .notice {
+      background: var(--bg-notice);
+      border-radius: var(--radius-xl);
+      padding: 10px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+      border: 1px solid #c3d5ff;
+      margin-bottom: 18px;
+    }
+
+    .notice__label {
+      font-weight: 700;
+      color: var(--text-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .notice__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3b82f6;
+    }
+
+    .notice__text p {
+      margin: 0;
+      line-height: 1.5;
+      color: #1f2933;
+    }
+
+    .notice__text p + p {
+      margin-top: 2px;
+    }
+
+    /* ==========================
+       4. 아이콘 공통
+    =========================== */
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .icon--download {
+      width: 16px;
+      height: 16px;
+    }
+
+    .icon--download path {
+      stroke: var(--text-accent);
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+
+    .icon--file {
+      width: 18px;
+      height: 18px;
+    }
+
+    .icon--file path {
+      stroke: #4b5563;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+
+    .btn--icon-white path {
+      stroke: #ffffff;
+    }
+
+    /* ==========================
+       5. 메인 콘텐츠 그리드
+    =========================== */
+    .content {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.4fr) minmax(280px, 1.5fr);
+      gap: 18px;
+    }
+
+    /* ==========================
+       6. 카드 공통
+    =========================== */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .card + .card {
+      margin-top: 12px;
+    }
+
+    .card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .card__title {
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card__grid {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      row-gap: 4px;
+      column-gap: 12px;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .field-label {
+      color: var(--text-muted);
+    }
+
+    .field-value {
+      color: var(--text-main);
+    }
+
+    /* ==========================
+       7. 테이블 / 뱃지
+    =========================== */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .table th,
+    .table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .table th {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: #f3f4ff;
+    }
+
+    .table td:nth-child(1) {
+      text-align: left;
+    }
+
+    .table td:nth-child(2) {
+      white-space: normal;
+    }
+
+    .badge-status {
+      width: fit-content;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e8f9f0;
+      color: var(--text-success);
+      font-weight: 600;
+    }
+
+    /* ==========================
+       8. AI 추출 문서 카드
+    =========================== */
+    .doc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .doc-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #f9fafb;
+    }
+
+    .doc-item__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .doc-item__meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4b5563;
+      font-size: 11px;
+      border: 1px solid #d4d7f0;
+    }
+
+    .doc-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .doc-item__status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      justify-content: flex-end;
+    }
+
+    .doc-status-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .doc-status-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e8f9f0;
+      color: #1aa36b;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .doc-item__body {
+      border-top: 1px dashed var(--border-subtle);
+      padding-top: 6px;
+    }
+
+    .doc-tag {
+      font-size: 12px;
+      color: var(--text-accent);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .doc-data {
+      display: flex;
+      row-gap: 10px;
+      column-gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .doc-data .data-item {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      flex: 1 1 40%;
+      min-width: 120px;
+      vertical-align: middle;
+      align-items: center;
+    }
+
+    .doc-data dt {
+      color: var(--text-muted);
+    }
+
+    .doc-data dd {
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    /* ==========================
+       9. 보상청구 신청 파일 카드
+    =========================== */
+    .claim-section__file {
+      margin-top: 14px;
+    }
+
+    .file-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 0.5px solid var(--border-strong);
+      background: #eef2ff;
+      gap: 10px;
+    }
+
+    .file-card__left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .file-card__icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .file-card__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .file-card__btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background: var(--text-accent);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .file-card__btn:hover {
+      background: #1d4ed8;
+    }
+
+    /* ==========================
+       10. 보상청구 검토 결과 / 설명
+    =========================== */
+    .result-card .card__title {
+      color: var(--text-accent);
+    }
+
+    .result-meta {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .result-meta-label {
+      opacity: 0.9;
+    }
+
+    .result-text {
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .description {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .description__block + .description__block {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .description strong {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- ==========================
+         Sidebar
+    =========================== -->
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <a href="https://teddy10.com" class="logo">
+          <img src="logo_white.png" alt="티디엑스" style="width:120px;">
+        </a>
+      </div>
+
+      <div class="sidebar__section">
+        <ul class="sidebar__nav">
+          <li class="sidebar__item">대시보드</li>
+          <li class="sidebar__item sidebar__item--active">보상 청구</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ==========================
+         Main
+    =========================== -->
+    <main class="main">
+      <!-- Notice -->
+      <section class="notice">
+        <div class="notice__label">
+          <span class="notice__dot"></span>
+          NOTICE
+        </div>
+        <div class="notice__text">
+          <p>
+            <span class="icon icon--download">
+              <svg viewBox="0 0 24 24" class="icon--download">
+                <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/>
+              </svg>
+            </span>
+            보험청구한 청구양식 파일과 첨부서류를 다운받을 수 있습니다.
+          </p>
+          <p>
+            보상청구 관련해서 AI가 분석한 내용을 안내드리고 있습니다.
+            보상청구 지급 시 서류 및 보상청구 신청 파일을 확인해 주시기 바랍니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- 본문 컨텐츠 -->
+      <section class="content">
+        <!-- ==========================
+             좌측 : 청구인 정보 / 보상청구 내용
+        =========================== -->
+        <div class="claim-section">
+          <!-- 청구인 정보 -->
+          <article class="card">
+            <div class="card__header">
+              <div class="card__title">청구인 정보</div>
+            </div>
+
+            <div class="card__grid">
+              <div class="field-label">청구자 성명</div>
+              <div class="field-value">김정화</div>
+
+              <div class="field-label">청구자 대상</div>
+              <div class="field-value">본인</div>
+
+              <div class="field-label">주민번호</div>
+              <div class="field-value">810306-123456</div>
+
+              <div class="field-label">연락처</div>
+              <div class="field-value">010-123-4567</div>
+
+              <div class="field-label">가입 플랜</div>
+              <div class="field-value">D1_안심플랜</div>
+
+              <div class="field-label">계좌정보</div>
+              <div class="field-value">하나은행 123-456-78910 / 김정화</div>
+            </div>
+          </article>
+
+          <!-- 보상청구 내용 -->
+          <article class="card">
+            <div class="card__header">
+              <div class="card__title">보상청구 내용</div>
+            </div>
+
+            <div class="card__grid">
+              <div class="field-label">사고일자</div>
+              <div class="field-value">2025.11.11</div>
+
+              <div class="field-label">청구 항목</div>
+              <div class="field-value">휴대폰 파손/도난 손해가생겼어요</div>
+
+              <div class="field-label">보상 내용</div>
+              <div class="field-value">
+                일본에서 넘어져 휴대폰이 파손된 사고에 대한 보상 청구
+              </div>
+            </div>
+
+            <!-- 보상청구 신청 파일 UI -->
+            <div class="claim-section__file">
+              <div class="file-card">
+                <div class="file-card__left">
+                  <div class="file-card__icon">
+                    <svg viewBox="0 0 24 24" class="icon icon--file">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <path d="M14 2v6h6M9 13h6M9 17h4"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="file-card__title">보상청구 신청 파일</div>
+                  </div>
+                </div>
+                <button class="file-card__btn btn--icon-white" type="button">
+                  <svg viewBox="0 0 24 24" class="icon icon--download">
+                    <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/>
+                  </svg>
+                  다운로드
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- ==========================
+             중간 : 첨부서류 AI 검토 + AI 추출데이터
+        =========================== -->
+        <div>
+          <!-- 첨부서류 AI 검토 -->
+          <article class="card">
+            <div class="card__header">
+              <div class="card__title">첨부서류 AI 검토</div>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 120px; text-align: left;">준비서류</th>
+                  <th style="width: 80px;">업로드 여부</th>
+                  <th style="width: 80px;">다운로드</th>
+                  <th style="width: 70px;">검증 여부</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>수리비용 영수증 / 수리불가확인서</td>
+                  <td><span class="badge-status">예</span></td>
+                  <td>
+                    <span class="icon icon--download">
+                      <svg viewBox="0 0 24 24" class="icon--download">
+                        <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/>
+                      </svg>
+                    </span>
+                  </td>
+                  <td><span class="badge-status">유효</span></td>
+                </tr>
+                <tr>
+                  <td>출입국사실증명서</td>
+                  <td><span class="badge-status">예</span></td>
+                  <td>
+                    <span class="icon icon--download">
+                      <svg viewBox="0 0 24 24" class="icon--download">
+                        <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/>
+                      </svg>
+                    </span>
+                  </td>
+                  <td><span class="badge-status">유효</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- AI 추출데이터 -->
+          <article class="card">
+            <div class="card__header">
+              <div class="card__title">AI 추출데이터</div>
+            </div>
+
+            <div class="doc-list">
+              <!-- 문서 1 -->
+              <div class="doc-item">
+                <div class="doc-item__top">
+                  <div class="doc-item__meta">
+                    <span class="doc-badge">문서 1</span>
+                    <span class="doc-title">수리비용영수증/수리불가확인서</span>
+                  </div>
+                  <div class="doc-item__status">
+                    <span class="doc-status-label">분류 신뢰도</span>
+                    <span class="doc-status-pill">유효</span>
+                  </div>
+                </div>
+
+                <div class="doc-item__body">
+                  <div class="doc-tag">※ 추출데이터</div>
+                  <dl class="doc-data">
+                    <div class="data-item">
+                      <dt>이름</dt>
+                      <dd>김정화</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>청구일자</dt>
+                      <dd>2025/11/11</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>구매 품목</dt>
+                      <dd>Galaxy S22</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>구매 금액</dt>
+                      <dd>1,000,000원</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+
+              <!-- 문서 2 -->
+              <div class="doc-item">
+                <div class="doc-item__top">
+                  <div class="doc-item__meta">
+                    <span class="doc-badge">문서 2</span>
+                    <span class="doc-title">출입국사실증명서</span>
+                  </div>
+                  <div class="doc-item__status">
+                    <span class="doc-status-label">분류 신뢰도</span>
+                    <span class="doc-status-pill">유효</span>
+                  </div>
+                </div>
+
+                <div class="doc-item__body">
+                  <div class="doc-tag">※ 추출데이터</div>
+                  <dl class="doc-data">
+                    <div class="data-item">
+                      <dt>이름</dt>
+                      <dd>김정화</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>주민번호</dt>
+                      <dd>810306-212345</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>출국일</dt>
+                      <dd>2025/11/10</dd>
+                    </div>
+                    <div class="data-item">
+                      <dt>입국일</dt>
+                      <dd>2025/11/13</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- ==========================
+             우측 : 검토 결과 + 설명
+        =========================== -->
+        <aside>
+          <!-- 보상청구 검토 결과 -->
+          <article class="card result-card">
+            <div class="card__header">
+              <div class="card__title">보상청구 검토 결과</div>
+            </div>
+
+            <div class="result-meta">
+              <span class="result-meta-label">보상청구 검토 :</span>
+              <span class="badge-status">보상청구 가능</span>
+            </div>
+
+            <p class="result-text">
+              특약 : 휴대품파손/도난 <br/>
+              특약 한도 : 300,000원(자기부담금 1만원)
+            </p>
+          </article>
+
+          <!-- 설명 패널 -->
+          <article class="card" style="margin-top:12px;">
+            <div class="description">
+              <div class="description__block">
+                김정화 고객님의 청구 내역 검증 결과,<br/>
+                가입한 플랜(12345678)에 있는 특약
+                <strong>휴대품 파손/도난</strong>으로 청구하셨습니다.<br/><br/>
+                첨부 서류는 모두 검증 유효로 판독되었으며,<br/>
+                해당 고객님은 플랜의 [휴대품 파손/도난] 한도
+                <strong>300,000원</strong>에 대해 보상 받으실 수 있습니다.
+              </div>
+
+              <div class="description__block">
+                위 내용을 검토하신 후, 필요 시 추가 확인을 진행하시고
+                최종 <strong>지급 판단</strong>을 진행해 주시기 바랍니다.
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
