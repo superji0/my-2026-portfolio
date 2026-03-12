@@ -1,0 +1,182 @@
+/* ==============================================
+   서브 프로젝트 페이지 공통 스타일
+============================================== */
+
+/* 교보문고 프로젝트 배경 */
+.kyobo__bg {
+    background: url(./images/mok.png) no-repeat center center;
+    background-size: 80%;
+    background-attachment: fixed;
+    padding: 200px 0;
+}
+
+/* 레어로우 프로젝트 배경 */
+.rareraw__bg {
+    background: url(./images/mockup_rareraw_2.png) no-repeat center center;
+    background-size: 60%;
+    background-attachment: fixed;
+    padding: 200px 0;
+}
+
+#rw_wrap .project__link ul { justify-content: center; gap: 4rem; }
+#rw_wrap .project__link li { width: 30%; }
+
+
+/* ==============================================
+   공통 컴포넌트
+============================================== */
+.site__link {
+    display: block;
+    width: 100%;
+    background-color: var(--color-black, #121212);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    transition: 0.5s;
+}
+
+.site__link:hover {
+    background-color: var(--color-accent, #0B97B6);
+    color: #fff;
+}
+
+
+/* ==============================================
+   프로젝트 상세 레이아웃
+============================================== */
+#main .inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+#main h2 {
+    font-size: clamp(2rem, 5vw, 5rem);
+    letter-spacing: -7px;
+}
+
+#main .project__title { width: 30%; }
+
+#main .project__item {
+    width: 40%;
+    margin-top: 20%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#main .project__item li:first-child { font-weight: bold; font-size: 1.3rem; }
+#main .project__item strong { display: inline-block; margin: 20px 0; }
+#main .project__item img { width: 50px; }
+
+
+/* ==============================================
+   프로젝트 스크린샷 링크
+============================================== */
+.project__link ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 5%;
+}
+
+.project__link li { width: 30%; }
+.project__link img {
+    width: 100%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.project__link .site__link { margin: 10% 0; }
+.project__link .site__link:hover { color: #fff; }
+
+
+/* ==============================================
+   프로그레스 바
+============================================== */
+.bar .graph {
+    width: 100%;
+    height: 20px;
+    background: white;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.bar .graph .fill {
+    width: 100%;
+    height: 100%;
+    background: var(--color-accent, #0B97B6);
+    color: #fff;
+    animation: barFill 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes barFill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes progressKB {
+    0% { width: 0%; }
+    100% { width: 70%; }
+}
+
+@keyframes progressRW {
+    0% { width: 0%; }
+    100% { width: 80%; }
+}
+
+.bar .graph .kb { width: 70%; animation: progressKB 1s; }
+
+/* 레어로우 프로그레스 바 */
+.rw__item .bar .graph .fill { background: #75fb4c; color: #222; font-weight: 800; }
+.rw__item .bar .graph .rw { width: 80%; animation: progressRW 1s; }
+
+dl dt {
+    padding-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -2px;
+}
+
+.project__visual img { width: 100%; }
+.project__link p { padding-top: 5%; text-align: center; }
+
+
+/* ==============================================
+   반응형 (서브 페이지)
+============================================== */
+@media (max-width: 1024px) {
+    .kyobo__bg,
+    .rareraw__bg {
+        background-size: contain;
+        padding: 100px 0;
+    }
+
+    #main .inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #main .project__title { width: 100%; text-align: center; }
+    #main .project__item { width: 80%; margin-top: 5%; }
+}
+
+@media (max-width: 768px) {
+    .kyobo__bg,
+    .rareraw__bg {
+        background-attachment: scroll;
+        padding: 80px 0;
+    }
+
+    #main .project__item { width: 100%; padding: 1.5rem; }
+
+    .project__link ul { flex-direction: column; gap: 2rem; }
+    .project__link li { width: 100%; }
+
+    #rw_wrap .project__link ul { gap: 2rem; }
+    #rw_wrap .project__link li { width: 100%; }
+
+    .site__link { font-size: 1.1rem; }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레어로우 웹 페이지 리뉴얼 | 장지영 포트폴리오</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./sub__projectpage.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="rw_wrap">
+        <header id="header" role="banner">
+            <div class="inner">
+                <h1 class="logo">
+                    <a href="./index.html" aria-label="포트폴리오 메인으로 이동">
+                        <img src="images/logo.png" alt="장지영 포트폴리오 로고">
+                    </a>
+                </h1>
+                <p class="header__tagline">Jiyeong's Portfolio</p>
+                <nav role="navigation" aria-label="주요 메뉴">
+                    <ul>
+                        <li><a href="./index.html#header">Home</a></li>
+                        <li><a href="./index.html#projects">Projects</a></li>
+                        <li><a href="./index.html#about">About (me)</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main" class="rareraw__bg">
+            <div class="inner">
+                <div class="project__title">
+                    <h2>
+                        레어로우 <br>
+                        웹 사이트 <br>
+                        리뉴얼
+                    </h2>
+                    <a class="site__link" target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/pc_rareraw/">사이트 링크 바로가기</a>
+                </div>
+                <div class="project__item rw__item">
+                    <dl>
+                        <dt>사용툴</dt>
+                        <dd>
+                            <img src="images/html5.png" alt="HTML5">
+                            <img src="images/Css3.png" alt="CSS3">
+                            <img src="images/JavaScript.png" alt="JavaScript">
+                        </dd>
+                        <dt>디자인</dt>
+                        <dd class="bar">
+                            <div class="graph"><div class="fill">개인 100%</div></div>
+                        </dd>
+                        <dt>퍼블리싱</dt>
+                        <dd class="bar">
+                            <div class="graph"><div class="fill">개인 100%</div></div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </main>
+
+        <section class="project__link inner" aria-label="레어로우 프로젝트 페이지 링크">
+            <ul>
+                <li>
+                    <img src="./images/rareraw_screen01.jpg" alt="레어로우 메인페이지 스크린샷" loading="lazy">
+                    <a target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/pc_rareraw/" class="site__link">메인페이지 바로보기</a>
+                </li>
+                <li>
+                    <img src="./images/rareraw_screen02.png" alt="레어로우 로그인페이지 스크린샷" loading="lazy">
+                    <a target="_blank" rel="noopener noreferrer" href="https://superji0.github.io/pc_rareraw/login.html" class="site__link">로그인페이지 바로보기</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+    const header = document.querySelector('#header');
+    const gnbLinks = document.querySelectorAll('#header nav li a');
+
+    window.addEventListener('scroll', function () {
+        const scrollPosition = window.scrollY;
+        if (scrollPosition > 0) {
+            header.classList.add('on');
+            header.style.transition = '0.2s ease-in';
+            document.querySelector('.logo').style.display = 'none';
+            gnbLinks.forEach(function (link) { link.classList.add('on'); });
+        } else {
+            header.classList.remove('on');
+            document.querySelector('.logo').style.display = 'block';
+            gnbLinks.forEach(function (link) { link.classList.remove('on'); });
+        }
+    });
+    </script>
+</body>
+</html>

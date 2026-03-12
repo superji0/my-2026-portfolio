@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>페이스 갤러리</title>
+
+    <style>
+        #wrap {width: 1200px; margin: 0 auto; margin-top: 5%; letter-spacing: -2px;}
+        .mockup { position: relative; width: 80%; margin: 0 auto;}
+        .mockup .item { position: absolute; left: 50%; top:15.8%; transform: translateX(-50%); width: 567px; height: 323px; overflow-y: scroll;  }
+        .mockup .item::-webkit-scrollbar {
+            width: 10px;
+        }
+        .mockup .item::-webkit-scrollbar-track { 
+            background-color: rgb(180, 180, 180);
+        }
+        .mockup .item::-webkit-scrollbar-thumb { 
+            background-color: rgb(58, 166, 255);
+        }
+        .mockup .item::-webkit-scrollbar-button {
+            display: none;
+        }
+        .mockup .item img{width: 100%; height: fit-content;}
+        .mockup img {width: 100%;}
+
+        .pop .in strong {border-bottom: 2px solid #222;}
+        .pop .in p {display: inline;}
+        .pop .in span {margin-left: 20px; font-size: 1.5rem; color: #20a2ad; font-weight: 800; letter-spacing: -1px;}
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <h1>페이스 갤러리 웹사이트 리디자인</h1>
+            <h2>디자인 툴</h2>
+            <span>Photoshop</span>
+        </header>
+
+        <main>
+            <div class="mockup">
+                <div class="item">
+                   <img src="./images/design_pace.jpg" alt="">
+                </div>
+                <img src="./images/iMacMockup.png" alt="pc 목업 이미지">
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
