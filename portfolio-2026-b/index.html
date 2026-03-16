@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>장지영 | 웹 퍼블리셔 & 프론트엔드 개발자 — 시안 B</title>
+  <meta name="description" content="웹 퍼블리셔 장지영의 포트폴리오. 실용적이고 감각적인 웹/모바일 구현을 목표로 합니다.">
+  <link rel="icon" href="./images/favicon.ico">
+
+  <!-- JSON-LD 구조화 데이터 (GEO 최적화) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "장지영",
+      "jobTitle": "웹 퍼블리셔 / 프론트엔드 개발자",
+      "url": "https://github.com/superji0",
+      "email": "o_o0789@naver.com",
+      "telephone": "+821041727389",
+      "knowsAbout": ["HTML5","CSS3","SCSS","JavaScript","React","Git","Figma","Photoshop","Illustrator"]
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Bebas Neue (대형 디스플레이) + Syne (UI) + Inter (본문) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════════
+       0. 디자인 토큰 & 리셋
+    ════════════════════════════════════════ */
+    :root {
+      --bg:        #131311;   /* 메인 배경 - 따뜻한 다크 */
+      --bg-2:      #1c1c1a;   /* 보조 배경 */
+      --fg:        #f0ede7;   /* 주 텍스트 - 따뜻한 화이트 */
+      --fg-muted:  rgba(240,237,231,0.45);
+      --fg-dim:    rgba(240,237,231,0.20);
+      --border:    rgba(240,237,231,0.12);
+      --border-hover: rgba(240,237,231,0.5);
+
+      /* 패널별 포인트 컬러 */
+      --c-kyobo:    #7b4ae2;  /* 교보 — 바이올렛 */
+      --c-rareraw:  #d4522a;  /* 레어로우 — 테라코타 */
+      --c-dash:     #2a6dd4;  /* 대시보드 — 블루 */
+      --c-design:   #2ea87a;  /* 디자인 — 그린 */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;       /* 패널 모드에서 스크롤 차단 */
+      cursor: none;
+    }
+
+    /* 스크롤 모드 전환 */
+    body.scroll-mode { overflow: hidden; }
+    body.scroll-mode #panels { opacity: 0; pointer-events: none; }
+    body.scroll-mode #scroll-wrap { opacity: 1; pointer-events: all; }
+    body.scroll-mode .nav-rail .nav-pills { display: none; }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { background: none; border: none; font-family: inherit; cursor: pointer; }
+
+    /* ════════════════════════════════════════
+       1. 커스텀 커서
+    ════════════════════════════════════════ */
+    .c-dot {
+      position: fixed;
+      width: 5px; height: 5px;
+      background: var(--fg);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease;
+    }
+    .c-ring {
+      position: fixed;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(240,237,231,0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+    .c-ring.hovered { width: 56px; height: 56px; border-color: rgba(240,237,231,0.75); }
+
+    /* ════════════════════════════════════════
+       2. 우측 네비게이션 레일 (항상 고정)
+    ════════════════════════════════════════ */
+    .nav-rail {
+      position: fixed;
+      right: 40px;
+      bottom: 44px;
+      z-index: 9000;  /* 패널 위에 항상 표시 */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: all;
+    }
+
+    /* 홈 버튼 (프로젝트 패널에서만 표시) */
+    .nav-home {
+      width: 48px; height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--fg);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+      opacity: 0; pointer-events: none;
+      transform: scale(0.75);
+    }
+    .nav-home.show { opacity: 1; pointer-events: all; transform: scale(1); }
+    .nav-home:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+    .nav-home svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* 프로젝트 내비게이션 pills */
+    .nav-pills { list-style: none; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+
+    .nav-pill {
+      display: block;
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--fg-muted);
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      pointer-events: all;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--fg);
+      background: rgba(240,237,231,0.06);
+    }
+    .nav-pill.active {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    /* Work 링크 */
+    .nav-work-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+    .nav-work-btn::before { content: ''; display: block; width: 28px; height: 1px; background: currentColor; }
+    .nav-work-btn:hover { color: var(--fg); }
+
+    /* 스크롤 모드 뒤로가기 버튼 */
+    .nav-back-btn {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--fg-muted);
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    body.scroll-mode .nav-back-btn { opacity: 1; pointer-events: all; }
+    .nav-back-btn:hover { border-color: var(--border-hover); color: var(--fg); }
+
+    /* ════════════════════════════════════════
+       3. 패널 공통 시스템
+    ════════════════════════════════════════ */
+    #panels {
+      position: fixed; inset: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .panel {
+      position: absolute; inset: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1), transform 0.55s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(16px);
+      overflow-y: auto;
+    }
+    .panel.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    /* 스파클 아이콘 (패널 상단 좌측) */
+    .panel-sparkle {
+      position: absolute; top: 30px; left: 44px;
+      font-size: 24px; line-height: 1;
+      opacity: 0.7;
+    }
+    .panel-sparkle svg { width: 26px; height: 26px; }
+
+    /* ════════════════════════════════════════
+       4. 히어로 패널
+    ════════════════════════════════════════ */
+    #p-hero {
+      background: var(--bg);
+      display: flex; flex-direction: column;
+    }
+
+    /* 상단 로고 */
+    .hero-logo {
+      position: absolute; top: 28px; left: 44px;
+    }
+    .hero-logo img { height: 32px; width: auto; opacity: 0.8; }
+    .hero-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      opacity: 0.9;
+    }
+
+    /* 좌하단 메인 컨텐츠 */
+    .hero-content {
+      position: absolute;
+      bottom: 52px; left: 44px;
+      max-width: 480px;
+    }
+
+    .hero-greeting {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700; line-height: 1.18;
+      margin-bottom: 22px;
+      letter-spacing: -0.02em;
+    }
+    .hero-greeting em { font-style: normal; color: var(--fg-muted); }
+
+    .hero-bio {
+      font-size: 13.5px; line-height: 1.75;
+      color: var(--fg-muted);
+      max-width: 360px;
+      margin-bottom: 18px;
+    }
+
+    .hero-status {
+      font-size: 12.5px; color: var(--fg-muted);
+      margin-bottom: 28px;
+    }
+    .hero-status a { color: var(--fg); border-bottom: 1px solid var(--border-hover); padding-bottom: 1px; }
+
+    .hero-links {
+      display: flex; gap: 20px; align-items: center;
+    }
+    .hero-link-item {
+      color: var(--fg-muted);
+      font-size: 12.5px;
+      transition: color 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-link-item:hover { color: var(--fg); }
+    .hero-link-item svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ════════════════════════════════════════
+       5. 프로젝트 패널 공통
+    ════════════════════════════════════════ */
+    .project-panel {
+      background: var(--bg);
+      padding: 80px 44px 100px;
+    }
+
+    .proj-header { margin-bottom: 36px; }
+
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(34px, 5.5vw, 68px);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .proj-meta {
+      display: flex; flex-wrap: wrap; gap: 6px 16px;
+      font-size: 13px; color: var(--fg-muted);
+    }
+    .proj-meta span { display: flex; align-items: center; gap: 6px; }
+    .proj-meta span::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--fg-muted); }
+    .proj-meta span:first-child::before { display: none; }
+    .proj-meta a { color: var(--fg); border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s; }
+    .proj-meta a:hover { border-color: var(--fg); }
+
+    /* 스크린샷 그리드 */
+    .proj-shots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .proj-shots img {
+      width: 100%; border-radius: 10px;
+      object-fit: cover;
+      aspect-ratio: 9/16;
+      filter: brightness(0.95);
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .proj-shots img:hover { filter: brightness(1.05); transform: scale(1.02); }
+    .proj-shots.landscape img { aspect-ratio: 16/10; }
+
+    /* 설명 + 태그 */
+    .proj-desc {
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+    .proj-desc p {
+      font-size: 14.5px; line-height: 1.85;
+      color: var(--fg-muted);
+      margin-bottom: 16px;
+    }
+    .proj-desc mark {
+      background: rgba(240,237,231,0.14);
+      color: var(--fg);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .proj-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px; font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--fg);
+    }
+
+    .proj-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .proj-tag {
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'Syne', sans-serif;
+      font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--fg-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .proj-tag:hover { border-color: var(--border-hover); color: var(--fg); }
+
+    /* Live 링크 버튼 */
+    .proj-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 13px 28px;
+      border: 1px solid var(--border-hover);
+      border-radius: 100px;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--fg);
+      transition: all 0.25s ease;
+    }
+    .proj-cta:hover { background: var(--fg); color: var(--bg); }
+    .proj-cta svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ════════════════════════════════════════
+       6. 대시보드 패널 — 타이포그래픽 스타일
+    ════════════════════════════════════════ */
+    #p-dashboard .typo-back {
+      position: absolute;
+      bottom: 0; left: 0; right: 200px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 13vw, 180px);
+      line-height: 0.9;
+      -webkit-text-stroke: 1px rgba(240,237,231,0.1);
+      color: transparent;
+      pointer-events: none; user-select: none;
+      padding: 0 44px;
+      z-index: 0;
+    }
+    #p-dashboard .proj-content { position: relative; z-index: 1; }
+    #p-dashboard .proj-shots { position: relative; z-index: 2; }
+
+    /* ════════════════════════════════════════
+       7. 디자인 패널 — 갤러리 그리드
+    ════════════════════════════════════════ */
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .design-item {
+      position: relative; overflow: hidden;
+      border-radius: 10px; aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .design-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.5s;
+    }
+    .design-item:hover img { transform: scale(1.06); filter: brightness(0.6); }
+    .design-item-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px 16px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    .design-item:hover .design-item-label { transform: translateY(0); }
+    .design-item-label span {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 600; color: #fff;
+    }
+    .design-item-label small {
+      display: block; font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 3px;
+    }
+
+    /* ════════════════════════════════════════
+       8. Work 스크롤 섹션 (MWS 레이아웃 참고)
+    ════════════════════════════════════════ */
+    #scroll-wrap {
+      position: fixed; inset: 0;
+      overflow-y: auto;
+      z-index: 8000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+      background: var(--bg);
+    }
+
+    /* Work 헤더 */
+    .work-header {
+      padding: 80px 44px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+    }
+    .work-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 11vw, 144px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+    }
+    .work-intro { max-width: 300px; padding-bottom: 8px; }
+    .work-intro h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 700;
+      line-height: 1.35; margin-bottom: 10px;
+    }
+    .work-intro p { font-size: 13px; color: var(--fg-muted); line-height: 1.65; }
+
+    /* 테이블 헤더 */
+    .work-table-head {
+      padding: 0 44px;
+      display: grid;
+      grid-template-columns: 52px 1fr 160px 80px 180px;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-top: 14px; padding-bottom: 14px;
+    }
+    .work-col-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--fg-muted);
+    }
+
+    /* 프로젝트 행 */
+    .work-list { list-style: none; padding: 0 44px; }
+
+    .work-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 52px 1fr 160px 80px 180px;
+      gap: 16px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      overflow: hidden;
+      transition: color 0.35s ease;
+    }
+    .work-item::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--fg);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      z-index: 0;
+    }
+    .work-item:hover::before { transform: scaleY(1); }
+    .work-item:hover { color: var(--bg); }
+    .work-item > * { position: relative; z-index: 1; }
+
+    .work-num {
+      font-size: 12px; color: var(--fg-muted);
+      padding-top: 3px;
+      transition: color 0.35s;
+    }
+    .work-item:hover .work-num { color: rgba(19,19,17,0.45); }
+
+    .work-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 19px; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .work-type, .work-year { font-size: 14px; padding-top: 3px; }
+    .work-type { color: var(--fg-muted); }
+    .work-year { color: var(--fg-muted); }
+    .work-item:hover .work-type,
+    .work-item:hover .work-year { color: rgba(19,19,17,0.5); }
+
+    .work-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 600;
+      padding-top: 2px;
+    }
+    .work-item:hover .work-role { color: rgba(19,19,17,0.75); }
+
+    /* 호버 시 떠다니는 이미지 프리뷰 */
+    .work-preview {
+      position: fixed;
+      width: 340px;
+      pointer-events: none; z-index: 700;
+      opacity: 0;
+      transform: scale(0.88) rotate(-3deg);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+      top: 0; left: 0;
+    }
+    .work-preview.show { opacity: 1; transform: scale(1) rotate(0deg); }
+    .work-preview img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .work-preview-label {
+      background: var(--bg-2);
+      padding: 12px 16px;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px; font-weight: 600;
+      color: var(--fg-muted);
+    }
+
+    /* ════════════════════════════════════════
+       9. About 섹션
+    ════════════════════════════════════════ */
+    #about-section {
+      background: var(--bg-2);
+      padding: 100px 44px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+
+    .about-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 110px);
+      line-height: 1; margin-bottom: 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .about-text p {
+      font-size: 14.5px; line-height: 1.85;
+      color: var(--fg-muted); margin-bottom: 18px;
+    }
+    .about-text strong { color: var(--fg); font-weight: 500; }
+
+    .about-facts { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+    .about-fact {
+      display: grid; grid-template-columns: 72px 1fr;
+      font-size: 13.5px; gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-fact-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--fg-muted); padding-top: 3px;
+    }
+
+    /* 스킬 그리드 */
+    .skills-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--fg-muted); margin-bottom: 20px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .skill-card {
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 16px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+    .skill-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 700;
+      margin-bottom: 5px; color: var(--fg);
+    }
+    .skill-card p { font-size: 11.5px; color: var(--fg-muted); line-height: 1.55; }
+
+    /* ════════════════════════════════════════
+       10. 푸터
+    ════════════════════════════════════════ */
+    footer {
+      background: var(--bg);
+      padding: 52px 44px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px; font-weight: 700;
+    }
+    .footer-brand small { display: block; font-size: 11px; font-weight: 400; color: var(--fg-muted); margin-top: 4px; }
+    .footer-contact { display: flex; gap: 28px; }
+    .footer-contact a {
+      font-size: 13px; color: var(--fg-muted);
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--fg); }
+    .footer-copy { font-size: 11px; color: var(--fg-muted); }
+
+    /* ════════════════════════════════════════
+       11. 반응형 미디어 쿼리
+    ════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-rail { right: 20px; bottom: 24px; }
+      .nav-pill { font-size: 12px; padding: 8px 16px; }
+      .project-panel { padding: 72px 24px 100px; }
+      .panel-sparkle { left: 24px; }
+      .hero-logo { left: 24px; }
+      .hero-content { left: 24px; bottom: 100px; }
+
+      .design-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 44px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .work-header, .work-list, .work-table-head { padding-left: 24px; padding-right: 24px; }
+      .work-table-head, .work-item { grid-template-columns: 40px 1fr 120px 60px; }
+      .work-role { display: none; }
+
+      #about-section { padding: 72px 24px; }
+      footer { flex-direction: column; gap: 24px; align-items: flex-start; padding: 44px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-pills { display: none; }
+      .nav-rail { bottom: 16px; right: 16px; }
+      .hero-greeting { font-size: 22px; }
+      .work-eyebrow { font-size: 72px; }
+      .work-table-head, .work-item { grid-template-columns: 36px 1fr 100px; }
+      .work-year { display: none; }
+      .proj-shots { grid-template-columns: 1fr 1fr; }
+      .design-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 커스텀 커서 -->
+  <div class="c-dot" id="cDot"></div>
+  <div class="c-ring" id="cRing"></div>
+
+  <!-- ════════════════════════════════════════
+       우측 고정 네비게이션 레일
+  ════════════════════════════════════════ -->
+  <nav class="nav-rail" id="navRail" aria-label="프로젝트 네비게이션">
+    <!-- 홈 버튼: 프로젝트 패널에서 히어로로 복귀 -->
+    <button class="nav-home" id="navHome" aria-label="홈으로 돌아가기">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </button>
+
+    <!-- 프로젝트 pills -->
+    <ul class="nav-pills" id="navPills">
+      <li><button class="nav-pill" data-target="kyobo" aria-label="교보문고 패널 열기">교보문고</button></li>
+      <li><button class="nav-pill" data-target="rareraw" aria-label="레어로우 패널 열기">레어로우</button></li>
+      <li><button class="nav-pill" data-target="dashboard" aria-label="대시보드 패널 열기">대시보드</button></li>
+      <li><button class="nav-pill" data-target="design" aria-label="디자인 패널 열기">디자인</button></li>
+    </ul>
+
+    <!-- Work 섹션으로 이동 -->
+    <button class="nav-work-btn" id="navWorkBtn" aria-label="전체 작업 목록 보기">Work</button>
+
+    <!-- 스크롤 모드 뒤로가기 -->
+    <button class="nav-back-btn" id="navBackBtn" aria-label="패널 모드로 돌아가기">
+      ← 돌아가기
+    </button>
+  </nav>
+
+  <!-- ════════════════════════════════════════
+       패널 컨테이너
+  ════════════════════════════════════════ -->
+  <div id="panels">
+
+    <!-- ─────── 히어로 패널 ─────── -->
+    <section class="panel active" id="p-hero" role="main" aria-label="소개">
+      <!-- 로고 -->
+      <div class="hero-logo">
+        <span class="hero-logo-text">JJY ✦</span>
+      </div>
+
+      <!-- 좌하단 메인 텍스트 -->
+      <div class="hero-content">
+        <h1 class="hero-greeting">
+          안녕하세요, 저는<br>
+          장지영입니다 —<br>
+          <em>and I build for the web.</em>
+        </h1>
+        <p class="hero-bio">
+          HTML, CSS, JavaScript를 기반으로 실용적이고 감각적인
+          웹 경험을 만들어갑니다. 퍼블리싱부터 프론트엔드 개발,
+          그래픽 디자인까지 폭넓은 역량을 갖추고 있습니다.
+        </p>
+        <p class="hero-status">
+          Web Publisher &amp; Frontend Developer — 경력 1년 5개월
+        </p>
+        <div class="hero-links">
+          <a href="https://github.com/superji0" target="_blank" rel="noopener noreferrer" class="hero-link-item" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+          <a href="mailto:o_o0789@naver.com" class="hero-link-item" aria-label="이메일">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────── 교보문고 패널 ─────── -->
+    <section class="panel project-panel" id="p-kyobo" role="region" aria-label="교보문고 프로젝트">
+      <span class="panel-sparkle" aria-hidden="true">✦</span>
+
+      <div class="proj-header">
+        <h2 class="proj-title">교보문고</h2>
+        <div class="proj-meta">
+          <span>모바일웹 리뉴얼</span>
+          <span>Web Publisher</span>
+          <span>2024</span>
+          <span>
+            <a href="https://superji0.github.io/mobile_kyobo/" target="_blank" rel="noopener noreferrer">
+              라이브 사이트 →
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <!-- 모바일 스크린샷 3컷 -->
+      <div class="proj-shots" role="img" aria-label="교보문고 프로젝트 스크린샷">
+        <img src="./images/kybo_screen.png"  alt="교보문고 메인페이지" loading="lazy">
+        <img src="./images/kybo_screen03.png" alt="교보문고 서브페이지" loading="lazy">
+        <img src="./images/kybo_screen02.png" alt="교보문고 메뉴" loading="lazy">
+      </div>
+
+      <div class="proj-desc">
+        <p class="proj-section-title">What I did</p>
+        <p>
+          <mark>교보문고 모바일웹을 Figma로 리디자인하고 HTML/CSS/JS로 완전히 퍼블리싱</mark>한
+          프로젝트입니다. 시맨틱 마크업과 웹 접근성 기준을 준수하며 실제 서비스와 유사한
+          수준의 모바일 인터페이스를 구현했습니다.
+        </p>
+        <p>
+          메인 페이지, 서브 페이지, 메뉴 등 총 3개 화면을 설계·구현하였으며
+          플렉스박스 기반의 반응형 레이아웃을 적용했습니다.
+        </p>
+      </div>
+
+      <div class="proj-tags" aria-label="사용 기술">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">CSS3</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">Figma</span>
+        <span class="proj-tag">반응형</span>
+        <span class="proj-tag">웹 접근성</span>
+      </div>
+
+      <a href="https://superji0.github.io/mobile_kyobo/" target="_blank" rel="noopener noreferrer" class="proj-cta">
+        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        라이브 사이트 보기
+      </a>
+    </section>
+
+    <!-- ─────── 레어로우 패널 ─────── -->
+    <section class="panel project-panel" id="p-rareraw" role="region" aria-label="레어로우 프로젝트">
+      <span class="panel-sparkle" aria-hidden="true">✦</span>
+
+      <div class="proj-header">
+        <h2 class="proj-title">레어로우</h2>
+        <div class="proj-meta">
+          <span>웹 페이지 리뉴얼</span>
+          <span>Web Publisher</span>
+          <span>2024</span>
+          <span>
+            <a href="https://superji0.github.io/rareraw/" target="_blank" rel="noopener noreferrer">
+              라이브 사이트 →
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class="proj-shots landscape" role="img" aria-label="레어로우 프로젝트 스크린샷">
+        <img src="./images/rareraw_screen01.jpg" alt="레어로우 메인페이지" loading="lazy">
+        <img src="./images/rareraw_screen02.png" alt="레어로우 서브페이지" loading="lazy">
+        <img src="./images/mockup_rareraw.jpg"   alt="레어로우 전체 목업" loading="lazy">
+      </div>
+
+      <div class="proj-desc">
+        <p class="proj-section-title">What I did</p>
+        <p>
+          <mark>패션 브랜드 레어로우의 웹 페이지를 리뉴얼</mark>한 프로젝트로,
+          브랜드 아이덴티티를 유지하면서 현대적인 레이아웃과 인터랙션을 구현했습니다.
+        </p>
+        <p>
+          메인 페이지와 로그인/회원가입 페이지를 포함하며, CSS 애니메이션과
+          JavaScript를 활용한 부드러운 사용자 경험을 목표로 했습니다.
+        </p>
+      </div>
+
+      <div class="proj-tags" aria-label="사용 기술">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">CSS3</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">GSAP</span>
+        <span class="proj-tag">반응형</span>
+        <span class="proj-tag">E-Commerce</span>
+      </div>
+
+      <a href="https://superji0.github.io/rareraw/" target="_blank" rel="noopener noreferrer" class="proj-cta">
+        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        라이브 사이트 보기
+      </a>
+    </section>
+
+    <!-- ─────── 대시보드 패널 (타이포그래픽 스타일) ─────── -->
+    <section class="panel project-panel" id="p-dashboard" role="region" aria-label="보험 대시보드 프로젝트">
+      <span class="panel-sparkle" aria-hidden="true">✦</span>
+
+      <!-- 배경 대형 타이포 -->
+      <div class="typo-back" aria-hidden="true">Insurance<br>Dashboard</div>
+
+      <div class="proj-content">
+        <div class="proj-header">
+          <h2 class="proj-title">보험 대시보드</h2>
+          <div class="proj-meta">
+            <span>보험 보상 청구 관리 시스템</span>
+            <span>Frontend Developer</span>
+            <span>2025</span>
+          </div>
+        </div>
+
+        <div class="proj-shots landscape" role="img" aria-label="보험 대시보드 스크린샷">
+          <img src="./images/mockup_kyobo.jpg" alt="대시보드 메인 화면" loading="lazy" style="aspect-ratio:16/10">
+          <img src="./images/kybo_screen.png"  alt="대시보드 상세 화면" loading="lazy" style="aspect-ratio:16/10">
+        </div>
+
+        <div class="proj-desc">
+          <p class="proj-section-title">What I built</p>
+          <p>
+            <mark>React + Vite 기반의 보험 보상 청구 어드민 대시보드</mark>를 컴포넌트 아키텍처로
+            설계한 프론트엔드 학습 프로젝트입니다. CSS Variables와 컴포넌트 기반 개발을 통해
+            실무 수준의 UI/UX를 구현했습니다.
+          </p>
+          <p>
+            사이드바 내비게이션, 데이터 카드, 상태 필터 등 복잡한 대시보드 UI를
+            체계적으로 구성하며 React 상태 관리를 깊이 학습했습니다.
+          </p>
+        </div>
+
+        <div class="proj-tags" aria-label="사용 기술">
+          <span class="proj-tag">React</span>
+          <span class="proj-tag">Vite</span>
+          <span class="proj-tag">CSS Variables</span>
+          <span class="proj-tag">Component Architecture</span>
+          <span class="proj-tag">JavaScript ES6+</span>
+        </div>
+
+        <a href="https://github.com/superji0" target="_blank" rel="noopener noreferrer" class="proj-cta">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub 보기
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────── 디자인 패널 ─────── -->
+    <section class="panel project-panel" id="p-design" role="region" aria-label="디자인 프로젝트">
+      <span class="panel-sparkle" aria-hidden="true">✦</span>
+
+      <div class="proj-header">
+        <h2 class="proj-title">디자인</h2>
+        <div class="proj-meta">
+          <span>그래픽 &amp; 웹 디자인</span>
+          <span>Designer</span>
+          <span>2023 — 2024</span>
+        </div>
+      </div>
+
+      <!-- 디자인 갤러리 그리드 -->
+      <div class="design-grid" role="list" aria-label="디자인 작업 갤러리">
+        <div class="design-item" role="listitem">
+          <img src="./images/design_typo_mok.jpg" alt="가구 브랜드 타이포그래피" loading="lazy">
+          <div class="design-item-label">
+            <span>가구 브랜드 타이포그래피</span>
+            <small>Photoshop · Brand Identity</small>
+          </div>
+        </div>
+        <div class="design-item" role="listitem">
+          <img src="./images/design_site_01.jpg" alt="플르부아 웹사이트 리디자인" loading="lazy">
+          <div class="design-item-label">
+            <span>플르부아 웹사이트 리디자인</span>
+            <small>Photoshop · Web Design</small>
+          </div>
+        </div>
+        <div class="design-item" role="listitem">
+          <img src="./images/design_pace.jpg" alt="페이스 갤러리 웹사이트 리디자인" loading="lazy">
+          <div class="design-item-label">
+            <span>페이스 갤러리 리디자인</span>
+            <small>Photoshop · Web Design</small>
+          </div>
+        </div>
+        <div class="design-item" role="listitem">
+          <img src="./images/design_h&m.png" alt="H&M 웹사이트 리디자인" loading="lazy">
+          <div class="design-item-label">
+            <span>H&amp;M 웹사이트 리디자인</span>
+            <small>Photoshop · Fashion · Web</small>
+          </div>
+        </div>
+        <div class="design-item" role="listitem">
+          <img src="./images/design_bookcover.png" alt="북커버 그래픽 디자인" loading="lazy">
+          <div class="design-item-label">
+            <span>북커버 그래픽 디자인</span>
+            <small>Photoshop · Graphic Design</small>
+          </div>
+        </div>
+        <div class="design-item" role="listitem">
+          <img src="./images/design_graphic_mok.png" alt="그래픽 포스터 디자인" loading="lazy">
+          <div class="design-item-label">
+            <span>그래픽 포스터 디자인</span>
+            <small>Photoshop · Poster Design</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-tags" aria-label="사용 툴">
+        <span class="proj-tag">Photoshop</span>
+        <span class="proj-tag">Illustrator</span>
+        <span class="proj-tag">Figma</span>
+        <span class="proj-tag">Brand Identity</span>
+        <span class="proj-tag">UI Design</span>
+        <span class="proj-tag">Typography</span>
+      </div>
+    </section>
+
+  </div><!-- /#panels -->
+
+  <!-- ════════════════════════════════════════
+       스크롤 영역 (Work + About + Footer)
+  ════════════════════════════════════════ -->
+  <div id="scroll-wrap">
+
+    <!-- Work 섹션 -->
+    <section id="work-section" aria-label="전체 작업 목록">
+
+      <div class="work-header">
+        <div class="work-eyebrow">WORK</div>
+        <div class="work-intro">
+          <h2>꾸준히 성장하는<br>웹 크리에이터</h2>
+          <p>퍼블리싱, 프론트엔드 개발, 그래픽 디자인까지 — 다양한 분야의 작업물을 소개합니다.</p>
+        </div>
+      </div>
+
+      <!-- 컬럼 헤더 -->
+      <div class="work-table-head" aria-hidden="true">
+        <div class="work-col-label">No.</div>
+        <div class="work-col-label">프로젝트명</div>
+        <div class="work-col-label">분야</div>
+        <div class="work-col-label">연도</div>
+        <div class="work-col-label">역할</div>
+      </div>
+
+      <!-- 프로젝트 리스트 -->
+      <ul class="work-list" id="workList" aria-label="프로젝트 목록">
+        <li class="work-item" data-img="./images/mockup_kyobo.jpg" data-label="교보문고 모바일웹 리뉴얼" data-panel="kyobo" tabindex="0" role="button" aria-label="교보문고 프로젝트 보기">
+          <div class="work-num">01</div>
+          <div class="work-name">교보문고 모바일웹</div>
+          <div class="work-type">Web Publishing</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">웹 퍼블리셔</div>
+        </li>
+        <li class="work-item" data-img="./images/mockup_rareraw.jpg" data-label="레어로우 웹 리뉴얼" data-panel="rareraw" tabindex="0" role="button" aria-label="레어로우 프로젝트 보기">
+          <div class="work-num">02</div>
+          <div class="work-name">레어로우 리뉴얼</div>
+          <div class="work-type">E-Commerce</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">웹 퍼블리셔</div>
+        </li>
+        <li class="work-item" data-img="./images/mok.jpg" data-label="보험 청구 관리 대시보드" data-panel="dashboard" tabindex="0" role="button" aria-label="보험 대시보드 프로젝트 보기">
+          <div class="work-num">03</div>
+          <div class="work-name">보험 청구 대시보드</div>
+          <div class="work-type">Frontend Dev</div>
+          <div class="work-year">2025</div>
+          <div class="work-role">프론트엔드 개발자</div>
+        </li>
+        <li class="work-item" data-img="./images/design_typo_mok.jpg" data-label="가구 브랜드 타이포그래피" data-panel="design" tabindex="0" role="button" aria-label="타이포그래피 디자인 보기">
+          <div class="work-num">04</div>
+          <div class="work-name">가구 브랜드 타이포</div>
+          <div class="work-type">Brand Identity</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">그래픽 디자이너</div>
+        </li>
+        <li class="work-item" data-img="./images/design_site_01.jpg" data-label="플르부아 웹사이트 리디자인" data-panel="design" tabindex="0" role="button" aria-label="플르부아 디자인 보기">
+          <div class="work-num">05</div>
+          <div class="work-name">플르부아 리디자인</div>
+          <div class="work-type">Web Design</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">UI 디자이너</div>
+        </li>
+        <li class="work-item" data-img="./images/design_pace.jpg" data-label="페이스 갤러리 리디자인" data-panel="design" tabindex="0" role="button" aria-label="페이스 갤러리 디자인 보기">
+          <div class="work-num">06</div>
+          <div class="work-name">페이스 갤러리 리디자인</div>
+          <div class="work-type">Web Design</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">UI 디자이너</div>
+        </li>
+        <li class="work-item" data-img="./images/design_h&m.png" data-label="H&M 웹사이트 리디자인" data-panel="design" tabindex="0" role="button" aria-label="H&M 리디자인 보기">
+          <div class="work-num">07</div>
+          <div class="work-name">H&amp;M 리디자인</div>
+          <div class="work-type">Fashion · Web</div>
+          <div class="work-year">2024</div>
+          <div class="work-role">UI 디자이너</div>
+        </li>
+      </ul>
+    </section><!-- /#work-section -->
+
+    <!-- ─────── About 섹션 ─────── -->
+    <section id="about-section" aria-label="자기소개">
+      <div class="about-grid">
+        <div>
+          <div class="about-heading">About<br>Me.</div>
+          <div class="about-text">
+            <p>
+              웹의 가능성을 믿고, <strong>구조적인 마크업과 감각적인 UI</strong>로
+              사용자 경험을 완성하는 웹 크리에이터입니다.
+            </p>
+            <p>
+              퍼블리싱의 정밀함과 프론트엔드 개발의 논리, 그리고 디자인의 감성까지 —
+              세 가지 영역을 아우르며 완성도 높은 결과물을 만들어갑니다.
+            </p>
+          </div>
+
+          <ul class="about-facts">
+            <li class="about-fact">
+              <span class="about-fact-label">이름</span>
+              <span>장지영 Jang Ji Yeong</span>
+            </li>
+            <li class="about-fact">
+              <span class="about-fact-label">직무</span>
+              <span>웹 퍼블리셔 / 프론트엔드 개발자</span>
+            </li>
+            <li class="about-fact">
+              <span class="about-fact-label">경력</span>
+              <span>웹 퍼블리셔 1년 5개월</span>
+            </li>
+            <li class="about-fact">
+              <span class="about-fact-label">학력</span>
+              <span>컴퓨터 정보과 졸업</span>
+            </li>
+            <li class="about-fact">
+              <span class="about-fact-label">자격증</span>
+              <span>정보처리산업기사 · 컴퓨터그래픽스운용기능사</span>
+            </li>
+            <li class="about-fact">
+              <span class="about-fact-label">연락처</span>
+              <span>
+                <a href="mailto:o_o0789@naver.com" style="color:var(--fg); border-bottom:1px solid var(--border)">o_o0789@naver.com</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="skills-heading">Skills &amp; Tools</p>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <h4>HTML5</h4>
+              <p>시맨틱 태그와 웹 접근성을 고려한 구조적 마크업</p>
+            </div>
+            <div class="skill-card">
+              <h4>CSS3 / SCSS</h4>
+              <p>Flex, Grid, 반응형 단위, 변수·믹스인 활용</p>
+            </div>
+            <div class="skill-card">
+              <h4>JavaScript</h4>
+              <p>ES6+, DOM 조작, 이벤트, 비동기 처리</p>
+            </div>
+            <div class="skill-card">
+              <h4>React</h4>
+              <p>컴포넌트 아키텍처, 상태 관리, Props 기반 개발</p>
+            </div>
+            <div class="skill-card">
+              <h4>Figma</h4>
+              <p>와이어프레임, 프로토타입, UI 디자인</p>
+            </div>
+            <div class="skill-card">
+              <h4>Photoshop</h4>
+              <p>시안 제작, 사진 편집, 웹 이미지 최적화</p>
+            </div>
+            <div class="skill-card">
+              <h4>Illustrator</h4>
+              <p>로고, 아이콘, 기초 일러스트 작업</p>
+            </div>
+            <div class="skill-card">
+              <h4>Git</h4>
+              <p>브랜치 전략, 협업 기반 형상관리</p>
+            </div>
+            <div class="skill-card">
+              <h4>GSAP</h4>
+              <p>ScrollTrigger, 타임라인 애니메이션</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────── 푸터 ─────── -->
+    <footer role="contentinfo">
+      <div class="footer-brand">
+        장지영 포트폴리오 — 시안 B
+        <small>© JJY 2026. All rights reserved.</small>
+      </div>
+      <div class="footer-contact">
+        <a href="tel:+821041727389">+82-10-4172-7389</a>
+        <a href="mailto:o_o0789@naver.com">o_o0789@naver.com</a>
+        <a href="https://github.com/superji0" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <p class="footer-copy">Web Publisher &amp; Frontend Developer</p>
+    </footer>
+
+  </div><!-- /#scroll-wrap -->
+
+  <!-- 호버 이미지 프리뷰 (Work 섹션용) -->
+  <div class="work-preview" id="workPreview" aria-hidden="true">
+    <img id="workPreviewImg" src="" alt="프로젝트 미리보기">
+    <div class="work-preview-label" id="workPreviewLabel"></div>
+  </div>
+
+
+  <script>
+    /* ════════════════════════════════════════
+       커스텀 커서 트래킹
+    ════════════════════════════════════════ */
+    const cDot  = document.getElementById('cDot');
+    const cRing = document.getElementById('cRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cDot.style.left = mx + 'px';
+      cDot.style.top  = my + 'px';
+    });
+
+    /* 링 커서 부드러운 지연 추적 */
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cRing.style.left = rx + 'px';
+      cRing.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    /* 클릭 가능한 요소 위에서 커서 확장 */
+    document.querySelectorAll('a, button, .work-item, .design-item, .nav-pill, .proj-cta').forEach(el => {
+      el.addEventListener('mouseenter', () => cRing.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cRing.classList.remove('hovered'));
+    });
+
+
+    /* ════════════════════════════════════════
+       패널 전환 로직
+    ════════════════════════════════════════ */
+    const panels   = document.querySelectorAll('.panel');
+    const navPills = document.querySelectorAll('.nav-pill');
+    const navHome  = document.getElementById('navHome');
+    let   current  = 'hero';
+
+    function switchPanel(targetId) {
+      /* 기존 패널 비활성화 */
+      panels.forEach(p => p.classList.remove('active'));
+      navPills.forEach(b => b.classList.remove('active'));
+
+      /* 타겟 패널 활성화 */
+      const target = document.getElementById('p-' + targetId);
+      if (target) {
+        target.classList.add('active');
+        target.scrollTop = 0;
+      }
+
+      /* 현재 패널에 맞는 nav pill 활성화 */
+      const pill = document.querySelector(`.nav-pill[data-target="${targetId}"]`);
+      if (pill) pill.classList.add('active');
+
+      /* 홈 버튼 표시/숨김 */
+      navHome.classList.toggle('show', targetId !== 'hero');
+
+      /* 스크롤 모드 해제 */
+      if (document.body.classList.contains('scroll-mode')) {
+        exitScrollMode();
+      }
+
+      current = targetId;
+    }
+
+    /* Nav pill 클릭 이벤트 */
+    navPills.forEach(btn => {
+      btn.addEventListener('click', () => switchPanel(btn.dataset.target));
+    });
+
+    /* 홈 버튼 */
+    navHome.addEventListener('click', () => switchPanel('hero'));
+
+
+    /* ════════════════════════════════════════
+       스크롤 모드 (Work / About 영역)
+    ════════════════════════════════════════ */
+    const navWorkBtn = document.getElementById('navWorkBtn');
+    const navBackBtn = document.getElementById('navBackBtn');
+    const scrollWrap = document.getElementById('scroll-wrap');
+
+    function enterScrollMode() {
+      document.body.classList.add('scroll-mode');
+      scrollWrap.scrollTop = 0;
+    }
+
+    function exitScrollMode() {
+      document.body.classList.remove('scroll-mode');
+    }
+
+    navWorkBtn.addEventListener('click', enterScrollMode);
+    navBackBtn.addEventListener('click', () => {
+      exitScrollMode();
+      switchPanel('hero');
+    });
+
+    /* Work 리스트 아이템 클릭 → 해당 프로젝트 패널로 이동 */
+    document.querySelectorAll('.work-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const panelId = item.dataset.panel;
+        if (panelId) {
+          exitScrollMode();
+          setTimeout(() => switchPanel(panelId), 80);
+        }
+      });
+      /* 키보드 접근성 */
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
+    });
+
+
+    /* ════════════════════════════════════════
+       Work 리스트 호버 — 이미지 프리뷰
+    ════════════════════════════════════════ */
+    const preview      = document.getElementById('workPreview');
+    const previewImg   = document.getElementById('workPreviewImg');
+    const previewLabel = document.getElementById('workPreviewLabel');
+    let   previewX = 0, previewY = 0;
+    let   animId;
+
+    /* 프리뷰 위치를 마우스 따라 부드럽게 이동 */
+    function animPreview() {
+      const cx = parseFloat(preview.style.left) || 0;
+      const cy = parseFloat(preview.style.top)  || 0;
+      const nx = cx + (previewX - cx) * 0.14;
+      const ny = cy + (previewY - cy) * 0.14;
+      preview.style.left = nx + 'px';
+      preview.style.top  = ny + 'px';
+      animId = requestAnimationFrame(animPreview);
+    }
+
+    document.querySelectorAll('.work-item').forEach(item => {
+      item.addEventListener('mouseenter', (e) => {
+        const imgSrc = item.dataset.img;
+        const label  = item.dataset.label;
+        if (!imgSrc) return;
+
+        previewImg.src = imgSrc;
+        previewImg.alt = label || '';
+        previewLabel.textContent = label || '';
+
+        /* 초기 위치 설정 후 표시 */
+        previewX = e.clientX + 32;
+        previewY = e.clientY - 120;
+        preview.style.left = previewX + 'px';
+        preview.style.top  = previewY + 'px';
+
+        preview.classList.add('show');
+        cancelAnimationFrame(animId);
+        animPreview();
+      });
+
+      item.addEventListener('mousemove', (e) => {
+        /* 마우스 위치에 오프셋 적용 */
+        previewX = e.clientX + 32;
+        previewY = e.clientY - 120;
+
+        /* 뷰포트 경계 처리 */
+        if (previewX + 340 > window.innerWidth)  previewX = e.clientX - 372;
+        if (previewY + 260 > window.innerHeight) previewY = e.clientY - 260;
+        if (previewY < 0)                        previewY = 8;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        preview.classList.remove('show');
+        cancelAnimationFrame(animId);
+      });
+    });
+
+
+    /* ════════════════════════════════════════
+       디자인 아이템 클릭 → 원본 이미지 새 탭
+    ════════════════════════════════════════ */
+    document.querySelectorAll('.design-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (img) window.open(img.src, '_blank');
+      });
+    });
+
+
+    /* ════════════════════════════════════════
+       키보드 내비게이션 (숫자키 단축키)
+    ════════════════════════════════════════ */
+    const keyMap = {
+      '1': 'hero',
+      '2': 'kyobo',
+      '3': 'rareraw',
+      '4': 'dashboard',
+      '5': 'design',
+      'w': null, /* Work 섹션 */
+    };
+
+    document.addEventListener('keydown', e => {
+      /* 입력 필드에서는 무시 */
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'w' || e.key === 'W') {
+        enterScrollMode();
+      } else if (keyMap[e.key] !== undefined) {
+        if (keyMap[e.key]) switchPanel(keyMap[e.key]);
+      }
+    });
+
+
+    /* ════════════════════════════════════════
+       초기 로드 애니메이션
+    ════════════════════════════════════════ */
+    window.addEventListener('DOMContentLoaded', () => {
+      /* 히어로 패널이 이미 active 상태 — 자연스럽게 fade-in */
+      document.getElementById('p-hero').style.transition = 'opacity 0.8s ease';
+    });
+  </script>
+
+</body>
+</html>
