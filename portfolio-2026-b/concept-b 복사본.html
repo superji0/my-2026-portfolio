@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장지영 — Concept B</title>
+<meta name="description" content="UI/UX 디자이너 & 웹 퍼블리셔 장지영 포트폴리오">
+<link rel="icon" href="./images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Funnel+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════ TOKENS ══════════════ */
+:root {
+  --cream:  #ede8dc;
+  --cream2: #e4dece;
+  --cream3: #f5f1e8;
+  --black:  #0d0d0b;
+  --blue:   #1847f5;
+  --blue2:  rgba(24,71,245,.09);
+  --yellow: #f5d535;
+  --red:    #e53b1e;
+  --muted:  rgba(13,13,11,.44);
+  --border: rgba(13,13,11,.11);
+  --white:  #faf8f2;
+  --ease:   cubic-bezier(.76,0,.24,1);
+  --ease2:  cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:auto;}
+body{
+  font-family:'Funnel Sans',system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--black);
+  cursor:none;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+button{background:none;border:none;font-family:inherit;cursor:pointer;color:inherit;}
+
+/* ══════════════ CURSOR ══════════════ */
+#cur-cross {
+  position:fixed;z-index:99999;pointer-events:none;
+  width:20px;height:20px;
+  transform:translate(-50%,-50%);
+  transition:width .25s var(--ease),height .25s var(--ease),opacity .2s;
+}
+#cur-cross::before,#cur-cross::after{
+  content:'';position:absolute;background:var(--black);
+  transition:background .2s;
+}
+#cur-cross::before{width:1px;height:100%;left:50%;top:0;}
+#cur-cross::after{width:100%;height:1px;top:50%;left:0;}
+#cur-cross.big{width:40px;height:40px;}
+#cur-cross.blue::before,#cur-cross.blue::after{background:var(--blue);}
+#cur-dot{
+  position:fixed;z-index:99998;pointer-events:none;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--blue);
+  transform:translate(-50%,-50%);
+}
+#cur-txt{
+  position:fixed;z-index:100000;pointer-events:none;
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);white-space:nowrap;
+  transform:translate(14px,-6px);
+  opacity:0;transition:opacity .2s;
+}
+#cur-txt.show{opacity:1;}
+
+/* ══════════════ HEADER / NAV ══════════════ */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 36px;
+  mix-blend-mode:multiply;
+}
+.hdr-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;letter-spacing:.1em;color:var(--black);
+}
+.hdr-logo em{color:var(--blue);font-style:normal;}
+.hdr-nav{display:flex;align-items:center;gap:28px;}
+.hdr-link{
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  transition:color .2s;position:relative;
+}
+.hdr-link::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--blue);transition:width .3s var(--ease);
+}
+.hdr-link:hover{color:var(--blue);}
+.hdr-link:hover::after{width:100%;}
+.hdr-link.active-nav{color:var(--blue);}
+.hdr-link.active-nav::after{width:100%;}
+
+/* ══════════════ HERO ══════════════ */
+#hero{
+  position:relative;
+  width:100%;height:100vh;
+  overflow:hidden;background:var(--cream);
+}
+
+/* Grid lines (background structure) */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(13,13,11,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,13,11,.045) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;z-index:0;
+}
+
+/* Giant name - bottom aligned */
+.hero-name-bg{
+  position:absolute;
+  bottom:-12px;left:32px;
+  z-index:1;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px, 18vw, 240px);
+  line-height:.88;letter-spacing:-.02em;
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(13,13,11,.12);
+  pointer-events:none;user-select:none;
+  white-space:nowrap;
+}
+
+/* Big blue JANG text */
+.hero-jang{
+  position:absolute;
+  top:clamp(60px,10vh,110px);left:36px;
+  z-index:4;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,14vw,190px);
+  line-height:.88;letter-spacing:-.02em;
+  color:var(--blue);
+  transition:transform .05s linear,opacity .05s linear;
+}
+
+/* Greeting serif italic */
+.hero-greeting{
+  position:absolute;
+  top:clamp(68px,11vh,120px);
+  right:clamp(40px,6vw,100px);
+  z-index:4;
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(16px,2.2vw,28px);
+  color:var(--muted);
+  text-align:right;
+  line-height:1.4;
+  transition:transform .05s linear,opacity .05s linear;
+}
+
+/* Role badge */
+.hero-role-tag{
+  position:absolute;
+  top:50%;left:36px;
+  transform:translateY(-50%);
+  z-index:4;
+  display:flex;flex-direction:column;gap:6px;
+  transition:transform .05s linear,opacity .05s linear;
+}
+.rtag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--black);color:var(--cream);
+  font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:.07em;padding:6px 14px;border-radius:2px;
+  width:fit-content;
+}
+.rtag.blue-tag{background:var(--blue);}
+
+/* Scatter cards */
+.s-card{
+  position:absolute;z-index:5;
+  background:var(--white);
+  border:1px solid var(--border);
+  padding:12px 14px;
+  transition:transform .05s linear,opacity .05s linear;
+  box-shadow:2px 3px 12px rgba(13,13,11,.08);
+}
+.s-card.yellow{background:var(--yellow);border-color:transparent;}
+.s-card.blue-card{background:var(--blue);color:var(--white);border-color:transparent;}
+.s-card.lined{background:transparent;border:1.5px solid var(--black);}
+
+.sc-label{
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px;
+}
+.s-card.blue-card .sc-label{color:rgba(255,255,255,.55);}
+.s-card.yellow .sc-label{color:rgba(13,13,11,.5);}
+.sc-val{font-size:13px;font-weight:700;line-height:1.3;}
+.sc-val.big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px;line-height:1;letter-spacing:.02em;
+}
+
+/* Specific card positions */
+#card-exp { top:22%;right:clamp(36px,8vw,120px); width:160px; }
+#card-role{ top:40%;right:clamp(36px,8vw,120px); width:180px; }
+#card-tool{ top:58%;right:clamp(36px,8vw,120px); width:200px; }
+#card-award{ bottom:22%;left:clamp(180px,28vw,380px); width:200px; transform:rotate(-2deg); }
+#card-contrib{ bottom:30%;left:36px; width:130px; transform:rotate(1.5deg); }
+#card-ai{ top:30%;left:clamp(180px,28vw,360px); width:170px; transform:rotate(-1.2deg); }
+
+/* Scroll hint */
+.hero-scroll-hint{
+  position:absolute;bottom:28px;left:50%;
+  transform:translateX(-50%);
+  z-index:6;
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+  animation:hscroll 2.5s ease infinite;
+  pointer-events:none;
+}
+.hero-scroll-hint svg{width:16px;height:16px;stroke:var(--muted);fill:none;}
+@keyframes hscroll{
+  0%,100%{transform:translateX(-50%) translateY(0);opacity:.4;}
+  55%{transform:translateX(-50%) translateY(8px);opacity:.8;}
+}
+
+/* Index number top center */
+.hero-index{
+  position:absolute;top:clamp(56px,8vh,90px);left:50%;
+  transform:translateX(-50%);z-index:4;
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:.2em;color:var(--muted);text-align:center;
+  transition:opacity .05s;
+}
+.hero-index span{display:block;}
+
+/* ══════════════ MARQUEE (between hero & work) ══════════════ */
+.marquee-divider{
+  background:var(--black);
+  height:44px;overflow:hidden;
+  display:flex;align-items:center;
+  position:relative;z-index:10;
+}
+.mq-track{
+  display:flex;white-space:nowrap;gap:0;
+  animation:mq 20s linear infinite;
+}
+.mq-track span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16px;letter-spacing:.14em;
+  color:var(--cream);padding:0 22px;
+}
+.mq-dot{color:var(--blue)!important;padding:0 8px!important;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ══════════════ SECTION SHARED ══════════════ */
+.section-eyebrow{
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.section-eyebrow::before{content:'';width:18px;height:1px;background:var(--blue);}
+
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(44px,7vw,96px);
+  line-height:.92;letter-spacing:-.02em;
+  margin-bottom:4px;
+}
+
+/* ══════════════ WORK INDEX ══════════════ */
+#work{
+  background:var(--cream);padding:88px 36px 80px;
+  position:relative;
+}
+
+.wk-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1.5px solid var(--black);padding-bottom:28px;margin-bottom:0;
+}
+.wk-head-left{}
+.wk-count{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:clamp(40px,6vw,72px);color:var(--blue);line-height:1;
+}
+.wk-head-right{
+  font-size:12.5px;color:var(--muted);max-width:220px;
+  text-align:right;line-height:1.7;
+}
+
+/* Column labels */
+.wk-th{
+  display:grid;grid-template-columns:48px 1fr 90px 160px 70px;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.wk-col{
+  font-family:'Space Mono',monospace;font-size:9px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+}
+.wk-section-div{
+  padding:20px 0 6px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:10px;
+}
+.wk-section-div::after{content:'';flex:1;height:1px;background:rgba(24,71,245,.18);}
+
+/* Work rows — hover = full-bleed image reveal */
+.wk-list{list-style:none;}
+.wk-row{
+  position:relative;display:grid;
+  grid-template-columns:48px 1fr 90px 160px 70px;
+  gap:12px;padding:18px 0;border-bottom:1px solid var(--border);
+  cursor:pointer;overflow:hidden;
+  transition:color .3s var(--ease);
+  isolation:isolate;
+}
+/* BG image reveal on hover */
+.wk-row-bg{
+  position:absolute;inset:0;z-index:-1;
+  background-size:cover;background-position:center;
+  opacity:0;filter:brightness(.35) saturate(0);
+  transition:opacity .45s var(--ease),transform .6s var(--ease);
+  transform:scale(1.04);
+}
+.wk-row:hover .wk-row-bg{opacity:1;transform:scale(1);}
+.wk-row:hover{color:var(--white);}
+/* Blue left accent on hover */
+.wk-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--blue);
+  transition:width .3s var(--ease);z-index:1;
+}
+.wk-row:hover::before{width:3px;}
+.wk-row>*{position:relative;z-index:2;}
+
+.wk-n{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);padding-top:2px;transition:color .3s;}
+.wk-row:hover .wk-n{color:rgba(255,255,255,.4);}
+.wk-name{font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;}
+.wk-award{
+  display:inline-flex;align-items:center;
+  background:var(--yellow);color:var(--black);
+  font-family:'Space Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.05em;padding:2px 7px;border-radius:2px;
+}
+.wk-yr,.wk-cat,.wk-role{font-size:12.5px;padding-top:2px;}
+.wk-yr,.wk-cat{color:var(--muted);}
+.wk-role{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.04em;}
+.wk-row:hover .wk-yr,.wk-row:hover .wk-cat,.wk-row:hover .wk-role{color:rgba(255,255,255,.55);}
+
+/* ══════════════ PROJECT DETAIL (right-slide panel) ══════════════ */
+#proj-panel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(680px,100vw);z-index:8000;
+  background:var(--white);
+  transform:translateX(100%);
+  transition:transform .6s var(--ease);
+  overflow-y:auto;
+  box-shadow:-24px 0 80px rgba(13,13,11,.15);
+}
+#proj-panel.open{transform:translateX(0);}
+#proj-overlay{
+  position:fixed;inset:0;z-index:7999;
+  background:rgba(13,13,11,.35);
+  opacity:0;pointer-events:none;
+  transition:opacity .4s;
+  backdrop-filter:blur(2px);
+}
+#proj-overlay.show{opacity:1;pointer-events:all;}
+.pp-inner{padding:56px 40px 80px;}
+/* 프로젝트별 콘텐츠 블록 — 수정 시 해당 article만 편집 */
+.proj-content{display:none;}
+.proj-content.active{display:block;}
+.pp-close{
+  position:absolute;top:20px;right:24px;
+  width:36px;height:36px;
+  border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--muted);
+  transition:all .2s;
+}
+.pp-close:hover{background:var(--black);color:var(--cream);border-color:var(--black);}
+.pp-eyebrow{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:9px;margin-bottom:10px;
+}
+.pp-eyebrow::before{content:'';width:16px;height:1px;background:var(--blue);}
+.pp-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(42px,8vw,76px);line-height:.9;letter-spacing:-.02em;margin-bottom:12px;
+}
+.pp-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px;}
+.pp-mi{font-size:12px;color:var(--muted);padding-right:12px;border-right:1px solid var(--border);}
+.pp-mi:last-child{border:none;}
+.pp-contrib{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--blue2);border:1px solid rgba(24,71,245,.25);
+  color:var(--blue);font-family:'Space Mono',monospace;
+  font-size:10px;letter-spacing:.04em;padding:3px 9px;border-radius:100px;
+}
+.pp-roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;margin-bottom:22px;}
+.pp-role{
+  padding:4px 11px;border:1px solid var(--border);border-radius:2px;
+  font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);
+}
+.pp-role.hi{border-color:rgba(24,71,245,.4);color:var(--blue);}
+
+.pp-shots{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:24px;}
+.pp-shots img{width:100%;border-radius:4px;object-fit:cover;aspect-ratio:4/3;}
+.pp-shots.port img{aspect-ratio:9/16;}
+.pp-shots.wide img{aspect-ratio:16/10;}
+
+.pp-sec{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.pp-body{margin-bottom:20px;}
+.pp-body p{font-size:13.5px;line-height:1.88;color:rgba(13,13,11,.7);margin-bottom:12px;}
+.pp-body mark{background:rgba(24,71,245,.1);color:var(--blue);padding:1px 4px;border-radius:2px;}
+.pp-body em{color:var(--blue);font-style:normal;}
+
+.pp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
+.pp-tag{
+  padding:4px 11px;border:1px solid var(--border);border-radius:100px;
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s;
+}
+.pp-tag:hover{border-color:var(--blue);color:var(--blue);}
+.pp-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;background:var(--blue);
+  color:var(--white);border:none;border-radius:2px;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;
+  transition:background .2s;
+}
+.pp-cta:hover{background:var(--black);}
+
+/* Inner tabs in panel */
+.pp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.pp-tab{
+  padding:9px 18px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;
+  color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
+}
+.pp-tab:hover{color:var(--black);}
+.pp-tab.on{color:var(--blue);border-bottom-color:var(--blue);}
+.ppane{display:none;}
+.ppane.on{display:block;}
+
+/* ══════════════ DIFFERENTIATORS ══════════════ */
+#diff{
+  background:var(--black);color:var(--cream);
+  padding:88px 36px;
+}
+.diff-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:40px;align-items:end;margin-bottom:56px;
+}
+.diff-title-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,8vw,112px);line-height:.9;letter-spacing:-.01em;
+}
+.diff-title-big em{color:var(--blue);font-style:normal;}
+.diff-intro-txt{font-size:13px;line-height:1.8;color:rgba(237,232,220,.5);max-width:280px;text-align:right;}
+
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(237,232,220,.08);}
+.d-card{
+  background:var(--black);padding:28px 24px;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.d-card:hover{background:#151510;}
+.d-card-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:transparent;transition:background .3s;
+}
+.d-card:hover .d-card-accent{background:var(--blue);}
+.d-num{
+  font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;
+  color:var(--blue);margin-bottom:10px;
+}
+.d-card h3{font-size:14.5px;font-weight:700;margin-bottom:8px;line-height:1.4;color:var(--cream);}
+.d-card p{font-size:12px;line-height:1.78;color:rgba(237,232,220,.5);}
+.d-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
+.d-tag{
+  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.05em;
+  text-transform:uppercase;padding:2px 7px;
+  border:1px solid rgba(24,71,245,.3);color:var(--blue);border-radius:1px;
+}
+
+/* ══════════════ DESIGN GALLERY ══════════════ */
+#gallery{background:var(--cream2);padding:88px 36px;}
+.gal-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:36px;
+}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+/* First item spans 2 cols */
+.gallery-grid .gi:first-child{grid-column:span 2;grid-row:span 2;}
+.gallery-grid .gi:nth-child(4){grid-column:span 2;}
+.gi{
+  position:relative;overflow:hidden;border-radius:3px;
+  aspect-ratio:4/3;cursor:pointer;
+}
+.gi:first-child{aspect-ratio:auto;}
+.gi img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease),filter .5s;
+}
+.gi:hover img{transform:scale(1.07);filter:brightness(.5);}
+.gi-info{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px 14px;
+  background:linear-gradient(transparent 40%,rgba(13,13,11,.75));
+  opacity:0;transition:opacity .35s;
+}
+.gi:hover .gi-info{opacity:1;}
+.gi-info b{font-size:13px;font-weight:700;color:#fff;display:block;}
+.gi-info small{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);margin-top:3px;display:block;}
+
+/* ══════════════ ABOUT ══════════════ */
+#about{
+  background:var(--white);
+  padding:88px 36px;
+  position:relative;overflow:hidden;
+}
+/* Big outlined JJY background */
+#about::before{
+  content:'JJY';position:absolute;
+  bottom:-60px;right:-20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(160px,24vw,320px);line-height:.8;
+  color:transparent;-webkit-text-stroke:1.5px rgba(13,13,11,.06);
+  pointer-events:none;user-select:none;
+}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
+.about-name-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(56px,9vw,120px);line-height:.88;
+  letter-spacing:-.02em;margin-bottom:24px;
+}
+.about-name-big em{color:var(--blue);font-style:normal;}
+.about-text p{font-size:13.5px;line-height:1.9;color:var(--muted);margin-bottom:13px;}
+.about-text strong{color:var(--black);font-weight:600;}
+.facts-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-top:28px;}
+.fact-row{
+  display:grid;grid-template-columns:68px 1fr;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px;
+}
+.fact-lbl{
+  font-family:'Space Mono',monospace;font-size:9px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding-top:1px;
+}
+
+/* Skills grid */
+.sk-header{
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px;
+}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.sk-item{
+  border:1px solid var(--border);padding:13px 12px;border-radius:2px;
+  transition:border-color .2s,transform .25s var(--ease);
+}
+.sk-item:hover{border-color:var(--blue);transform:translateY(-2px);}
+.sk-item h4{font-size:12px;font-weight:700;margin-bottom:3px;}
+.sk-item p{font-size:10.5px;color:var(--muted);line-height:1.5;}
+.sk-item.ai h4{color:var(--blue);}
+.sk-item.ai{border-color:rgba(24,71,245,.2);}
+
+/* ══════════════ ETC / CHARACTER ══════════════ */
+#etc{background:var(--cream);padding:80px 36px;}
+.etc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.etc-card{
+  border:1.5px solid var(--border);padding:28px;border-radius:2px;
+  transition:border-color .25s,transform .3s var(--ease),background .25s;
+}
+.etc-card:hover{border-color:var(--blue);background:var(--white);transform:translateY(-3px);}
+.etc-card h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.01em;margin-bottom:8px;}
+.etc-card p{font-size:12.5px;line-height:1.78;color:var(--muted);}
+.char-imgs{display:flex;gap:8px;margin-bottom:14px;}
+.ch-img{width:66px;height:66px;object-fit:contain;background:var(--cream2);border-radius:4px;padding:6px;}
+.award-pill{
+  display:inline-flex;align-items:center;gap:5px;margin-top:10px;
+  background:var(--yellow);color:var(--black);
+  padding:4px 12px;border-radius:1px;
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.05em;font-weight:700;
+}
+.etc-role-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.etc-rbadge{
+  padding:3px 10px;border:1px solid var(--border);border-radius:2px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.05em;color:var(--muted);
+}
+.etc-rbadge.hi{border-color:rgba(24,71,245,.35);color:var(--blue);}
+
+/* ══════════════ FOOTER ══════════════ */
+footer{
+  background:var(--black);color:var(--cream);
+  padding:40px 36px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.ft-brand{font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;}
+.ft-brand small{display:block;font-family:'Space Mono',monospace;font-style:normal;font-size:10px;color:rgba(237,232,220,.4);margin-top:3px;}
+.ft-links{display:flex;gap:20px;}
+.ft-links a{font-family:'Space Mono',monospace;font-size:10px;color:rgba(237,232,220,.45);transition:color .2s;}
+.ft-links a:hover{color:var(--blue);}
+.ft-xl{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:var(--blue);}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media(max-width:960px){
+  .wk-th,.wk-row{grid-template-columns:36px 1fr 80px 120px;}
+  .wk-role{display:none;}
+  .diff-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid .gi:first-child{grid-column:span 2;}
+  .gallery-grid .gi:nth-child(4){grid-column:span 1;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .sk-grid{grid-template-columns:repeat(2,1fr);}
+  .etc-grid{grid-template-columns:1fr;}
+  #proj-panel{width:100vw;}
+  footer{flex-direction:column;gap:16px;align-items:flex-start;}
+  .diff-head{grid-template-columns:1fr;}
+  .diff-intro-txt{text-align:left;}
+}
+@media(max-width:600px){
+  #site-header{padding:14px 18px;}
+  .hdr-nav{gap:16px;}
+  #work,#diff,#gallery,#about,#etc{padding-left:18px;padding-right:18px;}
+  .wk-th,.wk-row{grid-template-columns:32px 1fr 70px;}
+  .wk-yr{display:none;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .gallery-grid .gi:nth-child(4){grid-column:span 1;}
+  footer{padding:30px 18px;}
+}
+
+/* ══════════════ ANIMATE IN ══════════════ */
+.reveal-up{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+.reveal-up.in{opacity:1;transform:translateY(0);}
+
+/* ══════════════ WORK ROW THUMBNAIL HOVER ══════════════ */
+#wk-thumb{
+  position:fixed;
+  pointer-events:none;
+  z-index:6000;
+  width:280px;
+  opacity:0;
+  transition:opacity .22s var(--ease), transform .22s var(--ease);
+  transform:translateY(10px) rotate(-1.5deg) scale(.96);
+  will-change:transform;
+}
+#wk-thumb.visible{
+  opacity:1;
+  transform:translateY(0) rotate(-1.5deg) scale(1);
+}
+/* Card wrapper */
+.wk-thumb-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow:
+    0 8px 32px rgba(13,13,11,.14),
+    0 2px 8px rgba(13,13,11,.08),
+    0 0 0 1px rgba(13,13,11,.04);
+}
+.wk-thumb-img-wrap{
+  width:100%;
+  height:180px;
+  overflow:hidden;
+  background:var(--cream2);
+  position:relative;
+}
+.wk-thumb-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .6s var(--ease);
+}
+#wk-thumb.visible .wk-thumb-img-wrap img{
+  transform:scale(1.04);
+}
+.wk-thumb-meta{
+  padding:10px 14px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+.wk-thumb-name{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--black);
+  line-height:1.3;
+}
+.wk-thumb-cat{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:2px;
+}
+.wk-thumb-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  line-height:1;
+  color:var(--blue);
+  flex-shrink:0;
+  margin-left:10px;
+}
+/* Blue tag strip at top of card on hover-in */
+.wk-thumb-strip{
+  height:3px;
+  background:var(--blue);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s var(--ease) .05s;
+}
+#wk-thumb.visible .wk-thumb-strip{
+  transform:scaleX(1);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ CURSOR ══ -->
+<div id="cur-cross"></div>
+<div id="cur-dot"></div>
+<div id="cur-txt" id="curTxt"></div>
+
+<!-- ══ HEADER ══ -->
+<header id="site-header">
+  <div class="hdr-logo">JJY<em>.</em></div>
+  <nav class="hdr-nav">
+    <a href="#work" class="hdr-link">Work</a>
+    <a href="#diff" class="hdr-link">Why me</a>
+    <a href="#about" class="hdr-link">About</a>
+    <a href="/cdn-cgi/l/email-protection#87e8d8e8b7b0bfbec7e9e6f1e2f5a9e4e8ea" class="hdr-link">Contact</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════
+     HERO — scroll scatter
+══════════════════════════════════════ -->
+<section id="hero">
+  <!-- Grid background via ::before -->
+
+  <!-- Background name outline -->
+  <div class="hero-name-bg" id="heroNameBg" aria-hidden="true">장지영</div>
+
+  <!-- Index top center -->
+  <div class="hero-index" id="heroIndex">
+    <span>Portfolio</span>
+    <span>2026</span>
+  </div>
+
+  <!-- Big blue JANG -->
+  <div class="hero-jang" id="heroJang" aria-hidden="true">JANG<br>JI<br>YEONG</div>
+
+  <!-- Greeting top right -->
+  <div class="hero-greeting" id="heroGreeting">
+    안녕하세요,<br>저는 장지영입니다.<br>
+    <span style="font-size:.8em;opacity:.6;">Hello, I'm Ji-young.</span>
+  </div>
+
+  <!-- Role tags mid left -->
+  <div class="hero-role-tag" id="heroRole">
+    <span class="rtag blue-tag">UI / UX DESIGNER</span>
+    <span class="rtag">WEB PUBLISHER</span>
+    <span class="rtag">D → P</span>
+  </div>
+
+  <!-- Scatter cards -->
+  <div class="s-card yellow" id="card-exp">
+    <div class="sc-label">실무 경력</div>
+    <div class="sc-val big">1Y 8M</div>
+    <div style="font-size:11px;margin-top:2px;color:rgba(13,13,11,.5)">TDX 디자인팀</div>
+  </div>
+
+  <div class="s-card blue-card" id="card-role">
+    <div class="sc-label">기여도</div>
+    <div class="sc-val big">100%</div>
+    <div style="font-size:11px;margin-top:2px;color:rgba(255,255,255,.5)">모든 프로젝트</div>
+  </div>
+
+  <div class="s-card lined" id="card-tool">
+    <div class="sc-label">Tools</div>
+    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
+      Figma · Photoshop<br>
+      Illustrator · SCSS<br>
+      Midjourney · Cursor AI
+    </div>
+  </div>
+
+  <div class="s-card yellow" id="card-award">
+    <div class="sc-label">수상</div>
+    <div class="sc-val" style="font-size:12px;line-height:1.6">
+      🏆 파주시 캐릭터 공모전<br>
+      <strong>인기상 · 시민투표 1위</strong>
+    </div>
+  </div>
+
+  <div class="s-card" id="card-contrib">
+    <div class="sc-label">Projects</div>
+    <div class="sc-val big" style="color:var(--blue)">11+</div>
+  </div>
+
+  <div class="s-card" id="card-ai">
+    <div class="sc-label">AI Augmented</div>
+    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
+      Midjourney<br>ImageFX<br>Cursor AI · Agent
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    scroll to explore
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-divider">
+  <div class="mq-track">
+    <span>EXTRA L</span><span class="mq-dot">✦</span>
+    <span>장지영</span><span class="mq-dot">✦</span>
+    <span>D → P</span><span class="mq-dot">✦</span>
+    <span>UI / UX DESIGN</span><span class="mq-dot">✦</span>
+    <span>WEB PUBLISHING</span><span class="mq-dot">✦</span>
+    <span>기여도 100%</span><span class="mq-dot">✦</span>
+    <span>AI AUGMENTED</span><span class="mq-dot">✦</span>
+    <span>TDX 디자인팀</span><span class="mq-dot">✦</span>
+    <span>MIDJOURNEY</span><span class="mq-dot">✦</span>
+    <span>CURSOR AI</span><span class="mq-dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>EXTRA L</span><span class="mq-dot">✦</span>
+    <span>장지영</span><span class="mq-dot">✦</span>
+    <span>D → P</span><span class="mq-dot">✦</span>
+    <span>UI / UX DESIGN</span><span class="mq-dot">✦</span>
+    <span>WEB PUBLISHING</span><span class="mq-dot">✦</span>
+    <span>기여도 100%</span><span class="mq-dot">✦</span>
+    <span>AI AUGMENTED</span><span class="mq-dot">✦</span>
+    <span>TDX 디자인팀</span><span class="mq-dot">✦</span>
+    <span>MIDJOURNEY</span><span class="mq-dot">✦</span>
+    <span>CURSOR AI</span><span class="mq-dot">✦</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     WORK INDEX
+══════════════════════════════════════ -->
+<section id="work">
+  <div class="wk-head reveal-up">
+    <div class="wk-head-left">
+      <div class="section-eyebrow">Selected Work</div>
+      <div class="section-title">WORK</div>
+    </div>
+    <!-- <div style="text-align:right">
+      <div class="wk-count">11</div>
+      <div class="wk-head-right">기획부터 퍼블리싱까지<br>모든 프로젝트 기여도 100%</div>
+    </div> -->
+  </div>
+
+  <div class="wk-th">
+    <div class="wk-col">No.</div>
+    <div class="wk-col">프로젝트</div>
+    <div class="wk-col">연도</div>
+    <div class="wk-col">분야</div>
+    <div class="wk-col">기여</div>
+  </div>
+
+  <div class="wk-section-div">실무 · TDX 디자인팀</div>
+  <ul class="wk-list">
+    <li class="wk-row" data-proj="tdx-dash" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/mok.jpg')"></div>
+      <div class="wk-n">01</div>
+      <div class="wk-name">보험 청구 대시보드</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">UI Design + Publishing</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="tdx-hp" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/iMacMockup.png')"></div>
+      <div class="wk-n">02</div>
+      <div class="wk-name">TDX 홈페이지 리뉴얼</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">반응형 Design + Pub</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="tdx-db" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/design_graphic.jpg')"></div>
+      <div class="wk-n">03</div>
+      <div class="wk-name">DB 청구 프로세스</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">UX · Icon System</div>
+      <div class="wk-role">100%</div>
+    </li>
+  </ul>
+
+  <div class="wk-section-div">개인 프로젝트</div>
+  <ul class="wk-list">
+    <li class="wk-row" data-proj="pickcle" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/kybo_screen.png')"></div>
+      <div class="wk-n">04</div>
+      <div class="wk-name">픽클리 앱</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">기획 + UX/UI Design</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="nicepay" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/iMacMockup.png')"></div>
+      <div class="wk-n">05</div>
+      <div class="wk-name">나이스페이먼츠 리뉴얼</div>
+      <div class="wk-yr">2025</div>
+      <div class="wk-cat">AI · Design · Publishing</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="hyundai" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/design_hmmain.jpg')"></div>
+      <div class="wk-n">06</div>
+      <div class="wk-name">현대카드 배너 디자인</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">Graphic Design</div>
+      <div class="wk-role">100%</div>
+    </li>
+  </ul>
+
+  <!-- <div class="wk-section-div">퍼블리싱 포트폴리오</div>
+  <ul class="wk-list">
+    <li class="wk-row" data-proj="kyobo" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/mockup_kyobo.jpg')"></div>
+      <div class="wk-n">07</div>
+      <div class="wk-name">교보문고 모바일웹</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">Design + Publishing</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="rareraw" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/mockup_rareraw.jpg')"></div>
+      <div class="wk-n">08</div>
+      <div class="wk-name">레어로우 리뉴얼</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">E-Commerce · GSAP</div>
+      <div class="wk-role">100%</div>
+    </li>
+  </ul> -->
+
+  <div class="wk-section-div">ETC · 캐릭터 & 수상</div>
+  <ul class="wk-list">
+    <li class="wk-row" data-proj="merryweather" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/character_01.png')"></div>
+      <div class="wk-n">09</div>
+      <div class="wk-name">메리웨더 캐릭터 & 굿즈</div>
+      <div class="wk-yr">2023—</div>
+      <div class="wk-cat">Character · Illust Fair</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="paju" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/character_02.png')"></div>
+      <div class="wk-n">10</div>
+      <div class="wk-name">파주시 캐릭터 공모전 <span class="wk-award">🏆 인기상</span></div>
+      <div class="wk-yr">2023</div>
+      <div class="wk-cat">수상 · 시민투표 1위</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="design-gallery" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/design_typo_mok.jpg')"></div>
+      <div class="wk-n">11</div>
+      <div class="wk-name">디자인 갤러리</div>
+      <div class="wk-yr">2023—</div>
+      <div class="wk-cat">Graphic + Web Design</div>
+      <div class="wk-role">100%</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════════════════
+     DESIGN GALLERY
+══════════════════════════════════════ -->
+<section id="gallery">
+  <div class="gal-head reveal-up">
+    <div>
+      <div class="section-eyebrow">Design Work</div>
+      <div class="section-title">GALLERY</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);text-align:right;max-width:180px;line-height:1.7">
+      클릭하면 원본으로<br>확인할 수 있습니다
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi"><img src="./images/design_typo_mok.jpg" alt="가구 브랜드 타이포그래피" loading="lazy"><div class="gi-info"><b>가구 브랜드 타이포그래피</b><small>Photoshop · Brand Identity</small></div></div>
+    <div class="gi"><img src="./images/design_site_01.jpg" alt="플르부아 리디자인" loading="lazy"><div class="gi-info"><b>플르부아 웹사이트 리디자인</b><small>Photoshop · Web Design</small></div></div>
+    <div class="gi"><img src="./images/design_pace.jpg" alt="페이스 갤러리" loading="lazy"><div class="gi-info"><b>페이스 갤러리 리디자인</b><small>Photoshop · Web Design</small></div></div>
+    <div class="gi"><img src="./images/design_h&m.png" alt="H&M 리디자인" loading="lazy"><div class="gi-info"><b>H&amp;M 웹사이트 리디자인</b><small>Photoshop · Fashion</small></div></div>
+    <div class="gi"><img src="./images/design_bookcover.png" alt="북커버" loading="lazy"><div class="gi-info"><b>북커버 그래픽 디자인</b><small>Photoshop · Graphic Design</small></div></div>
+    <div class="gi"><img src="./images/design_graphic_mok.png" alt="포스터" loading="lazy"><div class="gi-info"><b>그래픽 포스터 디자인</b><small>Photoshop · Poster</small></div></div>
+    <div class="gi"><img src="./images/design_typo.jpg" alt="타이포1" loading="lazy"><div class="gi-info"><b>타이포그래피 워크</b><small>Photoshop · Typography</small></div></div>
+    <div class="gi"><img src="./images/design_hmmain.jpg" alt="현대카드 메인" loading="lazy"><div class="gi-info"><b>현대카드 프로모션 배너</b><small>Photoshop · 개인 프로젝트</small></div></div>
+    <div class="gi"><img src="./images/design_typo2.jpg" alt="타이포2" loading="lazy"><div class="gi-info"><b>타이포그래피 시리즈 2</b><small>Photoshop · Typography</small></div></div>
+    <div class="gi"><img src="./images/design_hmsub.jpg" alt="현대카드 서브" loading="lazy"><div class="gi-info"><b>현대카드 배너 시리즈 2</b><small>Photoshop · Banner Design</small></div></div>
+    <div class="gi"><img src="./images/design_graphic.jpg" alt="그래픽아트" loading="lazy"><div class="gi-info"><b>그래픽 아트워크</b><small>Illustrator · Graphic Art</small></div></div>
+    <div class="gi"><img src="./images/design_typo3.jpg" alt="타이포3" loading="lazy"><div class="gi-info"><b>타이포그래피 시리즈 3</b><small>Photoshop · Typography</small></div></div>
+  </div>
+</section>
+
+<!-- DIFF -->
+<section id="diff">
+  <div class="diff-head reveal-up">
+    <div>
+      <div class="section-eyebrow" style="color:var(--blue)">Why Jang Ji-young</div>
+      <div class="diff-title-big">남들과<br>다른 점<em>.</em></div>
+    </div>
+    <div class="diff-intro-txt">기획 · 디자인 · 퍼블리싱 — 하나의 직함으로 정의되지 않는 확장형 크리에이터입니다.</div>
+  </div>
+  <div class="diff-grid">
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">01</div><h3>D → P 올인원<br>처음부터 끝까지 내가 합니다</h3><p>기획 → UI/UX 디자인 → 퍼블리싱까지 전 과정을 혼자 처리합니다. 디자인 의도가 코드에 100% 반영됩니다.</p><div class="d-tags"><span class="d-tag">기획</span><span class="d-tag">UI/UX</span><span class="d-tag">Publishing</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">02</div><h3>AI 증강 디자이너<br>도구로 생산성을 올립니다</h3><p>미드저니·ImageFX·Cursor AI 에이전트를 워크플로우에 통합해 혼자서도 팀 수준의 결과물을 만듭니다.</p><div class="d-tags"><span class="d-tag">Midjourney</span><span class="d-tag">ImageFX</span><span class="d-tag">Cursor AI</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">03</div><h3>감각 × 정밀함<br>아티스트이자 엔지니어</h3><p>일러스트페어 출품, 공모전 시민투표 1위의 예술적 감각 위에 기술적 정밀함을 갖추고 있습니다.</p><div class="d-tags"><span class="d-tag">아트 감각</span><span class="d-tag">기술 정밀</span><span class="d-tag">수상 경력</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">04</div><h3>실무 1년 8개월<br>TDX 디자인팀 단독 담당</h3><p>자사 서비스 전반의 UI 디자인과 퍼블리싱을 담당. 기획자·개발자와의 실제 협업 경험을 보유하고 있습니다.</p><div class="d-tags"><span class="d-tag">실무</span><span class="d-tag">협업</span><span class="d-tag">프로세스</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">05</div><h3>자체 캐릭터 IP<br>홍콩·서울 페어 출품</h3><p>오리지널 캐릭터를 기획하고 굿즈로 제작하며 국제 일러스트레이션 페어에 출품한 창작 이력이 있습니다.</p><div class="d-tags"><span class="d-tag">캐릭터 IP</span><span class="d-tag">굿즈</span><span class="d-tag">일러스트페어</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">06</div><h3>Extra L 스케일<br>평범한 경계를 초과합니다</h3><p>디자이너이면서 퍼블리셔, 기획자이면서 아티스트 — 필요한 역할을 흡수하며 성장하는 확장형 크리에이터입니다.</p><div class="d-tags"><span class="d-tag">A to Z</span><span class="d-tag">확장형</span><span class="d-tag">성장러</span></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal-up">
+      <div class="about-name-big">About<br><em>JJY.</em></div>
+      <div class="about-text">
+        <p>디자인의 감각과 코드의 정밀함을 동시에 가진 <strong>D→P 크리에이터</strong>입니다. Figma에서 시작한 작업이 브라우저에서 완벽하게 구현되는 것을 가장 중요하게 생각합니다.</p>
+        <p>AI 도구를 두려워하지 않고 적극적으로 활용합니다. <strong>미드저니, ImageFX, Cursor AI, 에이전트</strong>를 워크플로우에 통합해 혼자서도 팀이 부럽지 않은 퀄리티와 속도를 냅니다.</p>
+        <p>TDX 디자인팀에서 1년 8개월간 자사 UI/UX 전반을 담당하며 실무 감각과 협업 역량을 갖췄고, 매일 더 넓은 스케일로 성장 중입니다.</p>
+      </div>
+      <ul class="facts-list">
+        <li class="fact-row"><span class="fact-lbl">이름</span><span>장지영 Jang Ji-young</span></li>
+        <li class="fact-row"><span class="fact-lbl">현직</span><span>TDX 디자인팀 · 1년 8개월</span></li>
+        <li class="fact-row"><span class="fact-lbl">역할</span><span>UI/UX Design · Web Publishing</span></li>
+        <li class="fact-row"><span class="fact-lbl">자격증</span><span>정보처리산업기사 · 컴퓨터그래픽스운용기능사</span></li>
+        <li class="fact-row"><span class="fact-lbl">수상</span><span>파주시 캐릭터 공모전 인기상 (시민투표 1위)</span></li>
+        <li class="fact-row"><span class="fact-lbl">GitHub</span><span><a href="https://github.com/superji0" target="_blank" style="color:var(--blue)">superji0</a></span></li>
+        <li class="fact-row"><span class="fact-lbl">Email</span><span><a href="/cdn-cgi/l/email-protection#d9b686b6e9eee1e099b7b8afbcabf7bab6b4" style="border-bottom:1px solid var(--border)"><span class="__cf_email__" data-cfemail="f699a999c6c1cecfb69897809384d895999b">[email&#160;protected]</span></a></span></li>
+      </ul>
+    </div>
+    <div class="reveal-up" style="transition-delay:.12s">
+      <p class="sk-header" style="margin-bottom:18px">Skills &amp; Tools</p>
+      <div class="sk-grid">
+        <div class="sk-item"><h4>HTML5</h4><p>시맨틱 마크업, 접근성</p></div>
+        <div class="sk-item"><h4>CSS3/SCSS</h4><p>Flex, Grid, 반응형</p></div>
+        <div class="sk-item"><h4>JavaScript</h4><p>ES6+, DOM, 비동기</p></div>
+        <div class="sk-item"><h4>Figma</h4><p>UI디자인, 프로토타입</p></div>
+        <div class="sk-item"><h4>Photoshop</h4><p>시안 제작, 배너</p></div>
+        <div class="sk-item"><h4>Illustrator</h4><p>아이콘, 캐릭터, 벡터</p></div>
+        <div class="sk-item"><h4>Git</h4><p>브랜치, 협업 형상관리</p></div>
+        <div class="sk-item"><h4>GSAP</h4><p>ScrollTrigger, 타임라인</p></div>
+        <div class="sk-item ai"><h4>Midjourney</h4><p>AI 이미지 생성</p></div>
+        <div class="sk-item ai"><h4>ImageFX</h4><p>AI 이미지 편집</p></div>
+        <div class="sk-item ai"><h4>Cursor AI</h4><p>AI 에이전트 개발</p></div>
+        <div class="sk-item"><h4>React</h4><p>컴포넌트, 상태관리</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETC -->
+<section id="etc">
+  <div style="margin-bottom:36px" class="reveal-up">
+    <div class="section-eyebrow">ETC</div>
+    <div class="section-title">캐릭터 & 수상</div>
+  </div>
+  <div class="etc-grid">
+    <div class="etc-card">
+      <div class="char-imgs">
+        <img src="./images/character_01.png" alt="메리웨더1" class="ch-img">
+        <img src="./images/character_02.png" alt="메리웨더2" class="ch-img">
+        <img src="./images/character_03.png" alt="메리웨더3" class="ch-img">
+      </div>
+      <h3>메리웨더 캐릭터</h3>
+      <p>자체 오리지널 캐릭터 <strong>메리웨더(Merryweather)</strong>를 기획·제작했습니다. 굿즈 제작까지 이어지며 실제 상품으로 완성하고, 홍콩 & 서울 일러스트레이션 페어에 참가했습니다.</p>
+      <div class="etc-role-row">
+        <span class="etc-rbadge hi">캐릭터 디자인</span>
+        <span class="etc-rbadge hi">굿즈 제작</span>
+        <span class="etc-rbadge">일러스트페어 홍콩</span>
+        <span class="etc-rbadge">일러스트페어 서울</span>
+      </div>
+    </div>
+    <div class="etc-card">
+      <div style="font-size:36px;margin-bottom:14px">🏆</div>
+      <h3>파주시 캐릭터 공모전</h3>
+      <p>파주시 공식 캐릭터 공모전에 출품하여 <strong>인기상을 수상</strong>했습니다. 시민 온라인 투표에서 <strong>1위</strong>를 기록하며 대중성과 디자인 완성도를 모두 인정받았습니다.</p>
+      <div class="award-pill">🥇 시민 투표 1위 · 인기상 수상</div>
+      <div class="etc-role-row" style="margin-top:10px">
+        <span class="etc-rbadge hi">공모전 수상</span>
+        <span class="etc-rbadge">캐릭터 디자인</span>
+        <span class="etc-rbadge">Illustrator</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-brand">장지영 포트폴리오<small>© JJY 2026. All rights reserved.</small></div>
+  <div class="ft-links">
+    <a href="tel:+821041727389">+82-10-4172-7389</a>
+    <a href="/cdn-cgi/l/email-protection#e18ebe8ed1d6d9d8a18f80978493cf828e8c"><span class="__cf_email__" data-cfemail="d7b888b8e7e0efee97b9b6a1b2a5f9b4b8ba">[email&#160;protected]</span></a>
+    <a href="https://github.com/superji0" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+  <div class="ft-xl">EXTRA L</div>
+</footer>
+
+<!-- ══════════════════════
+     PROJECT SIDE PANEL
+══════════════════════ -->
+<!-- ══ WORK ROW THUMBNAIL ══ -->
+<div id="wk-thumb" aria-hidden="true">
+  <div class="wk-thumb-card">
+    <div class="wk-thumb-strip"></div>
+    <div class="wk-thumb-img-wrap">
+      <img id="wk-thumb-img" src="" alt="">
+    </div>
+    <div class="wk-thumb-meta">
+      <div>
+        <div class="wk-thumb-name" id="wk-thumb-name"></div>
+        <div class="wk-thumb-cat" id="wk-thumb-cat"></div>
+      </div>
+      <div class="wk-thumb-num" id="wk-thumb-num"></div>
+    </div>
+  </div>
+</div>
+
+<div id="proj-overlay"></div>
+<div id="proj-panel">
+  <div class="pp-inner" id="ppInner">
+    <!-- ═══ 프로젝트별 콘텐츠 — 수정 시 아래 article 블록만 편집하면 됨 ═══ -->
+
+    <article class="proj-content" id="proj-content-tdx-dash">
+      <div class="pp-eyebrow">실무 · TDX 디자인팀</div>
+      <div class="pp-title">보험 청구<br>대시보드</div>
+      <div class="pp-meta"><span class="pp-mi">UI Design + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">UI/UX 디자인</span><span class="pp-role hi">웹 퍼블리싱</span><span class="pp-role hi">Admin UI</span></div>
+      <div class="pp-shots wide"><img src="./images/mok.jpg" alt="" loading="lazy"><img src="./images/mok.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>보험 보상 청구 관리 시스템의 UI 디자인과 퍼블리싱을 단독 진행</mark>한 프로젝트입니다. Figma로 전체 디자인 시스템을 설계하고, HTML/CSS/JS로 완전히 구현했습니다.</p>
+        <p>어드민 대시보드의 데이터 카드, 필터 UI, 청구 내역 테이블 등 복잡한 인터페이스를 <em>디자인 의도 그대로 코드로 전환</em>했습니다. 실무 환경에서 기획자, 백엔드 개발자와 협업하며 요구사항을 UI로 번역하는 역할을 수행했습니다.</p>
+      
+        🔴 문제
+        레퍼런스가 없는 신규 서비스였습니다. 보험 청구라는 복잡한 도메인을 처음 접하는 사용자도 막힘 없이 쓸 수 있어야 했고, 그게 가장 큰 설계 과제였습니다.
+        🔵 접근
+        기획자의 요구사항을 단순히 시각화하는 게 아니라, 왜 이 정보가 필요한가를 먼저 파악했습니다. 청구 진행 상태, 처리 금액, 반려 항목 — 사용자가 대시보드에 들어오는 이유를 역으로 정의하고 정보 우선순위를 잡았습니다.
+        🟡 핵심 디자인 결정
+        처음 보는 사람 기준으로 설계했습니다. 상태 구분은 색과 아이콘을 동시에 써서 색약 사용자도 구분할 수 있게 했고, 가장 자주 보는 정보를 스크롤 없이 확인할 수 있도록 레이아웃 우선순위를 기획자와 함께 조율했습니다. 개발자 피드백을 반영해 컴포넌트 구조도 두 차례 수정했습니다.
+        ⚪ 배운 점
+        실무에서 디자인 결정은 혼자 하는 게 아니라는 걸 배웠습니다. 기획자의 도메인 지식과 내 시각적 판단이 맞물릴 때 더 나은 결과물이 나왔습니다.
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Figma</span><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3/SCSS</span><span class="pp-tag">JavaScript</span><span class="pp-tag">Admin UI</span><span class="pp-tag">데이터 시각화</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-tdx-hp">
+      <div class="pp-eyebrow">실무 · TDX 디자인팀</div>
+      <div class="pp-title">TDX 홈페이지<br>리뉴얼</div>
+      <div class="pp-meta"><span class="pp-mi">반응형 Design + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">UI/UX 디자인</span><span class="pp-role hi">반응형 퍼블리싱</span><span class="pp-role hi">Brand Identity</span></div>
+      <div class="pp-shots wide"><img src="./images/iMacMockup.png" alt="" loading="lazy"><img src="./images/design_site_01.jpg" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>테디엑스 자사 홈페이지 전체 리뉴얼</mark> 프로젝트로, 디자인 컨셉 수립부터 UI 설계, 반응형 퍼블리싱까지 전 과정을 담당했습니다.</p>
+        <p>PC·태블릿·모바일 3분기 브레이크포인트를 기준으로 완벽한 반응형 레이아웃을 구현하고, 기존 사이트의 UX 문제점을 분석해 정보 구조를 재편했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">UI/UX Design</span><span class="pp-tag">반응형</span><span class="pp-tag">HTML5</span><span class="pp-tag">SCSS</span><span class="pp-tag">Figma</span><span class="pp-tag">Brand Identity</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-tdx-db">
+      <div class="pp-eyebrow">실무 · TDX 디자인팀</div>
+      <div class="pp-title">DB 청구<br>프로세스</div>
+      <div class="pp-meta"><span class="pp-mi">UX · Icon System</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">아이콘 시스템 설계</span><span class="pp-role hi">UX 개선</span><span class="pp-role hi">기획 협업</span></div>
+      <div class="pp-shots"><img src="./images/design_graphic.jpg" alt="" loading="lazy"><img src="./images/design_graphic_2.jpg" alt="" loading="lazy"><img src="./images/design_graphic_mok.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>DB 청구 프로세스 개선 프로젝트에서 전용 아이콘 시스템을 설계하고 제작</mark>했습니다. 기획자와 긴밀하게 협업하며 복잡한 보험 청구 흐름을 시각적으로 단순화하는 UX 개선 작업에 참여했습니다.</p>
+        <p><em>프로세스의 각 단계를 아이콘으로 표현</em>하여 사용자가 복잡한 청구 절차를 한눈에 파악할 수 있도록 설계했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Icon Design</span><span class="pp-tag">Illustrator</span><span class="pp-tag">UX Planning</span><span class="pp-tag">기획 협업</span><span class="pp-tag">프로세스 설계</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-pickcle">
+      <div class="pp-eyebrow">개인 프로젝트 · 앱 서비스</div>
+      <div class="pp-title">픽클리<br>App</div>
+      <div class="pp-meta"><span class="pp-mi">기획 + UX/UI Design</span><span class="pp-mi">2024 — 2025</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">서비스 기획</span><span class="pp-role hi">UX 리서치</span><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">프로토타이핑</span></div>
+      <div class="pp-shots port"><img src="./images/kybo_screen.png" alt="" loading="lazy"><img src="./images/kybo_screen02.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>서비스 기획, UX 리서치, UI 디자인 전 과정을 단독으로 진행</mark>한 개인 앱 프로젝트입니다. 사용자 니즈 분석에서 시작해 IA 설계, 와이어프레임, 프로토타입, 최종 UI까지 제로에서 완성까지 혼자 해냈습니다.</p>
+        <p><em>기획자 없이 디자이너가 직접 서비스를 구상하고 설계</em>하는 경험을 통해 제품 전반에 대한 오너십과 통찰력을 키웠습니다.</p>
+      
+        <p>
+          <mark>문제</mark>
+        유튜브, 인스타그램, 블로그 — 플랫폼마다 따로 저장하다 보니 정작 필요할 때 찾을 수가 없었습니다. "분명히 저장했는데 어디 있더라"가 반복되는 경험이 이 앱의 출발점이었습니다.
+        </p>
+        <mark>접근</mark>
+        나만 이런 불편을 겪는 건지 확인하는 것이 먼저였습니다. 주변 인터뷰와 설문을 통해 콘텐츠 소비량은 많지만 나중에 다시 꺼내보는 비율이 낮다는 걸 확인했고, 원인이 "저장"이 아니라 "분류와 재탐색" 에 있다는 인사이트를 얻었습니다.
+        <mark>핵심 디자인 결정</mark>
+        저장보다 꺼내 쓰는 경험을 중심에 뒀습니다. URL 하나로 어느 플랫폼이든 저장되고, 태그 기반으로 내 방식대로 분류할 수 있도록 IA를 설계했습니다. 와이어프레임 → 프로토타입 → 유저 테스트를 혼자 전 과정 진행하며 탐색 흐름을 3번 수정했습니다.
+        <mark>배운 점</mark>
+        기획자 없이 서비스 전체를 혼자 구상하면서, 좋은 UI는 좋은 문제 정의에서 나온다는 걸 체감했습니다.
+      </div>
+      <div class="pp-tags"><span class="pp-tag">서비스 기획</span><span class="pp-tag">UX Research</span><span class="pp-tag">IA 설계</span><span class="pp-tag">Wireframe</span><span class="pp-tag">UI Design</span><span class="pp-tag">Figma</span><span class="pp-tag">Prototype</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-nicepay">
+      <div class="pp-eyebrow">개인 프로젝트 · AI 활용</div>
+      <div class="pp-title">나이스<br>페이먼츠</div>
+      <div class="pp-meta"><span class="pp-mi">AI · Design · Publishing</span><span class="pp-mi">2024 — 2025</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">Midjourney 활용</span><span class="pp-role hi">UI/UX 디자인</span><span class="pp-role hi">반응형 퍼블리싱</span></div>
+      <div class="pp-shots wide"><img src="./images/iMacMockup.png" alt="" loading="lazy"><img src="./images/design_hmmain.jpg" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p>나이스페이먼츠 공식 웹사이트 리뉴얼 개인 프로젝트입니다. <mark>Midjourney를 활용해 고퀄리티 비주얼을 직접 생성</mark>하고, 디자인 시스템 구축 후 반응형 퍼블리싱까지 완성했습니다.</p>
+        <p><em>AI 이미지 생성 도구를 실무 워크플로우에 통합</em>한 사례로, 별도의 사진 촬영 없이 단독으로 완성도 높은 결과물을 만들어냈습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Midjourney</span><span class="pp-tag">AI 이미지 생성</span><span class="pp-tag">Figma</span><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3</span><span class="pp-tag">반응형</span><span class="pp-tag">핀테크 UI</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-hyundai">
+      <div class="pp-eyebrow">개인 프로젝트 · 그래픽 디자인</div>
+      <div class="pp-title">현대카드<br>프로모션 배너</div>
+      <div class="pp-meta"><span class="pp-mi">Graphic Design</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">배너 디자인</span><span class="pp-role hi">Photoshop</span><span class="pp-role hi">Brand Research</span></div>
+      <div class="pp-shots wide"><img src="./images/design_hmmain.jpg" alt="" loading="lazy"><img src="./images/design_hmsub.jpg" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p>현대카드 브랜드 아이덴티티를 분석하여 프로모션 배너 디자인을 개인 프로젝트로 진행했습니다. <mark>브랜드 가이드라인을 준수하면서도 차별화된 비주얼</mark>을 구현하는 것을 목표로 했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Photoshop</span><span class="pp-tag">Graphic Design</span><span class="pp-tag">Banner Design</span><span class="pp-tag">Brand Identity</span></div>
+    </article>
+
+    <!-- <article class="proj-content" id="proj-content-kyobo">
+      <div class="pp-eyebrow">포트폴리오 · 모바일웹</div>
+      <div class="pp-title">교보문고<br>모바일웹</div>
+      <div class="pp-meta"><span class="pp-mi">Design + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">웹 퍼블리싱</span><span class="pp-role hi">반응형</span><span class="pp-role hi">웹 접근성</span></div>
+      <div class="pp-shots port"><img src="./images/kybo_screen.png" alt="" loading="lazy"><img src="./images/kybo_screen03.png" alt="" loading="lazy"><img src="./images/kybo_screen02.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>교보문고 모바일웹을 Figma로 리디자인하고 HTML/CSS/JS로 완전히 퍼블리싱</mark>한 프로젝트입니다. 시맨틱 마크업과 웹 접근성 기준을 준수하며 실제 서비스와 유사한 수준의 모바일 인터페이스를 구현했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3</span><span class="pp-tag">JavaScript</span><span class="pp-tag">Figma</span><span class="pp-tag">반응형</span><span class="pp-tag">웹 접근성</span></div>
+      <a href="https://superji0.github.io/mobile_kyobo/" target="_blank" rel="noopener" class="pp-cta">라이브 사이트 보기 ↗</a>
+    </article> -->
+
+    <!-- <article class="proj-content" id="proj-content-rareraw">
+      <div class="pp-eyebrow">포트폴리오 · E-Commerce</div>
+      <div class="pp-title">레어로우<br>웹 리뉴얼</div>
+      <div class="pp-meta"><span class="pp-mi">E-Commerce · GSAP</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">웹 퍼블리싱</span><span class="pp-role hi">GSAP 애니메이션</span><span class="pp-role hi">반응형</span></div>
+      <div class="pp-shots wide"><img src="./images/rareraw_screen01.jpg" alt="" loading="lazy"><img src="./images/rareraw_screen02.png" alt="" loading="lazy"><img src="./images/mockup_rareraw.jpg" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p><mark>패션 브랜드 레어로우의 웹 페이지를 리뉴얼</mark>한 프로젝트로, 브랜드 아이덴티티를 유지하면서 현대적인 레이아웃과 인터랙션을 구현했습니다.</p>
+        <p>GSAP ScrollTrigger를 활용한 스크롤 애니메이션으로 프리미엄한 사용자 경험을 완성했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3</span><span class="pp-tag">JavaScript</span><span class="pp-tag">GSAP</span><span class="pp-tag">반응형</span><span class="pp-tag">E-Commerce</span></div>
+      <a href="https://superji0.github.io/rareraw/" target="_blank" rel="noopener" class="pp-cta">라이브 사이트 보기 ↗</a>
+    </article> -->
+
+    <article class="proj-content" id="proj-content-merryweather">
+      <div class="pp-eyebrow">ETC · 캐릭터 디자인</div>
+      <div class="pp-title">메리웨더<br>캐릭터 & 굿즈</div>
+      <div class="pp-meta"><span class="pp-mi">Character · Illustration Fair</span><span class="pp-mi">2023—</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">캐릭터 디자인</span><span class="pp-role hi">굿즈 제작</span><span class="pp-role hi">일러스트페어 홍콩</span><span class="pp-role hi">일러스트페어 서울</span></div>
+      <div class="pp-shots"><img src="./images/character_01.png" alt="" loading="lazy"><img src="./images/character_02.png" alt="" loading="lazy"><img src="./images/character_03.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p>자체 오리지널 캐릭터 <mark>메리웨더(Merryweather)</mark>를 기획·제작했습니다. 굿즈 제작까지 이어지며 실제 상품으로 완성하고, <em>홍콩 & 서울 일러스트레이션 페어에 참가</em>했습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Character Design</span><span class="pp-tag">Illustrator</span><span class="pp-tag">Goods Design</span><span class="pp-tag">일러스트레이션</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-paju">
+      <div class="pp-eyebrow">ETC · 수상</div>
+      <div class="pp-title">파주시 캐릭터<br>공모전</div>
+      <div class="pp-meta"><span class="pp-mi">수상 · 시민투표 1위</span><span class="pp-mi">2023</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">인기상 수상</span><span class="pp-role hi">캐릭터 디자인</span><span class="pp-role hi">Illustrator</span></div>
+      <div class="award-pill" style="margin-bottom:16px;display:inline-flex">🥇 시민 투표 1위 · 인기상 수상</div>
+      <div class="pp-shots"><img src="./images/character_02.png" alt="" loading="lazy"><img src="./images/character_01.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p>파주시 공식 캐릭터 공모전에 출품하여 <mark>인기상을 수상</mark>했습니다. 시민 온라인 투표에서 <em>1위</em>를 기록하며 대중성과 디자인 완성도 모두를 인정받았습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Character Design</span><span class="pp-tag">Illustrator</span><span class="pp-tag">공모전 수상</span></div>
+    </article>
+
+    <article class="proj-content" id="proj-content-design-gallery">
+      <div class="pp-eyebrow">그래픽 & 웹 디자인</div>
+      <div class="pp-title">Design<br>Gallery</div>
+      <div class="pp-meta"><span class="pp-mi">Graphic + Web Design</span><span class="pp-mi">2023—</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">웹 디자인</span><span class="pp-role hi">그래픽 디자인</span><span class="pp-role hi">타이포그래피</span><span class="pp-role hi">현대카드 배너</span></div>
+      <div class="pp-shots"><img src="./images/design_typo_mok.jpg" alt="" loading="lazy"><img src="./images/design_graphic_mok.png" alt="" loading="lazy"><img src="./images/design_bookcover.png" alt="" loading="lazy"><img src="./images/design_typo3.jpg" alt="" loading="lazy"></div>
+      <p class="pp-sec">What I did</p>
+      <div class="pp-body">
+        <p>Photoshop, Illustrator, Figma를 활용한 다양한 그래픽 & 웹 디자인 작업물입니다. <mark>타이포그래피, 브랜드 아이덴티티, 웹 디자인, 북커버 등</mark> 폭넓은 결과물을 보유하고 있습니다.</p>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Photoshop</span><span class="pp-tag">Illustrator</span><span class="pp-tag">Figma</span><span class="pp-tag">Brand Identity</span><span class="pp-tag">UI Design</span><span class="pp-tag">Typography</span><span class="pp-tag">Banner Design</span></div>
+    </article>
+  </div>
+  <button class="pp-close" id="ppClose" aria-label="닫기">✕</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ══════════════ CURSOR ══════════════ */
+const cross = document.getElementById('cur-cross');
+const dot   = document.getElementById('cur-dot');
+const ctxt  = document.getElementById('cur-txt');
+let cx=0,cy=0,dx=0,dy=0;
+
+document.addEventListener('mousemove',e=>{
+  cx=e.clientX; cy=e.clientY;
+  dot.style.left=cx+'px'; dot.style.top=cy+'px';
+  ctxt.style.left=cx+'px'; ctxt.style.top=cy+'px';
+});
+(function animCross(){
+  dx+=(cx-dx)*.12; dy+=(cy-dy)*.12;
+  cross.style.left=dx+'px'; cross.style.top=dy+'px';
+  requestAnimationFrame(animCross);
+})();
+
+function setCursorState(mode, label){
+  cross.className = mode==='big'?'big':mode==='blue'?'big blue':'';
+  ctxt.textContent = label||'';
+  ctxt.className = label?'show':'';
+}
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('big',null));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+document.querySelectorAll('.wk-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('blue','VIEW →'));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+document.querySelectorAll('.gi').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('blue','OPEN'));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+
+/* ══════════════ HERO SCROLL SCATTER ══════════════ */
+const heroEl      = document.getElementById('hero');
+const heroJang    = document.getElementById('heroJang');
+const heroGreet   = document.getElementById('heroGreeting');
+const heroRole    = document.getElementById('heroRole');
+const heroIndex   = document.getElementById('heroIndex');
+const heroNameBg  = document.getElementById('heroNameBg');
+
+// Each scatter card: element, tx, ty (exit direction), rot
+const scatterCards = [
+  { el: document.getElementById('card-exp'),    tx:  220, ty: -200, rot:  12 },
+  { el: document.getElementById('card-role'),   tx:  180, ty: -100, rot: -8  },
+  { el: document.getElementById('card-tool'),   tx:  240, ty:  120, rot:  6  },
+  { el: document.getElementById('card-award'),  tx: -180, ty:  200, rot: -14 },
+  { el: document.getElementById('card-contrib'),tx: -220, ty:  160, rot:  10 },
+  { el: document.getElementById('card-ai'),     tx: -100, ty: -180, rot:  -6 },
+];
+
+function lerp(a,b,t){ return a+(b-a)*t; }
+function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+
+window.addEventListener('scroll', ()=>{
+  const scrollY = window.scrollY;
+  const heroH   = heroEl.offsetHeight;
+  const p = clamp(scrollY / (heroH * 0.65), 0, 1); // progress 0→1
+
+  // Big JANG text: move left + fade
+  heroJang.style.transform    = `translateX(${p * -120}px) translateY(${p * -40}px)`;
+  heroJang.style.opacity      = 1 - p * 1.4;
+
+  // Greeting: move right + fade
+  heroGreet.style.transform   = `translateX(${p * 80}px) translateY(${p * -60}px)`;
+  heroGreet.style.opacity     = 1 - p * 1.6;
+
+  // Role tags: slide down + fade
+  heroRole.style.transform    = `translateX(${p * -60}px) translateY(${p * 80}px)`;
+  heroRole.style.opacity      = 1 - p * 1.5;
+
+  // Index: fade up
+  heroIndex.style.opacity     = 1 - p * 2;
+
+  // Background name: scale up + fade
+  heroNameBg.style.opacity    = 0.12 - p * 0.15;
+  heroNameBg.style.transform  = `scale(${1 + p * 0.06})`;
+
+  // Each scatter card flies to its exit position
+  scatterCards.forEach(({el, tx, ty, rot}) => {
+    const ep = clamp(p * 1.3, 0, 1); // slightly faster
+    el.style.transform = `translate(${lerp(0,tx,ep)}px, ${lerp(0,ty,ep)}px) rotate(${lerp(0,rot,ep)}deg)`;
+    el.style.opacity   = 1 - ep * 1.2;
+  });
+}, { passive: true });
+
+/* ══════════════ SCROLL REVEAL ══════════════ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in');
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal-up').forEach(el=>io.observe(el));
+
+/* ══════════════ ACTIVE NAV on scroll ══════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.hdr-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{
+    if(window.scrollY >= s.offsetTop - 100) current=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active-nav', a.getAttribute('href')==='#'+current);
+  });
+},{passive:true});
+
+/* ══════════════ GALLERY CLICK ══════════════ */
+document.querySelectorAll('.gi').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const img=item.querySelector('img');
+    if(img) window.open(img.src,'_blank');
+  });
+});
+
+/* ══════════════ PANEL OPEN / CLOSE ══════════════ */
+const panel = document.getElementById('proj-panel');
+const overlay = document.getElementById('proj-overlay');
+const ppClose = document.getElementById('ppClose');
+
+function openPanel(id){
+  const block = document.getElementById('proj-content-' + id);
+  if(!block) return;
+  document.querySelectorAll('.proj-content').forEach(el=>el.classList.remove('active'));
+  block.classList.add('active');
+  panel.classList.add('open');
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closePanel(){
+  panel.classList.remove('open');
+  overlay.classList.remove('show');
+  document.body.style.overflow='';
+}
+ppClose.addEventListener('click',closePanel);overlay.addEventListener('click',closePanel);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+
+document.querySelectorAll('.wk-row').forEach(row=>{
+  row.addEventListener('click',()=>{ const id=row.dataset.proj; if(id) openPanel(id); });
+  row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); row.click(); }});
+});
+
+/* ══════════════ WORK ROW THUMBNAIL FOLLOW ══════════════ */
+const thumb     = document.getElementById('wk-thumb');
+const thumbImg  = document.getElementById('wk-thumb-img');
+const thumbName = document.getElementById('wk-thumb-name');
+const thumbCat  = document.getElementById('wk-thumb-cat');
+const thumbNum  = document.getElementById('wk-thumb-num');
+
+// Target / current position for smooth lerp
+let tgx = 0, tgy = 0;
+let crx = 0, cry = 0;
+let rafId = null;
+let isVisible = false;
+
+// Thumb image data pulled from each row's bg + wk-name / wk-cat / wk-n
+function getRowData(row){
+  const bgEl  = row.querySelector('.wk-row-bg');
+  const img   = bgEl ? bgEl.style.backgroundImage.replace(/url\\([\"']?|[\"']?\\)/g,'') : '';
+  const name  = row.querySelector('.wk-name')?.textContent?.trim() || '';
+  const cat   = row.querySelector('.wk-cat')?.textContent?.trim() || '';
+  const num   = row.querySelector('.wk-n')?.textContent?.trim() || '';
+  return { img, name, cat, num };
+}
+
+function startLerp(){
+  function tick(){
+    // Spring lerp — slightly springy feel
+    crx += (tgx - crx) * 0.13;
+    cry += (tgy - cry) * 0.13;
+    thumb.style.left = crx + 'px';
+    thumb.style.top  = cry + 'px';
+    if(isVisible) rafId = requestAnimationFrame(tick);
+  }
+  cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(tick);
+}
+
+document.querySelectorAll('.wk-row').forEach(row => {
+  row.addEventListener('mouseenter', e => {
+    const d = getRowData(row);
+    if(!d.img) return;
+
+    // Populate card
+    thumbImg.src        = d.img;
+    thumbName.textContent = d.name.replace(/🏆.*$/, '').trim(); // strip emoji
+    thumbCat.textContent  = d.cat;
+    thumbNum.textContent  = d.num;
+
+    // Snap position before showing to avoid flash
+    const offsetX = 28;
+    const offsetY = -90;
+    crx = e.clientX + offsetX;
+    cry = e.clientY + offsetY;
+    thumb.style.left = crx + 'px';
+    thumb.style.top  = cry + 'px';
+    tgx = crx; tgy = cry;
+
+    isVisible = true;
+    thumb.classList.add('visible');
+    startLerp();
+  });
+
+  row.addEventListener('mousemove', e => {
+    if(!isVisible) return;
+    const offsetX = 28;
+    const offsetY = -90;
+    let nx = e.clientX + offsetX;
+    let ny = e.clientY + offsetY;
+
+    // Keep inside viewport
+    const tw = thumb.offsetWidth  || 280;
+    const th = thumb.offsetHeight || 220;
+    if(nx + tw > window.innerWidth  - 16) nx = e.clientX - tw - 16;
+    if(ny + th > window.innerHeight - 16) ny = e.clientY - th - 16;
+    if(ny < 60) ny = 60;
+
+    tgx = nx;
+    tgy = ny;
+  });
+
+  row.addEventListener('mouseleave', () => {
+    isVisible = false;
+    thumb.classList.remove('visible');
+    cancelAnimationFrame(rafId);
+  });
+});
+</script>
+</body>
+</html>
