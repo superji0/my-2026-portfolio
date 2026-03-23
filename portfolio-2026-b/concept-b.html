@@ -786,274 +786,1034 @@ footer{
 }
 .reveal-up.in{opacity:1;transform:translateY(0);}
 
-/* ══════════════ WORK ROW THUMBNAIL HOVER ══════════════ */
-#wk-thumb{
-  position:fixed;
-  pointer-events:none;
-  z-index:6000;
-  width:280px;
-  opacity:0;
-  transition:opacity .22s var(--ease), transform .22s var(--ease);
-  transform:translateY(10px) rotate(-1.5deg) scale(.96);
-  will-change:transform;
+/* ═══ portfolio-grid 레이아웃 (#gallery는 concept-b 디자인 유지) ═══ */
+:root { --nav-w: 200px; }
+
+#sidenav {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--nav-w);
+  height: 100vh;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 900;
+  border-right: 1px solid var(--border);
 }
-#wk-thumb.visible{
-  opacity:1;
-  transform:translateY(0) rotate(-1.5deg) scale(1);
+.nav-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  line-height: 1.5;
 }
-/* Card wrapper */
-.wk-thumb-card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:3px;
-  overflow:hidden;
-  box-shadow:
-    0 8px 32px rgba(13,13,11,.14),
-    0 2px 8px rgba(13,13,11,.08),
-    0 0 0 1px rgba(13,13,11,.04);
+.nav-name strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
 }
-.wk-thumb-img-wrap{
-  width:100%;
-  height:180px;
-  overflow:hidden;
-  background:var(--cream2);
-  position:relative;
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 40px;
 }
-.wk-thumb-img-wrap img{
-  width:100%;height:100%;
+.nav-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-link::before {
+  content:'';
+  width: 0;
+  height: 1px;
+  background: var(--black);
+  transition: width .25s var(--ease);
+}
+.nav-link:hover, .nav-link.on {
+  color: var(--black);
+}
+.nav-link.on::before,
+.nav-link:hover::before { width: 14px; }
+.nav-bottom {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.nav-bottom a:hover { color: var(--black); }
+
+/* ─── MAIN CONTENT ─── */
+main {
+  margin-left: var(--nav-w);
+}
+
+/* ─── HERO ─── */
+#grid-hero {
+  min-height: 100vh;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero-index {
+  position: absolute;
+  top: 44px; right: 60px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  writing-mode: vertical-rl;
+}
+.hero-display {
+  font-family: 'Funnel Sans', sans-serif;
+  font-size: clamp(80px, 14vw, 180px);
+  font-weight: 700;
+  line-height: .88;
+  letter-spacing: -.03em;
+  margin-bottom: 32px;
+}
+.hero-display em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+.hero-meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hero-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 64px; left: 60px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-scroll::before {
+  content:'';
+  width: 40px; height: 1px;
+  background: var(--dim);
+}
+
+/* ─── SECTION HEADER ─── */
+.sec-hdr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 24px 60px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-hdr-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sec-hdr-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--dim);
+}
+
+/* ─── PROJECT ROW ─── */
+.proj-block {
+  border-bottom: 1px solid var(--border);
+}
+.proj-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  padding: 0 60px;
+  height: 72px;
+  cursor: pointer;
+  transition: background .2s;
+  gap: 40px;
+}
+.proj-row:hover { background: var(--bg2); }
+.proj-n {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+.proj-name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+.proj-name {
+  font-family: 'Funnel Sans', sans-serif;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.proj-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.proj-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* ─── CASE STUDY (inline, accordion) ─── */
+.proj-cs {
+  display: none;
+  padding: 0 60px 60px;
+}
+.proj-block.open .proj-cs { display: block; }
+.proj-block.open .proj-row { background: var(--bg2); }
+.proj-block.open .proj-n::after { content: '−'; }
+.proj-n::after { content: '+'; margin-left:4px; color: var(--blue); }
+
+/* CS 내부 */
+.cs-img-hero {
+  width: 100%;
+  height: clamp(280px, 40vw, 480px);
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 48px;
+  background: var(--bg2);
+}
+.cs-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+.cs-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+.cs-body { font-size: 15px; line-height: 1.75; color: var(--muted); }
+.cs-body strong { color: var(--black); font-weight: 600; }
+.cs-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--black);
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.cs-dec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.cs-dec-item {
+  background: var(--bg);
+  padding: 28px 24px;
+}
+.cs-dec-n {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--blue);
+  letter-spacing: .06em;
+  margin-bottom: 10px;
+}
+.cs-dec-t {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  letter-spacing: -.01em;
+}
+.cs-dec-d {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.cs-retro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.cs-retro-item {
+  background: var(--bg);
+  padding: 24px;
+}
+.cs-retro-l {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .05em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.cs-retro-t { font-size: 14px; line-height: 1.65; }
+.cs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.cs-link:hover { color: var(--black); border-color: var(--black); }
+
+/* Midjourney grid */
+.mj-dark-block {
+  background: #0d1117;
+  border-radius: 4px;
+  padding: 32px;
+  margin-bottom: 48px;
+}
+.mj-block-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 16px;
+}
+.mj-block-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+.mj-block-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 24px;
+}
+.mj-prompt {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.mj-prompt pre {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.6);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+.mj-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.mj-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  background: rgba(24,71,245,.2);
+  color: #93c5fd;
+  border-radius: 2px;
+}
+.mj-img-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
+}
+.mj-img-cell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,.06);
+}
+.mj-img-cell img {
+  width:100%; height:100%;
   object-fit:cover;
-  display:block;
-  transition:transform .6s var(--ease);
 }
-#wk-thumb.visible .wk-thumb-img-wrap img{
-  transform:scale(1.04);
+.mj-img-cell span {
+  position: absolute;
+  bottom:0; left:0; right:0;
+  padding: 5px 8px;
+  background: rgba(0,0,0,.5);
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,.6);
 }
-.wk-thumb-meta{
-  padding:10px 14px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
+
+/* compare grid */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 48px;
 }
-.wk-thumb-name{
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:-.01em;
-  color:var(--black);
-  line-height:1.3;
+.cmp-cell { background: var(--bg); padding: 24px; }
+.cmp-head {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
 }
-.wk-thumb-cat{
+.cmp-head.bad { color: var(--red); border-color: rgba(229,59,30,.2); }
+.cmp-head.good { color: var(--blue); border-color: rgba(24,71,245,.2); }
+.cmp-item {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.cmp-item:last-child { border:none; }
+.cmp-item.bad { color: rgba(229,59,30,.8); }
+.cmp-item.good { color: rgba(24,71,245,.8); }
+
+/* data stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.stat-cell { background: var(--bg); padding: 28px 24px; }
+.stat-num {
+  font-family: 'Funnel Sans', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .04em;
+  line-height: 1.5;
+}
+
+/* icon grid */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.icon-cell {
+  aspect-ratio: 1;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.icon-cell img { width:65%; height:65%; object-fit:contain; }
+.icon-hint {
   font-family:'Space Mono',monospace;
-  font-size:11px;
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  font-size:10px;
   color:var(--muted);
-  margin-top:2px;
+  margin-top:-36px;
+  margin-bottom:48px;
 }
-.wk-thumb-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:28px;
-  line-height:1;
-  color:var(--blue);
-  flex-shrink:0;
-  margin-left:10px;
+
+/* screen previews */
+.screens-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-bottom: 48px;
 }
-/* Blue tag strip at top of card on hover-in */
-.wk-thumb-strip{
-  height:3px;
-  background:var(--blue);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .35s var(--ease) .05s;
+.screen-frame {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 9/18;
 }
-#wk-thumb.visible .wk-thumb-strip{
-  transform:scaleX(1);
+.screen-frame img { width:100%; height:100%; object-fit:cover; }
+
+/* lang compare */
+.lang-compare {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
 }
+.lang-before, .lang-after { display:flex; gap:6px; flex-wrap:wrap; }
+.lang-arrow { font-size: 18px; color: var(--muted); }
+.ltag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.ltag.after {
+  background: rgba(24,71,245,.07);
+  border-color: rgba(24,71,245,.25);
+  color: var(--blue);
+}
+
+
+#about {
+  padding: 80px 60px;
+  border-bottom: 1px solid var(--border);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-display {
+  font-family: 'Funnel Sans', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.03em;
+  margin-bottom: 32px;
+}
+.about-display em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+.about-body { font-size: 15px; color: var(--muted); line-height: 1.8; }
+.about-body strong { color:var(--black); font-weight:600; }
+.about-body p + p { margin-top: 14px; }
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 40px;
+}
+.sk-item { background:var(--bg); padding:14px 16px; }
+.sk-item h4 { font-size:13px; font-weight:700; margin-bottom:3px; }
+.sk-item p { font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; }
+
+/* ─── FOOTER / CONTACT ─── */
+#contact {
+  padding: 80px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.contact-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 10vw, 120px);
+  line-height: .88;
+  letter-spacing: .02em;
+}
+.contact-links { display:flex; flex-direction:column; gap:16px; }
+.contact-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: .04em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+  transition: color .2s;
+}
+.contact-link:hover { color: var(--black); }
+.contact-link span { font-size:10px; text-transform:uppercase; color:var(--dim); width:60px; }
+.ft-copy {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.ft-copy p {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .05em;
+}
+
+
+#grid-hero .hero-index { top: 44px; right: 60px; }
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+@media (max-width: 900px) {
+  :root { --nav-w: 0px; }
+  #sidenav { display:none; }
+  main { margin-left:0 !important; }
+  #grid-hero { padding: 80px 24px 48px !important; }
+  .sec-hdr, .proj-row { padding-left: 24px !important; padding-right: 24px !important; }
+  .proj-cs { padding: 0 24px 48px !important; }
+}
+
 </style>
 </head>
 <body>
-
-<!-- ══ CURSOR ══ -->
+<!-- ══ CURSOR (concept-b) ══ -->
 <div id="cur-cross"></div>
 <div id="cur-dot"></div>
-<div id="cur-txt" id="curTxt"></div>
+<div id="cur-txt"></div>
 
-<!-- ══ HEADER ══ -->
-<header id="site-header">
-  <div class="hdr-logo">JJY<em>.</em></div>
-  <nav class="hdr-nav">
-    <a href="#work" class="hdr-link">Work</a>
-    <a href="#diff" class="hdr-link">Positioning</a>
-    <a href="#about" class="hdr-link">About</a>
-    <a href="/cdn-cgi/l/email-protection#87e8d8e8b7b0bfbec7e9e6f1e2f5a9e4e8ea" class="hdr-link">Contact</a>
-  </nav>
-</header>
-
-<!-- ══════════════════════════════════════
-     HERO — scroll scatter
-══════════════════════════════════════ -->
-<section id="hero">
-  <!-- Grid background via ::before -->
-
-  <!-- Background name outline -->
-  <div class="hero-name-bg" id="heroNameBg" aria-hidden="true">장지영</div>
-
-  <!-- Index top center -->
-  <div class="hero-index" id="heroIndex">
-    <span>Portfolio</span>
-    <span>2026</span>
-  </div>
-
-  <!-- 가운데 "나" + 커서 깜빡임 -->
-  <div class="hero-na" id="heroNa" aria-hidden="true">
-    UIUX<span class="hero-na-cursor" aria-hidden="true"></span>
-  </div>
-
-  <!-- Big blue JANG -->
-  <div class="hero-jang" id="heroJang" aria-hidden="true">JANG<br>JI<br>YEONG</div>
-
-  <!-- Greeting top right -->
-  <div class="hero-greeting" id="heroGreeting">
-    UI/UX Designer & Publisher<br>
-    <span style="font-size:.8em;opacity:.75;">문제 해결 · 비즈니스 이해 · 구현 역량</span>
-  </div>
-
-  <!-- Role tags mid left -->
-  <div class="hero-role-tag" id="heroRole">
-    <span class="rtag blue-tag">PROBLEM SOLVER</span>
-    <span class="rtag">BUSINESS THINKING</span>
-    <span class="rtag">DESIGN → CODE</span>
-  </div>
-
-  <!-- Scatter cards -->
-  <div class="s-card yellow" id="card-exp">
-    <div class="sc-label">실무 경험</div>
-    <div class="sc-val big">1Y 8M</div>
-    <div style="font-size:11px;margin-top:2px;color:rgba(13,13,11,.5)">제품/서비스 UI·UX 운영</div>
-  </div>
-
-  <div class="s-card blue-card" id="card-role">
-    <div class="sc-label">포지셔닝</div>
-    <div class="sc-val big">D→P</div>
-    <div style="font-size:11px;margin-top:2px;color:rgba(255,255,255,.5)">기획 이해 + 설계 + 구현</div>
-  </div>
-
-  <div class="s-card lined" id="card-tool">
-    <div class="sc-label">핵심 키워드</div>
-    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
-      문제 정의 중심 UX<br>
-      전환 중심 랜딩 설계<br>
-      퍼블리싱 가능한 디자인
+<!-- ═══ SIDE NAV ═══ -->
+<nav id="sidenav">
+  <div>
+    <div class="nav-name">
+      <strong>장지영</strong>
+      JJY Portfolio
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#work">Work</a>
+      <a class="nav-link" href="#gallery">Gallery</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#contact">Contact</a>
     </div>
   </div>
+  <div class="nav-bottom">
+    <a href="https://github.com/superji0" target="_blank">GitHub ↗</a><br>
+    Seoul, KR<br>
+    UI/UX · Publishing
+  </div>
+</nav>
 
-  <div class="s-card yellow" id="card-award">
-    <div class="sc-label">핵심 한 줄</div>
-    <div class="sc-val" style="font-size:12px;line-height:1.6">
-      예쁜 화면보다<br>
-      <strong>성과 나는 UX를 설계</strong>
+<!-- ═══ MAIN ═══ -->
+<main>
+
+  <!-- ─── HERO ─── -->
+  <section id="grid-hero">
+    <div class="hero-index">UI/UX Designer & Web Publisher — 2026</div>
+    <div class="hero-display">
+      JANG<br>
+      <em>JI</em><br>
+      YOUNG
     </div>
-  </div>
-
-  <div class="s-card" id="card-contrib">
-    <div class="sc-label">Selected Projects</div>
-    <div class="sc-val big" style="color:var(--blue)">4</div>
-  </div>
-
-  <div class="s-card" id="card-ai">
-    <div class="sc-label">Build Stack</div>
-    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
-      Figma → HTML/CSS/JS<br>
-      Responsive · A11y<br>
-      AI-assisted workflow
+    <div class="hero-meta">
+      <div class="hero-role">
+        UI/UX DESIGNER<br>
+        WEB PUBLISHER<br>
+        AI-ASSISTED DESIGN
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag">Figma</span>
+        <span class="hero-tag">HTML/CSS/JS</span>
+        <span class="hero-tag">Midjourney</span>
+        <span class="hero-tag">Seoul</span>
+      </div>
     </div>
-  </div>
+    <div class="hero-scroll">Scroll to work</div>
+  </section>
 
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    scroll to explore
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-divider">
-  <div class="mq-track">
-    <span>PROBLEM → SOLUTION → RESULT</span><span class="mq-dot">✦</span>
-    <span>RECRUITER-FRIENDLY CASE STUDY</span><span class="mq-dot">✦</span>
-    <span>BUSINESS + UX + IMPLEMENTATION</span><span class="mq-dot">✦</span>
-    <span>SELECTED PROJECTS 4</span><span class="mq-dot">✦</span>
-    <span>CONVERSION FOCUSED</span><span class="mq-dot">✦</span>
-    <span>RESPONSIVE READY</span><span class="mq-dot">✦</span>
-    <span>AI AUGMENTED WORKFLOW</span><span class="mq-dot">✦</span>
-    <!-- duplicate for seamless loop -->
-    <span>PROBLEM → SOLUTION → RESULT</span><span class="mq-dot">✦</span>
-    <span>RECRUITER-FRIENDLY CASE STUDY</span><span class="mq-dot">✦</span>
-    <span>BUSINESS + UX + IMPLEMENTATION</span><span class="mq-dot">✦</span>
-    <span>SELECTED PROJECTS 4</span><span class="mq-dot">✦</span>
-    <span>CONVERSION FOCUSED</span><span class="mq-dot">✦</span>
-    <span>RESPONSIVE READY</span><span class="mq-dot">✦</span>
-    <span>AI AUGMENTED WORKFLOW</span><span class="mq-dot">✦</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     WORK INDEX
-══════════════════════════════════════ -->
-<section id="work">
-  <div class="wk-head reveal-up">
-    <div class="wk-head-left">
-      <div class="section-eyebrow">Selected Work</div>
-      <div class="section-title">WORK</div>
+  <!-- ─── WORK ─── -->
+  <section id="work">
+    <div class="sec-hdr">
+      <span class="sec-hdr-label">Selected Work</span>
+      <span class="sec-hdr-count">(03)</span>
     </div>
-    <div style="text-align:right">
-      <div class="wk-count">4</div>
-      <div class="wk-head-right">문제 해결 + 비즈니스 이해 + 구현까지<br>핵심 프로젝트만 깊게 설명</div>
+
+    <!-- ── PROJECT 01: PICKLY ── -->
+    <div class="proj-block" id="pb-pickly">
+      <div class="proj-row" onclick="toggleProj('pb-pickly')" tabindex="0" role="button" aria-expanded="false">
+        <span class="proj-n">01</span>
+        <div class="proj-name-row">
+          <span class="proj-name">Pickly</span>
+          <span class="proj-cat">Mobile App · UX/UI · Personal</span>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-cs">
+        <!-- hero image placeholder -->
+        <div class="cs-img-hero" style="background:var(--bg2); display:flex; align-items:center; justify-content:center;">
+          <!-- ./images/pickly/cover.jpg 로 교체 -->
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">./images/pickly/cover.jpg</span>
+        </div>
+
+        <!-- overview -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Overview</div>
+          <div class="cs-body">숏폼 콘텐츠를 저장해도 다시 못 찾는 문제를 해결하는 모바일 앱.<br>저장·관리·공유를 하나로. 리서치부터 IA, UI까지 <strong>단독 설계.</strong></div>
+        </div>
+
+        <!-- quote -->
+        <div class="cs-quote reveal">"처음엔 저장 버튼이 불편한 거라고 생각했다."</div>
+
+        <!-- stats -->
+        <div class="stats-row reveal">
+          <div class="stat-cell">
+            <div class="stat-num">64.3%</div>
+            <div class="stat-label">화면 캡처로<br>저장하는 사용자</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">57.1%</div>
+            <div class="stat-label">재생목록 정리<br>기능 원함</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">14명</div>
+            <div class="stat-label">설문 + 2그룹<br>심층 인터뷰</div>
+          </div>
+        </div>
+
+        <!-- problem insight -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Problem</div>
+          <div class="cs-body">설문 이후 두 유형의 사용자를 심층 인터뷰했다 — 저장 기능을 쓰다 이탈한 그룹과, 꾸준히 쓰는 그룹. 니즈가 <strong>저장, 검색, 공유</strong> 세 축으로 수렴됐다.</div>
+        </div>
+
+        <!-- design decisions -->
+        <div class="cs-dec-grid reveal">
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 01</div>
+            <div class="cs-dec-t">AI 자동분류를 선택지가 아닌 기본값으로</div>
+            <div class="cs-dec-d">"폴더 직접 만드는 것도 귀찮다"는 발화가 결정적. 저장의 마찰을 없애려면 아무것도 안 해도 분류가 되어야 했다.</div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 02</div>
+            <div class="cs-dec-t">리마인더를 핵심 기능으로 — 부가 기능이 아니라</div>
+            <div class="cs-dec-d">저장이 소비로 이어지지 않으면 앱을 쓸 이유가 없다. 이 서비스의 존재 이유를 완성하는 기능이었다.</div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 03</div>
+            <div class="cs-dec-t">공유를 저장 플로우 안에 — 별도 탭이 아니라</div>
+            <div class="cs-dec-d">행동이 일어나는 맥락에서 기능을 노출해야 실제로 쓰인다. 저장 시점에 "같이 볼 사람 추가" 옵션이 자연스럽게 제안된다.</div>
+          </div>
+        </div>
+
+        <!-- retrospective -->
+        <div class="cs-retro reveal">
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Learned</div>
+            <div class="cs-retro-t">무엇을 만드느냐보다 무엇을 홈 첫 줄에 올리느냐가 서비스의 철학을 결정한다.</div>
+          </div>
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Limit</div>
+            <div class="cs-retro-t">설문 n=14는 통계적으로 유의미하지 않다. 실제 사용성 테스트로 재방문율 검증이 필요하다.</div>
+          </div>
+        </div>
+
+        <a class="cs-link" href="./docs/pickly-portfolio.pdf" target="_blank">전체 기획서 보기 →</a>
+      </div>
     </div>
-  </div>
 
-  <div class="wk-th">
-    <div class="wk-col">No.</div>
-    <div class="wk-col">프로젝트</div>
-    <div class="wk-col">연도</div>
-    <div class="wk-col">분야</div>
-    <div class="wk-col">기여</div>
-  </div>
+    <!-- ── PROJECT 02: DB 보험청구 ── -->
+    <div class="proj-block" id="pb-db">
+      <div class="proj-row" onclick="toggleProj('pb-db')" tabindex="0" role="button" aria-expanded="false">
+        <span class="proj-n">02</span>
+        <div class="proj-name-row">
+          <span class="proj-name">DB 보험청구</span>
+          <span class="proj-cat">Web Service · Design + Publishing · 실무</span>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-cs">
+        <div class="cs-img-hero" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">./images/db/cover.jpg — 서비스 스크린샷</span>
+        </div>
 
-  <div class="wk-section-div">Selected Projects (Depth over volume)</div>
-  <ul class="wk-list">
-    <li class="wk-row" data-proj="insurance-landing" tabindex="0">
-      <div class="wk-row-bg" style="background-image:url('./images/design_site_01.jpg')"></div>
-      <div class="wk-n">01</div>
-      <div class="wk-name">보험 랜딩 리뉴얼</div>
-      <div class="wk-yr">2024</div>
-      <div class="wk-cat">전환 중심 랜딩 UX</div>
-      <div class="wk-role">100%</div>
-    </li>
-    <li class="wk-row" data-proj="pickcle" tabindex="0">
-      <div class="wk-row-bg" style="background-image:url('./images/kybo_screen.png')"></div>
-      <div class="wk-n">02</div>
-      <div class="wk-name">Pickly 앱 서비스</div>
-      <div class="wk-yr">2024-25</div>
-      <div class="wk-cat">서비스 기획 + UX/UI</div>
-      <div class="wk-role">100%</div>
-    </li>
-    <li class="wk-row" data-proj="tdx-dash" tabindex="0">
-      <div class="wk-row-bg" style="background-image:url('./images/mok.jpg')"></div>
-      <div class="wk-n">03</div>
-      <div class="wk-name">보험 청구 대시보드</div>
-      <div class="wk-yr">2024</div>
-      <div class="wk-cat">복잡도 높은 Admin UX</div>
-      <div class="wk-role">100%</div>
-    </li>
-    <li class="wk-row" data-proj="nicepay" tabindex="0">
-      <div class="wk-row-bg" style="background-image:url('./images/iMacMockup.png')"></div>
-      <div class="wk-n">04</div>
-      <div class="wk-name">나이스페이먼츠 리뉴얼</div>
-      <div class="wk-yr">2025</div>
-      <div class="wk-cat">AI 비주얼 + 반응형 퍼블리싱</div>
-      <div class="wk-role">100%</div>
-    </li>
-  </ul>
-</section>
+        <div class="cs-grid reveal">
+          <div class="cs-label">Overview</div>
+          <div class="cs-body">여행자보험 보상청구 서비스. <strong>디자인 + 퍼블리싱 단독</strong> 담당. 기획 1·디자인 1·개발 1, 3인 팀. 현재 테스트 운영 중.</div>
+        </div>
+
+        <div class="cs-quote reveal">"복잡한 심사 과정을,<br>사용자는 복잡하다고 느끼지 않게."</div>
+
+        <!-- 아이콘 시스템 -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Icon System</div>
+          <div>
+            <div class="cs-body" style="margin-bottom:16px;">보험 청구 도메인 특화 아이콘 세트 직접 제작</div>
+            <div class="icon-grid">
+              <!-- ./images/db/icons/ 에 아이콘 PNG 넣기 -->
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+              <div class="icon-cell"></div>
+            </div>
+            <div class="icon-hint">↑ 각 아이콘 PNG 파일 배치</div>
+          </div>
+        </div>
+
+        <!-- 화면 -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Live Service</div>
+          <div>
+            <div class="cs-body" style="margin-bottom:12px;font-size:13px;color:var(--muted);">테스트 환경 기준 화면 (캡처)</div>
+            <div class="screens-row">
+              <div class="screen-frame"></div>
+              <div class="screen-frame"></div>
+              <div class="screen-frame"></div>
+            </div>
+            <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">↑ 실제 스크린샷으로 교체</p>
+          </div>
+        </div>
+
+        <!-- decisions -->
+        <div class="cs-dec-grid reveal">
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 01</div>
+            <div class="cs-dec-t">삼성화재를 레퍼런스로</div>
+            <div class="cs-dec-d">새로운 것보다 익숙함 위에서 더 잘. 처음 보는 UI보다 익숙한 패턴이 불안을 줄인다.</div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 02</div>
+            <div class="cs-dec-t">시스템 언어 → 사용자 언어</div>
+            <div>
+              <div class="cs-dec-d" style="margin-bottom:10px;">청구 분야 레이블을 시스템 용어 대신 사용자가 실제로 하는 말로 설계했다.</div>
+              <div class="lang-compare">
+                <div class="lang-before">
+                  <span class="ltag">의료비(질병)</span>
+                  <span class="ltag">배상책임</span>
+                  <span class="ltag">여권재발급</span>
+                </div>
+                <div class="lang-arrow">→</div>
+                <div class="lang-after">
+                  <span class="ltag after">아팠어요</span>
+                  <span class="ltag after">피해를 끼쳤어요</span>
+                  <span class="ltag after">여권 분실했어요</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 03</div>
+            <div class="cs-dec-t">설명 없이도 다음을 누를 수 있는가</div>
+            <div class="cs-dec-d">레이블과 버튼 텍스트 하나하나를 이 기준으로 삼성화재 플로우와 비교하며 검토했다.</div>
+          </div>
+        </div>
+
+        <div class="cs-retro reveal">
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Learned</div>
+            <div class="cs-retro-t">디자인+퍼블리싱 동시 담당 → 설계 결정이 구현에 바로 영향을 미친다는 걸 체감했다.</div>
+          </div>
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Next</div>
+            <div class="cs-retro-t">IA 설계부터 관여하면 수정이 줄어든다. 다음엔 사용자 테스트까지 제안할 것이다.</div>
+          </div>
+        </div>
+
+        <p class="cs-body" style="margin-top:16px;font-size:13px;color:var(--muted);">보안상 실서비스 URL은 비공개입니다. 테스트 환경 화면 캡처로 플로우를 정리했습니다. (국내 보험사 B2B)</p>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 03: NICE PAYMENTS ── -->
+    <div class="proj-block" id="pb-nice">
+      <div class="proj-row" onclick="toggleProj('pb-nice')" tabindex="0" role="button" aria-expanded="false">
+        <span class="proj-n">03</span>
+        <div class="proj-name-row">
+          <span class="proj-name">NICE Payments</span>
+          <span class="proj-cat">Web Redesign · Midjourney · Personal</span>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-cs">
+        <div class="cs-img-hero" style="background:#0d1117; display:flex; align-items:center; justify-content:center;">
+          <!-- ./images/nicepayments/herobanner.png -->
+          <img src="./images/nicepayments/herobanner.png" alt="NICE Payments hero" style="width:100%;height:100%;object-fit:cover; border-radius:4px;">
+        </div>
+
+        <div class="cs-grid reveal">
+          <div class="cs-label">Overview</div>
+          <div class="cs-body">연 매출 1.1조 PG사의 노후 홈페이지를 B2B 의사결정권자를 위한 <strong>데이터 기반 인터페이스</strong>로 리디자인. Product Designer Solo.</div>
+        </div>
+
+        <!-- stats -->
+        <div class="stats-row reveal">
+          <div class="stat-cell">
+            <div class="stat-num">77%</div>
+            <div class="stat-label">모바일 결제<br>비중 돌파</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">60조</div>
+            <div class="stat-label">한국 디지털<br>결제 시장 규모</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">35%</div>
+            <div class="stat-label">GNB 진입 후<br>즉시 이탈률 AS-IS</div>
+          </div>
+        </div>
+
+        <!-- AS-IS / TO-BE -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Problem</div>
+          <div>
+            <div class="compare-grid">
+              <div class="cmp-cell">
+                <div class="cmp-head bad">AS-IS</div>
+                <div class="cmp-item bad">GNB 진입 후 즉시 이탈 35%</div>
+                <div class="cmp-item bad">서비스 도달까지 평균 클릭 40%</div>
+                <div class="cmp-item bad">텍스트 나열, 시각화 부재</div>
+                <div class="cmp-item bad">메뉴 6개, 인지 과부하</div>
+              </div>
+              <div class="cmp-cell">
+                <div class="cmp-head good">TO-BE</div>
+                <div class="cmp-item good">GNB 4개로 단순화</div>
+                <div class="cmp-item good">전환 경로 50% 단축</div>
+                <div class="cmp-item good">3D 비주얼 + 수치 기반 신뢰</div>
+                <div class="cmp-item good">탐색이 아닌 결정으로 유도</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- midjourney -->
+        <div class="cs-grid reveal">
+          <div class="cs-label">Midjourney</div>
+          <div>
+            <div class="mj-dark-block">
+              <div class="mj-block-label">AI Image Generation</div>
+              <div class="mj-block-title">이미지를 구매하지 않고 직접 만들었다</div>
+              <div class="mj-block-sub">3D 보안 비주얼 — 결제 신뢰감을 상징하는 이미지를 미드저니로 이터레이션</div>
+              <div class="mj-prompt">
+                <pre>3D isometric credit card with security lock floating above,
+glass morphism cards layout, light blue monochrome palette,
+soft ambient lighting, clean minimal background,
+payment security concept --ar 16:9 --v 6 --style raw</pre>
+                <div class="mj-tags">
+                  <span class="mj-tag">--ar 16:9</span>
+                  <span class="mj-tag">--v 6</span>
+                  <span class="mj-tag">isometric</span>
+                  <span class="mj-tag">glass morphism</span>
+                  <span class="mj-tag">monochrome blue</span>
+                </div>
+              </div>
+              <div class="mj-img-grid">
+                <div class="mj-img-cell">
+                  <img src="./images/nicepayments/mj_01.png" alt="">
+                  <span>Business</span>
+                </div>
+                <div class="mj-img-cell">
+                  <img src="./images/nicepayments/mj_02.png" alt="">
+                  <span>Service</span>
+                </div>
+                <div class="mj-img-cell">
+                  <img src="./images/nicepayments/mj_03.png" alt="">
+                  <span>Solution</span>
+                </div>
+                <div class="mj-img-cell">
+                  <img src="./images/nicepayments/mj_04.png" alt="">
+                  <span>Feature</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- decisions -->
+        <div class="cs-dec-grid reveal">
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 01</div>
+            <div class="cs-dec-t">다크모드 — 신뢰감은 톤에서 온다</div>
+            <div class="cs-dec-d">KG이니시스의 전통적 신뢰 + 토스의 현대적 UX. 다크 배경과 NICE 블루로 테크 기업의 전문성을 시각화했다.</div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 02</div>
+            <div class="cs-dec-t">탐색형 → 데이터 확신형 플로우</div>
+            <div class="cs-dec-d">GNB 6개를 4개로 줄이고, 히어로에서 수치(115만 가맹점, 42.4%)를 즉시 노출해 탐색 전에 신뢰를 심었다.</div>
+          </div>
+          <div class="cs-dec-item">
+            <div class="cs-dec-n">DECISION — 03</div>
+            <div class="cs-dec-t">3D 카드형 UI로 서비스 구조 시각화</div>
+            <div class="cs-dec-d">텍스트 나열이었던 사업 영역을 미드저니 3D 카드로 재설계. PG/VAN 구분을 컬러 톤으로 분리했다.</div>
+          </div>
+        </div>
+
+        <div class="cs-retro reveal">
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Learned</div>
+            <div class="cs-retro-t">B2B 서비스는 설득이 아니라 "확신"시켜야 한다. 수치 없는 신뢰 설계는 빈 말이다.</div>
+          </div>
+          <div class="cs-retro-item">
+            <div class="cs-retro-l">Limit</div>
+            <div class="cs-retro-t">미드저니 프롬프트 컨트롤의 불확실성. 이터레이션 비용이 예측 불가능하다.</div>
+          </div>
+        </div>
+
+        <a class="cs-link" href="./nicepayments.pdf" target="_blank">전체 기획서 보기 →</a>
+      </div>
+    </div>
+  </section>
 
 <!-- ══════════════════════════════════════
      DESIGN GALLERY
@@ -1084,255 +1844,101 @@ footer{
   </div>
 </section>
 
-<!-- DIFF -->
-<section id="diff">
-  <div class="diff-head reveal-up">
-    <div>
-      <div class="section-eyebrow" style="color:var(--blue)">Positioning Strategy</div>
-      <div class="diff-title-big">디자인이 아니라<br>문제 해결로 설득<em>.</em></div>
-    </div>
-    <div class="diff-intro-txt">포트폴리오는 작품집이 아니라, 이 사람을 뽑았을 때 비즈니스에 어떤 이득이 생기는지 보여주는 설득 문서여야 합니다.</div>
-  </div>
-  <div class="diff-grid">
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">01</div><h3>Problem 먼저 정의<br>화면보다 문제를 먼저 봅니다</h3><p>모든 프로젝트를 문제 정의로 시작합니다. 기존 플로우의 마찰과 비용을 먼저 파악해 디자인 방향을 정합니다.</p><div class="d-tags"><span class="d-tag">Problem Framing</span><span class="d-tag">UX Audit</span><span class="d-tag">Pain Point</span></div></div>
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">02</div><h3>비즈니스 KPI 연결<br>성과 기준으로 설계합니다</h3><p>상담 전환율, 클릭률, 체류 시간처럼 KPI에 연결된 UX 결정을 우선순위로 둡니다.</p><div class="d-tags"><span class="d-tag">KPI</span><span class="d-tag">Conversion</span><span class="d-tag">Retention</span></div></div>
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">03</div><h3>Why를 설명하는 디자이너<br>선택의 근거를 남깁니다</h3><p>CTA 위치, 정보 계층, 컴포넌트 패턴을 왜 선택했는지 문서화하고 설득 가능한 근거로 전달합니다.</p><div class="d-tags"><span class="d-tag">Decision Log</span><span class="d-tag">IA</span><span class="d-tag">Rationale</span></div></div>
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">04</div><h3>Design → Code 실행력<br>구현까지 일관성 유지</h3><p>Figma에서 결정한 의도를 HTML/CSS/JS로 직접 구현해, 설계와 실제 결과 사이의 간극을 줄입니다.</p><div class="d-tags"><span class="d-tag">Figma</span><span class="d-tag">Publishing</span><span class="d-tag">Responsive</span></div></div>
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">05</div><h3>AI 활용 생산성<br>속도와 품질을 같이 확보</h3><p>Midjourney와 Cursor AI를 활용해 시안 탐색과 구현 속도를 높이고, 남는 시간은 문제 정의와 검증에 투자합니다.</p><div class="d-tags"><span class="d-tag">Midjourney</span><span class="d-tag">Cursor AI</span><span class="d-tag">Workflow</span></div></div>
-    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">06</div><h3>협업 친화 커뮤니케이션<br>기획·개발 언어로도 설명</h3><p>디자인 언어뿐 아니라 요구사항/구현 제약까지 함께 다뤄서 팀이 바로 실행 가능한 형태로 결과물을 만듭니다.</p><div class="d-tags"><span class="d-tag">Collaboration</span><span class="d-tag">Handoff</span><span class="d-tag">Execution</span></div></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="reveal-up">
-      <div class="about-name-big">About<br><em>JJY.</em></div>
-      <div class="about-text">
-        <p>디자인의 감각과 코드의 정밀함을 동시에 가진 <strong>D→P 크리에이터</strong>입니다. Figma에서 시작한 작업이 브라우저에서 완벽하게 구현되는 것을 가장 중요하게 생각합니다.</p>
-        <p>AI 도구를 두려워하지 않고 적극적으로 활용합니다. <strong>미드저니, ImageFX, Cursor AI, 에이전트</strong>를 워크플로우에 통합해 혼자서도 팀이 부럽지 않은 퀄리티와 속도를 냅니다.</p>
-        <p>TDX 디자인팀에서 1년 8개월간 자사 UI/UX 전반을 담당하며 실무 감각과 협업 역량을 갖췄고, 매일 더 넓은 스케일로 성장 중입니다.</p>
-      </div>
-      <ul class="facts-list">
-        <li class="fact-row"><span class="fact-lbl">이름</span><span>장지영 Jang Ji-young</span></li>
-        <li class="fact-row"><span class="fact-lbl">현직</span><span>TDX 디자인팀 · 1년 8개월</span></li>
-        <li class="fact-row"><span class="fact-lbl">역할</span><span>UI/UX Design · Web Publishing</span></li>
-        <li class="fact-row"><span class="fact-lbl">자격증</span><span>정보처리산업기사 · 컴퓨터그래픽스운용기능사</span></li>
-        <li class="fact-row"><span class="fact-lbl">수상</span><span>파주시 캐릭터 공모전 인기상 (시민투표 1위)</span></li>
-        <li class="fact-row"><span class="fact-lbl">GitHub</span><span><a href="https://github.com/superji0" target="_blank" style="color:var(--blue)">superji0</a></span></li>
-        <li class="fact-row"><span class="fact-lbl">Email</span><span><a href="/cdn-cgi/l/email-protection#d9b686b6e9eee1e099b7b8afbcabf7bab6b4" style="border-bottom:1px solid var(--border)"><span class="__cf_email__" data-cfemail="f699a999c6c1cecfb69897809384d895999b">[email&#160;protected]</span></a></span></li>
-      </ul>
-    </div>
-    <div class="reveal-up" style="transition-delay:.12s">
-      <p class="sk-header" style="margin-bottom:18px">Skills &amp; Tools</p>
-      <div class="sk-grid">
-        <div class="sk-item"><h4>HTML5</h4><p>시맨틱 마크업, 접근성</p></div>
-        <div class="sk-item"><h4>CSS3/SCSS</h4><p>Flex, Grid, 반응형</p></div>
-        <div class="sk-item"><h4>JavaScript</h4><p>ES6+, DOM, 비동기</p></div>
-        <div class="sk-item"><h4>Figma</h4><p>UI디자인, 프로토타입</p></div>
-        <div class="sk-item"><h4>Photoshop</h4><p>시안 제작, 배너</p></div>
-        <div class="sk-item"><h4>Illustrator</h4><p>아이콘, 캐릭터, 벡터</p></div>
-        <div class="sk-item"><h4>Git</h4><p>브랜치, 협업 형상관리</p></div>
-        <div class="sk-item"><h4>GSAP</h4><p>ScrollTrigger, 타임라인</p></div>
-        <div class="sk-item ai"><h4>Midjourney</h4><p>AI 이미지 생성</p></div>
-        <div class="sk-item ai"><h4>ImageFX</h4><p>AI 이미지 편집</p></div>
-        <div class="sk-item ai"><h4>Cursor AI</h4><p>AI 에이전트 개발</p></div>
-        <div class="sk-item"><h4>React</h4><p>컴포넌트, 상태관리</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ETC -->
-<section id="etc">
-  <div style="margin-bottom:36px" class="reveal-up">
-    <div class="section-eyebrow">ETC</div>
-    <div class="section-title">캐릭터 & 수상</div>
-  </div>
-  <div class="etc-grid">
-    <div class="etc-card">
-      <div class="char-imgs">
-        <img src="./images/character_01.png" alt="메리웨더1" class="ch-img">
-        <img src="./images/character_02.png" alt="메리웨더2" class="ch-img">
-        <img src="./images/character_03.png" alt="메리웨더3" class="ch-img">
-      </div>
-      <h3>메리웨더 캐릭터</h3>
-      <p>자체 오리지널 캐릭터 <strong>메리웨더(Merryweather)</strong>를 기획·제작했습니다. 굿즈 제작까지 이어지며 실제 상품으로 완성하고, 홍콩 & 서울 일러스트레이션 페어에 참가했습니다.</p>
-      <div class="etc-role-row">
-        <span class="etc-rbadge hi">캐릭터 디자인</span>
-        <span class="etc-rbadge hi">굿즈 제작</span>
-        <span class="etc-rbadge">일러스트페어 홍콩</span>
-        <span class="etc-rbadge">일러스트페어 서울</span>
-      </div>
-    </div>
-    <div class="etc-card">
-      <div style="font-size:36px;margin-bottom:14px">🏆</div>
-      <h3>파주시 캐릭터 공모전</h3>
-      <p>파주시 공식 캐릭터 공모전에 출품하여 <strong>인기상을 수상</strong>했습니다. 시민 온라인 투표에서 <strong>1위</strong>를 기록하며 대중성과 디자인 완성도를 모두 인정받았습니다.</p>
-      <div class="award-pill">🥇 시민 투표 1위 · 인기상 수상</div>
-      <div class="etc-role-row" style="margin-top:10px">
-        <span class="etc-rbadge hi">공모전 수상</span>
-        <span class="etc-rbadge">캐릭터 디자인</span>
-        <span class="etc-rbadge">Illustrator</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="ft-brand">장지영 포트폴리오<small>© JJY 2026. All rights reserved.</small></div>
-  <div class="ft-links">
-    <a href="tel:+821041727389">+82-10-4172-7389</a>
-    <a href="/cdn-cgi/l/email-protection#e18ebe8ed1d6d9d8a18f80978493cf828e8c"><span class="__cf_email__" data-cfemail="d7b888b8e7e0efee97b9b6a1b2a5f9b4b8ba">[email&#160;protected]</span></a>
-    <a href="https://github.com/superji0" target="_blank" rel="noopener">GitHub ↗</a>
-  </div>
-  <div class="ft-xl">EXTRA L</div>
-</footer>
-
-<!-- ══════════════════════
-     PROJECT SIDE PANEL
-══════════════════════ -->
-<!-- ══ WORK ROW THUMBNAIL ══ -->
-<div id="wk-thumb" aria-hidden="true">
-  <div class="wk-thumb-card">
-    <div class="wk-thumb-strip"></div>
-    <div class="wk-thumb-img-wrap">
-      <img id="wk-thumb-img" src="" alt="">
-    </div>
-    <div class="wk-thumb-meta">
+<!-- ─── ABOUT ─── -->
+  <section id="about">
+    <div class="about-grid reveal">
       <div>
-        <div class="wk-thumb-name" id="wk-thumb-name"></div>
-        <div class="wk-thumb-cat" id="wk-thumb-cat"></div>
+        <div class="about-display">
+          ABOUT<br>
+          <em>ME</em>
+        </div>
+        <div class="about-body">
+          <p>안녕하세요, UI/UX 디자이너 & 웹 퍼블리셔 <strong>장지영</strong>입니다.</p>
+          <p>컴공 전공 배경으로 디자인과 개발을 함께 다루며, <strong>문제를 정의하고 설계로 해결하는 일</strong>을 합니다.</p>
+          <p>Figma에서 결정한 의도를 HTML/CSS/JS로 직접 구현해 설계와 구현 사이의 간극을 줄이고, Midjourney 등 AI 툴을 워크플로우에 통합해 빠르게 실험합니다.</p>
+        </div>
+        <div class="skills-grid" style="margin-top:40px;">
+          <div class="sk-item"><h4>HTML5 / CSS3</h4><p>시맨틱 마크업, Flex, Grid, 반응형</p></div>
+          <div class="sk-item"><h4>JavaScript</h4><p>ES6+, DOM, GSAP</p></div>
+          <div class="sk-item"><h4>Figma</h4><p>UI 디자인, 프로토타입, 컴포넌트</p></div>
+          <div class="sk-item"><h4>Midjourney</h4><p>AI 이미지 생성, 프롬프트 설계</p></div>
+          <div class="sk-item"><h4>Photoshop / Illustrator</h4><p>시안 제작, 아이콘, 벡터</p></div>
+          <div class="sk-item"><h4>React / Git</h4><p>컴포넌트, 상태관리, 협업 형상관리</p></div>
+        </div>
       </div>
-      <div class="wk-thumb-num" id="wk-thumb-num"></div>
+      <div>
+        <!-- 수상 / 활동 -->
+        <div style="border-top:1px solid var(--border);padding-top:28px;margin-bottom:32px;">
+          <div class="cs-label" style="margin-bottom:14px;">Awards & Activities</div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
+              <div style="font-size:13px;font-weight:700;margin-bottom:3px;">파주시 캐릭터 공모전 — 인기상 수상</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">시민 투표 1위 · Illustrator</div>
+            </div>
+            <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
+              <div style="font-size:13px;font-weight:700;margin-bottom:3px;">메리웨더 캐릭터 제작 · 굿즈 출시</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">홍콩 & 서울 일러스트레이션 페어 참가</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="border-top:1px solid var(--border);padding-top:28px;margin-top:32px;">
+          <div class="cs-label" style="margin-bottom:14px;">Character & ETC</div>
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+            <img src="./images/character_01.png" alt="" width="56" height="56" style="object-fit:contain;border-radius:4px;background:rgba(13,13,11,.04);padding:4px;">
+            <img src="./images/character_02.png" alt="" width="56" height="56" style="object-fit:contain;border-radius:4px;background:rgba(13,13,11,.04);padding:4px;">
+            <img src="./images/character_03.png" alt="" width="56" height="56" style="object-fit:contain;border-radius:4px;background:rgba(13,13,11,.04);padding:4px;">
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:var(--muted);margin-bottom:10px;">오리지널 캐릭터 <strong>메리웨더</strong> · 굿즈 · 일러스트페어(홍콩/서울)</p>
+          <p style="font-size:13px;color:var(--muted);">파주시 캐릭터 공모전 인기상 · 시민 투표 1위</p>
+        </div>
+
+        <!-- experience -->
+        <div style="border-top:1px solid var(--border);padding-top:28px;">
+          <div class="cs-label" style="margin-bottom:14px;">Experience</div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
+              <div style="font-size:13px;font-weight:700;margin-bottom:3px;">UI/UX Designer & Web Publisher</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">현직 · 보험 서비스 스타트업</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<div id="proj-overlay"></div>
-<div id="proj-panel">
-  <div class="pp-inner" id="ppInner">
-    <!-- 핵심 프로젝트 4개: 채용용 깊이 중심 -->
-    <article class="proj-content" id="proj-content-insurance-landing">
-      <div class="pp-eyebrow">Selected Project · Conversion</div>
-      <div class="pp-title">보험 랜딩<br>리뉴얼</div>
-      <div class="pp-meta"><span class="pp-mi">Landing UX + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
-      <div class="pp-roles"><span class="pp-role hi">UX 구조 설계</span><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">반응형 퍼블리싱</span></div>
-      <div class="pp-shots wide"><img src="./images/design_site_01.jpg" alt="" loading="lazy"><img src="./images/iMacMockup.png" alt="" loading="lazy"></div>
-      <p class="pp-sec">Case Study</p>
-      <div class="pp-body">
-        <div class="cs-block"><div class="cs-k">Problem</div><div class="cs-v">핵심 보장 정보보다 장식성 콘텐츠가 먼저 노출되어 이탈률이 높고 CTA 도달 전 이탈이 잦았습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Goal</div><div class="cs-v">상담 CTA 클릭률 20% 개선, 핵심 정보 섹션 체류시간 증가를 목표로 구조를 재설계했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Research</div><div class="cs-v">동종 보험 랜딩 6개를 비교해 CTA 위치, 정보 계층, 신뢰 요소(리뷰/보장 요약) 배치를 분석했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Insight</div><div class="cs-v">사용자는 보험 상품 설명보다 “나에게 어떤 결과가 생기는가”를 먼저 확인할 때 전환 가능성이 높았습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Solution</div><div class="cs-v">첫 화면에 문제-해결 메시지와 CTA를 고정 배치하고, 보장 요약 카드를 상단으로 이동해 스크롤 초반 의사결정을 돕도록 구성했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Why</div><div class="cs-v">CTA를 상단에 고정하면 클릭 동선이 짧아지고, 카드형 정보는 스캔 속도를 높여 비교 판단 시간을 줄일 수 있기 때문입니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Result</div><div class="cs-v">랜딩 흐름 상 클릭 동선이 단축되었고, 상담 CTA 노출 빈도가 증가하는 구조로 개선했습니다. (estimated)</div></div>
-        <div class="cs-block"><div class="cs-k">What I did</div><div class="cs-v">UX 설계 100% · UI 디자인 100% · 퍼블리싱 100%</div></div>
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div>
+      <div class="contact-display">
+        GET<br>IN<br>TOUCH
       </div>
-      <div class="pp-tags"><span class="pp-tag">Conversion UX</span><span class="pp-tag">Landing IA</span><span class="pp-tag">Responsive</span><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3</span><span class="pp-tag">JavaScript</span></div>
-    </article>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:jiyoung@example.com">
+        <span>Email</span>
+        jiyoung@example.com
+      </a>
+      <a class="contact-link" href="tel:+821041727389">
+        <span>Phone</span>
+        010-4172-7389
+      </a>
+      <a class="contact-link" href="https://github.com/superji0" target="_blank" rel="noopener">
+        <span>GitHub</span>
+        github.com/superji0 ↗
+      </a>
+      <a class="contact-link" href="https://superji0.github.io/" target="_blank" rel="noopener">
+        <span>Portfolio</span>
+        superji0.github.io ↗
+      </a>
+    </div>
+    <div class="ft-copy">
+      <p>장지영 포트폴리오 — UI/UX Designer & Web Publisher</p>
+      <p>© JJY 2026. All rights reserved.</p>
+    </div>
+  </section>
 
-    <article class="proj-content" id="proj-content-pickcle">
-      <div class="pp-eyebrow">Selected Project · App Service</div>
-      <div class="pp-title">Pickly<br>App</div>
-      <div class="pp-meta"><span class="pp-mi">기획 + UX/UI Design</span><span class="pp-mi">2024 — 2025</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
-      <div class="pp-roles"><span class="pp-role hi">서비스 기획</span><span class="pp-role hi">UX 리서치</span><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">프로토타이핑</span></div>
-      <div class="pp-shots port"><img src="./images/kybo_screen.png" alt="" loading="lazy"><img src="./images/kybo_screen02.png" alt="" loading="lazy"></div>
-      <!-- Pickly 상세 포트폴리오 PDF (원본: 장지영_포트폴리오-압축됨.pdf → docs/pickly-portfolio.pdf) -->
-      <p class="pp-sec">Portfolio PDF</p>
-      <p class="pp-pdf-note">Pickly 앱 프로세스·와이어·UI 등이 담긴 포트폴리오 문서입니다. 채용 담당자가 한 번에 흐름을 볼 수 있도록 첨부했습니다.</p>
-      <div class="pp-pdf-row">
-        <a href="./docs/pickly-portfolio.pdf" target="_blank" rel="noopener" class="pp-cta">PDF 새 탭에서 보기 ↗</a>
-        <a href="./docs/pickly-portfolio.pdf" download="Pickly_장지영_포트폴리오.pdf" class="pp-cta--outline">다운로드</a>
-      </div>
-      <p class="pp-sec">Case Study</p>
-      <div class="pp-body">
-        <div class="cs-block"><div class="cs-k">Problem</div><div class="cs-v">관심 아이템이 여러 플랫폼에 흩어져 저장되어, 실제 구매 시점에는 다시 찾지 못하는 문제가 반복되었습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Goal</div><div class="cs-v">저장한 아이템의 재탐색 시간 단축, 비교/결정 흐름 단계를 3탭 이내로 단순화하는 것을 목표로 했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Research</div><div class="cs-v">주변 사용자 인터뷰/관찰에서 저장 방식은 다양하지만 “저장 후 재사용률”이 낮다는 공통 패턴을 확인했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Insight</div><div class="cs-v">핵심 문제는 저장 기능 부재가 아니라, 저장 후 분류/비교/재탐색 맥락이 사라지는 구조였습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Solution</div><div class="cs-v">URL 저장 + 태그 분류 + 비교 모드를 중심으로 IA를 재설계하고, 저장 이유 메모를 강제하지 않고 자연스럽게 입력하게 구성했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Why</div><div class="cs-v">사용자가 원하는 건 기록 자체가 아니라 의사결정 보조이므로, 저장보다 비교/우선순위 판단 UI를 우선했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Result</div><div class="cs-v">탐색 플로우를 3회 개선하며 의사결정 전환 경로를 단순화했고, 프로토타입 테스트 기준으로 재탐색 혼란도를 낮췄습니다. (based on internal feedback)</div></div>
-        <div class="cs-block"><div class="cs-k">What I did</div><div class="cs-v">서비스 기획 100% · UX 리서치 100% · UI 디자인 100% · 프로토타입 100%</div></div>
-      </div>
-      <div class="pp-tags"><span class="pp-tag">Product Thinking</span><span class="pp-tag">UX Research</span><span class="pp-tag">IA</span><span class="pp-tag">Figma</span><span class="pp-tag">Prototype</span></div>
-    </article>
-
-    <article class="proj-content" id="proj-content-tdx-dash">
-      <div class="pp-eyebrow">Selected Project · Admin Dashboard</div>
-      <div class="pp-title">보험 청구<br>대시보드</div>
-      <div class="pp-meta"><span class="pp-mi">UI Design + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
-      <div class="pp-roles"><span class="pp-role hi">UI/UX 디자인</span><span class="pp-role hi">웹 퍼블리싱</span><span class="pp-role hi">Admin UI</span></div>
-      <div class="pp-shots wide"><img src="./images/mok.jpg" alt="" loading="lazy"><img src="./images/mok.png" alt="" loading="lazy"></div>
-      <p class="pp-sec">Case Study</p>
-      <div class="pp-body">
-        <div class="cs-block"><div class="cs-k">Problem</div><div class="cs-v">청구 건 처리 시 다수 화면 이동이 필요해 처리 속도가 느리고, 상태 우선순위 판단이 어려웠습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Goal</div><div class="cs-v">페이지 이동 횟수 50% 이상 감소, 상태 기반 우선 처리 판단을 1화면에서 가능하게 만드는 것을 목표로 했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Research</div><div class="cs-v">운영 담당자의 반복 액션(상태 확인 → 상세 확인 → 처리 입력)을 기준으로 병목 구간을 정의했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Insight</div><div class="cs-v">운영자는 미관보다 “정보 스캔 속도”와 “컨텍스트 유지”를 더 중요하게 여겼습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Solution</div><div class="cs-v">테이블 + 사이드 패널 구조로 전환하고, 상태 뱃지/필터를 전면 배치해 상세 페이지 이동 없이 처리하도록 설계했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Why</div><div class="cs-v">대시보드 업무는 연속 처리 과업이므로, 컨텍스트가 끊기면 처리 품질과 속도가 동시에 하락하기 때문입니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Result</div><div class="cs-v">페이지 이동 중심 플로우를 단일 화면 중심 플로우로 재구성해 처리 동선을 단축했습니다. (estimated)</div></div>
-        <div class="cs-block"><div class="cs-k">What I did</div><div class="cs-v">UX 설계 100% · UI 디자인 100% · 퍼블리싱 100%</div></div>
-      </div>
-      <div class="pp-tags"><span class="pp-tag">Admin UX</span><span class="pp-tag">Data-heavy UI</span><span class="pp-tag">Figma</span><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3/SCSS</span><span class="pp-tag">JavaScript</span></div>
-    </article>
-
-    <article class="proj-content" id="proj-content-nicepay">
-      <div class="pp-eyebrow">Selected Project · Fintech</div>
-      <div class="pp-title">나이스<br>페이먼츠</div>
-      <div class="pp-meta"><span class="pp-mi">AI · Design · Publishing</span><span class="pp-mi">2024 — 2025</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
-      <div class="pp-roles"><span class="pp-role hi">Midjourney 활용</span><span class="pp-role hi">UI/UX 디자인</span><span class="pp-role hi">반응형 퍼블리싱</span></div>
-      <div class="pp-shots wide"><img src="./images/iMacMockup.png" alt="" loading="lazy"><img src="./images/design_hmmain.jpg" alt="" loading="lazy"></div>
-      <p class="pp-sec">Before / After</p>
-      <div class="ba-compare">
-        <!-- 웹 기준 비교: 첫 화면 메시지와 CTA 구조 개선 -->
-        <div class="ba-row">
-          <div class="ba-row-head">Web Responsive</div>
-          <div class="ba-grid">
-            <figure class="ba-card">
-              <img src="./images/design_hmmain.jpg" alt="나이스페이먼츠 리뉴얼 전 웹 화면" loading="lazy">
-              <figcaption class="ba-cap"><strong>Before</strong> — 가치 제안/CTA가 분산된 구조</figcaption>
-            </figure>
-            <figure class="ba-card">
-              <img src="./images/iMacMockup.png" alt="나이스페이먼츠 리뉴얼 후 웹 화면" loading="lazy">
-              <figcaption class="ba-cap"><strong>After</strong> — 신뢰 요소 + CTA 중심 구조</figcaption>
-            </figure>
-          </div>
-        </div>
-        <!-- 모바일 기준 비교: 화면 밀도와 스캔 흐름 개선 -->
-        <div class="ba-row">
-          <div class="ba-row-head">Mobile Responsive</div>
-          <div class="ba-grid">
-            <figure class="ba-card mobile">
-              <img src="./images/design_hmsub.jpg" alt="나이스페이먼츠 리뉴얼 전 모바일 화면" loading="lazy">
-              <figcaption class="ba-cap"><strong>Before</strong> — 핵심 메시지 대비 정보 밀도 높음</figcaption>
-            </figure>
-            <figure class="ba-card mobile">
-              <img src="./images/design_h&amp;m.png" alt="나이스페이먼츠 리뉴얼 후 모바일 화면" loading="lazy">
-              <figcaption class="ba-cap"><strong>After</strong> — 스캔 가능한 카드 + 명확한 다음 행동</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <p class="pp-sec">Case Study</p>
-      <div class="pp-body">
-        <div class="cs-block"><div class="cs-k">Problem</div><div class="cs-v">기존 페이지는 서비스 신뢰 메시지와 CTA 연결이 약해, 사용자가 결제 솔루션의 장점을 빠르게 이해하기 어려웠습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Goal</div><div class="cs-v">핵심 가치 전달 시간을 단축하고, 문의/상담 CTA 전환 흐름을 강화하는 것이 목표였습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Research</div><div class="cs-v">핀테크 랜딩 사례를 참고해 신뢰 요소, 기능 설명, CTA 배치 순서를 비교 분석했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Insight</div><div class="cs-v">핀테크 서비스는 시각 완성도보다 “신뢰 근거 + 명확한 다음 행동”이 전환에 더 큰 영향을 줍니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Solution</div><div class="cs-v">Midjourney 기반 키비주얼을 제작해 첫 인지 품질을 높이고, 가치 제안/근거/CTA가 자연스럽게 이어지도록 랜딩 구조를 재배치했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Why</div><div class="cs-v">신뢰가 선행되지 않으면 클릭이 일어나지 않기 때문에, 비주얼-카피-CTA의 정보 흐름을 단일 서사로 설계했습니다.</div></div>
-        <div class="cs-block"><div class="cs-k">Result</div><div class="cs-v">브랜드 신뢰 메시지와 CTA 노출 구조가 강화되어 문의 전환 가능성이 높은 랜딩 흐름을 확보했습니다. (estimated)</div></div>
-        <div class="cs-block"><div class="cs-k">What I did</div><div class="cs-v">UX 구조 설계 100% · UI 디자인 100% · 퍼블리싱 100% · AI 비주얼 제작 100%</div></div>
-      </div>
-      <div class="pp-tags"><span class="pp-tag">Midjourney</span><span class="pp-tag">Fintech UX</span><span class="pp-tag">Landing Conversion</span><span class="pp-tag">Responsive</span><span class="pp-tag">HTML/CSS/JS</span></div>
-    </article>
-  </div>
-  <button class="pp-close" id="ppClose" aria-label="닫기">✕</button>
-</div>
+</main>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══════════════ CURSOR ══════════════ */
@@ -1361,7 +1967,7 @@ document.querySelectorAll('a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>setCursorState('big',null));
   el.addEventListener('mouseleave',()=>setCursorState('',''));
 });
-document.querySelectorAll('.wk-row').forEach(el=>{
+document.querySelectorAll('.proj-row').forEach(el=>{
   el.addEventListener('mouseenter',()=>setCursorState('blue','VIEW →'));
   el.addEventListener('mouseleave',()=>setCursorState('',''));
 });
@@ -1370,81 +1976,25 @@ document.querySelectorAll('.gi').forEach(el=>{
   el.addEventListener('mouseleave',()=>setCursorState('',''));
 });
 
-/* ══════════════ HERO SCROLL SCATTER ══════════════ */
-const heroEl      = document.getElementById('hero');
-const heroJang    = document.getElementById('heroJang');
-const heroGreet   = document.getElementById('heroGreeting');
-const heroRole    = document.getElementById('heroRole');
-const heroIndex   = document.getElementById('heroIndex');
-const heroNameBg  = document.getElementById('heroNameBg');
-const heroNa      = document.getElementById('heroNa');
-
-// Each scatter card: element, tx, ty (exit direction), rot
-const scatterCards = [
-  { el: document.getElementById('card-exp'),    tx:  220, ty: -200, rot:  12 },
-  { el: document.getElementById('card-role'),   tx:  180, ty: -100, rot: -8  },
-  { el: document.getElementById('card-tool'),   tx:  240, ty:  120, rot:  6  },
-  { el: document.getElementById('card-award'),  tx: -180, ty:  200, rot: -14 },
-  { el: document.getElementById('card-contrib'),tx: -220, ty:  160, rot:  10 },
-  { el: document.getElementById('card-ai'),     tx: -100, ty: -180, rot:  -6 },
-];
-
-function lerp(a,b,t){ return a+(b-a)*t; }
-function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
-
-window.addEventListener('scroll', ()=>{
-  const scrollY = window.scrollY;
-  const heroH   = heroEl.offsetHeight;
-  const p = clamp(scrollY / (heroH * 0.65), 0, 1); // progress 0→1
-
-  // Big JANG text: move left + fade
-  heroJang.style.transform    = `translateX(${p * -120}px) translateY(${p * -40}px)`;
-  heroJang.style.opacity      = 1 - p * 1.4;
-
-  // Greeting: move right + fade
-  heroGreet.style.transform   = `translateX(${p * 80}px) translateY(${p * -60}px)`;
-  heroGreet.style.opacity     = 1 - p * 1.6;
-
-  // Role tags: slide down + fade
-  heroRole.style.transform    = `translateX(${p * -60}px) translateY(${p * 80}px)`;
-  heroRole.style.opacity      = 1 - p * 1.5;
-
-  // Index: fade up
-  heroIndex.style.opacity     = 1 - p * 2;
-
-  // 가운데 "나": fade out
-  if(heroNa){ heroNa.style.opacity = 1 - p * 1.4; }
-
-  // Background name: scale up + fade
-  heroNameBg.style.opacity    = 0.12 - p * 0.15;
-  heroNameBg.style.transform  = `scale(${1 + p * 0.06})`;
-
-  // Each scatter card flies to its exit position
-  scatterCards.forEach(({el, tx, ty, rot}) => {
-    const ep = clamp(p * 1.3, 0, 1); // slightly faster
-    el.style.transform = `translate(${lerp(0,tx,ep)}px, ${lerp(0,ty,ep)}px) rotate(${lerp(0,rot,ep)}deg)`;
-    el.style.opacity   = 1 - ep * 1.2;
-  });
-}, { passive: true });
-
-/* ══════════════ SCROLL REVEAL ══════════════ */
+/* ══════════════ SCROLL REVEAL (concept-b + 그리드 .reveal) ══════════════ */
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting) e.target.classList.add('in');
   });
 },{threshold:.15});
 document.querySelectorAll('.reveal-up').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ══════════════ ACTIVE NAV on scroll ══════════════ */
+/* ══════════════ ACTIVE NAV (사이드 .nav-link) ══════════════ */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.hdr-link');
+const navLinks = document.querySelectorAll('.nav-link');
 window.addEventListener('scroll',()=>{
   let current='';
   sections.forEach(s=>{
-    if(window.scrollY >= s.offsetTop - 100) current=s.id;
+    if(window.scrollY >= s.offsetTop - 120) current=s.id;
   });
   navLinks.forEach(a=>{
-    a.classList.toggle('active-nav', a.getAttribute('href')==='#'+current);
+    a.classList.toggle('on', a.getAttribute('href')==='#'+current);
   });
 },{passive:true});
 
@@ -1456,116 +2006,23 @@ document.querySelectorAll('.gi').forEach(item=>{
   });
 });
 
-/* ══════════════ PANEL OPEN / CLOSE ══════════════ */
-const panel = document.getElementById('proj-panel');
-const overlay = document.getElementById('proj-overlay');
-const ppClose = document.getElementById('ppClose');
-
-function openPanel(id){
-  const block = document.getElementById('proj-content-' + id);
+/* ══════════════ WORK 아코디언 (portfolio-grid) ══════════════ */
+function toggleProj(id){
+  const block = document.getElementById(id);
   if(!block) return;
-  document.querySelectorAll('.proj-content').forEach(el=>el.classList.remove('active'));
-  block.classList.add('active');
-  panel.classList.add('open');
-  overlay.classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closePanel(){
-  panel.classList.remove('open');
-  overlay.classList.remove('show');
-  document.body.style.overflow='';
-}
-ppClose.addEventListener('click',closePanel);overlay.addEventListener('click',closePanel);
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
-
-document.querySelectorAll('.wk-row').forEach(row=>{
-  row.addEventListener('click',()=>{ const id=row.dataset.proj; if(id) openPanel(id); });
-  row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); row.click(); }});
-});
-
-/* ══════════════ WORK ROW THUMBNAIL FOLLOW ══════════════ */
-const thumb     = document.getElementById('wk-thumb');
-const thumbImg  = document.getElementById('wk-thumb-img');
-const thumbName = document.getElementById('wk-thumb-name');
-const thumbCat  = document.getElementById('wk-thumb-cat');
-const thumbNum  = document.getElementById('wk-thumb-num');
-
-// Target / current position for smooth lerp
-let tgx = 0, tgy = 0;
-let crx = 0, cry = 0;
-let rafId = null;
-let isVisible = false;
-
-// Thumb image data pulled from each row's bg + wk-name / wk-cat / wk-n
-function getRowData(row){
-  const bgEl  = row.querySelector('.wk-row-bg');
-  const img   = bgEl ? bgEl.style.backgroundImage.replace(/url\\([\"']?|[\"']?\\)/g,'') : '';
-  const name  = row.querySelector('.wk-name')?.textContent?.trim() || '';
-  const cat   = row.querySelector('.wk-cat')?.textContent?.trim() || '';
-  const num   = row.querySelector('.wk-n')?.textContent?.trim() || '';
-  return { img, name, cat, num };
-}
-
-function startLerp(){
-  function tick(){
-    // Spring lerp — slightly springy feel
-    crx += (tgx - crx) * 0.13;
-    cry += (tgy - cry) * 0.13;
-    thumb.style.left = crx + 'px';
-    thumb.style.top  = cry + 'px';
-    if(isVisible) rafId = requestAnimationFrame(tick);
+  const isOpen = block.classList.contains('open');
+  document.querySelectorAll('.proj-block').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.proj-row').forEach(r=>r.setAttribute('aria-expanded','false'));
+  if(!isOpen){
+    block.classList.add('open');
+    const row = block.querySelector('.proj-row');
+    if(row) row.setAttribute('aria-expanded','true');
+    setTimeout(()=>{ block.scrollIntoView({behavior:'smooth',block:'start'}); }, 50);
   }
-  cancelAnimationFrame(rafId);
-  rafId = requestAnimationFrame(tick);
 }
-
-document.querySelectorAll('.wk-row').forEach(row => {
-  row.addEventListener('mouseenter', e => {
-    const d = getRowData(row);
-    if(!d.img) return;
-
-    // Populate card
-    thumbImg.src        = d.img;
-    thumbName.textContent = d.name.replace(/🏆.*$/, '').trim(); // strip emoji
-    thumbCat.textContent  = d.cat;
-    thumbNum.textContent  = d.num;
-
-    // Snap position before showing to avoid flash
-    const offsetX = 28;
-    const offsetY = -90;
-    crx = e.clientX + offsetX;
-    cry = e.clientY + offsetY;
-    thumb.style.left = crx + 'px';
-    thumb.style.top  = cry + 'px';
-    tgx = crx; tgy = cry;
-
-    isVisible = true;
-    thumb.classList.add('visible');
-    startLerp();
-  });
-
-  row.addEventListener('mousemove', e => {
-    if(!isVisible) return;
-    const offsetX = 28;
-    const offsetY = -90;
-    let nx = e.clientX + offsetX;
-    let ny = e.clientY + offsetY;
-
-    // Keep inside viewport
-    const tw = thumb.offsetWidth  || 280;
-    const th = thumb.offsetHeight || 220;
-    if(nx + tw > window.innerWidth  - 16) nx = e.clientX - tw - 16;
-    if(ny + th > window.innerHeight - 16) ny = e.clientY - th - 16;
-    if(ny < 60) ny = 60;
-
-    tgx = nx;
-    tgy = ny;
-  });
-
-  row.addEventListener('mouseleave', () => {
-    isVisible = false;
-    thumb.classList.remove('visible');
-    cancelAnimationFrame(rafId);
+document.querySelectorAll('.proj-row').forEach(row=>{
+  row.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); row.click(); }
   });
 });
 </script>

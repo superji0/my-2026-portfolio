@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장지영 — Concept B</title>
+<meta name="description" content="UI/UX 디자이너 & 웹 퍼블리셔 장지영 포트폴리오">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@master/css/SpoqaHanSansNeo.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "장지영",
+  "jobTitle": "UI/UX Designer & Web Publisher",
+  "url": "https://superji0.github.io/",
+  "sameAs": ["https://github.com/superji0"],
+  "knowsAbout": ["UX Design", "UI Design", "Web Publishing", "Figma", "HTML", "CSS", "JavaScript", "AI-assisted Design"],
+  "email": "mailto:jiyoung@example.com"
+}
+</script>
+<link rel="icon" href="./images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Funnel+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+@font-face {
+  font-family: 'SUIT';
+  font-weight: 100 900;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations');
+  font-display: swap;
+}
+/* ══════════════ TOKENS ══════════════ */
+:root {
+  --cream:  #ede8dc;
+  --cream2: #e4dece;
+  --cream3: #f5f1e8;
+  --black:  #0d0d0b;
+  --blue:   #1847f5;
+  --blue2:  rgba(24,71,245,.09);
+  --yellow: #f5d535;
+  --red:    #e53b1e;
+  --muted:  rgba(13,13,11,.44);
+  --border: rgba(13,13,11,.11);
+  --white:  #faf8f2;
+  --ease:   cubic-bezier(.76,0,.24,1);
+  --ease2:  cubic-bezier(.4,0,.2,1);
+  /* 타이포 시스템 (요청 기준) */
+  --fs-h1: 36px;
+  --fs-h2: 26px;
+  --fs-h3: 18px;
+  --fs-body: 15px;
+  --fs-caption: 12px;
+  --lh-title: 1.2;
+  --lh-body: 1.6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:auto;}
+body{
+  font-family:'Spoqa Han Sans Neo','SUIT',system-ui,-apple-system,sans-serif;
+  background:var(--cream);
+  color:var(--black);
+  cursor:none;
+  overflow-x:hidden;
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+button{background:none;border:none;font-family:inherit;cursor:pointer;color:inherit;}
+
+/* ══════════════ CURSOR ══════════════ */
+#cur-cross {
+  position:fixed;z-index:99999;pointer-events:none;
+  width:20px;height:20px;
+  transform:translate(-50%,-50%);
+  transition:width .25s var(--ease),height .25s var(--ease),opacity .2s;
+}
+#cur-cross::before,#cur-cross::after{
+  content:'';position:absolute;background:var(--black);
+  transition:background .2s;
+}
+#cur-cross::before{width:1px;height:100%;left:50%;top:0;}
+#cur-cross::after{width:100%;height:1px;top:50%;left:0;}
+#cur-cross.big{width:40px;height:40px;}
+#cur-cross.blue::before,#cur-cross.blue::after{background:var(--blue);}
+#cur-dot{
+  position:fixed;z-index:99998;pointer-events:none;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--blue);
+  transform:translate(-50%,-50%);
+}
+#cur-txt{
+  position:fixed;z-index:100000;pointer-events:none;
+  font-family:'Space Mono',monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);white-space:nowrap;
+  transform:translate(14px,-6px);
+  opacity:0;transition:opacity .2s;
+}
+#cur-txt.show{opacity:1;}
+
+/* ══════════════ HEADER / NAV ══════════════ */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 36px;
+  mix-blend-mode:multiply;
+}
+.hdr-logo{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:var(--fs-h3);font-weight:700;letter-spacing:.01em;color:var(--black);
+}
+.hdr-logo em{color:var(--blue);font-style:normal;}
+.hdr-nav{display:flex;align-items:center;gap:28px;}
+.hdr-link{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  letter-spacing:.02em;text-transform:uppercase;color:var(--muted);
+  transition:color .2s;position:relative;
+}
+.hdr-link::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--blue);transition:width .3s var(--ease);
+}
+.hdr-link:hover{color:var(--blue);}
+.hdr-link:hover::after{width:100%;}
+.hdr-link.active-nav{color:var(--blue);}
+.hdr-link.active-nav::after{width:100%;}
+
+/* ══════════════ HERO ══════════════ */
+#hero{
+  position:relative;
+  width:100%;height:100vh;
+  overflow:hidden;background:var(--cream);
+}
+
+/* Grid lines (background structure) */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(13,13,11,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,13,11,.045) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;z-index:0;
+}
+
+/* Giant name - bottom aligned */
+.hero-name-bg{
+  position:absolute;
+  bottom:-12px;left:32px;
+  z-index:1;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px, 18vw, 240px);
+  line-height:.88;letter-spacing:-.02em;
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(13,13,11,.12);
+  pointer-events:none;user-select:none;
+  white-space:nowrap;
+}
+
+/* Big blue JANG text — 가운데 쪽으로 */
+.hero-jang{
+  position:absolute;
+  top:clamp(60px,10vh,110px);left:12%;
+  z-index:4;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,14vw,190px);
+  line-height:.88;letter-spacing:-.02em;
+  color:var(--blue);
+  transition:transform .05s linear,opacity .05s linear;
+}
+
+/* Greeting — 가운데 쪽으로 */
+.hero-greeting{
+  position:absolute;
+  top:clamp(68px,11vh,120px);
+  right:12%;
+  z-index:4;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-style:normal;
+  font-size:clamp(var(--fs-h3),2.2vw,var(--fs-h2));
+  color:var(--muted);
+  text-align:right;
+  line-height:var(--lh-title);
+  transition:transform .05s linear,opacity .05s linear;
+}
+
+/* Role badge — 가운데 쪽으로 */
+.hero-role-tag{
+  position:absolute;
+  top:50%;left:10%;
+  transform:translateY(-50%);
+  z-index:4;
+  display:flex;flex-direction:column;gap:6px;
+  transition:transform .05s linear,opacity .05s linear;
+}
+.rtag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--black);color:var(--cream);
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  letter-spacing:.01em;padding:6px 14px;border-radius:2px;
+  width:fit-content;
+}
+.rtag.blue-tag{background:var(--blue);}
+
+/* Scatter cards */
+.s-card{
+  position:absolute;z-index:5;
+  background:var(--white);
+  border:1px solid var(--border);
+  padding:12px 14px;
+  transition:transform .05s linear,opacity .05s linear;
+  box-shadow:2px 3px 12px rgba(13,13,11,.08);
+}
+.s-card.yellow{background:var(--yellow);border-color:transparent;}
+.s-card.blue-card{background:var(--blue);color:var(--white);border-color:transparent;}
+.s-card.lined{background:transparent;border:1.5px solid var(--black);}
+
+.sc-label{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  letter-spacing:.01em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px;
+}
+.s-card.blue-card .sc-label{color:rgba(255,255,255,.55);}
+.s-card.yellow .sc-label{color:rgba(13,13,11,.5);}
+.sc-val{font-size:13px;font-weight:700;line-height:1.3;}
+.sc-val.big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px;line-height:1;letter-spacing:.02em;
+}
+
+/* Scatter cards — 가운데 쪽으로 모음 */
+#card-exp { top:18%;right:14%; width:160px; }
+#card-role{ top:36%;right:14%; width:180px; }
+#card-tool{ top:54%;right:14%; width:200px; }
+#card-award{ bottom:18%;left:14%; width:200px; transform:rotate(-2deg); }
+#card-contrib{ bottom:28%;left:10%; width:130px; transform:rotate(1.5deg); }
+#card-ai{ top:26%;left:14%; width:170px; transform:rotate(-1.2deg); }
+
+/* Scroll hint */
+.hero-scroll-hint{
+  position:absolute;bottom:28px;left:50%;
+  transform:translateX(-50%);
+  z-index:6;
+  display:flex;align-items:center;gap:10px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  text-transform:uppercase;color:var(--muted);
+  animation:hscroll 2.5s ease infinite;
+  pointer-events:none;
+}
+.hero-scroll-hint svg{width:16px;height:16px;stroke:var(--muted);fill:none;}
+@keyframes hscroll{
+  0%,100%{transform:translateX(-50%) translateY(0);opacity:.4;}
+  55%{transform:translateX(-50%) translateY(8px);opacity:.8;}
+}
+
+/* Index number top center */
+.hero-index{
+  position:absolute;top:clamp(56px,8vh,90px);left:50%;
+  transform:translateX(-50%);z-index:4;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  letter-spacing:.02em;color:var(--muted);text-align:center;
+  transition:opacity .05s;
+}
+.hero-index span{display:block;}
+
+/* ══════════════ HERO CENTER "나" + 커서 깜빡임 ══════════════ */
+.hero-na{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:4;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(120px,22vw,220px);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.01em;
+  color:var(--black);
+  display:inline-flex;align-items:center;gap:6px;
+  transition:transform .05s linear,opacity .05s linear;
+}
+.hero-na-cursor{
+  display:inline-block;
+  width:6px;
+  height:.85em;
+  background:var(--blue);
+  animation:blink 1s step-end infinite;
+  flex-shrink:0;
+}
+@keyframes blink{
+  0%,50%{opacity:1;}
+  51%,100%{opacity:0;}
+}
+
+/* ══════════════ MARQUEE (between hero & work) ══════════════ */
+.marquee-divider{
+  background:var(--black);
+  height:44px;overflow:hidden;
+  display:flex;align-items:center;
+  position:relative;z-index:10;
+}
+.mq-track{
+  display:flex;white-space:nowrap;gap:0;
+  animation:mq 20s linear infinite;
+}
+.mq-track span{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;
+  color:var(--cream);padding:0 22px;
+}
+.mq-dot{color:var(--blue)!important;padding:0 8px!important;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ══════════════ SECTION SHARED ══════════════ */
+.section-eyebrow{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  letter-spacing:.02em;text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.section-eyebrow::before{content:'';width:18px;height:1px;background:var(--blue);}
+
+.section-title{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(32px,4.4vw,40px);
+  line-height:var(--lh-title);letter-spacing:-.01em;
+  margin-bottom:4px;
+  font-weight:700;
+}
+
+/* ══════════════ WORK INDEX ══════════════ */
+#work{
+  background:var(--cream);padding:88px 36px 80px;
+  position:relative;
+}
+
+.wk-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1.5px solid var(--black);padding-bottom:28px;margin-bottom:0;
+}
+.wk-count{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:clamp(40px,6vw,72px);color:var(--blue);line-height:1;
+}
+.wk-head-right{
+  font-size:var(--fs-body);color:var(--muted);max-width:260px;
+  text-align:right;line-height:var(--lh-body);
+}
+
+/* Column labels */
+.wk-th{
+  display:grid;grid-template-columns:48px 1fr 90px 160px 70px;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.wk-col{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--muted);
+}
+.wk-section-div{
+  padding:20px 0 6px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:10px;
+}
+.wk-section-div::after{content:'';flex:1;height:1px;background:rgba(24,71,245,.18);}
+
+/* Work rows — hover = full-bleed image reveal */
+.wk-list{list-style:none;}
+.wk-row{
+  position:relative;display:grid;
+  grid-template-columns:48px 1fr 90px 160px 70px;
+  gap:12px;padding:18px 0;border-bottom:1px solid var(--border);
+  cursor:pointer;overflow:hidden;
+  transition:color .3s var(--ease);
+  isolation:isolate;
+}
+/* BG image reveal on hover */
+.wk-row-bg{
+  position:absolute;inset:0;z-index:-1;
+  background-size:cover;background-position:center;
+  opacity:0;filter:brightness(.35) saturate(0);
+  transition:opacity .45s var(--ease),transform .6s var(--ease);
+  transform:scale(1.04);
+}
+.wk-row:hover .wk-row-bg{opacity:1;transform:scale(1);}
+.wk-row:hover{color:var(--white);}
+/* Blue left accent on hover */
+.wk-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:var(--blue);
+  transition:width .3s var(--ease);z-index:1;
+}
+.wk-row:hover::before{width:3px;}
+.wk-row>*{position:relative;z-index:2;}
+
+.wk-n{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);padding-top:2px;transition:color .3s;}
+.wk-row:hover .wk-n{color:rgba(255,255,255,.4);}
+.wk-name{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;line-height:var(--lh-title);}
+.wk-award{
+  display:inline-flex;align-items:center;
+  background:var(--yellow);color:var(--black);
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  letter-spacing:.01em;padding:2px 7px;border-radius:2px;
+}
+.wk-yr,.wk-cat,.wk-role{font-size:var(--fs-caption);padding-top:2px;line-height:var(--lh-title);}
+.wk-yr,.wk-cat{color:var(--muted);}
+.wk-role{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;}
+.wk-row:hover .wk-yr,.wk-row:hover .wk-cat,.wk-row:hover .wk-role{color:rgba(255,255,255,.55);}
+
+/* ══════════════ PROJECT DETAIL (right-slide panel) ══════════════ */
+#proj-panel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(680px,100vw);z-index:8000;
+  background:var(--white);
+  transform:translateX(100%);
+  transition:transform .6s var(--ease);
+  overflow-y:auto;
+  box-shadow:-24px 0 80px rgba(13,13,11,.15);
+}
+#proj-panel.open{transform:translateX(0);}
+#proj-overlay{
+  position:fixed;inset:0;z-index:7999;
+  background:rgba(13,13,11,.35);
+  opacity:0;pointer-events:none;
+  transition:opacity .4s;
+  backdrop-filter:blur(2px);
+}
+#proj-overlay.show{opacity:1;pointer-events:all;}
+.pp-inner{padding:56px 40px 80px;}
+/* 프로젝트별 콘텐츠 블록 — 수정 시 해당 article만 편집 */
+.proj-content{display:none;}
+.proj-content.active{display:block;}
+.pp-close{
+  position:absolute;top:20px;right:24px;
+  width:36px;height:36px;
+  border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--muted);
+  transition:all .2s;
+}
+.pp-close:hover{background:var(--black);color:var(--cream);border-color:var(--black);}
+.pp-eyebrow{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  text-transform:uppercase;color:var(--blue);
+  display:flex;align-items:center;gap:9px;margin-bottom:10px;
+}
+.pp-eyebrow::before{content:'';width:16px;height:1px;background:var(--blue);}
+.pp-title{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(32px,5.2vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;margin-bottom:12px;font-weight:700;
+}
+.pp-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px;}
+.pp-mi{font-size:var(--fs-caption);color:var(--muted);padding-right:12px;border-right:1px solid var(--border);}
+.pp-mi:last-child{border:none;}
+.pp-contrib{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--blue2);border:1px solid rgba(24,71,245,.25);
+  color:var(--blue);font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:var(--fs-caption);letter-spacing:.01em;padding:4px 9px;border-radius:100px;
+}
+.pp-roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;margin-bottom:22px;}
+.pp-role{
+  padding:4px 11px;border:1px solid var(--border);border-radius:2px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);
+}
+.pp-role.hi{border-color:rgba(24,71,245,.4);color:var(--blue);}
+
+.pp-shots{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:24px;}
+.pp-shots img{width:100%;border-radius:4px;object-fit:cover;aspect-ratio:4/3;}
+.pp-shots.port img{aspect-ratio:9/16;}
+.pp-shots.wide img{aspect-ratio:16/10;}
+
+.pp-sec{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(22px,2.4vw,28px);
+  line-height:var(--lh-title);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--black);
+  margin:18px 0 10px;
+}
+.pp-body{margin-bottom:20px;}
+.pp-body p{font-size:var(--fs-body);line-height:var(--lh-body);color:rgba(13,13,11,.7);margin-bottom:12px;}
+.pp-body mark{background:rgba(24,71,245,.1);color:var(--blue);padding:1px 4px;border-radius:2px;}
+.pp-body em{color:var(--blue);font-style:normal;}
+/* 케이스 스터디 블록: 문제 해결형 구조를 한눈에 보여주는 템플릿 */
+.cs-block{margin-bottom:14px;padding:10px 0;border-top:1px dashed rgba(13,13,11,.12);}
+.cs-k{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(22px,2.2vw,26px);
+  line-height:var(--lh-title);
+  font-weight:600;
+  letter-spacing:-.01em;
+  text-transform:none;
+  color:var(--black);
+  margin-bottom:8px;
+}
+.cs-v{
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  color:rgba(13,13,11,.76);
+}
+/* 나이스페이먼츠 Before/After 전용 비교 섹션 */
+.ba-compare{display:flex;flex-direction:column;gap:14px;margin-bottom:22px;}
+.ba-row{
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:var(--cream3);
+  padding:12px;
+}
+.ba-row-head{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(16px,1.8vw,20px);
+  font-weight:500;
+  letter-spacing:-.01em;
+  text-transform:none;
+  color:var(--black);
+  margin-bottom:10px;
+}
+.ba-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.ba-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+}
+.ba-card img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  aspect-ratio:16/10;
+}
+.ba-card.mobile img{aspect-ratio:9/16;}
+.ba-cap{
+  padding:8px 10px;
+  border-top:1px solid var(--border);
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:var(--fs-caption);
+  letter-spacing:.01em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.ba-cap strong{color:var(--blue);font-weight:700;}
+
+.pp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
+.pp-tag{
+  padding:4px 11px;border:1px solid var(--border);border-radius:100px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s;
+}
+.pp-tag:hover{border-color:var(--blue);color:var(--blue);}
+.pp-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;background:var(--blue);
+  color:var(--white);border:none;border-radius:2px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  transition:background .2s;
+}
+.pp-cta:hover{background:var(--black);}
+/* Pickly 등 PDF 첨부: 보기 + 다운로드 */
+.pp-pdf-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px;}
+.pp-cta--outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;background:transparent;color:var(--blue);
+  border:1.5px solid var(--blue);border-radius:2px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  transition:background .2s,color .2s;
+}
+.pp-cta--outline:hover{background:var(--blue2);color:var(--black);border-color:var(--blue);}
+.pp-pdf-note{font-size:var(--fs-caption);color:var(--muted);line-height:var(--lh-body);margin-bottom:12px;max-width:36em;}
+
+/* ─── Pickly 패널 전용: Behance식 위계·리듬 (pl- 접두어, #proj-content-pickcle) ─── */
+.pickly-panel{--pl-accent:#FF68B0;--pl-accent-2:#e94a9a;}
+.pickly-panel .pl-inner{max-width:100%;}
+.pickly-panel .pl-sec{
+  padding:clamp(22px,3.5vw,34px) 0;
+  border-bottom:1px solid var(--border);
+}
+.pickly-panel .pl-sec:last-child{border-bottom:none;padding-bottom:4px;}
+.pickly-panel .pl-sec--hero{padding-top:0;}
+/* 커버: 브랜드 컬러 + 실제 스크린샷 */
+.pickly-panel .pl-cover{
+  position:relative;
+  border-radius:12px;
+  min-height:clamp(160px,28vw,200px);
+  margin-bottom:clamp(18px,3vw,24px);
+  background:linear-gradient(135deg,var(--pl-accent) 0%,var(--pl-accent-2) 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(16px,3vw,28px) clamp(20px,4vw,40px);
+  overflow:hidden;
+}
+.pickly-panel .pl-cover::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 85% 50%,rgba(255,255,255,.12),transparent 55%);
+  pointer-events:none;
+}
+.pickly-panel .pl-cover-brand{
+  position:relative;z-index:1;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(24px,4vw,30px);font-weight:700;color:var(--white);
+  letter-spacing:-.03em;line-height:1;
+}
+.pickly-panel .pl-cover-phone{
+  position:relative;z-index:1;
+  width:clamp(64px,14vw,88px);height:auto;max-height:140px;
+  object-fit:contain;border-radius:10px 10px 0 0;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+  align-self:flex-end;margin-bottom:-8px;
+}
+.pickly-panel .pl-eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--pl-accent);margin-bottom:10px;
+}
+.pickly-panel .pl-eyebrow::before{
+  content:'';display:block;width:18px;height:1px;background:var(--pl-accent);flex-shrink:0;
+}
+.pickly-panel .pl-sec-title{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(22px,2.6vw,26px);font-weight:600;line-height:1.25;
+  color:var(--black);margin-bottom:8px;letter-spacing:-.02em;
+}
+.pickly-panel .pl-sec-sub{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:15px;color:var(--muted);line-height:1.65;max-width:38em;
+}
+.pickly-panel .pl-sec-sub--flush{margin-top:0;}
+.pickly-panel .pl-problem-block .pl-problem-body + .pl-problem-body{margin-top:12px;}
+.pickly-panel .pl-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.pickly-panel .pl-meta-pill{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:12px;padding:6px 12px;border-radius:100px;
+  border:1px solid var(--border);color:var(--muted);background:var(--cream2);
+  line-height:1.35;
+}
+.pickly-panel .pl-problem-block{
+  margin-top:14px;padding:20px 22px 22px;
+  background:var(--cream2);border-radius:0 12px 12px 0;
+  border-left:3px solid var(--pl-accent);
+}
+.pickly-panel .pl-problem-quote{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:16px;font-weight:600;line-height:1.5;color:var(--black);margin-bottom:12px;
+}
+.pickly-panel .pl-problem-body{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:15px;color:var(--muted);line-height:1.7;
+}
+.pickly-panel .pl-decision-list{display:flex;flex-direction:column;gap:14px;margin-top:18px;}
+.pickly-panel .pl-decision-item{
+  padding:18px 20px;border:1px solid var(--border);border-radius:12px;background:var(--white);
+}
+.pickly-panel .pl-decision-num{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:600;color:var(--pl-accent);letter-spacing:.06em;margin-bottom:6px;
+}
+.pickly-panel .pl-decision-title{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:15px;font-weight:600;margin-bottom:8px;color:var(--black);line-height:1.35;
+}
+.pickly-panel .pl-decision-body{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:14px;color:var(--muted);line-height:1.65;
+}
+.pickly-panel .pl-retro-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;
+}
+.pickly-panel .pl-retro-card{
+  background:var(--cream2);border-radius:10px;padding:16px 18px;border:1px solid var(--border);
+}
+.pickly-panel .pl-retro-label{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.05em;margin-bottom:8px;
+}
+.pickly-panel .pl-retro-text{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:14px;line-height:1.6;color:var(--black);
+}
+.pickly-panel .pl-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center;}
+.pickly-panel .pl-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:8px;font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:14px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .15s;
+}
+.pickly-panel .pl-btn--primary{background:var(--pl-accent);color:var(--white);border:none;}
+.pickly-panel .pl-btn--primary:hover{background:var(--pl-accent-2);}
+.pickly-panel .pl-btn--secondary{
+  background:transparent;color:var(--muted);border:1px solid var(--border);
+}
+.pickly-panel .pl-btn--secondary:hover{border-color:var(--pl-accent);color:var(--black);}
+.pickly-panel .pl-pdf-sub{
+  width:100%;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;
+}
+.pickly-panel .pl-pdf-sub a{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:13px;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;
+}
+.pickly-panel .pl-pdf-sub a:hover{border-bottom-color:var(--blue);}
+.pickly-panel .pl-pdf-note{font-size:13px;color:var(--muted);line-height:1.55;max-width:40em;margin:0;}
+@media (max-width:520px){
+  .pickly-panel .pl-retro-grid{grid-template-columns:1fr;}
+  .pickly-panel .pl-cover{flex-direction:column;align-items:flex-start;gap:12px;min-height:auto;padding-bottom:20px;}
+  .pickly-panel .pl-cover-phone{align-self:flex-end;margin-bottom:0;}
+  .pickly-panel .pl-cta-row{flex-direction:column;align-items:stretch;}
+  .pickly-panel .pl-btn{justify-content:center;}
+}
+
+/* ─── DB 여행자보험 보상청구 패널 (db_insurance_revised.html 기반 · db- 접두어) ─── */
+.db-panel{--db-surface:var(--cream2);--db-chip-blue-bg:rgba(24,71,245,.08);--db-chip-blue-bd:rgba(24,71,245,.35);--db-status-bg:#ECFDF5;--db-status-bd:#A7F3D0;--db-status-txt:#065F46;}
+.db-panel .db-inner{max-width:100%;}
+.db-panel .db-cover{
+  background:var(--db-surface);
+  border-radius:12px;
+  padding:clamp(24px,4vw,36px) clamp(18px,3vw,28px);
+  margin-bottom:clamp(8px,2vw,12px);
+}
+.db-panel .db-cover-eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:12px;color:var(--muted);margin-bottom:14px;
+}
+.db-panel .db-cover-eyebrow::before{content:'';width:20px;height:1px;background:var(--muted);flex-shrink:0;}
+.db-panel .db-cover-title{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(22px,2.8vw,28px);font-weight:600;line-height:1.25;
+  color:var(--black);margin-bottom:10px;letter-spacing:-.02em;
+}
+.db-panel .db-cover-sub{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:20px;max-width:36em;
+}
+.db-panel .db-cover-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.db-panel .db-chip{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:12px;padding:6px 12px;border-radius:100px;
+  border:1px solid var(--border);color:var(--muted);background:var(--white);
+}
+.db-panel .db-chip--blue{
+  border-color:var(--db-chip-blue-bd);background:var(--db-chip-blue-bg);color:var(--blue);font-weight:600;
+}
+.db-panel .db-sec{
+  padding:clamp(22px,3.5vw,32px) 0;
+  border-bottom:1px solid var(--border);
+}
+.db-panel .db-sec:last-child{border-bottom:none;padding-bottom:4px;}
+.db-panel .db-label{
+  font-family:'Space Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;
+}
+.db-panel .db-lead{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:16px;font-weight:600;line-height:1.45;margin-bottom:14px;color:var(--black);
+}
+.db-panel .db-prob-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+.db-panel .db-prob-card{
+  background:var(--db-surface);border-radius:10px;padding:16px 18px;border:1px solid var(--border);
+}
+.db-panel .db-prob-card-label{
+  font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:6px;
+}
+.db-panel .db-prob-card-text{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;line-height:1.6;color:var(--black);
+}
+.db-panel .db-sec--icon{background:var(--cream);border-radius:12px;padding:clamp(20px,3vw,28px);margin:0 -4px;border:1px solid var(--border);}
+.db-panel .db-icon-lead{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;color:var(--muted);margin:0;line-height:1.55;
+}
+.db-panel .db-icon-hint{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:12px;color:var(--muted);margin-top:12px;
+}
+.db-panel .db-icon-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px;
+}
+.db-panel .db-icon-cell{
+  aspect-ratio:1;border-radius:14px;background:var(--white);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+}
+/* 실서비스 URL 비공개 시 안내 문단 */
+.db-panel .db-sec-note{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 14px;max-width:40em;
+}
+.db-panel .db-screens{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+.db-panel .db-screen{
+  background:var(--db-surface);border-radius:10px;aspect-ratio:9/17;
+  overflow:hidden;border:1px solid var(--border);display:flex;flex-direction:column;
+}
+.db-panel .db-screen-bar{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:6px 10px;display:flex;align-items:center;gap:6px;
+}
+.db-panel .db-screen-dot{width:5px;height:5px;border-radius:50%;background:rgba(24,71,245,.45);}
+.db-panel .db-screen-label{font-size:10px;color:var(--muted);}
+.db-panel .db-screen-body{flex:1;padding:8px;display:flex;flex-direction:column;gap:6px;}
+.db-panel .db-sl{height:5px;border-radius:3px;background:var(--border);}
+.db-panel .db-sc{
+  height:24px;border-radius:6px;background:var(--white);border:1px solid var(--border);
+  display:flex;align-items:center;padding:0 8px;gap:6px;
+}
+.db-panel .db-sc-dot{width:12px;height:12px;border-radius:3px;background:rgba(24,71,245,.35);flex-shrink:0;}
+.db-panel .db-sb{height:22px;border-radius:6px;background:var(--blue);margin-top:auto;opacity:.75;}
+.db-panel .db-screen-note{font-size:11px;color:var(--muted);margin-top:8px;}
+.db-panel .db-dec-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.db-panel .db-dec{
+  display:flex;gap:14px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--white);
+}
+.db-panel .db-dec-n{
+  font-family:'Space Mono',monospace;font-size:11px;font-weight:600;color:var(--blue);min-width:22px;padding-top:2px;flex-shrink:0;
+}
+.db-panel .db-dec-t{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;font-weight:600;margin-bottom:4px;color:var(--black);
+}
+.db-panel .db-dec-d{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;color:var(--muted);line-height:1.6;
+}
+.db-panel .db-lang-compare{display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+.db-panel .db-lang-before,.db-panel .db-lang-after{display:flex;flex-wrap:wrap;gap:6px;flex:1;min-width:140px;}
+.db-panel .db-lang-arrow{font-size:14px;color:var(--muted);flex-shrink:0;}
+.db-panel .db-tag-b{
+  font-size:11px;padding:5px 10px;border-radius:6px;background:var(--cream2);color:var(--muted);border:1px solid var(--border);
+}
+.db-panel .db-tag-a{
+  font-size:11px;padding:5px 10px;border-radius:6px;background:var(--db-chip-blue-bg);color:var(--blue);border:1px solid var(--db-chip-blue-bd);font-weight:600;
+}
+.db-panel .db-retro-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+.db-panel .db-retro-card{background:var(--db-surface);border-radius:10px;padding:16px 18px;border:1px solid var(--border);}
+.db-panel .db-retro-l{font-size:11px;color:var(--muted);margin-bottom:6px;font-family:'Space Mono',monospace;}
+.db-panel .db-retro-t{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;line-height:1.6;color:var(--black);}
+.db-panel .db-status-pill{
+  display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 12px;border-radius:100px;
+  background:var(--db-status-bg);color:var(--db-status-txt);border:1px solid var(--db-status-bd);margin-top:14px;
+}
+.db-panel .db-status-dot{width:6px;height:6px;border-radius:50%;background:#10B981;}
+@media (max-width:640px){
+  .db-panel .db-prob-row{grid-template-columns:1fr;}
+  .db-panel .db-icon-grid{grid-template-columns:repeat(4,1fr);}
+  .db-panel .db-screens{grid-template-columns:1fr;max-width:280px;margin-left:auto;margin-right:auto;}
+  .db-panel .db-retro-grid{grid-template-columns:1fr;}
+  .db-panel .db-lang-compare{flex-direction:column;align-items:stretch;}
+  .db-panel .db-lang-arrow{align-self:center;transform:rotate(90deg);}
+}
+
+/* Inner tabs in panel */
+.pp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.pp-tab{
+  padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;
+  color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
+}
+.pp-tab:hover{color:var(--black);}
+.pp-tab.on{color:var(--blue);border-bottom-color:var(--blue);}
+.ppane{display:none;}
+.ppane.on{display:block;}
+
+/* ══════════════ DIFFERENTIATORS ══════════════ */
+#diff{
+  background:var(--black);color:var(--cream);
+  padding:88px 36px;
+}
+.diff-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:40px;align-items:end;margin-bottom:56px;
+}
+.diff-title-big{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(32px,4.6vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;font-weight:700;
+}
+.diff-title-big em{color:var(--blue);font-style:normal;}
+.diff-intro-txt{font-size:var(--fs-body);line-height:var(--lh-body);color:rgba(237,232,220,.6);max-width:320px;text-align:right;}
+
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(237,232,220,.08);}
+.d-card{
+  background:var(--black);padding:28px 24px;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.d-card:hover{background:#151510;}
+.d-card-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:transparent;transition:background .3s;
+}
+.d-card:hover .d-card-accent{background:var(--blue);}
+.d-num{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);line-height:var(--lh-title);font-weight:700;
+  color:var(--blue);margin-bottom:10px;
+}
+.d-card h3{font-size:var(--fs-h3);font-weight:600;margin-bottom:8px;line-height:var(--lh-title);color:var(--cream);}
+.d-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:rgba(237,232,220,.62);}
+.d-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
+.d-tag{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  text-transform:uppercase;padding:2px 7px;
+  border:1px solid rgba(24,71,245,.3);color:var(--blue);border-radius:1px;
+}
+
+/* ══════════════ DESIGN GALLERY ══════════════ */
+#gallery{background:var(--cream2);padding:88px 36px;}
+.gal-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:36px;
+}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+/* First item spans 2 cols */
+.gallery-grid .gi:first-child{grid-column:span 2;grid-row:span 2;}
+.gallery-grid .gi:nth-child(4){grid-column:span 2;}
+.gi{
+  position:relative;overflow:hidden;border-radius:3px;
+  aspect-ratio:4/3;cursor:pointer;
+}
+.gi:first-child{aspect-ratio:auto;}
+.gi img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease),filter .5s;
+}
+.gi:hover img{transform:scale(1.07);filter:brightness(.5);}
+.gi-info{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px 14px;
+  background:linear-gradient(transparent 40%,rgba(13,13,11,.75));
+  opacity:0;transition:opacity .35s;
+}
+.gi:hover .gi-info{opacity:1;}
+.gi-info b{font-size:var(--fs-h3);font-weight:600;color:#fff;display:block;line-height:var(--lh-title);}
+.gi-info small{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(255,255,255,.65);margin-top:3px;display:block;}
+
+/* ══════════════ ABOUT ══════════════ */
+#about{
+  background:var(--white);
+  padding:88px 36px;
+  position:relative;overflow:hidden;
+}
+/* Big outlined JJY background */
+#about::before{
+  content:'JJY';position:absolute;
+  bottom:-60px;right:-20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(160px,24vw,320px);line-height:.8;
+  color:transparent;-webkit-text-stroke:1.5px rgba(13,13,11,.06);
+  pointer-events:none;user-select:none;
+}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
+.about-name-big{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-size:clamp(32px,4.8vw,40px);line-height:var(--lh-title);
+  letter-spacing:-.02em;margin-bottom:24px;
+  font-weight:700;
+}
+.about-name-big em{color:var(--blue);font-style:normal;}
+.about-text p{font-size:var(--fs-body);line-height:var(--lh-body);color:var(--muted);margin-bottom:13px;}
+.about-text strong{color:var(--black);font-weight:600;}
+.facts-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-top:28px;}
+.fact-row{
+  display:grid;grid-template-columns:68px 1fr;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--border);font-size:var(--fs-body);
+}
+.fact-lbl{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  text-transform:uppercase;letter-spacing:.01em;color:var(--muted);padding-top:1px;
+}
+
+/* Skills grid */
+.sk-header{
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  text-transform:uppercase;letter-spacing:.01em;color:var(--muted);margin-bottom:14px;
+}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.sk-item{
+  border:1px solid var(--border);padding:13px 12px;border-radius:2px;
+  transition:border-color .2s,transform .25s var(--ease);
+}
+.sk-item:hover{border-color:var(--blue);transform:translateY(-2px);}
+.sk-item h4{font-size:var(--fs-h3);font-weight:600;margin-bottom:3px;line-height:var(--lh-title);}
+.sk-item p{font-size:var(--fs-caption);color:var(--muted);line-height:var(--lh-body);}
+.sk-item.ai h4{color:var(--blue);}
+.sk-item.ai{border-color:rgba(24,71,245,.2);}
+
+/* ══════════════ ETC / CHARACTER ══════════════ */
+#etc{background:var(--cream);padding:80px 36px;}
+.etc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.etc-card{
+  border:1.5px solid var(--border);padding:28px;border-radius:2px;
+  transition:border-color .25s,transform .3s var(--ease),background .25s;
+}
+.etc-card:hover{border-color:var(--blue);background:var(--white);transform:translateY(-3px);}
+.etc-card h3{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);letter-spacing:0;margin-bottom:8px;line-height:var(--lh-title);font-weight:700;}
+.etc-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:var(--muted);}
+.char-imgs{display:flex;gap:8px;margin-bottom:14px;}
+.ch-img{width:66px;height:66px;object-fit:contain;background:var(--cream2);border-radius:4px;padding:6px;}
+.award-pill{
+  display:inline-flex;align-items:center;gap:5px;margin-top:10px;
+  background:var(--yellow);color:var(--black);
+  padding:4px 12px;border-radius:1px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;font-weight:700;
+}
+.etc-role-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.etc-rbadge{
+  padding:3px 10px;border:1px solid var(--border);border-radius:2px;
+  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;color:var(--muted);
+}
+.etc-rbadge.hi{border-color:rgba(24,71,245,.35);color:var(--blue);}
+
+/* ══════════════ FOOTER ══════════════ */
+footer{
+  background:var(--black);color:var(--cream);
+  padding:40px 36px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.ft-brand{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-h3);font-weight:700;}
+.ft-brand small{display:block;font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-caption);color:rgba(237,232,220,.55);margin-top:3px;}
+.ft-links{display:flex;gap:20px;}
+.ft-links a{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(237,232,220,.6);transition:color .2s;}
+.ft-links a:hover{color:var(--blue);}
+.ft-xl{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;color:var(--blue);}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media(max-width:960px){
+  .wk-th,.wk-row{grid-template-columns:36px 1fr 80px 120px;}
+  .wk-role{display:none;}
+  .diff-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid .gi:first-child{grid-column:span 2;}
+  .gallery-grid .gi:nth-child(4){grid-column:span 1;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .sk-grid{grid-template-columns:repeat(2,1fr);}
+  .etc-grid{grid-template-columns:1fr;}
+  #proj-panel{width:100vw;}
+  footer{flex-direction:column;gap:16px;align-items:flex-start;}
+  .diff-head{grid-template-columns:1fr;}
+  .diff-intro-txt{text-align:left;}
+}
+@media(max-width:600px){
+  #site-header{padding:14px 18px;}
+  .hdr-nav{gap:16px;}
+  #work,#diff,#gallery,#about,#etc{padding-left:18px;padding-right:18px;}
+  .wk-th,.wk-row{grid-template-columns:32px 1fr 70px;}
+  .wk-yr{display:none;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .gallery-grid .gi:nth-child(4){grid-column:span 1;}
+  .ba-grid{grid-template-columns:1fr;}
+  footer{padding:30px 18px;}
+}
+
+/* ══════════════ ANIMATE IN ══════════════ */
+.reveal-up{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+.reveal-up.in{opacity:1;transform:translateY(0);}
+
+/* ══════════════ WORK ROW THUMBNAIL HOVER ══════════════ */
+#wk-thumb{
+  position:fixed;
+  pointer-events:none;
+  z-index:6000;
+  width:280px;
+  opacity:0;
+  transition:opacity .22s var(--ease), transform .22s var(--ease);
+  transform:translateY(10px) rotate(-1.5deg) scale(.96);
+  will-change:transform;
+}
+#wk-thumb.visible{
+  opacity:1;
+  transform:translateY(0) rotate(-1.5deg) scale(1);
+}
+/* Card wrapper */
+.wk-thumb-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow:
+    0 8px 32px rgba(13,13,11,.14),
+    0 2px 8px rgba(13,13,11,.08),
+    0 0 0 1px rgba(13,13,11,.04);
+}
+.wk-thumb-img-wrap{
+  width:100%;
+  height:180px;
+  overflow:hidden;
+  background:var(--cream2);
+  position:relative;
+}
+.wk-thumb-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .6s var(--ease);
+}
+#wk-thumb.visible .wk-thumb-img-wrap img{
+  transform:scale(1.04);
+}
+.wk-thumb-meta{
+  padding:10px 14px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+.wk-thumb-name{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--black);
+  line-height:1.3;
+}
+.wk-thumb-cat{
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:2px;
+}
+.wk-thumb-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  line-height:1;
+  color:var(--blue);
+  flex-shrink:0;
+  margin-left:10px;
+}
+/* Blue tag strip at top of card on hover-in */
+.wk-thumb-strip{
+  height:3px;
+  background:var(--blue);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s var(--ease) .05s;
+}
+#wk-thumb.visible .wk-thumb-strip{
+  transform:scaleX(1);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ CURSOR ══ -->
+<div id="cur-cross"></div>
+<div id="cur-dot"></div>
+<div id="cur-txt" id="curTxt"></div>
+
+<!-- ══ HEADER ══ -->
+<header id="site-header">
+  <div class="hdr-logo">JJY<em>.</em></div>
+  <nav class="hdr-nav">
+    <a href="#work" class="hdr-link">Work</a>
+    <a href="#diff" class="hdr-link">Positioning</a>
+    <a href="#about" class="hdr-link">About</a>
+    <a href="/cdn-cgi/l/email-protection#87e8d8e8b7b0bfbec7e9e6f1e2f5a9e4e8ea" class="hdr-link">Contact</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════
+     HERO — scroll scatter
+══════════════════════════════════════ -->
+<section id="hero">
+  <!-- Grid background via ::before -->
+
+  <!-- Background name outline -->
+  <div class="hero-name-bg" id="heroNameBg" aria-hidden="true">장지영</div>
+
+  <!-- Index top center -->
+  <div class="hero-index" id="heroIndex">
+    <span>Portfolio</span>
+    <span>2026</span>
+  </div>
+
+  <!-- 가운데 "나" + 커서 깜빡임 -->
+  <div class="hero-na" id="heroNa" aria-hidden="true">
+    UIUX<span class="hero-na-cursor" aria-hidden="true"></span>
+  </div>
+
+  <!-- Big blue JANG -->
+  <div class="hero-jang" id="heroJang" aria-hidden="true">JANG<br>JI<br>YEONG</div>
+
+  <!-- Greeting top right -->
+  <div class="hero-greeting" id="heroGreeting">
+    UI/UX Designer & Publisher<br>
+    <span style="font-size:.8em;opacity:.75;">문제 해결 · 비즈니스 이해 · 구현 역량</span>
+  </div>
+
+  <!-- Role tags mid left -->
+  <div class="hero-role-tag" id="heroRole">
+    <span class="rtag blue-tag">PROBLEM SOLVER</span>
+    <span class="rtag">BUSINESS THINKING</span>
+    <span class="rtag">DESIGN → CODE</span>
+  </div>
+
+  <!-- Scatter cards -->
+  <div class="s-card yellow" id="card-exp">
+    <div class="sc-label">실무 경험</div>
+    <div class="sc-val big">1Y 8M</div>
+    <div style="font-size:11px;margin-top:2px;color:rgba(13,13,11,.5)">제품/서비스 UI·UX 운영</div>
+  </div>
+
+  <div class="s-card blue-card" id="card-role">
+    <div class="sc-label">포지셔닝</div>
+    <div class="sc-val big">D→P</div>
+    <div style="font-size:11px;margin-top:2px;color:rgba(255,255,255,.5)">기획 이해 + 설계 + 구현</div>
+  </div>
+
+  <div class="s-card lined" id="card-tool">
+    <div class="sc-label">핵심 키워드</div>
+    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
+      문제 정의 중심 UX<br>
+      전환 중심 랜딩 설계<br>
+      퍼블리싱 가능한 디자인
+    </div>
+  </div>
+
+  <div class="s-card yellow" id="card-award">
+    <div class="sc-label">핵심 한 줄</div>
+    <div class="sc-val" style="font-size:12px;line-height:1.6">
+      예쁜 화면보다<br>
+      <strong>성과 나는 UX를 설계</strong>
+    </div>
+  </div>
+
+  <div class="s-card" id="card-contrib">
+    <div class="sc-label">Selected Projects</div>
+    <div class="sc-val big" style="color:var(--blue)">4</div>
+  </div>
+
+  <div class="s-card" id="card-ai">
+    <div class="sc-label">Build Stack</div>
+    <div class="sc-val" style="font-size:11px;line-height:1.8;color:var(--muted)">
+      Figma → HTML/CSS/JS<br>
+      Responsive · A11y<br>
+      AI-assisted workflow
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    scroll to explore
+  </div>
+</section>
+
+<!-- MARQUEE -->
+ <!-- <div class="marquee-divider">
+  <div class="mq-track">
+    <span>PROBLEM → SOLUTION → RESULT</span><span class="mq-dot">✦</span>
+    <span>RECRUITER-FRIENDLY CASE STUDY</span><span class="mq-dot">✦</span>
+    <span>BUSINESS + UX + IMPLEMENTATION</span><span class="mq-dot">✦</span>
+    <span>SELECTED PROJECTS 4</span><span class="mq-dot">✦</span>
+    <span>CONVERSION FOCUSED</span><span class="mq-dot">✦</span>
+    <span>RESPONSIVE READY</span><span class="mq-dot">✦</span>
+    <span>AI AUGMENTED WORKFLOW</span><span class="mq-dot">✦</span>
+     duplicate for seamless loop 
+    <span>PROBLEM → SOLUTION → RESULT</span><span class="mq-dot">✦</span>
+    <span>RECRUITER-FRIENDLY CASE STUDY</span><span class="mq-dot">✦</span>
+    <span>BUSINESS + UX + IMPLEMENTATION</span><span class="mq-dot">✦</span>
+    <span>SELECTED PROJECTS 4</span><span class="mq-dot">✦</span>
+    <span>CONVERSION FOCUSED</span><span class="mq-dot">✦</span>
+    <span>RESPONSIVE READY</span><span class="mq-dot">✦</span>
+    <span>AI AUGMENTED WORKFLOW</span><span class="mq-dot">✦</span>
+  </div>
+</div>  -->
+
+<!-- ══════════════════════════════════════
+     WORK INDEX
+══════════════════════════════════════ -->
+<section id="work">
+  <div class="wk-head reveal-up">
+    <div class="wk-head-left">
+      <div class="section-eyebrow">Selected Work</div>
+      <div class="section-title">WORK</div>
+    </div>
+  </div>
+
+  <div class="wk-th">
+    <div class="wk-col">No.</div>
+    <div class="wk-col">프로젝트</div>
+    <div class="wk-col">연도</div>
+    <div class="wk-col">분야</div>
+    <div class="wk-col">기여</div>
+  </div>
+
+  <div class="wk-section-div">Selected Projects (Depth over volume)</div>
+  <ul class="wk-list">
+    <!-- <li class="wk-row" data-proj="insurance-landing" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/design_site_01.jpg')"></div>
+      <div class="wk-n">01</div>
+      <div class="wk-name">보험 랜딩 리뉴얼</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">전환 중심 랜딩 UX</div>
+      <div class="wk-role">100%</div>
+    </li> -->
+    <li class="wk-row" data-proj="pickcle" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/kybo_screen.png')"></div>
+      <div class="wk-n">02</div>
+      <div class="wk-name">Pickly 앱 서비스</div>
+      <div class="wk-yr">2024-25</div>
+      <div class="wk-cat">서비스 기획 + UX/UI</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="tdx-dash" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/mok.jpg')"></div>
+      <div class="wk-n">03</div>
+      <div class="wk-name">DB 여행자보험 보상청구</div>
+      <div class="wk-yr">2024</div>
+      <div class="wk-cat">청구 UX · 디자인·퍼블</div>
+      <div class="wk-role">100%</div>
+    </li>
+    <li class="wk-row" data-proj="nicepay" tabindex="0">
+      <div class="wk-row-bg" style="background-image:url('./images/iMacMockup.png')"></div>
+      <div class="wk-n">04</div>
+      <div class="wk-name">나이스페이먼츠 리뉴얼</div>
+      <div class="wk-yr">2025</div>
+      <div class="wk-cat">AI 비주얼 + 반응형 퍼블리싱</div>
+      <div class="wk-role">100%</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════════════════
+     DESIGN GALLERY
+══════════════════════════════════════ -->
+<section id="gallery">
+  <div class="gal-head reveal-up">
+    <div>
+      <div class="section-eyebrow">Design Work</div>
+      <div class="section-title">GALLERY</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);text-align:right;max-width:180px;line-height:1.7">
+      클릭하면 원본으로<br>확인할 수 있습니다
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gi"><img src="./images/design_typo_mok.jpg" alt="가구 브랜드 타이포그래피" loading="lazy"><div class="gi-info"><b>가구 브랜드 타이포그래피</b><small>Photoshop · Brand Identity</small></div></div>
+    <div class="gi"><img src="./images/design_site_01.jpg" alt="플르부아 리디자인" loading="lazy"><div class="gi-info"><b>플르부아 웹사이트 리디자인</b><small>Photoshop · Web Design</small></div></div>
+    <div class="gi"><img src="./images/design_pace.jpg" alt="페이스 갤러리" loading="lazy"><div class="gi-info"><b>페이스 갤러리 리디자인</b><small>Photoshop · Web Design</small></div></div>
+    <div class="gi"><img src="./images/design_h&m.png" alt="H&M 리디자인" loading="lazy"><div class="gi-info"><b>H&amp;M 웹사이트 리디자인</b><small>Photoshop · Fashion</small></div></div>
+    <div class="gi"><img src="./images/design_bookcover.png" alt="북커버" loading="lazy"><div class="gi-info"><b>북커버 그래픽 디자인</b><small>Photoshop · Graphic Design</small></div></div>
+    <div class="gi"><img src="./images/design_graphic_mok.png" alt="포스터" loading="lazy"><div class="gi-info"><b>그래픽 포스터 디자인</b><small>Photoshop · Poster</small></div></div>
+    <div class="gi"><img src="./images/design_typo.jpg" alt="타이포1" loading="lazy"><div class="gi-info"><b>타이포그래피 워크</b><small>Photoshop · Typography</small></div></div>
+    <div class="gi"><img src="./images/design_hmmain.jpg" alt="현대카드 메인" loading="lazy"><div class="gi-info"><b>현대카드 프로모션 배너</b><small>Photoshop · 개인 프로젝트</small></div></div>
+    <div class="gi"><img src="./images/design_typo2.jpg" alt="타이포2" loading="lazy"><div class="gi-info"><b>타이포그래피 시리즈 2</b><small>Photoshop · Typography</small></div></div>
+    <div class="gi"><img src="./images/design_hmsub.jpg" alt="현대카드 서브" loading="lazy"><div class="gi-info"><b>현대카드 배너 시리즈 2</b><small>Photoshop · Banner Design</small></div></div>
+    <div class="gi"><img src="./images/design_graphic.jpg" alt="그래픽아트" loading="lazy"><div class="gi-info"><b>그래픽 아트워크</b><small>Illustrator · Graphic Art</small></div></div>
+    <div class="gi"><img src="./images/design_typo3.jpg" alt="타이포3" loading="lazy"><div class="gi-info"><b>타이포그래피 시리즈 3</b><small>Photoshop · Typography</small></div></div>
+  </div>
+</section>
+
+<!-- DIFF -->
+<!-- <section id="diff">
+  <div class="diff-head reveal-up">
+    <div>
+      <div class="section-eyebrow" style="color:var(--blue)">Positioning Strategy</div>
+      <div class="diff-title-big">디자인이 아니라<br>문제 해결로 설득<em>.</em></div>
+    </div>
+    <div class="diff-intro-txt">포트폴리오는 작품집이 아니라, 이 사람을 뽑았을 때 비즈니스에 어떤 이득이 생기는지 보여주는 설득 문서여야 합니다.</div>
+  </div>
+  <div class="diff-grid">
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">01</div><h3>Problem 먼저 정의<br>화면보다 문제를 먼저 봅니다</h3><p>모든 프로젝트를 문제 정의로 시작합니다. 기존 플로우의 마찰과 비용을 먼저 파악해 디자인 방향을 정합니다.</p><div class="d-tags"><span class="d-tag">Problem Framing</span><span class="d-tag">UX Audit</span><span class="d-tag">Pain Point</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">02</div><h3>비즈니스 KPI 연결<br>성과 기준으로 설계합니다</h3><p>상담 전환율, 클릭률, 체류 시간처럼 KPI에 연결된 UX 결정을 우선순위로 둡니다.</p><div class="d-tags"><span class="d-tag">KPI</span><span class="d-tag">Conversion</span><span class="d-tag">Retention</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">03</div><h3>Why를 설명하는 디자이너<br>선택의 근거를 남깁니다</h3><p>CTA 위치, 정보 계층, 컴포넌트 패턴을 왜 선택했는지 문서화하고 설득 가능한 근거로 전달합니다.</p><div class="d-tags"><span class="d-tag">Decision Log</span><span class="d-tag">IA</span><span class="d-tag">Rationale</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">04</div><h3>Design → Code 실행력<br>구현까지 일관성 유지</h3><p>Figma에서 결정한 의도를 HTML/CSS/JS로 직접 구현해, 설계와 실제 결과 사이의 간극을 줄입니다.</p><div class="d-tags"><span class="d-tag">Figma</span><span class="d-tag">Publishing</span><span class="d-tag">Responsive</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">05</div><h3>AI 활용 생산성<br>속도와 품질을 같이 확보</h3><p>Midjourney와 Cursor AI를 활용해 시안 탐색과 구현 속도를 높이고, 남는 시간은 문제 정의와 검증에 투자합니다.</p><div class="d-tags"><span class="d-tag">Midjourney</span><span class="d-tag">Cursor AI</span><span class="d-tag">Workflow</span></div></div>
+    <div class="d-card"><div class="d-card-accent"></div><div class="d-num">06</div><h3>협업 친화 커뮤니케이션<br>기획·개발 언어로도 설명</h3><p>디자인 언어뿐 아니라 요구사항/구현 제약까지 함께 다뤄서 팀이 바로 실행 가능한 형태로 결과물을 만듭니다.</p><div class="d-tags"><span class="d-tag">Collaboration</span><span class="d-tag">Handoff</span><span class="d-tag">Execution</span></div></div>
+  </div>
+</section> -->
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal-up">
+      <div class="about-name-big">About<br><em>JJY.</em></div>
+      <div class="about-text">
+        <p>디자인의 감각과 코드의 정밀함을 동시에 가진 <strong>D→P 크리에이터</strong>입니다. Figma에서 시작한 작업이 브라우저에서 완벽하게 구현되는 것을 가장 중요하게 생각합니다.</p>
+        <p>AI 도구를 두려워하지 않고 적극적으로 활용합니다. <strong>미드저니, ImageFX, Cursor AI, 에이전트</strong>를 워크플로우에 통합해 혼자서도 팀이 부럽지 않은 퀄리티와 속도를 냅니다.</p>
+        <p>TDX 디자인팀에서 1년 8개월간 자사 UI/UX 전반을 담당하며 실무 감각과 협업 역량을 갖췄고, 매일 더 넓은 스케일로 성장 중입니다.</p>
+      </div>
+      <ul class="facts-list">
+        <li class="fact-row"><span class="fact-lbl">이름</span><span>장지영 Jang Ji-young</span></li>
+        <li class="fact-row"><span class="fact-lbl">현직</span><span>TDX 디자인팀 · 1년 8개월</span></li>
+        <li class="fact-row"><span class="fact-lbl">역할</span><span>UI/UX Design · Web Publishing</span></li>
+        <li class="fact-row"><span class="fact-lbl">자격증</span><span>정보처리산업기사 · 컴퓨터그래픽스운용기능사</span></li>
+        <li class="fact-row"><span class="fact-lbl">수상</span><span>파주시 캐릭터 공모전 인기상 (시민투표 1위)</span></li>
+        <li class="fact-row"><span class="fact-lbl">GitHub</span><span><a href="https://github.com/superji0" target="_blank" style="color:var(--blue)">superji0</a></span></li>
+        <li class="fact-row"><span class="fact-lbl">Email</span><span><a href="/cdn-cgi/l/email-protection#d9b686b6e9eee1e099b7b8afbcabf7bab6b4" style="border-bottom:1px solid var(--border)"><span class="__cf_email__" data-cfemail="f699a999c6c1cecfb69897809384d895999b">[email&#160;protected]</span></a></span></li>
+      </ul>
+    </div>
+    <div class="reveal-up" style="transition-delay:.12s">
+      <p class="sk-header" style="margin-bottom:18px">Skills &amp; Tools</p>
+      <div class="sk-grid">
+        <div class="sk-item"><h4>HTML5</h4><p>시맨틱 마크업, 접근성</p></div>
+        <div class="sk-item"><h4>CSS3/SCSS</h4><p>Flex, Grid, 반응형</p></div>
+        <div class="sk-item"><h4>JavaScript</h4><p>ES6+, DOM, 비동기</p></div>
+        <div class="sk-item"><h4>Figma</h4><p>UI디자인, 프로토타입</p></div>
+        <div class="sk-item"><h4>Photoshop</h4><p>시안 제작, 배너</p></div>
+        <div class="sk-item"><h4>Illustrator</h4><p>아이콘, 캐릭터, 벡터</p></div>
+        <div class="sk-item"><h4>Git</h4><p>브랜치, 협업 형상관리</p></div>
+        <div class="sk-item"><h4>GSAP</h4><p>ScrollTrigger, 타임라인</p></div>
+        <div class="sk-item ai"><h4>Midjourney</h4><p>AI 이미지 생성</p></div>
+        <div class="sk-item ai"><h4>ImageFX</h4><p>AI 이미지 편집</p></div>
+        <div class="sk-item ai"><h4>Cursor AI</h4><p>AI 에이전트 개발</p></div>
+        <div class="sk-item"><h4>React</h4><p>컴포넌트, 상태관리</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETC -->
+<section id="etc">
+  <div style="margin-bottom:36px" class="reveal-up">
+    <div class="section-eyebrow">ETC</div>
+    <div class="section-title">캐릭터 & 수상</div>
+  </div>
+  <div class="etc-grid">
+    <div class="etc-card">
+      <div class="char-imgs">
+        <img src="./images/character_01.png" alt="메리웨더1" class="ch-img">
+        <img src="./images/character_02.png" alt="메리웨더2" class="ch-img">
+        <img src="./images/character_03.png" alt="메리웨더3" class="ch-img">
+      </div>
+      <h3>메리웨더 캐릭터</h3>
+      <p>자체 오리지널 캐릭터 <strong>메리웨더(Merryweather)</strong>를 기획·제작했습니다. 굿즈 제작까지 이어지며 실제 상품으로 완성하고, 홍콩 & 서울 일러스트레이션 페어에 참가했습니다.</p>
+      <div class="etc-role-row">
+        <span class="etc-rbadge hi">캐릭터 디자인</span>
+        <span class="etc-rbadge hi">굿즈 제작</span>
+        <span class="etc-rbadge">일러스트페어 홍콩</span>
+        <span class="etc-rbadge">일러스트페어 서울</span>
+      </div>
+    </div>
+    <div class="etc-card">
+      <div style="font-size:36px;margin-bottom:14px">🏆</div>
+      <h3>파주시 캐릭터 공모전</h3>
+      <p>파주시 공식 캐릭터 공모전에 출품하여 <strong>인기상을 수상</strong>했습니다. 시민 온라인 투표에서 <strong>1위</strong>를 기록하며 대중성과 디자인 완성도를 모두 인정받았습니다.</p>
+      <div class="award-pill">🥇 시민 투표 1위 · 인기상 수상</div>
+      <div class="etc-role-row" style="margin-top:10px">
+        <span class="etc-rbadge hi">공모전 수상</span>
+        <span class="etc-rbadge">캐릭터 디자인</span>
+        <span class="etc-rbadge">Illustrator</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-brand">장지영 포트폴리오<small>© JJY 2026. All rights reserved.</small></div>
+  <div class="ft-links">
+    <a href="tel:+821041727389">+82-10-4172-7389</a>
+    <a href="/cdn-cgi/l/email-protection#e18ebe8ed1d6d9d8a18f80978493cf828e8c"><span class="__cf_email__" data-cfemail="d7b888b8e7e0efee97b9b6a1b2a5f9b4b8ba">[email&#160;protected]</span></a>
+    <a href="https://github.com/superji0" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</footer>
+
+<!-- ══════════════════════
+     PROJECT SIDE PANEL
+══════════════════════ -->
+<!-- ══ WORK ROW THUMBNAIL ══ -->
+<div id="wk-thumb" aria-hidden="true">
+  <div class="wk-thumb-card">
+    <div class="wk-thumb-strip"></div>
+    <div class="wk-thumb-img-wrap">
+      <img id="wk-thumb-img" src="" alt="">
+    </div>
+    <div class="wk-thumb-meta">
+      <div>
+        <div class="wk-thumb-name" id="wk-thumb-name"></div>
+        <div class="wk-thumb-cat" id="wk-thumb-cat"></div>
+      </div>
+      <div class="wk-thumb-num" id="wk-thumb-num"></div>
+    </div>
+  </div>
+</div>
+
+<div id="proj-overlay"></div>
+<div id="proj-panel">
+  <div class="pp-inner" id="ppInner">
+    <!-- 핵심 프로젝트 4개: 채용용 깊이 중심 -->
+    <!-- <article class="proj-content" id="proj-content-insurance-landing">
+      <div class="pp-eyebrow">Selected Project · Conversion</div>
+      <div class="pp-title">보험 랜딩<br>리뉴얼</div>
+      <div class="pp-meta"><span class="pp-mi">Landing UX + Publishing</span><span class="pp-mi">2024</span><span class="pp-mi"><span class="pp-contrib">✦ 기여도 100%</span></span></div>
+      <div class="pp-roles"><span class="pp-role hi">UX 구조 설계</span><span class="pp-role hi">UI 디자인</span><span class="pp-role hi">반응형 퍼블리싱</span></div>
+      <div class="pp-shots wide"><img src="./images/design_site_01.jpg" alt="" loading="lazy"><img src="./images/iMacMockup.png" alt="" loading="lazy"></div>
+      <p class="pp-sec">Case Study</p>
+      <div class="pp-body">
+        <div class="cs-block"><div class="cs-k">Problem</div><div class="cs-v">핵심 보장 정보보다 장식성 콘텐츠가 먼저 노출되어 이탈률이 높고 CTA 도달 전 이탈이 잦았습니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Goal</div><div class="cs-v">상담 CTA 클릭률 20% 개선, 핵심 정보 섹션 체류시간 증가를 목표로 구조를 재설계했습니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Research</div><div class="cs-v">동종 보험 랜딩 6개를 비교해 CTA 위치, 정보 계층, 신뢰 요소(리뷰/보장 요약) 배치를 분석했습니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Insight</div><div class="cs-v">사용자는 보험 상품 설명보다 “나에게 어떤 결과가 생기는가”를 먼저 확인할 때 전환 가능성이 높았습니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Solution</div><div class="cs-v">첫 화면에 문제-해결 메시지와 CTA를 고정 배치하고, 보장 요약 카드를 상단으로 이동해 스크롤 초반 의사결정을 돕도록 구성했습니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Why</div><div class="cs-v">CTA를 상단에 고정하면 클릭 동선이 짧아지고, 카드형 정보는 스캔 속도를 높여 비교 판단 시간을 줄일 수 있기 때문입니다.</div></div>
+        <div class="cs-block"><div class="cs-k">Result</div><div class="cs-v">랜딩 흐름 상 클릭 동선이 단축되었고, 상담 CTA 노출 빈도가 증가하는 구조로 개선했습니다. (estimated)</div></div>
+        <div class="cs-block"><div class="cs-k">What I did</div><div class="cs-v">UX 설계 100% · UI 디자인 100% · 퍼블리싱 100%</div></div>
+      </div>
+      <div class="pp-tags"><span class="pp-tag">Conversion UX</span><span class="pp-tag">Landing IA</span><span class="pp-tag">Responsive</span><span class="pp-tag">HTML5</span><span class="pp-tag">CSS3</span><span class="pp-tag">JavaScript</span></div>
+    </article> -->
+
+    <!-- Pickly: pickly_panel_layout.html 구조 + Behance식 타이포 (pl- 스코프) -->
+    <article class="proj-content pickly-panel" id="proj-content-pickcle">
+      <div class="pl-inner">
+        <div class="pl-sec pl-sec--hero">
+          <div class="pl-cover" aria-hidden="true">
+            <span class="pl-cover-brand">Pickly</span>
+            <img class="pl-cover-phone" src="./images/kybo_screen02.png" alt="" width="88" height="140" loading="lazy">
+          </div>
+          <div class="pl-eyebrow">Overview</div>
+          <h2 class="pl-sec-title">숏폼 저장·관리·공유 플랫폼</h2>
+          <p class="pl-sec-sub">저장해도 다시 못 찾는 문제를 해결하는 모바일 앱.<br>리서치부터 IA, UI까지 혼자 설계했다.</p>
+          <div class="pl-meta-row">
+            <span class="pl-meta-pill">Personal Project</span>
+            <span class="pl-meta-pill">2025.09 – 10</span>
+            <span class="pl-meta-pill">UI/UX 100%</span>
+            <span class="pl-meta-pill">Figma · Illustrator</span>
+          </div>
+        </div>
+
+        <div class="pl-sec">
+          <div class="pl-eyebrow">Problem</div>
+          <div class="pl-problem-block">
+            <p class="pl-problem-quote">"처음엔 저장 버튼이 불편한 거라고 생각했다."</p>
+            <p class="pl-problem-body">14명 설문과 2그룹 심층 인터뷰를 거치고 나서야 진짜 문제를 찾았다. 64.3%가 화면 캡처로 저장하고 있었고, 정작 가장 원하는 기능은 저장이 아니라 재생목록 정리(57.1%)였다.</p>
+            <p class="pl-problem-body">문제는 저장 기능이 아니라, 저장 이후의 여정이었다.</p>
+          </div>
+        </div>
+
+        <div class="pl-sec">
+          <div class="pl-eyebrow">Design Decisions</div>
+          <p class="pl-sec-sub pl-sec-sub--flush">왜 이 기능을, 이 방식으로 만들었나</p>
+          <div class="pl-decision-list">
+            <div class="pl-decision-item">
+              <div class="pl-decision-num">결정 01</div>
+              <div class="pl-decision-title">AI 자동분류를 선택지가 아닌 기본값으로</div>
+              <div class="pl-decision-body">"폴더 직접 만드는 것도 귀찮다"는 인터뷰 발화가 결정적이었다. 저장의 마찰을 없애려면 사용자가 아무것도 안 해도 분류가 되어야 했다.</div>
+            </div>
+            <div class="pl-decision-item">
+              <div class="pl-decision-num">결정 02</div>
+              <div class="pl-decision-title">리마인더를 핵심 기능으로 — 부가 기능이 아니라</div>
+              <div class="pl-decision-body">저장이 소비로 이어지지 않으면 앱을 쓸 이유가 없다. 리마인더는 이 서비스의 존재 이유를 완성하는 기능이었다.</div>
+            </div>
+            <div class="pl-decision-item">
+              <div class="pl-decision-num">결정 03</div>
+              <div class="pl-decision-title">공유를 저장 플로우 안에 — 별도 탭이 아니라</div>
+              <div class="pl-decision-body">공유를 별도 탭으로 빼면 아무도 안 쓴다. 행동이 일어나는 맥락에서 기능을 노출해야 실제로 쓰인다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pl-sec">
+          <div class="pl-eyebrow">Retrospective</div>
+          <div class="pl-retro-grid">
+            <div class="pl-retro-card">
+              <div class="pl-retro-label">배운 것</div>
+              <div class="pl-retro-text">처음 불편함에서 시작한 문제가 아니라, 실제 사용자 플로우를 통해 발견한 문제였다. 이런 방식으로 문제를 찾을 수 있었다.</div>
+            </div>
+            <div class="pl-retro-card">
+              <div class="pl-retro-label">한계</div>
+              <div class="pl-retro-text">설문 n=14는 통계적으로 유의미하지 않다. 실제 사용성 테스트로 재방문율 검증이 필요하다</div>
+            </div>
+          </div>
+          <div class="pl-cta-row">
+            <a class="pl-btn pl-btn--primary" href="./docs/pickly-portfolio.pdf" target="_blank" rel="noopener">전체 기획서 보기 →</a>
+            <!-- Figma URL 있으면 href만 교체 -->
+            <a class="pl-btn pl-btn--secondary" href="javascript:void(0)" title="Figma URL 확정 시 연결">Figma 프로토타입 →</a>
+          </div>
+          <div class="pl-pdf-sub">
+            <p class="pl-pdf-note">Pickly 앱 프로세스·와이어·UI가 담긴 PDF입니다. 채용 담당자가 한 번에 흐름을 볼 수 있도록 첨부했습니다.</p>
+            <a href="./docs/pickly-portfolio.pdf" target="_blank" rel="noopener">PDF 새 탭에서 보기 ↗</a>
+            <a href="./docs/pickly-portfolio.pdf" download="Pickly_장지영_포트폴리오.pdf">다운로드</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- DB 여행자보험 보상청구: db_insurance_revised.html 구조 이식 -->
+    <article class="proj-content db-panel" id="proj-content-tdx-dash">
+      <div class="db-inner">
+        <div class="db-cover">
+          <div class="db-cover-eyebrow">실무 프로젝트 · 테스트 운영 중</div>
+          <h2 class="db-cover-title">DB 여행자보험<br>보상청구 서비스</h2>
+          <p class="db-cover-sub">복잡한 심사 과정을, 사용자는 복잡하다고 느끼지 않게.</p>
+          <div class="db-cover-chips">
+            <span class="db-chip db-chip--blue">디자인 + 퍼블리싱 단독</span>
+            <span class="db-chip">기획 1 · 디자인 1 · 개발 1</span>
+            <span class="db-chip">Figma · HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="db-sec">
+          <div class="db-label">Problem</div>
+          <p class="db-lead">보험 청구는 본질적으로<br>불안한 경험이다.</p>
+          <div class="db-prob-row">
+            <div class="db-prob-card">
+              <div class="db-prob-card-label">상황</div>
+              <div class="db-prob-card-text">심사 단계가 복잡하고, 필요 서류가 많고, 내가 제대로 하고 있는지 알 수 없다</div>
+            </div>
+            <div class="db-prob-card">
+              <div class="db-prob-card-label">목표</div>
+              <div class="db-prob-card-text">설명 없이도 다음을 누를 수 있게. 이해하기 쉽고 직관적인 청구 경험</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-sec db-sec--icon">
+          <div class="db-label">Icon System</div>
+          <p class="db-icon-lead">보험 청구 도메인 특화 아이콘 세트 직접 제작</p>
+          <div class="db-icon-grid" aria-hidden="true">
+            <div class="db-icon-cell"></div><div class="db-icon-cell"></div><div class="db-icon-cell"></div>
+            <div class="db-icon-cell"></div><div class="db-icon-cell"></div><div class="db-icon-cell"></div>
+            <div class="db-icon-cell"></div><div class="db-icon-cell"></div><div class="db-icon-cell"></div>
+            <div class="db-icon-cell"></div><div class="db-icon-cell"></div><div class="db-icon-cell"></div>
+          </div>
+          <p class="db-icon-hint">↑ 아이콘 PNG 개별 배치 (실서비스 에셋으로 교체 가능)</p>
+        </div>
+
+        <div class="db-sec">
+          <div class="db-label">테스트 화면</div>
+          <!-- 보안: 국내 보험사 B2B — 공개 URL 금지, 테스트 화면 캡처로 설명 -->
+          <p class="db-sec-note">실서비스 링크는 보안상 공개하지 않았습니다. 아래 플로우는 테스트 환경에서의 화면 캡처를 바탕으로 구성했습니다. (국내 보험사 B2B 서비스)</p>
+          <div class="db-screens" aria-hidden="true">
+            <div class="db-screen">
+              <div class="db-screen-bar"><div class="db-screen-dot"></div><div class="db-screen-label">보험 선택</div></div>
+              <div class="db-screen-body">
+                <div class="db-sl" style="width:70%"></div>
+                <div class="db-sc"><div class="db-sc-dot"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sc"><div class="db-sc-dot" style="opacity:.4"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sb"></div>
+              </div>
+            </div>
+            <div class="db-screen">
+              <div class="db-screen-bar"><div class="db-screen-dot"></div><div class="db-screen-label">동의</div></div>
+              <div class="db-screen-body">
+                <div class="db-sl" style="width:80%"></div>
+                <div class="db-sc"><div class="db-sc-dot"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sc"><div class="db-sc-dot"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sc"><div class="db-sc-dot"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sb"></div>
+              </div>
+            </div>
+            <div class="db-screen">
+              <div class="db-screen-bar"><div class="db-screen-dot"></div><div class="db-screen-label">청구 분야</div></div>
+              <div class="db-screen-body">
+                <div class="db-sl" style="width:65%"></div>
+                <div class="db-sc"><div class="db-sc-dot" style="background:#FCA5A5"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sc"><div class="db-sc-dot" style="background:#86EFAC"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sc"><div class="db-sc-dot" style="background:#FCD34D"></div><div class="db-sl" style="flex:1"></div></div>
+                <div class="db-sb"></div>
+              </div>
+            </div>
+          </div>
+          <p class="db-screen-note">↑ 플로우 구조를 보여주는 와이어입니다. 실제 공개 시에는 테스트 환경 캡처 이미지로 바꿉니다.</p>
+        </div>
+
+        <div class="db-sec">
+          <div class="db-label">Design Decisions</div>
+          <div class="db-dec-list">
+            <div class="db-dec">
+              <div class="db-dec-n">01</div>
+              <div>
+                <div class="db-dec-t">삼성화재를 레퍼런스로 — 새로운 것보다 익숙함 위에서 더 잘</div>
+                <div class="db-dec-d">국내 사용자가 가장 많이 접한 패턴이 거기 있었다. 처음 보는 UI보다 익숙한 패턴이 불안을 줄인다.</div>
+              </div>
+            </div>
+            <div class="db-dec">
+              <div class="db-dec-n">02</div>
+              <div>
+                <div class="db-dec-t">시스템 언어를 사용자 언어로</div>
+                <div class="db-dec-d">청구 분야 레이블을 시스템 용어 대신 사용자가 실제로 하는 말로 설계했다.</div>
+                <div class="db-lang-compare">
+                  <div class="db-lang-before">
+                    <span class="db-tag-b">의료비(질병)</span>
+                    <span class="db-tag-b">배상책임</span>
+                    <span class="db-tag-b">여권재발급</span>
+                  </div>
+                  <span class="db-lang-arrow" aria-hidden="true">→</span>
+                  <div class="db-lang-after">
+                    <span class="db-tag-a">아팠어요</span>
+                    <span class="db-tag-a">피해를 끼쳤어요</span>
+                    <span class="db-tag-a">여권 분실했어요</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="db-dec">
+              <div class="db-dec-n">03</div>
+              <div>
+                <div class="db-dec-t">설명 없이도 다음을 누를 수 있는가</div>
+                <div class="db-dec-d">레이블과 버튼 텍스트 하나하나를 이 기준으로 삼성화재 플로우와 비교하며 검토했다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-sec">
+          <div class="db-label">Retrospective</div>
+          <div class="db-retro-grid">
+            <div class="db-retro-card">
+              <div class="db-retro-l">배운 것</div>
+              <div class="db-retro-t">디자인+퍼블리싱 동시 담당 → 설계 결정이 구현에 바로 영향을 미친다는 걸 체감했다</div>
+            </div>
+            <div class="db-retro-card">
+              <div class="db-retro-l">다음엔</div>
+              <div class="db-retro-t">사용자 테스트를 직접 제안해보고 싶다. 실사용 데이터로 레이블 효과 검증이 필요하다</div>
+            </div>
+          </div>
+          <div class="db-status-pill">
+            <span class="db-status-dot" aria-hidden="true"></span>
+            현재 테스트 운영 중 · 실사용 데이터 수집 예정
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- NICE Payments: proj-nicepayments.html 반영 -->
+    <article class="proj-content" id="proj-content-nicepay">
+    
+      <!-- ── 기존 pp 헤더 클래스 유지 ── -->
+      <div class="pp-eyebrow">Personal Project · Responsive Web Redesign</div>
+      <div class="pp-title">NICE Payments<br>홈페이지 리디자인</div>
+      <div class="pp-meta">
+        <span class="pp-mi">2025</span>
+        <span class="pp-mi">Personal</span>
+        <span class="pp-mi">Responsive Web</span>
+      </div>
+      <div class="pp-roles">
+        <span class="pp-role hi">Product Designer Solo</span>
+        <span class="pp-role hi">Research</span>
+        <span class="pp-role hi">UX/UI Design</span>
+        <span class="pp-role hi">Midjourney</span>
+      </div>
+    
+      <!-- ── 커스텀 스타일 (이 패널 내부 전용) ── -->
+      <style>
+        #proj-content-nicepay .np-sec {
+          margin-top: 36px;
+          padding-top: 28px;
+          border-top: 1px solid var(--border);
+        }
+        #proj-content-nicepay .np-label {
+          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          color: var(--blue);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 14px;
+        }
+        #proj-content-nicepay .np-label::before {
+          content: '';
+          width: 16px;
+          height: 1px;
+          background: var(--blue);
+        }
+        #proj-content-nicepay .np-hero {
+          width: 100%;
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 20px;
+        }
+        #proj-content-nicepay .np-hero img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        #proj-content-nicepay .np-sub {
+          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 1.5;
+          margin-bottom: 14px;
+        }
+        #proj-content-nicepay .np-body {
+          font-size: var(--fs-body);
+          color: var(--muted);
+          line-height: var(--lh-body);
+        }
+        /* 데이터 카드 */
+        #proj-content-nicepay .np-data-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          margin: 14px 0;
+        }
+        #proj-content-nicepay .np-data-card {
+          background: rgba(13,13,11,.03);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 14px 16px;
+        }
+        #proj-content-nicepay .np-num {
+          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-size: 30px;
+          font-weight: 700;
+          color: var(--blue);
+          line-height: 1;
+          margin-bottom: 4px;
+        }
+        #proj-content-nicepay .np-num-label {
+          font-size: var(--fs-caption);
+          color: var(--muted);
+          line-height: 1.5;
+        }
+        /* 인용 블록 */
+        #proj-content-nicepay .np-quote {
+          border-left: 3px solid var(--blue);
+          border-radius: 0 8px 8px 0;
+          background: rgba(24,71,245,.05);
+          padding: 14px 18px;
+          font-size: var(--fs-body);
+          font-weight: 500;
+          line-height: 1.6;
+          margin: 14px 0;
+        }
+        /* AS-IS / TO-BE 비교 */
+        #proj-content-nicepay .np-compare {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          margin: 14px 0;
+        }
+        #proj-content-nicepay .np-compare-card {
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        #proj-content-nicepay .np-compare-head {
+          padding: 8px 14px;
+          font-size: var(--fs-caption);
+          font-weight: 700;
+          letter-spacing: .03em;
+        }
+        #proj-content-nicepay .np-compare-head.bad {
+          background: rgba(229,59,30,.08);
+          color: var(--red);
+          border-bottom: 1px solid rgba(229,59,30,.15);
+        }
+        #proj-content-nicepay .np-compare-head.good {
+          background: rgba(24,71,245,.07);
+          color: var(--blue);
+          border-bottom: 1px solid rgba(24,71,245,.15);
+        }
+        #proj-content-nicepay .np-compare-body {
+          padding: 12px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        #proj-content-nicepay .np-ci {
+          font-size: 12px;
+          color: var(--muted);
+          line-height: 1.5;
+          display: flex;
+          align-items: flex-start;
+          gap: 6px;
+        }
+        #proj-content-nicepay .np-ci::before {
+          content: '';
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: currentColor;
+          flex-shrink: 0;
+          margin-top: 6px;
+        }
+        #proj-content-nicepay .np-ci.bad { color: var(--red); }
+        #proj-content-nicepay .np-ci.good { color: var(--blue); }
+        /* 미드저니 섹션 */
+        #proj-content-nicepay .np-mj-dark {
+          background: #0d1117;
+          border-radius: 12px;
+          padding: 20px;
+          margin: 14px 0;
+        }
+        #proj-content-nicepay .np-mj-label {
+          font-size: var(--fs-caption);
+          color: rgba(255,255,255,.35);
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          margin-bottom: 6px;
+        }
+        #proj-content-nicepay .np-mj-title {
+          font-size: 15px;
+          font-weight: 600;
+          color: white;
+          margin-bottom: 4px;
+        }
+        #proj-content-nicepay .np-mj-sub {
+          font-size: var(--fs-caption);
+          color: rgba(255,255,255,.45);
+          margin-bottom: 16px;
+          line-height: 1.5;
+        }
+        #proj-content-nicepay .np-mj-flow {
+          display: flex;
+          margin-bottom: 14px;
+        }
+        #proj-content-nicepay .np-mj-step {
+          flex: 1;
+          padding: 12px 14px;
+          border: 0.5px solid rgba(255,255,255,.08);
+        }
+        #proj-content-nicepay .np-mj-step:first-child { border-radius: 8px 0 0 8px; }
+        #proj-content-nicepay .np-mj-step:last-child { border-radius: 0 8px 8px 0; }
+        #proj-content-nicepay .np-mj-step + .np-mj-step { border-left: none; }
+        #proj-content-nicepay .np-mj-step-n {
+          font-size: 10px;
+          color: #60a5fa;
+          font-weight: 700;
+          margin-bottom: 4px;
+        }
+        #proj-content-nicepay .np-mj-step-t {
+          font-size: 12px;
+          font-weight: 600;
+          color: white;
+          margin-bottom: 2px;
+        }
+        #proj-content-nicepay .np-mj-step-d {
+          font-size: 11px;
+          color: rgba(255,255,255,.4);
+          line-height: 1.4;
+        }
+        #proj-content-nicepay .np-prompt-box {
+          background: rgba(255,255,255,.04);
+          border: 0.5px solid rgba(255,255,255,.08);
+          border-radius: 8px;
+          padding: 12px 14px;
+          margin-bottom: 14px;
+        }
+        #proj-content-nicepay .np-prompt-label {
+          font-size: 10px;
+          color: rgba(255,255,255,.3);
+          letter-spacing: .05em;
+          margin-bottom: 6px;
+        }
+        #proj-content-nicepay .np-prompt-text {
+          font-family: 'Space Mono', monospace;
+          font-size: 11px;
+          color: rgba(255,255,255,.65);
+          line-height: 1.7;
+        }
+        #proj-content-nicepay .np-prompt-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+          margin-top: 8px;
+        }
+        #proj-content-nicepay .np-ptag {
+          font-size: 10px;
+          padding: 2px 8px;
+          border-radius: 4px;
+          background: rgba(24,71,245,.2);
+          color: #93c5fd;
+        }
+        /* 미드저니 이미지 그리드 */
+        #proj-content-nicepay .np-mj-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+        #proj-content-nicepay .np-mj-cell {
+          border-radius: 8px;
+          overflow: hidden;
+          position: relative;
+          aspect-ratio: 1;
+          background: rgba(255,255,255,.04);
+          border: 0.5px solid rgba(255,255,255,.08);
+        }
+        #proj-content-nicepay .np-mj-cell img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        #proj-content-nicepay .np-mj-cell-label {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 6px 10px;
+          background: rgba(0,0,0,.5);
+          font-size: 10px;
+          color: rgba(255,255,255,.7);
+        }
+        /* 디자인 결정 */
+        #proj-content-nicepay .np-dec-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 14px;
+        }
+        #proj-content-nicepay .np-dec {
+          display: flex;
+          gap: 14px;
+          padding: 14px 16px;
+          border: 1px solid var(--border);
+          border-radius: 10px;
+        }
+        #proj-content-nicepay .np-dec-n {
+          font-size: var(--fs-caption);
+          font-weight: 700;
+          color: var(--blue);
+          min-width: 18px;
+          padding-top: 2px;
+          flex-shrink: 0;
+        }
+        #proj-content-nicepay .np-dec-t {
+          font-size: var(--fs-body);
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+        #proj-content-nicepay .np-dec-d {
+          font-size: var(--fs-caption);
+          color: var(--muted);
+          line-height: 1.65;
+        }
+        /* 회고 */
+        #proj-content-nicepay .np-retro {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+          margin-top: 14px;
+        }
+        #proj-content-nicepay .np-retro-card {
+          background: rgba(13,13,11,.03);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          padding: 14px 16px;
+        }
+        #proj-content-nicepay .np-retro-l {
+          font-size: var(--fs-caption);
+          color: var(--muted);
+          margin-bottom: 6px;
+        }
+        #proj-content-nicepay .np-retro-t {
+          font-size: var(--fs-body);
+          line-height: 1.6;
+        }
+        #proj-content-nicepay .np-cta {
+          margin-top: 24px;
+          display: flex;
+          gap: 10px;
+        }
+        #proj-content-nicepay .np-btn-s {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 10px 18px;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          font-size: var(--fs-caption);
+          color: var(--muted);
+          background: transparent;
+          cursor: pointer;
+          text-decoration: none;
+          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          transition: all .2s;
+        }
+        #proj-content-nicepay .np-btn-s:hover {
+          border-color: var(--blue);
+          color: var(--blue);
+        }
+        /* 히어로 상단 여백 (인라인 제거) */
+        #proj-content-nicepay .np-hero { margin-top: 24px; }
+        /* 모바일: 2열 그리드 1열, 미드저니 스텝 세로 */
+        @media (max-width: 720px) {
+          #proj-content-nicepay .np-data-row,
+          #proj-content-nicepay .np-compare,
+          #proj-content-nicepay .np-retro { grid-template-columns: 1fr; }
+          #proj-content-nicepay .np-mj-flow {
+            flex-direction: column;
+            gap: 8px;
+          }
+          #proj-content-nicepay .np-mj-step {
+            border-radius: 8px !important;
+            border: 0.5px solid rgba(255,255,255,.08) !important;
+          }
+        }
+      </style>
+    
+      <!-- ── 히어로 이미지 ── -->
+      <div class="np-hero">
+        <img src="./images/nicepayments/herobanner.png" alt="NICE Payments 히어로 배너 — 미드저니 생성 이미지">
+      </div>
+    
+      <!-- ── 배경 ── -->
+      <div class="np-sec">
+        <div class="np-label">Background</div>
+        <div class="np-sub">모바일 결제 77% 시대,<br>홈페이지가 첫 번째 영업 채널이다</div>
+        <div class="np-data-row">
+          <div class="np-data-card">
+            <div class="np-num">77%</div>
+            <div class="np-num-label">모바일 결제 비중 돌파<br>가맹점도 모바일로 탐색</div>
+          </div>
+          <div class="np-data-card">
+            <div class="np-num">60조</div>
+            <div class="np-num-label">2025년 한국 디지털<br>결제 시장 규모</div>
+          </div>
+        </div>
+        <div class="np-quote">연 매출 1.1조 규모의 NICE가 가진 위상과 기술력을 현재 홈페이지는 제대로 담아내지 못하고 있다.</div>
+      </div>
+    
+      <!-- ── 문제 AS-IS / TO-BE ── -->
+      <div class="np-sec">
+        <div class="np-label">Problem</div>
+        <div class="np-sub">탐색형 구조가 이탈을 만들고 있었다</div>
+        <div class="np-compare">
+          <div class="np-compare-card">
+            <div class="np-compare-head bad">AS-IS 문제</div>
+            <div class="np-compare-body">
+              <div class="np-ci bad">GNB 진입 후 즉시 이탈 35%</div>
+              <div class="np-ci bad">서비스 도달까지 평균 클릭 40%</div>
+              <div class="np-ci bad">텍스트 나열 — 시각화 부재</div>
+              <div class="np-ci bad">메뉴 6개, 인지 과부하</div>
+            </div>
+          </div>
+          <div class="np-compare-card">
+            <div class="np-compare-head good">TO-BE 방향</div>
+            <div class="np-compare-body">
+              <div class="np-ci good">GNB 4개로 단순화</div>
+              <div class="np-ci good">전환 경로 50% 단축</div>
+              <div class="np-ci good">3D 비주얼 + 수치 기반 신뢰 설계</div>
+              <div class="np-ci good">탐색이 아닌 결정으로 유도</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ── 미드저니 프로세스 ── -->
+      <div class="np-sec">
+        <div class="np-label">Midjourney Process</div>
+        <div class="np-mj-dark">
+          <div class="np-mj-label">AI Image Generation</div>
+          <div class="np-mj-title">이미지를 구매하지 않고 직접 만들었다</div>
+          <div class="np-mj-sub">3D 보안 비주얼 — 결제 신뢰감을 상징하는 이미지를 미드저니로 이터레이션</div>
+          <div class="np-mj-flow">
+            <div class="np-mj-step">
+              <div class="np-mj-step-n">01</div>
+              <div class="np-mj-step-t">방향 설정</div>
+              <div class="np-mj-step-d">테크 + 보안 + 신뢰. 차갑고 정밀한 블루 톤</div>
+            </div>
+            <div class="np-mj-step">
+              <div class="np-mj-step-n">02</div>
+              <div class="np-mj-step-t">이터레이션</div>
+              <div class="np-mj-step-d">소재·앵글·라이팅 조합 반복 시도</div>
+            </div>
+            <div class="np-mj-step">
+              <div class="np-mj-step-n">03</div>
+              <div class="np-mj-step-t">최종 선정</div>
+              <div class="np-mj-step-d">브랜드 블루 톤과 조화 기준으로 픽</div>
+            </div>
+          </div>
+          <div class="np-prompt-box">
+            <div class="np-prompt-label">PROMPT EXAMPLE (재현)</div>
+            <div class="np-prompt-text">3D isometric credit card with security lock floating above, glass morphism cards layout, light blue monochrome palette, soft ambient lighting, clean minimal background, payment security concept</div>
+            <div class="np-prompt-tags">
+              <span class="np-ptag">--ar 16:9</span>
+              <span class="np-ptag">--v 6</span>
+              <span class="np-ptag">isometric</span>
+              <span class="np-ptag">glass morphism</span>
+              <span class="np-ptag">monochrome blue</span>
+            </div>
+          </div>
+          <div class="np-mj-grid">
+            <div class="np-mj-cell">
+              <img src="./images/nicepayments/mj_01.png" alt="미드저니 생성 이미지 1 — 웨이브 큐브">
+              <div class="np-mj-cell-label">Business Section</div>
+            </div>
+            <div class="np-mj-cell">
+              <img src="./images/nicepayments/mj_02.png" alt="미드저니 생성 이미지 2 — 문서 아이콘">
+              <div class="np-mj-cell-label">Service Section</div>
+            </div>
+            <div class="np-mj-cell">
+              <img src="./images/nicepayments/mj_03.png" alt="미드저니 생성 이미지 3 — 글래스 플랫폼">
+              <div class="np-mj-cell-label">Solution Card</div>
+            </div>
+            <div class="np-mj-cell">
+              <img src="./images/nicepayments/mj_04.png" alt="미드저니 생성 이미지 4 — UI 컴포넌트">
+              <div class="np-mj-cell-label">Feature Section</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ── 디자인 결정 ── -->
+      <div class="np-sec">
+        <div class="np-label">Design Decisions</div>
+        <div class="np-dec-list">
+          <div class="np-dec">
+            <div class="np-dec-n">01</div>
+            <div>
+              <div class="np-dec-t">다크모드를 선택한 이유 — 신뢰감은 톤에서 온다</div>
+              <div class="np-dec-d">KG이니시스의 전통적 신뢰 + 토스의 현대적 UX. 다크 배경과 NICE 블루 조합으로 테크 기업의 전문성을 시각화했다.</div>
+            </div>
+          </div>
+          <div class="np-dec">
+            <div class="np-dec-n">02</div>
+            <div>
+              <div class="np-dec-t">탐색형 → 데이터 확신형 플로우</div>
+              <div class="np-dec-d">GNB 메뉴 6개를 4개로 줄이고, 히어로에서 수치(115만 가맹점, VAN 점유율 42.4%)를 즉시 노출해 탐색 전에 신뢰를 심었다.</div>
+            </div>
+          </div>
+          <div class="np-dec">
+            <div class="np-dec-n">03</div>
+            <div>
+              <div class="np-dec-t">3D 카드형 UI로 서비스 구조를 시각화</div>
+              <div class="np-dec-d">텍스트 나열이었던 사업 영역을 미드저니 3D 이미지 카드로 재설계. PG/VAN 구분을 컬러 톤으로 분리했다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ── 회고 ── -->
+      <div class="np-sec">
+        <div class="np-label">Retrospective</div>
+        <div class="np-retro">
+          <div class="np-retro-card">
+            <div class="np-retro-l">배운 것</div>
+            <div class="np-retro-t">B2B 서비스는 설득이 아니라 "확신"시켜야 한다. 수치 없는 신뢰 설계는 빈 말이다</div>
+          </div>
+          <div class="np-retro-card">
+            <div class="np-retro-l">한계</div>
+            <div class="np-retro-t">미드저니 프롬프트 컨트롤의 불확실성. 원하는 결과까지 이터레이션 비용이 예측 불가능하다</div>
+          </div>
+        </div>
+        <div class="np-cta">
+          <a class="np-btn-s" href="./nicepayments.pdf" target="_blank">전체 기획서 보기 →</a>
+        </div>
+      </div>
+    
+    </article>
+  </div>
+  <button class="pp-close" id="ppClose" aria-label="닫기">✕</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ══════════════ CURSOR ══════════════ */
+const cross = document.getElementById('cur-cross');
+const dot   = document.getElementById('cur-dot');
+const ctxt  = document.getElementById('cur-txt');
+let cx=0,cy=0,dx=0,dy=0;
+
+document.addEventListener('mousemove',e=>{
+  cx=e.clientX; cy=e.clientY;
+  dot.style.left=cx+'px'; dot.style.top=cy+'px';
+  ctxt.style.left=cx+'px'; ctxt.style.top=cy+'px';
+});
+(function animCross(){
+  dx+=(cx-dx)*.12; dy+=(cy-dy)*.12;
+  cross.style.left=dx+'px'; cross.style.top=dy+'px';
+  requestAnimationFrame(animCross);
+})();
+
+function setCursorState(mode, label){
+  cross.className = mode==='big'?'big':mode==='blue'?'big blue':'';
+  ctxt.textContent = label||'';
+  ctxt.className = label?'show':'';
+}
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('big',null));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+document.querySelectorAll('.wk-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('blue','VIEW →'));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+document.querySelectorAll('.gi').forEach(el=>{
+  el.addEventListener('mouseenter',()=>setCursorState('blue','OPEN'));
+  el.addEventListener('mouseleave',()=>setCursorState('',''));
+});
+
+/* ══════════════ HERO SCROLL SCATTER ══════════════ */
+const heroEl      = document.getElementById('hero');
+const heroJang    = document.getElementById('heroJang');
+const heroGreet   = document.getElementById('heroGreeting');
+const heroRole    = document.getElementById('heroRole');
+const heroIndex   = document.getElementById('heroIndex');
+const heroNameBg  = document.getElementById('heroNameBg');
+const heroNa      = document.getElementById('heroNa');
+
+// Each scatter card: element, tx, ty (exit direction), rot
+const scatterCards = [
+  { el: document.getElementById('card-exp'),    tx:  220, ty: -200, rot:  12 },
+  { el: document.getElementById('card-role'),   tx:  180, ty: -100, rot: -8  },
+  { el: document.getElementById('card-tool'),   tx:  240, ty:  120, rot:  6  },
+  { el: document.getElementById('card-award'),  tx: -180, ty:  200, rot: -14 },
+  { el: document.getElementById('card-contrib'),tx: -220, ty:  160, rot:  10 },
+  { el: document.getElementById('card-ai'),     tx: -100, ty: -180, rot:  -6 },
+];
+
+function lerp(a,b,t){ return a+(b-a)*t; }
+function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+
+window.addEventListener('scroll', ()=>{
+  const scrollY = window.scrollY;
+  const heroH   = heroEl.offsetHeight;
+  const p = clamp(scrollY / (heroH * 0.65), 0, 1); // progress 0→1
+
+  // Big JANG text: move left + fade
+  heroJang.style.transform    = `translateX(${p * -120}px) translateY(${p * -40}px)`;
+  heroJang.style.opacity      = 1 - p * 1.4;
+
+  // Greeting: move right + fade
+  heroGreet.style.transform   = `translateX(${p * 80}px) translateY(${p * -60}px)`;
+  heroGreet.style.opacity     = 1 - p * 1.6;
+
+  // Role tags: slide down + fade
+  heroRole.style.transform    = `translateX(${p * -60}px) translateY(${p * 80}px)`;
+  heroRole.style.opacity      = 1 - p * 1.5;
+
+  // Index: fade up
+  heroIndex.style.opacity     = 1 - p * 2;
+
+  // 가운데 "나": fade out
+  if(heroNa){ heroNa.style.opacity = 1 - p * 1.4; }
+
+  // Background name: scale up + fade
+  heroNameBg.style.opacity    = 0.12 - p * 0.15;
+  heroNameBg.style.transform  = `scale(${1 + p * 0.06})`;
+
+  // Each scatter card flies to its exit position
+  scatterCards.forEach(({el, tx, ty, rot}) => {
+    const ep = clamp(p * 1.3, 0, 1); // slightly faster
+    el.style.transform = `translate(${lerp(0,tx,ep)}px, ${lerp(0,ty,ep)}px) rotate(${lerp(0,rot,ep)}deg)`;
+    el.style.opacity   = 1 - ep * 1.2;
+  });
+}, { passive: true });
+
+/* ══════════════ SCROLL REVEAL ══════════════ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in');
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal-up').forEach(el=>io.observe(el));
+
+/* ══════════════ ACTIVE NAV on scroll ══════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.hdr-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{
+    if(window.scrollY >= s.offsetTop - 100) current=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active-nav', a.getAttribute('href')==='#'+current);
+  });
+},{passive:true});
+
+/* ══════════════ GALLERY CLICK ══════════════ */
+document.querySelectorAll('.gi').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const img=item.querySelector('img');
+    if(img) window.open(img.src,'_blank');
+  });
+});
+
+/* ══════════════ PANEL OPEN / CLOSE ══════════════ */
+const panel = document.getElementById('proj-panel');
+const overlay = document.getElementById('proj-overlay');
+const ppClose = document.getElementById('ppClose');
+
+function openPanel(id){
+  const block = document.getElementById('proj-content-' + id);
+  if(!block) return;
+  document.querySelectorAll('.proj-content').forEach(el=>el.classList.remove('active'));
+  block.classList.add('active');
+  panel.classList.add('open');
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closePanel(){
+  panel.classList.remove('open');
+  overlay.classList.remove('show');
+  document.body.style.overflow='';
+}
+ppClose.addEventListener('click',closePanel);overlay.addEventListener('click',closePanel);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+
+document.querySelectorAll('.wk-row').forEach(row=>{
+  row.addEventListener('click',()=>{ const id=row.dataset.proj; if(id) openPanel(id); });
+  row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); row.click(); }});
+});
+
+/* ══════════════ WORK ROW THUMBNAIL FOLLOW ══════════════ */
+const thumb     = document.getElementById('wk-thumb');
+const thumbImg  = document.getElementById('wk-thumb-img');
+const thumbName = document.getElementById('wk-thumb-name');
+const thumbCat  = document.getElementById('wk-thumb-cat');
+const thumbNum  = document.getElementById('wk-thumb-num');
+
+// Target / current position for smooth lerp
+let tgx = 0, tgy = 0;
+let crx = 0, cry = 0;
+let rafId = null;
+let isVisible = false;
+
+// Thumb image data pulled from each row's bg + wk-name / wk-cat / wk-n
+function getRowData(row){
+  const bgEl  = row.querySelector('.wk-row-bg');
+  const img   = bgEl ? bgEl.style.backgroundImage.replace(/url\\([\"']?|[\"']?\\)/g,'') : '';
+  const name  = row.querySelector('.wk-name')?.textContent?.trim() || '';
+  const cat   = row.querySelector('.wk-cat')?.textContent?.trim() || '';
+  const num   = row.querySelector('.wk-n')?.textContent?.trim() || '';
+  return { img, name, cat, num };
+}
+
+function startLerp(){
+  function tick(){
+    // Spring lerp — slightly springy feel
+    crx += (tgx - crx) * 0.13;
+    cry += (tgy - cry) * 0.13;
+    thumb.style.left = crx + 'px';
+    thumb.style.top  = cry + 'px';
+    if(isVisible) rafId = requestAnimationFrame(tick);
+  }
+  cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(tick);
+}
+
+document.querySelectorAll('.wk-row').forEach(row => {
+  row.addEventListener('mouseenter', e => {
+    const d = getRowData(row);
+    if(!d.img) return;
+
+    // Populate card
+    thumbImg.src        = d.img;
+    thumbName.textContent = d.name.replace(/🏆.*$/, '').trim(); // strip emoji
+    thumbCat.textContent  = d.cat;
+    thumbNum.textContent  = d.num;
+
+    // Snap position before showing to avoid flash
+    const offsetX = 28;
+    const offsetY = -90;
+    crx = e.clientX + offsetX;
+    cry = e.clientY + offsetY;
+    thumb.style.left = crx + 'px';
+    thumb.style.top  = cry + 'px';
+    tgx = crx; tgy = cry;
+
+    isVisible = true;
+    thumb.classList.add('visible');
+    startLerp();
+  });
+
+  row.addEventListener('mousemove', e => {
+    if(!isVisible) return;
+    const offsetX = 28;
+    const offsetY = -90;
+    let nx = e.clientX + offsetX;
+    let ny = e.clientY + offsetY;
+
+    // Keep inside viewport
+    const tw = thumb.offsetWidth  || 280;
+    const th = thumb.offsetHeight || 220;
+    if(nx + tw > window.innerWidth  - 16) nx = e.clientX - tw - 16;
+    if(ny + th > window.innerHeight - 16) ny = e.clientY - th - 16;
+    if(ny < 60) ny = 60;
+
+    tgx = nx;
+    tgy = ny;
+  });
+
+  row.addEventListener('mouseleave', () => {
+    isVisible = false;
+    thumb.classList.remove('visible');
+    cancelAnimationFrame(rafId);
+  });
+});
+</script>
+</body>
+</html>
