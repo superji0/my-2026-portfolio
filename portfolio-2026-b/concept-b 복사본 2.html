@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>장지영 — Concept B</title>
 <meta name="description" content="UI/UX 디자이너 & 웹 퍼블리셔 장지영 포트폴리오">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@master/css/SpoqaHanSansNeo.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -20,19 +19,13 @@
 </script>
 <link rel="icon" href="./images/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Funnel+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 100 900;
-  font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations');
-  font-display: swap;
-}
 /* ══════════════ TOKENS ══════════════ */
 :root {
+  --font-sans: 'Mona Sans', 'Noto Sans KR', sans-serif;
   --cream:  #ede8dc;
   --cream2: #e4dece;
   --cream3: #f5f1e8;
@@ -58,7 +51,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;scroll-behavior:auto;}
 body{
-  font-family:'Spoqa Han Sans Neo','SUIT',system-ui,-apple-system,sans-serif;
+  font-family: var(--font-sans);
   background:var(--cream);
   color:var(--black);
   cursor:none;
@@ -93,7 +86,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 #cur-txt{
   position:fixed;z-index:100000;pointer-events:none;
-  font-family:'Space Mono',monospace;font-size:11px;
+  font-family: var(--font-sans);font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;
   color:var(--blue);white-space:nowrap;
   transform:translate(14px,-6px);
@@ -109,13 +102,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   mix-blend-mode:multiply;
 }
 .hdr-logo{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-h3);font-weight:700;letter-spacing:.01em;color:var(--black);
 }
 .hdr-logo em{color:var(--blue);font-style:normal;}
 .hdr-nav{display:flex;align-items:center;gap:28px;}
 .hdr-link{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;text-transform:uppercase;color:var(--muted);
   transition:color .2s;position:relative;
 }
@@ -150,7 +143,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   position:absolute;
   bottom:-12px;left:32px;
   z-index:1;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(100px, 18vw, 240px);
   line-height:.88;letter-spacing:-.02em;
   color:transparent;
@@ -164,7 +157,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   position:absolute;
   top:clamp(60px,10vh,110px);left:12%;
   z-index:4;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(80px,14vw,190px);
   line-height:.88;letter-spacing:-.02em;
   color:var(--blue);
@@ -177,7 +170,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   top:clamp(68px,11vh,120px);
   right:12%;
   z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-style:normal;
   font-size:clamp(var(--fs-h3),2.2vw,var(--fs-h2));
   color:var(--muted);
@@ -198,7 +191,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .rtag{
   display:inline-flex;align-items:center;gap:6px;
   background:var(--black);color:var(--cream);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   letter-spacing:.01em;padding:6px 14px;border-radius:2px;
   width:fit-content;
 }
@@ -218,7 +211,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .s-card.lined{background:transparent;border:1.5px solid var(--black);}
 
 .sc-label{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.01em;text-transform:uppercase;
   color:var(--muted);margin-bottom:5px;
 }
@@ -226,7 +219,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .s-card.yellow .sc-label{color:rgba(13,13,11,.5);}
 .sc-val{font-size:13px;font-weight:700;line-height:1.3;}
 .sc-val.big{
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:32px;line-height:1;letter-spacing:.02em;
 }
 
@@ -244,7 +237,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   transform:translateX(-50%);
   z-index:6;
   display:flex;align-items:center;gap:10px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--muted);
   animation:hscroll 2.5s ease infinite;
   pointer-events:none;
@@ -259,7 +252,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .hero-index{
   position:absolute;top:clamp(56px,8vh,90px);left:50%;
   transform:translateX(-50%);z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;color:var(--muted);text-align:center;
   transition:opacity .05s;
 }
@@ -271,7 +264,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(120px,22vw,220px);
   font-weight:700;
   line-height:1;
@@ -305,7 +298,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   animation:mq 20s linear infinite;
 }
 .mq-track span{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;
   color:var(--cream);padding:0 22px;
 }
@@ -314,14 +307,14 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 
 /* ══════════════ SECTION SHARED ══════════════ */
 .section-eyebrow{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:10px;margin-bottom:14px;
 }
 .section-eyebrow::before{content:'';width:18px;height:1px;background:var(--blue);}
 
 .section-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.4vw,40px);
   line-height:var(--lh-title);letter-spacing:-.01em;
   margin-bottom:4px;
@@ -339,7 +332,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   border-bottom:1.5px solid var(--black);padding-bottom:28px;margin-bottom:0;
 }
 .wk-count{
-  font-family:'DM Serif Display',serif;font-style:italic;
+  font-family: var(--font-sans);font-style:italic;
   font-size:clamp(40px,6vw,72px);color:var(--blue);line-height:1;
 }
 .wk-head-right{
@@ -353,12 +346,12 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:12px 0;border-bottom:1px solid var(--border);
 }
 .wk-col{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.02em;color:var(--muted);
 }
 .wk-section-div{
   padding:20px 0 6px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:10px;
 }
@@ -393,18 +386,18 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .wk-row:hover::before{width:3px;}
 .wk-row>*{position:relative;z-index:2;}
 
-.wk-n{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);padding-top:2px;transition:color .3s;}
+.wk-n{font-family: var(--font-sans);font-size:var(--fs-caption);color:var(--muted);padding-top:2px;transition:color .3s;}
 .wk-row:hover .wk-n{color:rgba(255,255,255,.4);}
 .wk-name{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;line-height:var(--lh-title);}
 .wk-award{
   display:inline-flex;align-items:center;
   background:var(--yellow);color:var(--black);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   letter-spacing:.01em;padding:2px 7px;border-radius:2px;
 }
 .wk-yr,.wk-cat,.wk-role{font-size:var(--fs-caption);padding-top:2px;line-height:var(--lh-title);}
 .wk-yr,.wk-cat{color:var(--muted);}
-.wk-role{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;}
+.wk-role{font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;}
 .wk-row:hover .wk-yr,.wk-row:hover .wk-cat,.wk-row:hover .wk-role{color:rgba(255,255,255,.55);}
 
 /* ══════════════ PROJECT DETAIL (right-slide panel) ══════════════ */
@@ -440,13 +433,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .pp-close:hover{background:var(--black);color:var(--cream);border-color:var(--black);}
 .pp-eyebrow{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:9px;margin-bottom:10px;
 }
 .pp-eyebrow::before{content:'';width:16px;height:1px;background:var(--blue);}
 .pp-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,5.2vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;margin-bottom:12px;font-weight:700;
 }
 .pp-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px;}
@@ -455,13 +448,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-contrib{
   display:inline-flex;align-items:center;gap:4px;
   background:var(--blue2);border:1px solid rgba(24,71,245,.25);
-  color:var(--blue);font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  color:var(--blue);font-family: var(--font-sans);
   font-size:var(--fs-caption);letter-spacing:.01em;padding:4px 9px;border-radius:100px;
 }
 .pp-roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;margin-bottom:22px;}
 .pp-role{
   padding:4px 11px;border:1px solid var(--border);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);
+  font-family: var(--font-sans);font-size:var(--fs-caption);color:var(--muted);
 }
 .pp-role.hi{border-color:rgba(24,71,245,.4);color:var(--blue);}
 
@@ -471,7 +464,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-shots.wide img{aspect-ratio:16/10;}
 
 .pp-sec{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.4vw,28px);
   line-height:var(--lh-title);
   font-weight:600;
@@ -487,7 +480,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .cs-block{margin-bottom:14px;padding:10px 0;border-top:1px dashed rgba(13,13,11,.12);}
 .cs-k{
   display:inline-flex;align-items:center;gap:6px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.2vw,26px);
   line-height:var(--lh-title);
   font-weight:600;
@@ -510,7 +503,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:12px;
 }
 .ba-row-head{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(16px,1.8vw,20px);
   font-weight:500;
   letter-spacing:-.01em;
@@ -539,7 +532,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .ba-cap{
   padding:8px 10px;
   border-top:1px solid var(--border);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-caption);
   letter-spacing:.01em;
   text-transform:uppercase;
@@ -550,7 +543,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
 .pp-tag{
   padding:4px 11px;border:1px solid var(--border);border-radius:100px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;
   text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s;
 }
 .pp-tag:hover{border-color:var(--blue);color:var(--blue);}
@@ -558,7 +551,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:8px;
   padding:11px 22px;background:var(--blue);
   color:var(--white);border:none;border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
   transition:background .2s;
 }
 .pp-cta:hover{background:var(--black);}
@@ -568,7 +561,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:8px;
   padding:11px 22px;background:transparent;color:var(--blue);
   border:1.5px solid var(--blue);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
   transition:background .2s,color .2s;
 }
 .pp-cta--outline:hover{background:var(--blue2);color:var(--black);border-color:var(--blue);}
@@ -601,7 +594,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .pickly-panel .pl-cover-brand{
   position:relative;z-index:1;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(24px,4vw,30px);font-weight:700;color:var(--white);
   letter-spacing:-.03em;line-height:1;
 }
@@ -614,7 +607,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .pickly-panel .pl-eyebrow{
   display:flex;align-items:center;gap:10px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   color:var(--pl-accent);margin-bottom:10px;
 }
@@ -622,19 +615,19 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   content:'';display:block;width:18px;height:1px;background:var(--pl-accent);flex-shrink:0;
 }
 .pickly-panel .pl-sec-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.6vw,26px);font-weight:600;line-height:1.25;
   color:var(--black);margin-bottom:8px;letter-spacing:-.02em;
 }
 .pickly-panel .pl-sec-sub{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:15px;color:var(--muted);line-height:1.65;max-width:38em;
 }
 .pickly-panel .pl-sec-sub--flush{margin-top:0;}
 .pickly-panel .pl-problem-block .pl-problem-body + .pl-problem-body{margin-top:12px;}
 .pickly-panel .pl-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
 .pickly-panel .pl-meta-pill{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:12px;padding:6px 12px;border-radius:100px;
   border:1px solid var(--border);color:var(--muted);background:var(--cream2);
   line-height:1.35;
@@ -645,11 +638,11 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   border-left:3px solid var(--pl-accent);
 }
 .pickly-panel .pl-problem-quote{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:16px;font-weight:600;line-height:1.5;color:var(--black);margin-bottom:12px;
 }
 .pickly-panel .pl-problem-body{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:15px;color:var(--muted);line-height:1.7;
 }
 .pickly-panel .pl-decision-list{display:flex;flex-direction:column;gap:14px;margin-top:18px;}
@@ -657,15 +650,15 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:18px 20px;border:1px solid var(--border);border-radius:12px;background:var(--white);
 }
 .pickly-panel .pl-decision-num{
-  font-family:'Space Mono',monospace;
+  font-family: var(--font-sans);
   font-size:11px;font-weight:600;color:var(--pl-accent);letter-spacing:.06em;margin-bottom:6px;
 }
 .pickly-panel .pl-decision-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:15px;font-weight:600;margin-bottom:8px;color:var(--black);line-height:1.35;
 }
 .pickly-panel .pl-decision-body{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:14px;color:var(--muted);line-height:1.65;
 }
 .pickly-panel .pl-retro-grid{
@@ -675,17 +668,17 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   background:var(--cream2);border-radius:10px;padding:16px 18px;border:1px solid var(--border);
 }
 .pickly-panel .pl-retro-label{
-  font-family:'Space Mono',monospace;
+  font-family: var(--font-sans);
   font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.05em;margin-bottom:8px;
 }
 .pickly-panel .pl-retro-text{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:14px;line-height:1.6;color:var(--black);
 }
 .pickly-panel .pl-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center;}
 .pickly-panel .pl-btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:12px 20px;border-radius:8px;font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  padding:12px 20px;border-radius:8px;font-family: var(--font-sans);
   font-size:14px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .15s;
 }
 .pickly-panel .pl-btn--primary{background:var(--pl-accent);color:var(--white);border:none;}
@@ -699,7 +692,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;
 }
 .pickly-panel .pl-pdf-sub a{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:13px;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;
+  font-family: var(--font-sans);font-size:13px;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;
 }
 .pickly-panel .pl-pdf-sub a:hover{border-bottom-color:var(--blue);}
 .pickly-panel .pl-pdf-note{font-size:13px;color:var(--muted);line-height:1.55;max-width:40em;margin:0;}
@@ -722,22 +715,22 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .db-panel .db-cover-eyebrow{
   display:flex;align-items:center;gap:10px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:12px;color:var(--muted);margin-bottom:14px;
 }
 .db-panel .db-cover-eyebrow::before{content:'';width:20px;height:1px;background:var(--muted);flex-shrink:0;}
 .db-panel .db-cover-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.8vw,28px);font-weight:600;line-height:1.25;
   color:var(--black);margin-bottom:10px;letter-spacing:-.02em;
 }
 .db-panel .db-cover-sub{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:20px;max-width:36em;
 }
 .db-panel .db-cover-chips{display:flex;gap:8px;flex-wrap:wrap;}
 .db-panel .db-chip{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:12px;padding:6px 12px;border-radius:100px;
   border:1px solid var(--border);color:var(--muted);background:var(--white);
 }
@@ -750,12 +743,12 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .db-panel .db-sec:last-child{border-bottom:none;padding-bottom:4px;}
 .db-panel .db-label{
-  font-family:'Space Mono',monospace;
+  font-family: var(--font-sans);
   font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   color:var(--muted);margin-bottom:12px;
 }
 .db-panel .db-lead{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:16px;font-weight:600;line-height:1.45;margin-bottom:14px;color:var(--black);
 }
 .db-panel .db-prob-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
@@ -763,17 +756,17 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   background:var(--db-surface);border-radius:10px;padding:16px 18px;border:1px solid var(--border);
 }
 .db-panel .db-prob-card-label{
-  font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:6px;
+  font-family: var(--font-sans);font-size:11px;color:var(--muted);margin-bottom:6px;
 }
 .db-panel .db-prob-card-text{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;line-height:1.6;color:var(--black);
+  font-family: var(--font-sans);font-size:14px;line-height:1.6;color:var(--black);
 }
 .db-panel .db-sec--icon{background:var(--cream);border-radius:12px;padding:clamp(20px,3vw,28px);margin:0 -4px;border:1px solid var(--border);}
 .db-panel .db-icon-lead{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;color:var(--muted);margin:0;line-height:1.55;
+  font-family: var(--font-sans);font-size:14px;color:var(--muted);margin:0;line-height:1.55;
 }
 .db-panel .db-icon-hint{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:12px;color:var(--muted);margin-top:12px;
 }
 .db-panel .db-icon-grid{
@@ -785,7 +778,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 /* 실서비스 URL 비공개 시 안내 문단 */
 .db-panel .db-sec-note{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 14px;max-width:40em;
 }
 .db-panel .db-screens{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
@@ -813,13 +806,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:flex;gap:14px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--white);
 }
 .db-panel .db-dec-n{
-  font-family:'Space Mono',monospace;font-size:11px;font-weight:600;color:var(--blue);min-width:22px;padding-top:2px;flex-shrink:0;
+  font-family: var(--font-sans);font-size:11px;font-weight:600;color:var(--blue);min-width:22px;padding-top:2px;flex-shrink:0;
 }
 .db-panel .db-dec-t{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;font-weight:600;margin-bottom:4px;color:var(--black);
+  font-family: var(--font-sans);font-size:14px;font-weight:600;margin-bottom:4px;color:var(--black);
 }
 .db-panel .db-dec-d{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;color:var(--muted);line-height:1.6;
+  font-family: var(--font-sans);font-size:14px;color:var(--muted);line-height:1.6;
 }
 .db-panel .db-lang-compare{display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap;}
 .db-panel .db-lang-before,.db-panel .db-lang-after{display:flex;flex-wrap:wrap;gap:6px;flex:1;min-width:140px;}
@@ -832,8 +825,8 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .db-panel .db-retro-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
 .db-panel .db-retro-card{background:var(--db-surface);border-radius:10px;padding:16px 18px;border:1px solid var(--border);}
-.db-panel .db-retro-l{font-size:11px;color:var(--muted);margin-bottom:6px;font-family:'Space Mono',monospace;}
-.db-panel .db-retro-t{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:14px;line-height:1.6;color:var(--black);}
+.db-panel .db-retro-l{font-size:11px;color:var(--muted);margin-bottom:6px;font-family: var(--font-sans);}
+.db-panel .db-retro-t{font-family: var(--font-sans);font-size:14px;line-height:1.6;color:var(--black);}
 .db-panel .db-status-pill{
   display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 12px;border-radius:100px;
   background:var(--db-status-bg);color:var(--db-status-txt);border:1px solid var(--db-status-bd);margin-top:14px;
@@ -851,7 +844,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 /* Inner tabs in panel */
 .pp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
 .pp-tab{
-  padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;
+  padding:9px 18px;font-family: var(--font-sans);font-size:11px;letter-spacing:.04em;
   color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
 }
 .pp-tab:hover{color:var(--black);}
@@ -869,7 +862,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   gap:40px;align-items:end;margin-bottom:56px;
 }
 .diff-title-big{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.6vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;font-weight:700;
 }
 .diff-title-big em{color:var(--blue);font-style:normal;}
@@ -888,14 +881,14 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .d-card:hover .d-card-accent{background:var(--blue);}
 .d-num{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);line-height:var(--lh-title);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-h2);line-height:var(--lh-title);font-weight:700;
   color:var(--blue);margin-bottom:10px;
 }
 .d-card h3{font-size:var(--fs-h3);font-weight:600;margin-bottom:8px;line-height:var(--lh-title);color:var(--cream);}
 .d-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:rgba(237,232,220,.62);}
 .d-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
 .d-tag{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;
   text-transform:uppercase;padding:2px 7px;
   border:1px solid rgba(24,71,245,.3);color:var(--blue);border-radius:1px;
 }
@@ -933,7 +926,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .gi:hover .gi-info{opacity:1;}
 .gi-info b{font-size:var(--fs-h3);font-weight:600;color:#fff;display:block;line-height:var(--lh-title);}
-.gi-info small{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(255,255,255,.65);margin-top:3px;display:block;}
+.gi-info small{font-family: var(--font-sans);font-size:var(--fs-caption);color:rgba(255,255,255,.65);margin-top:3px;display:block;}
 
 /* ══════════════ ABOUT ══════════════ */
 #about{
@@ -945,7 +938,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 #about::before{
   content:'JJY';position:absolute;
   bottom:-60px;right:-20px;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(160px,24vw,320px);line-height:.8;
   color:transparent;-webkit-text-stroke:1.5px rgba(13,13,11,.06);
   pointer-events:none;user-select:none;
@@ -953,7 +946,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
 .about-name-big{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.8vw,40px);line-height:var(--lh-title);
   letter-spacing:-.02em;margin-bottom:24px;
   font-weight:700;
@@ -967,13 +960,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:10px 0;border-bottom:1px solid var(--border);font-size:var(--fs-body);
 }
 .fact-lbl{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.01em;color:var(--muted);padding-top:1px;
 }
 
 /* Skills grid */
 .sk-header{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.01em;color:var(--muted);margin-bottom:14px;
 }
 .sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -995,7 +988,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   transition:border-color .25s,transform .3s var(--ease),background .25s;
 }
 .etc-card:hover{border-color:var(--blue);background:var(--white);transform:translateY(-3px);}
-.etc-card h3{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);letter-spacing:0;margin-bottom:8px;line-height:var(--lh-title);font-weight:700;}
+.etc-card h3{font-family: var(--font-sans);font-size:var(--fs-h2);letter-spacing:0;margin-bottom:8px;line-height:var(--lh-title);font-weight:700;}
 .etc-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:var(--muted);}
 .char-imgs{display:flex;gap:8px;margin-bottom:14px;}
 .ch-img{width:66px;height:66px;object-fit:contain;background:var(--cream2);border-radius:4px;padding:6px;}
@@ -1003,12 +996,12 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:5px;margin-top:10px;
   background:var(--yellow);color:var(--black);
   padding:4px 12px;border-radius:1px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;font-weight:700;
 }
 .etc-role-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
 .etc-rbadge{
   padding:3px 10px;border:1px solid var(--border);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;color:var(--muted);
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;color:var(--muted);
 }
 .etc-rbadge.hi{border-color:rgba(24,71,245,.35);color:var(--blue);}
 
@@ -1018,12 +1011,12 @@ footer{
   padding:40px 36px;
   display:flex;justify-content:space-between;align-items:center;
 }
-.ft-brand{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-h3);font-weight:700;}
-.ft-brand small{display:block;font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-caption);color:rgba(237,232,220,.55);margin-top:3px;}
+.ft-brand{font-family: var(--font-sans);font-style:normal;font-size:var(--fs-h3);font-weight:700;}
+.ft-brand small{display:block;font-family: var(--font-sans);font-style:normal;font-size:var(--fs-caption);color:rgba(237,232,220,.55);margin-top:3px;}
 .ft-links{display:flex;gap:20px;}
-.ft-links a{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(237,232,220,.6);transition:color .2s;}
+.ft-links a{font-family: var(--font-sans);font-size:var(--fs-caption);color:rgba(237,232,220,.6);transition:color .2s;}
 .ft-links a:hover{color:var(--blue);}
-.ft-xl{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;color:var(--blue);}
+.ft-xl{font-family: var(--font-sans);font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;color:var(--blue);}
 
 /* ══════════════ RESPONSIVE ══════════════ */
 @media(max-width:960px){
@@ -1116,7 +1109,7 @@ footer{
   line-height:1.3;
 }
 .wk-thumb-cat{
-  font-family:'Space Mono',monospace;
+  font-family: var(--font-sans);
   font-size:11px;
   letter-spacing:.06em;
   text-transform:uppercase;
@@ -1124,7 +1117,7 @@ footer{
   margin-top:2px;
 }
 .wk-thumb-num{
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:28px;
   line-height:1;
   color:var(--blue);
@@ -1743,7 +1736,7 @@ footer{
           border-top: 1px solid var(--border);
         }
         #proj-content-nicepay .np-label {
-          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-family: var(--font-sans);
           font-size: 11px;
           font-weight: 700;
           letter-spacing: .08em;
@@ -1772,7 +1765,7 @@ footer{
           display: block;
         }
         #proj-content-nicepay .np-sub {
-          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-family: var(--font-sans);
           font-size: 15px;
           font-weight: 500;
           line-height: 1.5;
@@ -1797,7 +1790,7 @@ footer{
           padding: 14px 16px;
         }
         #proj-content-nicepay .np-num {
-          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-family: var(--font-sans);
           font-size: 30px;
           font-weight: 700;
           color: var(--blue);
@@ -1942,7 +1935,7 @@ footer{
           margin-bottom: 6px;
         }
         #proj-content-nicepay .np-prompt-text {
-          font-family: 'Space Mono', monospace;
+          font-family: var(--font-sans);
           font-size: 11px;
           color: rgba(255,255,255,.65);
           line-height: 1.7;
@@ -2061,7 +2054,7 @@ footer{
           background: transparent;
           cursor: pointer;
           text-decoration: none;
-          font-family: 'SUIT', 'Spoqa Han Sans Neo', sans-serif;
+          font-family: var(--font-sans);
           transition: all .2s;
         }
         #proj-content-nicepay .np-btn-s:hover {

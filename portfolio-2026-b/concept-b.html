@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>장지영 — Concept B</title>
 <meta name="description" content="UI/UX 디자이너 & 웹 퍼블리셔 장지영 포트폴리오">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@master/css/SpoqaHanSansNeo.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -19,20 +18,16 @@
 }
 </script>
 <link rel="icon" href="./images/favicon.ico">
+<!-- 타이포: 영문 Mona Sans · 한글 Noto Sans KR -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Funnel+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-  font-family: 'SUIT';
-  font-weight: 100 900;
-  font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations');
-  font-display: swap;
-}
 /* ══════════════ TOKENS ══════════════ */
 :root {
+  /* 영문 Mona Sans · 한글 Noto Sans KR */
+  --font-sans: 'Mona Sans', 'Noto Sans KR', sans-serif;
   --cream:  #ede8dc;
   --cream2: #e4dece;
   --cream3: #f5f1e8;
@@ -58,7 +53,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;scroll-behavior:auto;}
 body{
-  font-family:'Spoqa Han Sans Neo','SUIT',system-ui,-apple-system,sans-serif;
+  font-family: var(--font-sans);
   background:var(--cream);
   color:var(--black);
   cursor:none;
@@ -93,7 +88,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 #cur-txt{
   position:fixed;z-index:100000;pointer-events:none;
-  font-family:'Space Mono',monospace;font-size:11px;
+  font-family: var(--font-sans);font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;
   color:var(--blue);white-space:nowrap;
   transform:translate(14px,-6px);
@@ -109,13 +104,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   mix-blend-mode:multiply;
 }
 .hdr-logo{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-h3);font-weight:700;letter-spacing:.01em;color:var(--black);
 }
 .hdr-logo em{color:var(--blue);font-style:normal;}
 .hdr-nav{display:flex;align-items:center;gap:28px;}
 .hdr-link{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;text-transform:uppercase;color:var(--muted);
   transition:color .2s;position:relative;
 }
@@ -150,7 +145,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   position:absolute;
   bottom:-12px;left:32px;
   z-index:1;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(100px, 18vw, 240px);
   line-height:.88;letter-spacing:-.02em;
   color:transparent;
@@ -164,7 +159,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   position:absolute;
   top:clamp(60px,10vh,110px);left:12%;
   z-index:4;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(80px,14vw,190px);
   line-height:.88;letter-spacing:-.02em;
   color:var(--blue);
@@ -177,7 +172,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   top:clamp(68px,11vh,120px);
   right:12%;
   z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-style:normal;
   font-size:clamp(var(--fs-h3),2.2vw,var(--fs-h2));
   color:var(--muted);
@@ -198,7 +193,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .rtag{
   display:inline-flex;align-items:center;gap:6px;
   background:var(--black);color:var(--cream);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   letter-spacing:.01em;padding:6px 14px;border-radius:2px;
   width:fit-content;
 }
@@ -218,7 +213,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .s-card.lined{background:transparent;border:1.5px solid var(--black);}
 
 .sc-label{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.01em;text-transform:uppercase;
   color:var(--muted);margin-bottom:5px;
 }
@@ -226,7 +221,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .s-card.yellow .sc-label{color:rgba(13,13,11,.5);}
 .sc-val{font-size:13px;font-weight:700;line-height:1.3;}
 .sc-val.big{
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:32px;line-height:1;letter-spacing:.02em;
 }
 
@@ -244,7 +239,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   transform:translateX(-50%);
   z-index:6;
   display:flex;align-items:center;gap:10px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--muted);
   animation:hscroll 2.5s ease infinite;
   pointer-events:none;
@@ -259,7 +254,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .hero-index{
   position:absolute;top:clamp(56px,8vh,90px);left:50%;
   transform:translateX(-50%);z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;color:var(--muted);text-align:center;
   transition:opacity .05s;
 }
@@ -271,7 +266,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   z-index:4;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(120px,22vw,220px);
   font-weight:700;
   line-height:1;
@@ -305,7 +300,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   animation:mq 20s linear infinite;
 }
 .mq-track span{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;
   color:var(--cream);padding:0 22px;
 }
@@ -314,14 +309,14 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 
 /* ══════════════ SECTION SHARED ══════════════ */
 .section-eyebrow{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);
+  font-family: var(--font-sans);font-size:var(--fs-caption);
   letter-spacing:.02em;text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:10px;margin-bottom:14px;
 }
 .section-eyebrow::before{content:'';width:18px;height:1px;background:var(--blue);}
 
 .section-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.4vw,40px);
   line-height:var(--lh-title);letter-spacing:-.01em;
   margin-bottom:4px;
@@ -339,7 +334,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   border-bottom:1.5px solid var(--black);padding-bottom:28px;margin-bottom:0;
 }
 .wk-count{
-  font-family:'DM Serif Display',serif;font-style:italic;
+  font-family: var(--font-sans);font-style:italic;
   font-size:clamp(40px,6vw,72px);color:var(--blue);line-height:1;
 }
 .wk-head-right{
@@ -353,12 +348,12 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:12px 0;border-bottom:1px solid var(--border);
 }
 .wk-col{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.02em;color:var(--muted);
 }
 .wk-section-div{
   padding:20px 0 6px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:10px;
 }
@@ -393,18 +388,18 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .wk-row:hover::before{width:3px;}
 .wk-row>*{position:relative;z-index:2;}
 
-.wk-n{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);padding-top:2px;transition:color .3s;}
+.wk-n{font-family: var(--font-sans);font-size:var(--fs-caption);color:var(--muted);padding-top:2px;transition:color .3s;}
 .wk-row:hover .wk-n{color:rgba(255,255,255,.4);}
 .wk-name{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;line-height:var(--lh-title);}
 .wk-award{
   display:inline-flex;align-items:center;
   background:var(--yellow);color:var(--black);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   letter-spacing:.01em;padding:2px 7px;border-radius:2px;
 }
 .wk-yr,.wk-cat,.wk-role{font-size:var(--fs-caption);padding-top:2px;line-height:var(--lh-title);}
 .wk-yr,.wk-cat{color:var(--muted);}
-.wk-role{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;}
+.wk-role{font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;}
 .wk-row:hover .wk-yr,.wk-row:hover .wk-cat,.wk-row:hover .wk-role{color:rgba(255,255,255,.55);}
 
 /* ══════════════ PROJECT DETAIL (right-slide panel) ══════════════ */
@@ -440,13 +435,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .pp-close:hover{background:var(--black);color:var(--cream);border-color:var(--black);}
 .pp-eyebrow{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.02em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.02em;
   text-transform:uppercase;color:var(--blue);
   display:flex;align-items:center;gap:9px;margin-bottom:10px;
 }
 .pp-eyebrow::before{content:'';width:16px;height:1px;background:var(--blue);}
 .pp-title{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,5.2vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;margin-bottom:12px;font-weight:700;
 }
 .pp-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px;}
@@ -455,13 +450,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-contrib{
   display:inline-flex;align-items:center;gap:4px;
   background:var(--blue2);border:1px solid rgba(24,71,245,.25);
-  color:var(--blue);font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  color:var(--blue);font-family: var(--font-sans);
   font-size:var(--fs-caption);letter-spacing:.01em;padding:4px 9px;border-radius:100px;
 }
 .pp-roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;margin-bottom:22px;}
 .pp-role{
   padding:4px 11px;border:1px solid var(--border);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:var(--muted);
+  font-family: var(--font-sans);font-size:var(--fs-caption);color:var(--muted);
 }
 .pp-role.hi{border-color:rgba(24,71,245,.4);color:var(--blue);}
 
@@ -471,7 +466,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-shots.wide img{aspect-ratio:16/10;}
 
 .pp-sec{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.4vw,28px);
   line-height:var(--lh-title);
   font-weight:600;
@@ -487,7 +482,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .cs-block{margin-bottom:14px;padding:10px 0;border-top:1px dashed rgba(13,13,11,.12);}
 .cs-k{
   display:inline-flex;align-items:center;gap:6px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(22px,2.2vw,26px);
   line-height:var(--lh-title);
   font-weight:600;
@@ -510,7 +505,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:12px;
 }
 .ba-row-head{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(16px,1.8vw,20px);
   font-weight:500;
   letter-spacing:-.01em;
@@ -539,7 +534,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .ba-cap{
   padding:8px 10px;
   border-top:1px solid var(--border);
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:var(--fs-caption);
   letter-spacing:.01em;
   text-transform:uppercase;
@@ -550,7 +545,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 .pp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;}
 .pp-tag{
   padding:4px 11px;border:1px solid var(--border);border-radius:100px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;
   text-transform:uppercase;color:var(--muted);transition:border-color .2s,color .2s;
 }
 .pp-tag:hover{border-color:var(--blue);color:var(--blue);}
@@ -558,7 +553,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:8px;
   padding:11px 22px;background:var(--blue);
   color:var(--white);border:none;border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
   transition:background .2s;
 }
 .pp-cta:hover{background:var(--black);}
@@ -568,7 +563,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:8px;
   padding:11px 22px;background:transparent;color:var(--blue);
   border:1.5px solid var(--blue);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;letter-spacing:.01em;
   transition:background .2s,color .2s;
 }
 .pp-cta--outline:hover{background:var(--blue2);color:var(--black);border-color:var(--blue);}
@@ -577,7 +572,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 /* Inner tabs in panel */
 .pp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
 .pp-tab{
-  padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;
+  padding:9px 18px;font-family: var(--font-sans);font-size:11px;letter-spacing:.04em;
   color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
 }
 .pp-tab:hover{color:var(--black);}
@@ -595,7 +590,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   gap:40px;align-items:end;margin-bottom:56px;
 }
 .diff-title-big{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.6vw,40px);line-height:var(--lh-title);letter-spacing:-.01em;font-weight:700;
 }
 .diff-title-big em{color:var(--blue);font-style:normal;}
@@ -614,14 +609,14 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .d-card:hover .d-card-accent{background:var(--blue);}
 .d-num{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);line-height:var(--lh-title);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-h2);line-height:var(--lh-title);font-weight:700;
   color:var(--blue);margin-bottom:10px;
 }
 .d-card h3{font-size:var(--fs-h3);font-weight:600;margin-bottom:8px;line-height:var(--lh-title);color:var(--cream);}
 .d-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:rgba(237,232,220,.62);}
 .d-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
 .d-tag{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;
   text-transform:uppercase;padding:2px 7px;
   border:1px solid rgba(24,71,245,.3);color:var(--blue);border-radius:1px;
 }
@@ -659,7 +654,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 }
 .gi:hover .gi-info{opacity:1;}
 .gi-info b{font-size:var(--fs-h3);font-weight:600;color:#fff;display:block;line-height:var(--lh-title);}
-.gi-info small{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(255,255,255,.65);margin-top:3px;display:block;}
+.gi-info small{font-family: var(--font-sans);font-size:var(--fs-caption);color:rgba(255,255,255,.65);margin-top:3px;display:block;}
 
 /* ══════════════ ABOUT ══════════════ */
 #about{
@@ -671,7 +666,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 #about::before{
   content:'JJY';position:absolute;
   bottom:-60px;right:-20px;
-  font-family:'Bebas Neue',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(160px,24vw,320px);line-height:.8;
   color:transparent;-webkit-text-stroke:1.5px rgba(13,13,11,.06);
   pointer-events:none;user-select:none;
@@ -679,7 +674,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
 
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
 .about-name-big{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;
+  font-family: var(--font-sans);
   font-size:clamp(32px,4.8vw,40px);line-height:var(--lh-title);
   letter-spacing:-.02em;margin-bottom:24px;
   font-weight:700;
@@ -693,13 +688,13 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   padding:10px 0;border-bottom:1px solid var(--border);font-size:var(--fs-body);
 }
 .fact-lbl{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.01em;color:var(--muted);padding-top:1px;
 }
 
 /* Skills grid */
 .sk-header{
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);font-weight:700;
   text-transform:uppercase;letter-spacing:.01em;color:var(--muted);margin-bottom:14px;
 }
 .sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -721,7 +716,7 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   transition:border-color .25s,transform .3s var(--ease),background .25s;
 }
 .etc-card:hover{border-color:var(--blue);background:var(--white);transform:translateY(-3px);}
-.etc-card h3{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h2);letter-spacing:0;margin-bottom:8px;line-height:var(--lh-title);font-weight:700;}
+.etc-card h3{font-family: var(--font-sans);font-size:var(--fs-h2);letter-spacing:0;margin-bottom:8px;line-height:var(--lh-title);font-weight:700;}
 .etc-card p{font-size:var(--fs-body);line-height:var(--lh-body);color:var(--muted);}
 .char-imgs{display:flex;gap:8px;margin-bottom:14px;}
 .ch-img{width:66px;height:66px;object-fit:contain;background:var(--cream2);border-radius:4px;padding:6px;}
@@ -729,12 +724,12 @@ button{background:none;border:none;font-family:inherit;cursor:pointer;color:inhe
   display:inline-flex;align-items:center;gap:5px;margin-top:10px;
   background:var(--yellow);color:var(--black);
   padding:4px 12px;border-radius:1px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;font-weight:700;
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;font-weight:700;
 }
 .etc-role-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
 .etc-rbadge{
   padding:3px 10px;border:1px solid var(--border);border-radius:2px;
-  font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);letter-spacing:.01em;color:var(--muted);
+  font-family: var(--font-sans);font-size:var(--fs-caption);letter-spacing:.01em;color:var(--muted);
 }
 .etc-rbadge.hi{border-color:rgba(24,71,245,.35);color:var(--blue);}
 
@@ -744,12 +739,12 @@ footer{
   padding:40px 36px;
   display:flex;justify-content:space-between;align-items:center;
 }
-.ft-brand{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-h3);font-weight:700;}
-.ft-brand small{display:block;font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-style:normal;font-size:var(--fs-caption);color:rgba(237,232,220,.55);margin-top:3px;}
+.ft-brand{font-family: var(--font-sans);font-style:normal;font-size:var(--fs-h3);font-weight:700;}
+.ft-brand small{display:block;font-family: var(--font-sans);font-style:normal;font-size:var(--fs-caption);color:rgba(237,232,220,.55);margin-top:3px;}
 .ft-links{display:flex;gap:20px;}
-.ft-links a{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-caption);color:rgba(237,232,220,.6);transition:color .2s;}
+.ft-links a{font-family: var(--font-sans);font-size:var(--fs-caption);color:rgba(237,232,220,.6);transition:color .2s;}
 .ft-links a:hover{color:var(--blue);}
-.ft-xl{font-family:'SUIT','Spoqa Han Sans Neo',sans-serif;font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;color:var(--blue);}
+.ft-xl{font-family: var(--font-sans);font-size:var(--fs-h3);font-weight:700;letter-spacing:.02em;color:var(--blue);}
 
 /* ══════════════ RESPONSIVE ══════════════ */
 @media(max-width:960px){
@@ -802,7 +797,7 @@ footer{
   border-right: 1px solid var(--border);
 }
 .nav-name {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: .04em;
   line-height: 1.5;
@@ -820,7 +815,7 @@ footer{
   margin-top: 40px;
 }
 .nav-link {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -843,7 +838,7 @@ footer{
 .nav-link.on::before,
 .nav-link:hover::before { width: 14px; }
 .nav-bottom {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--muted);
   line-height: 1.7;
@@ -870,7 +865,7 @@ main {
 .hero-index {
   position: absolute;
   top: 44px; right: 60px;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -878,7 +873,7 @@ main {
   writing-mode: vertical-rl;
 }
 .hero-display {
-  font-family: 'Funnel Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(80px, 14vw, 180px);
   font-weight: 700;
   line-height: .88;
@@ -897,7 +892,7 @@ main {
   gap: 40px;
 }
 .hero-role {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -911,7 +906,7 @@ main {
   justify-content: flex-end;
 }
 .hero-tag {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   padding: 5px 12px;
   border: 1px solid var(--border);
@@ -922,7 +917,7 @@ main {
 .hero-scroll {
   position: absolute;
   bottom: 64px; left: 60px;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -946,14 +941,14 @@ main {
   border-bottom: 1px solid var(--border);
 }
 .sec-hdr-label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .sec-hdr-count {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--dim);
 }
@@ -974,7 +969,7 @@ main {
 }
 .proj-row:hover { background: var(--bg2); }
 .proj-n {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   color: var(--muted);
   letter-spacing: .06em;
@@ -985,21 +980,21 @@ main {
   gap: 20px;
 }
 .proj-name {
-  font-family: 'Funnel Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(22px, 3.5vw, 36px);
   font-weight: 700;
   letter-spacing: -.02em;
   line-height: 1;
 }
 .proj-cat {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .proj-year {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   color: var(--muted);
   flex-shrink: 0;
@@ -1031,7 +1026,7 @@ main {
   margin-bottom: 48px;
 }
 .cs-label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -1042,7 +1037,7 @@ main {
 .cs-body { font-size: 15px; line-height: 1.75; color: var(--muted); }
 .cs-body strong { color: var(--black); font-weight: 600; }
 .cs-quote {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--font-sans);
   font-size: clamp(22px, 3vw, 32px);
   font-style: italic;
   line-height: 1.3;
@@ -1065,7 +1060,7 @@ main {
   padding: 28px 24px;
 }
 .cs-dec-n {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--blue);
   letter-spacing: .06em;
@@ -1096,7 +1091,7 @@ main {
   padding: 24px;
 }
 .cs-retro-l {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--muted);
   letter-spacing: .05em;
@@ -1108,7 +1103,7 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -1119,6 +1114,161 @@ main {
 }
 .cs-link:hover { color: var(--black); border-color: var(--black); }
 
+/* ─── NICE: Persona / pain point mapping (미니멀 · 배경 없음) ─── */
+.nice-pm {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 48px;
+}
+.nice-pm-kicker {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nice-pm-kicker::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+.nice-pm-title {
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  color: var(--black);
+}
+.nice-pm-lead {
+  margin: 0 0 28px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 72ch;
+}
+.nice-pm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 28px;
+  overflow: visible;
+}
+.nice-pm-card {
+  position: relative;
+  background: transparent;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: visible;
+}
+.nice-pm-top {
+  display: block;
+  padding: 14px 16px 12px 16px;
+  padding-left: 118px;
+  border-bottom: 1px solid var(--border);
+  min-height: 76px;
+}
+/* 한글 주석: 페르소나 캐릭터 — 카드 밖으로 살짝 돌출, 사이즈 업 */
+.nice-pm-avatar {
+  position: absolute;
+  left: 8px;
+  top: -34px;
+  width: 108px;
+  height: 108px;
+  z-index: 2;
+  border-radius: 14px;
+  overflow: visible;
+  pointer-events: none;
+  background: transparent;
+}
+.nice-pm-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 8px 18px rgba(13, 13, 11, .1));
+}
+.nice-pm-identity {
+  min-width: 0;
+  flex: 1;
+  padding-top: 2px;
+}
+.nice-pm-name-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-bottom: 4px;
+}
+.nice-pm-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--black);
+}
+.nice-pm-age {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.nice-pm-job {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(13, 13, 11, .72);
+  font-weight: 600;
+}
+.nice-pm-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+  padding: 12px 16px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.nice-pm-np {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 12px 16px;
+}
+.nice-pm-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px 14px;
+  box-shadow: 0 2px 12px rgba(13, 13, 11, .06);
+}
+.nice-pm-blabel {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.nice-pm-box p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(13, 13, 11, .72);
+}
+@media (max-width: 960px) {
+  .nice-pm-grid { grid-template-columns: 1fr; }
+  .nice-pm-np { grid-template-columns: 1fr; }
+}
+
 /* Midjourney grid */
 .mj-dark-block {
   background: #0d1117;
@@ -1127,7 +1277,7 @@ main {
   margin-bottom: 48px;
 }
 .mj-block-label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -1153,7 +1303,7 @@ main {
   margin-bottom: 20px;
 }
 .mj-prompt pre {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 11px;
   color: rgba(255,255,255,.6);
   white-space: pre-wrap;
@@ -1161,7 +1311,7 @@ main {
 }
 .mj-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
 .mj-tag {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   padding: 2px 8px;
   background: rgba(24,71,245,.2);
@@ -1189,7 +1339,7 @@ main {
   bottom:0; left:0; right:0;
   padding: 5px 8px;
   background: rgba(0,0,0,.5);
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 9px;
   color: rgba(255,255,255,.6);
 }
@@ -1205,7 +1355,7 @@ main {
 }
 .cmp-cell { background: var(--bg); padding: 24px; }
 .cmp-head {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -1241,7 +1391,7 @@ main {
 }
 .stat-cell { background: var(--bg); padding: 28px 24px; }
 .stat-num {
-  font-family: 'Funnel Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
   color: var(--blue);
@@ -1250,7 +1400,7 @@ main {
   margin-bottom: 6px;
 }
 .stat-label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--muted);
   letter-spacing: .04em;
@@ -1276,7 +1426,7 @@ main {
 }
 .icon-cell img { width:65%; height:65%; object-fit:contain; }
 .icon-hint {
-  font-family:'Space Mono',monospace;
+  font-family: var(--font-sans);
   font-size:10px;
   color:var(--muted);
   margin-top:-36px;
@@ -1334,7 +1484,7 @@ main {
   align-items: start;
 }
 .about-display {
-  font-family: 'Funnel Sans', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(48px, 8vw, 96px);
   font-weight: 700;
   line-height: .9;
@@ -1359,7 +1509,7 @@ main {
 }
 .sk-item { background:var(--bg); padding:14px 16px; }
 .sk-item h4 { font-size:13px; font-weight:700; margin-bottom:3px; }
-.sk-item p { font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; }
+.sk-item p { font-size:11px; color:var(--muted); font-family: var(--font-sans); }
 
 /* ─── FOOTER / CONTACT ─── */
 #contact {
@@ -1370,14 +1520,14 @@ main {
   align-items: end;
 }
 .contact-display {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-sans);
   font-size: clamp(60px, 10vw, 120px);
   line-height: .88;
   letter-spacing: .02em;
 }
 .contact-links { display:flex; flex-direction:column; gap:16px; }
 .contact-link {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 13px;
   letter-spacing: .04em;
   display: flex;
@@ -1399,7 +1549,7 @@ main {
   border-top: 1px solid var(--border);
 }
 .ft-copy p {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-sans);
   font-size: 10px;
   color: var(--muted);
   letter-spacing: .05em;
@@ -1499,7 +1649,7 @@ main {
         <!-- hero image placeholder -->
         <div class="cs-img-hero" style="background:var(--bg2); display:flex; align-items:center; justify-content:center;">
           <!-- ./images/pickly/cover.jpg 로 교체 -->
-          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">./images/pickly/cover.jpg</span>
+          <span style="font-family:var(--font-sans);font-size:11px;color:var(--muted);">./images/pickly/cover.jpg</span>
         </div>
 
         <!-- overview -->
@@ -1580,7 +1730,7 @@ main {
       </div>
       <div class="proj-cs">
         <div class="cs-img-hero" style="background:var(--bg2);display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">./images/db/cover.jpg — 서비스 스크린샷</span>
+          <span style="font-family:var(--font-sans);font-size:11px;color:var(--muted);">./images/db/cover.jpg — 서비스 스크린샷</span>
         </div>
 
         <div class="cs-grid reveal">
@@ -1624,7 +1774,7 @@ main {
               <div class="screen-frame"></div>
               <div class="screen-frame"></div>
             </div>
-            <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">↑ 실제 스크린샷으로 교체</p>
+            <p style="font-family:var(--font-sans);font-size:10px;color:var(--muted);">↑ 실제 스크린샷으로 교체</p>
           </div>
         </div>
 
@@ -1711,6 +1861,92 @@ main {
           <div class="stat-cell">
             <div class="stat-num">35%</div>
             <div class="stat-label">GNB 진입 후<br>즉시 이탈률 AS-IS</div>
+          </div>
+        </div>
+
+        <!-- Persona / pain point mapping (기획 데크와 동일 레이아웃) -->
+        <div class="nice-pm reveal">
+          <div class="nice-pm-kicker">Persona / pain point mapping</div>
+          <h3 class="nice-pm-title">사용자는 세 명처럼 보이지만 결국 같은 질문을 합니다.</h3>
+          <p class="nice-pm-lead">
+            “이 회사는 믿을 수 있는가?”, “내 상황에 맞는가?”, “다음 행동은 무엇인가?” 각 페르소나의 언어만 다를 뿐, 판단 기준은 같습니다.
+          </p>
+          <div class="nice-pm-grid">
+            <article class="nice-pm-card">
+              <div class="nice-pm-avatar" aria-hidden="true">
+                <img src="./images/nicepayments/persona-01.png" width="108" height="108" alt="">
+              </div>
+              <div class="nice-pm-top">
+                <div class="nice-pm-identity">
+                  <div class="nice-pm-name-row">
+                    <span class="nice-pm-name">김지민</span>
+                    <span class="nice-pm-age">24세 · 20대</span>
+                  </div>
+                  <p class="nice-pm-job">대학생 · 모바일·UX 수업 수강</p>
+                </div>
+              </div>
+              <p class="nice-pm-desc">모바일 네이티브 세대 — 빠르고 심플한 UX 선호</p>
+              <div class="nice-pm-np">
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Needs</span>
+                  <p>간편 인증, 직관적 UI, 빠른 비교</p>
+                </div>
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Pain</span>
+                  <p>복잡한 메뉴, 범람하는 정보로 찾기 어려움</p>
+                </div>
+              </div>
+            </article>
+            <article class="nice-pm-card">
+              <div class="nice-pm-avatar" aria-hidden="true">
+                <img src="./images/nicepayments/persona-02.png" width="108" height="108" alt="">
+              </div>
+              <div class="nice-pm-top">
+                <div class="nice-pm-identity">
+                  <div class="nice-pm-name-row">
+                    <span class="nice-pm-name">박현우</span>
+                    <span class="nice-pm-age">35세 · 30대</span>
+                  </div>
+                  <p class="nice-pm-job">IT 기획자 · B2B 서비스 도입 검토</p>
+                </div>
+              </div>
+              <p class="nice-pm-desc">기획 담당 — 업무 효율과 보안·정책 확인이 핵심</p>
+              <div class="nice-pm-np">
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Needs</span>
+                  <p>서비스 기능 범위, 보안 정책, 고객 지원 체계</p>
+                </div>
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Pain</span>
+                  <p>분산된 정보로 전환 피로, 긴 비교 시간</p>
+                </div>
+              </div>
+            </article>
+            <article class="nice-pm-card">
+              <div class="nice-pm-avatar" aria-hidden="true">
+                <img src="./images/nicepayments/persona-03.png" width="108" height="108" alt="">
+              </div>
+              <div class="nice-pm-top">
+                <div class="nice-pm-identity">
+                  <div class="nice-pm-name-row">
+                    <span class="nice-pm-name">이성영</span>
+                    <span class="nice-pm-age">42세 · 40대</span>
+                  </div>
+                  <p class="nice-pm-job">카페 운영 · 소상공인</p>
+                </div>
+              </div>
+              <p class="nice-pm-desc">자영업자 — 온라인 연동보다 빠른 실행이 중요</p>
+              <div class="nice-pm-np">
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Needs</span>
+                  <p>간결한 가이드, 즉시 문의, 실무용 솔루션</p>
+                </div>
+                <div class="nice-pm-box">
+                  <span class="nice-pm-blabel">Pain</span>
+                  <p>불분명한 용어, 복잡한 절차로 인한 실행 포기</p>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
 
@@ -1810,7 +2046,10 @@ payment security concept --ar 16:9 --v 6 --style raw</pre>
           </div>
         </div>
 
-        <a class="cs-link" href="./nicepayments.pdf" target="_blank">전체 기획서 보기 →</a>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;">
+          <a class="cs-link" href="./nicepayments.pdf" target="_blank">전체 기획서 보기 →</a>
+          <a class="cs-link" href="./nicepay-rebuilder.html">인터랙티브 기획 데크 (HTML) →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1873,11 +2112,11 @@ payment security concept --ar 16:9 --v 6 --style raw</pre>
           <div style="display:flex;flex-direction:column;gap:16px;">
             <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
               <div style="font-size:13px;font-weight:700;margin-bottom:3px;">파주시 캐릭터 공모전 — 인기상 수상</div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">시민 투표 1위 · Illustrator</div>
+              <div style="font-family:var(--font-sans);font-size:10px;color:var(--muted);">시민 투표 1위 · Illustrator</div>
             </div>
             <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
               <div style="font-size:13px;font-weight:700;margin-bottom:3px;">메리웨더 캐릭터 제작 · 굿즈 출시</div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">홍콩 & 서울 일러스트레이션 페어 참가</div>
+              <div style="font-family:var(--font-sans);font-size:10px;color:var(--muted);">홍콩 & 서울 일러스트레이션 페어 참가</div>
             </div>
           </div>
         </div>
@@ -1899,7 +2138,7 @@ payment security concept --ar 16:9 --v 6 --style raw</pre>
           <div style="display:flex;flex-direction:column;gap:16px;">
             <div style="padding-bottom:14px;border-bottom:1px solid var(--border);">
               <div style="font-size:13px;font-weight:700;margin-bottom:3px;">UI/UX Designer & Web Publisher</div>
-              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">현직 · 보험 서비스 스타트업</div>
+              <div style="font-family:var(--font-sans);font-size:10px;color:var(--muted);">현직 · 보험 서비스 스타트업</div>
             </div>
           </div>
         </div>

@@ -1,0 +1,2761 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나이스페이먼츠 리빌더 · 기획서 핵심 업그레이드</title>
+  <meta name="description" content="NICEPAY 웹 경험을 데이터 기반 신뢰 설계(Trust-Layer)와 결정 중심 UX로 리빌더한 기획안 데크입니다." />
+
+  <!--
+    GEO/SEO 용 JSON-LD
+    - 실제 주소/좌표는 포트폴리오 납품 전에 본인/회사 정보로 교체해 주세요.
+  -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "나이스페이먼츠 리빌더 · 기획서 핵심 업그레이드",
+      "description": "NICEPAY 웹 경험을 데이터 기반 신뢰 설계(Trust-Layer)와 결정 중심 UX로 리빌더한 기획안 데크입니다.",
+      "url": "https://example.com/nicepay-rebuilder.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "JJY Portfolio"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://example.com/og/nicepay-rebuilder.png"
+      },
+      "about": {
+        "@type": "LocalBusiness",
+        "name": "NICE Payments Rebuilder",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Seoul",
+          "addressCountry": "KR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.5665,
+          "longitude": 126.9780
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts: Mona Sans (Latin) + Noto Sans KR (Korean) — 통일 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      /* 영문 Mona Sans · 한글 Noto Sans KR */
+      --font-sans: 'Mona Sans', 'Noto Sans KR', sans-serif;
+      /* NICE 스타일 가이드 기반 */
+      --blue: #016DD5;
+      --blue2: #0a3dff;
+      --bg: #F8FAFF;
+      --bg2: #EFF4FF;
+      --card: rgba(255, 255, 255, .68);
+      --card2: rgba(255, 255, 255, .56);
+      --ink: #0B0D12;
+      --muted: rgba(11, 13, 18, .62);
+      --border: rgba(11, 13, 18, .08);
+      --shadow: 0 18px 55px rgba(1, 109, 213, .10);
+      --shadow2: 0 10px 28px rgba(11, 13, 18, .07);
+      --radius: 16px;
+      --radius2: 22px;
+      --lh: 1.7;
+      --ease: cubic-bezier(.2, .9, .2, 1);
+      --container: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ====== Ambient background (정적 느낌 완화) ====== */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(1, 109, 213, .12), transparent 42%),
+        radial-gradient(circle at 90% 12%, rgba(11, 13, 18, .06), transparent 36%),
+        radial-gradient(circle at 60% 100%, rgba(1, 109, 213, .10), transparent 46%);
+      opacity: .35;
+      mix-blend-mode: normal;
+    }
+
+    /* ====== Top Bar ====== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+      background: rgba(246, 248, 255, .62);
+      border-bottom: 1px solid rgba(11, 13, 18, .08);
+    }
+
+    .topbar-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand strong {
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .brand span {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--font-sans);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .topnav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .topnav a {
+      font-size: 13px;
+      color: rgba(11, 13, 18, .72);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all .2s;
+    }
+
+    .topnav a:hover {
+      border-color: rgba(1, 109, 213, .25);
+      background: rgba(1, 109, 213, .06);
+      color: var(--blue);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 12px 26px rgba(1, 109, 213, .22);
+      transition: transform .2s var(--ease), filter .2s var(--ease);
+      white-space: nowrap;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    /* ====== Layout ====== */
+    .wrap {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .deck {
+      padding-top: 70px;
+    }
+
+    .section-kicker {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(1, 109, 213, .9);
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: rgba(1, 109, 213, .85);
+      border-radius: 2px;
+    }
+
+    .h2 {
+      margin: 0 0 16px;
+      font-size: clamp(26px, 3.6vw, 44px);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: var(--lh);
+      max-width: 62ch;
+    }
+
+    /* ====== Reveal base ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px) scale(.99);
+      filter: blur(1px);
+      will-change: transform, opacity, filter;
+    }
+
+    .hero-new {
+      position: relative;
+      /* Exact pixel-sampled background from the mockup PNG: rgb(247,248,252) */
+      background: #F7F8FC;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0;
+      isolation: isolate;   /* prevents body::before bleeding in */
+    }
+
+    .hero-new-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Meta bar ── */
+    .hero-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 28px;
+      padding-bottom: 0;
+    }
+
+    .hero-meta-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hero-logo-mark {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      color: #0B0D12;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      line-height: 1;
+    }
+
+    .hero-logo-mark .slash {
+      color: var(--blue);
+    }
+
+    .hero-meta-line {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: .04em;
+      color: rgba(11,13,18,.45);
+      line-height: 1.6;
+    }
+
+    .hero-meta-line strong {
+      color: rgba(11,13,18,.65);
+      font-weight: 700;
+    }
+
+    .hero-tools-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .hero-tools-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(11,13,18,.4);
+      margin-bottom: 4px;
+    }
+
+    .hero-tools-col a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--blue);
+      letter-spacing: .02em;
+      text-decoration: none;
+      opacity: .75;
+      transition: opacity .2s;
+      line-height: 1.7;
+    }
+
+    .hero-tools-col a:hover { opacity: 1; }
+
+    /* ── Stage (monitor + text) ── */
+    .hero-stage-v2 {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: 20px;
+      /* subtle bottom gradient to ease into the page content */
+      padding-bottom: 0;
+    }
+
+    .hero-stage-v2::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, #F7F8FC);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Big display text behind the monitor */
+    .hero-big-text {
+      position: absolute;
+      bottom: -0.06em;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: clamp(72px, 10.5vw, 150px);
+      font-weight: 200;
+      letter-spacing: -.04em;
+      color: #016DD5;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+      /* Mix-blend to sit under monitor while being visible on bg */
+    }
+
+    /* Monitor + phone wrapper */
+    .hero-devices-wrap {
+      position: relative;
+      z-index: 3;
+      width: 85%;
+      max-width: 1020px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-desktop-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      /* No drop-shadow — bg matches image so it blends seamlessly */
+      will-change: transform;
+    }
+
+    .hero-phone-img {
+      position: absolute;
+      right: -3%;
+      bottom: 8%;
+      width: clamp(80px, 10vw, 148px);
+      filter: drop-shadow(0 12px 28px rgba(11,13,18,.10));
+      will-change: transform;
+      z-index: 4;
+    }
+
+    /* entrance states */
+    .h-fade  { opacity: 0; }
+    .h-slide-up { opacity: 0; transform: translateY(32px); }
+    .h-scale-in { opacity: 0; transform: scale(.95); }
+
+    @media (max-width: 768px) {
+      .hero-new-inner { padding: 0 18px; }
+      .hero-big-text { font-size: clamp(52px, 16vw, 80px); }
+      .hero-devices-wrap { width: 96%; }
+      .hero-phone-img { right: -2%; width: clamp(60px, 14vw, 90px); }
+    }
+
+    /* ====== Cards ====== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 32px rgba(11, 13, 18, .05);
+      padding: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(11, 13, 18, .7);
+      line-height: var(--lh);
+      font-size: 14px;
+    }
+
+    .card .meta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .pill {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(1, 109, 213, .06);
+      border: 1px solid rgba(1, 109, 213, .18);
+      color: rgba(1, 109, 213, .95);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pill.gray {
+      background: rgba(11, 13, 18, .05);
+      border-color: rgba(11, 13, 18, .12);
+      color: rgba(11, 13, 18, .65);
+    }
+
+    /* ====== Illustration placeholders ====== */
+    .mock-media {
+      border-radius: 18px;
+      border: 1px solid rgba(11, 13, 18, .06);
+      background:
+        linear-gradient(145deg, rgba(1, 109, 213, .14), rgba(1, 109, 213, .04)),
+        radial-gradient(circle at 18% 20%, rgba(255, 255, 255, .72), transparent 50%);
+      height: 240px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 26px rgba(1, 109, 213, .08);
+    }
+
+    .mock-media .label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .66);
+      border: 1px solid rgba(255, 255, 255, .52);
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: rgba(1, 109, 213, .95);
+    }
+
+    .mock-media::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(1, 109, 213, .22), transparent 58%);
+      pointer-events: none;
+    }
+
+    .mock-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    /* ====== Approach list ====== */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .principles {
+      display: grid;
+      gap: 14px;
+    }
+
+    .principle {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, .48));
+      border: 1px solid rgba(11, 13, 18, .06);
+      border-radius: var(--radius2);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(11, 13, 18, .05);
+    }
+
+    .principle::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: rgba(1, 109, 213, .95);
+      border-top-left-radius: var(--radius2);
+      border-bottom-left-radius: var(--radius2);
+      opacity: .2;
+    }
+
+    .principle .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .principle .title .num {
+      font-family: var(--font-sans);
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .principle .title h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+
+    .principle ul {
+      margin: 0;
+      padding-left: 16px;
+      color: rgba(11, 13, 18, .72);
+      line-height: var(--lh);
+      font-size: 14px;
+    }
+
+    .principle li {
+      margin: 8px 0;
+    }
+
+    /* ====== Diagram ====== */
+    .flow-wrap {
+      background: linear-gradient(180deg, rgba(1, 109, 213, .07), rgba(1, 109, 213, 0));
+      border: 1px solid rgba(1, 109, 213, .18);
+      border-radius: var(--radius2);
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(1, 109, 213, .08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .flow-cards {
+      display: grid;
+      gap: 12px;
+      padding-right: 6px;
+    }
+
+    .step-card {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(255, 255, 255, .62);
+      display: grid;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card .step {
+      font-family: var(--font-sans);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(1, 109, 213, .9);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step-card b {
+      font-size: 14px;
+      letter-spacing: -.01em;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: rgba(11, 13, 18, .7);
+      line-height: var(--lh);
+      font-size: 13px;
+    }
+
+    .flow-svg {
+      width: 100%;
+      height: 320px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .52);
+      border: 1px solid rgba(11, 13, 18, .08);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .flow-svg svg {
+      width: 92%;
+      height: 88%;
+    }
+
+    .flow-node {
+      opacity: 0.15;
+      transform-origin: center;
+    }
+
+    .flow-node.on {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .flow-path {
+      fill: none;
+      stroke: rgba(1, 109, 213, .9);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+
+    /* ====== Persona / pain point mapping (미니멀 · 배경 없음) ====== */
+    .sec-persona-map {
+      padding: 0;
+      margin-top: 0;
+      background: none;
+      border: none;
+    }
+
+    .persona-map-h2 {
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.35;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .persona-map-lead {
+      margin: 0 0 48px;
+      color: rgba(11, 13, 18, .68);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 72ch;
+    }
+
+    .persona-map-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      padding-top: 28px;
+      /* 한글 주석: 아바타 absolute 상단 돌출 여유 */
+      overflow: visible;
+    }
+
+    .persona-map-card {
+      position: relative;
+      background: #fff;
+      border-radius: 14px;
+      padding: 0 0 4px;
+      border: 1px solid rgba(11, 13, 18, .1);
+      overflow: visible;
+      box-shadow: 0 12px 32px rgba(11, 13, 18, .05);
+    }
+
+    .persona-map-top {
+      display: block;
+      padding: 14px 16px 12px 16px;
+      padding-left: 122px;
+      border-bottom: 1px solid rgba(11, 13, 18, .06);
+      min-height: 78px;
+    }
+
+    /* 한글 주석: 캐릭터만 카드 밖으로 살짝 돌출 + 사이즈 업 */
+    .persona-map-avatar {
+      position: absolute;
+      left: 8px;
+      top: -36px;
+      width: 112px;
+      height: 112px;
+      z-index: 2;
+      border-radius: 16px;
+      overflow: visible;
+      pointer-events: none;
+      background: transparent;
+    }
+
+    .persona-map-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      display: block;
+      filter: drop-shadow(0 8px 20px rgba(11, 13, 18, .12));
+    }
+
+    .persona-map-identity {
+      min-width: 0;
+      flex: 1;
+      padding-top: 2px;
+    }
+
+    .persona-map-name-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      margin-bottom: 4px;
+    }
+
+    .persona-map-name {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+
+    .persona-map-age {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: rgba(11, 13, 18, .45);
+    }
+
+    .persona-map-job {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(11, 13, 18, .62);
+      font-weight: 600;
+    }
+
+    .persona-map-desc {
+      font-size: 13px;
+      color: rgba(11, 13, 18, .55);
+      line-height: 1.5;
+      margin: 0;
+      padding: 12px 16px 14px;
+      border-bottom: 1px solid rgba(11, 13, 18, .06);
+    }
+
+    .persona-np-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 12px 12px 16px;
+    }
+
+    .persona-np-box {
+      background: #fff;
+      border: 1px solid rgba(11, 13, 18, .08);
+      border-radius: 10px;
+      padding: 14px 12px 14px;
+    }
+
+    .persona-np-label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .persona-np-box p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 600;
+      color: rgba(11, 13, 18, .72);
+    }
+
+    @media (max-width: 960px) {
+      .persona-map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-np-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ====== Comparisons ====== */
+    .cmp-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .cmp {
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid rgba(11, 13, 18, .08);
+      border-radius: var(--radius2);
+      padding: 18px;
+      box-shadow: 0 18px 50px rgba(11, 13, 18, .06);
+    }
+
+    .cmp h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+
+    .cmp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .cmp-top p {
+      margin: 0;
+      color: rgba(11, 13, 18, .7);
+      line-height: var(--lh);
+      font-size: 14px;
+      max-width: 66ch;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+
+    .compare-card {
+      border-radius: 18px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+      min-height: 260px;
+    }
+
+    .compare-card .cap {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 11px;
+      font-weight: 800;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, .35);
+      background: rgba(255, 255, 255, .62);
+      color: rgba(11, 13, 18, .8);
+      backdrop-filter: blur(6px);
+    }
+
+    .compare-card.before {
+      background: linear-gradient(145deg, #F1F1F4, #FFFFFF);
+    }
+
+    .compare-card.after {
+      background: linear-gradient(145deg, rgba(1, 109, 213, .22), rgba(1, 109, 213, .06));
+    }
+
+    .compare-card .mock-img {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, .4);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(11, 13, 18, .55);
+    }
+
+    .after .mock-img {
+      color: rgba(1, 109, 213, .9);
+      font-weight: 800;
+    }
+
+    .compare-card .mock-img .mini {
+      display: grid;
+      gap: 10px;
+      width: 86%;
+    }
+
+    .mock-bars {
+      height: 86px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(1, 109, 213, .25), rgba(1, 109, 213, .08));
+      border: 1px solid rgba(1, 109, 213, .18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-bars::after {
+      content: "";
+      position: absolute;
+      inset: -40px -60px auto -60px;
+      height: 140px;
+      background: repeating-linear-gradient(90deg,
+          rgba(255, 255, 255, .5) 0 12px,
+          rgba(255, 255, 255, 0) 12px 24px);
+      transform: rotate(-8deg);
+      opacity: .35;
+    }
+
+    /* ====== Outcome ====== */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(255, 255, 255, .62);
+      box-shadow: 0 18px 50px rgba(11, 13, 18, .06);
+    }
+
+    .metric .num {
+      font-family: var(--font-sans);
+      font-weight: 900;
+      color: var(--blue);
+      font-size: 28px;
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+
+    .metric small {
+      font-family: var(--font-sans);
+      display: block;
+      color: rgba(11, 13, 18, .62);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .outcome-copy {
+      color: rgba(11, 13, 18, .72);
+      line-height: var(--lh);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* ====== Footer ====== */
+    footer {
+      padding: 64px 0 80px;
+      border-top: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(246, 248, 255, .68);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .footer-title {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+
+    .footer-copy {
+      margin: 0;
+      color: rgba(11, 13, 18, .66);
+      line-height: var(--lh);
+      font-size: 14px;
+      max-width: 60ch;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .footer-links a {
+      font-family: var(--font-sans);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(11, 13, 18, .68);
+      border-bottom: 1px solid rgba(11, 13, 18, .12);
+      padding-bottom: 10px;
+    }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 960px) {
+      section {
+        padding: 64px 0;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-row {
+        grid-template-columns: 1fr;
+      }
+
+      .outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ====== IA Before / After (구조 비교 — 혼란 → 정리) ====== */
+    .ia-ba-section {
+      padding: 80px 0 72px;
+    }
+
+    .ia-ba-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .ia-ba-tagline span {
+      opacity: .45;
+      font-weight: 600;
+    }
+
+    /* 한글 주석: AS-IS Pain / TO-BE 전략 / 와이어프레임 표 블록 */
+    .ia-ba-block {
+      margin-bottom: 40px;
+    }
+
+    .ia-ba-block--wide {
+      max-width: none;
+    }
+
+    .ia-ba-h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+
+    .ia-ba-sub {
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(11, 13, 18, .72);
+      max-width: 68ch;
+    }
+
+    .ia-ba-pain-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      max-width: 72ch;
+    }
+
+    .ia-ba-pain-list li {
+      padding: 14px 16px 14px 18px;
+      margin-bottom: 12px;
+      border-left: 3px solid rgba(1, 109, 213, .45);
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(11, 13, 18, .84);
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 4px 18px rgba(11, 13, 18, .04);
+    }
+
+    .ia-ba-pain-list li strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .ia-ba-strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 900px) {
+      .ia-ba-strategy-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .ia-strategy-card {
+      padding: 18px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: var(--shadow2);
+    }
+
+    .ia-strategy-card h4 {
+      margin: 0 0 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .ia-strategy-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.68;
+      color: rgba(11, 13, 18, .74);
+    }
+
+    .ia-strategy-card .ia-kw {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+
+    .ia-wf-table-wrap {
+      overflow-x: auto;
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(255, 255, 255, .85);
+    }
+
+    .ia-wf-table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 13px;
+      color: rgba(11, 13, 18, .82);
+    }
+
+    .ia-wf-table th,
+    .ia-wf-table td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(11, 13, 18, .06);
+      line-height: 1.6;
+    }
+
+    .ia-wf-table th {
+      background: rgba(1, 109, 213, .07);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .02em;
+    }
+
+    .ia-wf-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ia-ba-callout {
+      margin: 16px 0 0;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px dashed rgba(11, 13, 18, .14);
+      background: rgba(248, 250, 255, .95);
+      font-size: 13px;
+      line-height: 1.68;
+      color: rgba(11, 13, 18, .76);
+      max-width: 72ch;
+    }
+
+    .ia-ba-callout strong {
+      color: var(--ink);
+    }
+
+    .ia-ba-callout--bid {
+      border-color: rgba(1, 109, 213, .28);
+      background: rgba(1, 109, 213, .05);
+    }
+
+    .ia-ba-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: var(--radius2);
+      overflow: hidden;
+      border: 1px solid rgba(11, 13, 18, .1);
+      margin-bottom: 32px;
+    }
+
+    .ia-ba-col {
+      padding: 20px 18px 24px;
+      min-height: auto;
+    }
+
+    /* 한글 주석: After와 동일 톤(화이트) — 차이는 ‘압축 레이아웃’으로만 표현 */
+    .ia-ba-before {
+      background: #fff;
+      border-right: 1px solid rgba(11, 13, 18, .08);
+      color: #111;
+      font-size: 14px;
+      line-height: 1.75;
+      letter-spacing: -.01em;
+    }
+
+    .ia-ba-after {
+      background: #fff;
+      color: #111;
+      font-size: 14px;
+      line-height: 1.75;
+      letter-spacing: -.01em;
+    }
+
+    /* ── IA 다이어그램 (알약 노드 + 라임 주요 / 블랙 서브) ── */
+    .ia-diag {
+      --ia-lime: #d4ff3d;
+      --ia-lime-border: #b8e020;
+      --ia-ink: #0b0d12;
+      --ia-paper: #f2f0ea;
+    }
+
+    .ia-diag-inner {
+      background: var(--ia-paper);
+      border-radius: 14px;
+      padding: 18px 14px 22px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+    }
+
+    /* ── AS-IS: After와 같은 라임/블랙 색상, 레이아웃만 과밀·단축 ── */
+    .ia-diag--as-is .ia-diag-inner {
+      position: relative;
+      padding: 10px 8px 12px;
+      overflow: hidden;
+    }
+
+    .ia-diag--as-is .ia-diag-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(11, 13, 18, .06);
+      background:
+        linear-gradient(90deg, rgba(212, 255, 61, .14) 0%, transparent 18%, transparent 82%, rgba(212, 255, 61, .12) 100%);
+    }
+
+    .ia-diag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--ia-ink);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .ia-diag-badge em {
+      font-style: normal;
+      color: var(--ia-lime);
+    }
+
+    .ia-diag-row--squeeze {
+      gap: 4px 5px;
+      margin-bottom: 8px;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    /* 한글 주석: 중복 블록 안은 가운데 정렬(스크롤 행과 병용) */
+    .ia-diag-row--squeeze.ia-diag-row--center {
+      justify-content: center;
+    }
+
+    .ia-diag-row--squeeze::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .ia-diag-row--squeeze::-webkit-scrollbar-thumb {
+      background: rgba(11, 13, 18, .2);
+      border-radius: 99px;
+    }
+
+    .ia-diag--as-is .ia-diag-hline {
+      min-width: 6px;
+      flex: 0.3 1 8px;
+      margin: 0 1px;
+    }
+
+    .ia-p--mini {
+      padding: 4px 8px !important;
+      font-size: 9px !important;
+      font-weight: 700 !important;
+      letter-spacing: -.01em;
+    }
+
+    .ia-diag--as-is .ia-p--lime.ia-p--mini {
+      box-shadow: 0 0 0 1px rgba(11, 13, 18, .08);
+    }
+
+    .ia-diag--as-is .ia-p--blk.ia-p--mini {
+      font-weight: 600 !important;
+    }
+
+    .ia-diag-caption--as-is {
+      color: var(--ia-ink);
+      opacity: .72;
+      font-size: 9px;
+      letter-spacing: .08em;
+      margin: 6px 0 8px;
+    }
+
+    .ia-diag-caption--as-is strong {
+      color: var(--ia-lime);
+      background: var(--ia-ink);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-weight: 800;
+    }
+
+    .ia-diag-dup-grid--as-is {
+      gap: 6px;
+    }
+
+    .ia-dup-stack--as-is {
+      border: 1px solid var(--ia-lime-border);
+      background: rgba(212, 255, 61, .1);
+      padding: 8px;
+    }
+
+    .ia-dup-label--as-is {
+      color: var(--ia-ink);
+      font-size: 8px;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    .ia-dup-x2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 4px 0 8px;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--ia-ink);
+      letter-spacing: .06em;
+    }
+
+    .ia-dup-x2 span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--ia-lime);
+      color: var(--ia-ink);
+      font-size: 10px;
+      border: 1px solid var(--ia-lime-border);
+    }
+
+    .ia-p {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .ia-p--blk {
+      background: var(--ia-ink);
+      color: #fff;
+      border: 1px solid #1a1a1a;
+    }
+
+    .ia-p--lime {
+      background: var(--ia-lime);
+      color: var(--ia-ink);
+      border: 1px solid var(--ia-lime-border);
+      font-weight: 700;
+    }
+
+    .ia-p--muted {
+      background: #ddd;
+      color: #777;
+      border: 1px solid #c8c8c8;
+    }
+
+    .ia-p--wire {
+      background: #e5e5e5;
+      color: #888;
+      border: 1px dashed #bbb;
+    }
+
+    .ia-p--dup {
+      background: #2a2a2a;
+      color: #eee;
+      border: 1px dashed #ff6b6b;
+      opacity: .88;
+    }
+
+    .ia-diag-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 10px;
+      margin-bottom: 12px;
+    }
+
+    .ia-diag-row--tight {
+      gap: 6px 8px;
+      margin-bottom: 10px;
+    }
+
+    /* 한글 주석: 중복 블록 안 가운데 정렬 행 */
+    .ia-diag-row--center {
+      justify-content: center;
+    }
+
+    .ia-diag-row--center-mt {
+      margin-top: 6px;
+    }
+
+    .ia-p--xs {
+      font-size: 10px !important;
+      padding: 5px 9px !important;
+    }
+
+    .ia-diag-vrule {
+      width: 1px;
+      align-self: stretch;
+      min-height: 14px;
+      background: rgba(11, 13, 18, .2);
+      margin: 0 2px;
+    }
+
+    .ia-diag-hline {
+      height: 1px;
+      flex: 1;
+      min-width: 12px;
+      background: rgba(11, 13, 18, .18);
+      margin: 0 4px;
+    }
+
+    .ia-diag-caption {
+      font-size: 10px;
+      color: #c44;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin: 4px 0 8px;
+    }
+
+    .ia-diag-dup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .ia-dup-stack {
+      border: 1px dashed rgba(180, 80, 80, .45);
+      border-radius: 10px;
+      padding: 10px;
+      background: rgba(255, 255, 255, .35);
+    }
+
+    .ia-dup-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #a66;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .ia-diag--to-be .ia-diag-grid-main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .ia-diag--to-be .ia-diag-cols {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px 12px;
+    }
+
+    @media (min-width: 720px) {
+      .ia-diag--to-be .ia-diag-cols {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+    }
+
+    /* 한글 주석: 모바일에서 중복 비교 2열 → 1열 */
+    @media (max-width: 600px) {
+      .ia-diag-dup-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ia-diag-row--squeeze {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    .ia-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ia-col .ia-p--blk {
+      font-size: 10px;
+      padding: 6px 10px;
+      font-weight: 600;
+    }
+
+    .ia-ba-col-h {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(11, 13, 18, .12);
+    }
+
+    .ia-ba-before .ia-ba-col-h {
+      color: #111;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .12em;
+      border-bottom-color: rgba(17, 17, 17, .15);
+    }
+
+    .ia-ba-after .ia-ba-col-h {
+      color: #111;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .12em;
+      border-bottom-color: rgba(17, 17, 17, .15);
+    }
+
+    .ia-ba-insight {
+      margin-bottom: 28px;
+      padding: 22px 22px 20px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(1, 109, 213, .2);
+      background: linear-gradient(180deg, rgba(1, 109, 213, .06), rgba(1, 109, 213, 0));
+    }
+
+    .ia-ba-insight h3 {
+      margin: 0 0 14px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+
+    .ia-ba-insight ul {
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(11, 13, 18, .72);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .ia-ba-insight li {
+      margin: 8px 0;
+    }
+
+    .ia-ba-results {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ia-ba-res {
+      padding: 18px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: rgba(255, 255, 255, .72);
+      text-align: center;
+    }
+
+    .ia-ba-res strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 6px;
+      letter-spacing: -.02em;
+    }
+
+    .ia-ba-res span {
+      font-size: 12px;
+      color: rgba(11, 13, 18, .62);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 960px) {
+      .ia-ba-split {
+        grid-template-columns: 1fr;
+      }
+
+      .ia-ba-before {
+        border-right: none;
+        border-bottom: 1px solid rgba(11, 13, 18, .1);
+      }
+
+      .ia-ba-results {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Accessibility: 모션 줄이기 */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" role="banner" aria-label="브랜드">
+        <strong>NICEPAY Rebuilder</strong>
+        <span>Data Trust · Decision UX</span>
+      </div>
+      <nav class="topnav" aria-label="문서 내 이동">
+        <a href="#sec-hero">Overview</a>
+        <a href="#sec-issues">UX Issues</a>
+        <a href="#sec-insights">Key Insights</a>
+        <a href="#sec-persona">Persona</a>
+        <a href="#sec-ia-flow">IA / Flow</a>
+        <a href="#sec-ia-before-after">IA Before/After</a>
+        <a href="#sec-screens">Key Screens</a>
+      </nav>
+      <a class="cta-btn" href="#sec-outcome" aria-label="문의하기 버튼">
+        문의하기 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="wrap deck">
+    <!-- ===== HERO REBUILD v2 — Portfolio Editorial ===== -->
+    <section id="sec-hero" class="hero-new" aria-label="NICE 히어로 섹션">
+      <div class="hero-new-inner">
+
+        <!-- Meta bar -->
+        <div class="hero-meta-bar">
+          <div class="hero-meta-left h-fade" id="heroMetaL">
+            <div class="hero-logo-mark">N<span class="slash">/</span>CE</div>
+            <div class="hero-meta-line"><strong>Role</strong> &nbsp;Product Designer (Solo)</div>
+            <div class="hero-meta-line"><strong>Scope</strong> &nbsp;Research, UX/UI Design, Prototyping</div>
+          </div>
+          <div class="hero-tools-col h-fade" id="heroMetaR">
+            <div class="hero-tools-label">Tools</div>
+            <a href="#">Figma</a>
+            <a href="#">Midjourney</a>
+            <a href="#">Photoshop</a>
+            <a href="#">Illustrator</a>
+          </div>
+        </div>
+
+        <!-- Stage -->
+        <div class="hero-stage-v2">
+          <!-- Background big text -->
+          <div class="hero-big-text h-fade" id="heroBigText" aria-hidden="true">NICE PAYMENTS</div>
+
+          <!-- Devices -->
+          <div class="hero-devices-wrap h-scale-in" id="heroDevices">
+            <img
+              class="hero-desktop-img" id="heroDesktop" src="./images/nicepayments/hero-desktop.png" draggable="false"/>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== UX Issues ===== -->
+    <section id="sec-issues">
+      <div class="section-kicker">AS-IS · Web Site UX Issues</div>
+      <h2 class="h2 reveal">파편화된 탐색이 이탈을 만든다</h2>
+      <p class="lead reveal">
+        기존 웹사이트는 복잡한 구조와 텍스트 중심 데이터 표로 인해 사용자의 목적 지향 탐색이 실패하며,
+        체류/클릭 경로가 ‘의사결정’이 아닌 ‘탐색’으로 고정됩니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="grid-3">
+        <article class="card reveal">
+          <h3>GNB 파편화 (Phenomenon)</h3>
+          <p>
+            메인 페이지 진입 후 <strong>GNB 영역에서 즉시 이탈</strong>하는 비율이 <strong>35%</strong>로 매우 높습니다.
+          </p>
+          <div class="meta-row">
+            <span class="pill">AS-IS: 복잡</span>
+            <span class="pill gray">TO-BE: 단순화</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>목적지 탐색 실패 (Problem)</h3>
+          <p>
+            메뉴 명칭의 모호성과 과도한 depth로 인해 목적지 탐색 실패 및 <strong>인지 혼란</strong>이 증가합니다.
+          </p>
+          <div class="meta-row">
+            <span class="pill">Depth 과다</span>
+            <span class="pill gray">Decision-first</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>해독 지연 · 정보 습득 실패</h3>
+          <p>
+            텍스트 위주의 데이터 테이블 영역에서 시각화 부재로 해독 난이도가 높고, 정보 습득이 지연됩니다.
+            특정 서비스 도달까지 평균 클릭 발생률 <strong>40%</strong> (기획 문구 기준).
+          </p>
+          <div class="meta-row">
+            <span class="pill">Visualization 부족</span>
+            <span class="pill gray">Card Layout</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Key Insights ===== -->
+    <section id="sec-insights">
+      <div class="section-kicker">Key Insights</div>
+      <h2 class="h2 reveal">Pain Point를 4가지 과제로 정리</h2>
+      <p class="lead reveal">
+        경쟁사 UX 패턴과 페르소나 기반 Pain Point를 통해, 의사결정 중심 UX로 리빌드하기 위한 우선순위를 도출했습니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="grid-2">
+        <article class="card reveal">
+          <h3>1) 내비게이션 단순화</h3>
+          <p>복잡한 메뉴 구조를 직관적이고 단순하게 개선해 탐색 비용을 줄입니다.</p>
+          <div class="meta-row">
+            <span class="pill">GNB 50% 제거 목표</span>
+            <span class="pill gray">Fixed CTA</span>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3>2) 정보 전달력 강화</h3>
+          <p>텍스트 나열 대신 핵심 요약 + 비주얼 요소로 ‘읽는 UX’를 ‘결정하는 UX’로 전환합니다.</p>
+          <div class="meta-row">
+            <span class="pill">Real-time Data</span>
+            <span class="pill gray">3D Cards</span>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3>3) 브랜드 신뢰 강화</h3>
+          <p>톤앤매너, 컬러, 비주얼 아이덴티티로 안정감을 전달해 ‘문의하기’까지 확신을 쌓습니다.</p>
+          <div class="meta-row">
+            <span class="pill">Trust-Layer</span>
+            <span class="pill gray">Tech & Security</span>
+          </div>
+        </article>
+        <article class="card reveal">
+          <h3>4) CTA 명확화</h3>
+          <p>주요 버튼(가입/문의)을 일관되게 노출해, 사용자의 최종 전환을 예측 가능하게 만듭니다.</p>
+          <div class="meta-row">
+            <span class="pill">Inquiry CTA</span>
+            <span class="pill gray">Conversion Loop</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Persona / pain point mapping ===== -->
+    <section id="sec-persona" style="padding-top: 30px;">
+      <div class="sec-persona-map reveal">
+        <!-- 한글 주석: 레퍼런스 시안 — 아바타 + Needs/Pain 2열 그리드 -->
+        <div class="section-kicker">Persona / pain point mapping</div>
+        <h2 class="persona-map-h2">사용자는 세 명처럼 보이지만 결국 같은 질문을 합니다.</h2>
+        <p class="persona-map-lead">
+         페르소나별 행동 동기는 다르지만,<Br/>결제/신청까지 도달하기 위해서는 "빠른 이해 + 신뢰 근거"가 필요합니다.
+        </p>
+
+        <div class="persona-map-grid">
+          <article class="persona-map-card">
+            <div class="persona-map-avatar" aria-hidden="true">
+              <img src="./images/nicepayments/persona-01.png" width="112" height="112" alt="">
+            </div>
+            <div class="persona-map-top">
+              <div class="persona-map-identity">
+                <div class="persona-map-name-row">
+                  <span class="persona-map-name">김지민</span>
+                  <span class="persona-map-age">24세 · 20대</span>
+                </div>
+                <p class="persona-map-job">대학생 · 모바일·UX 수업 수강</p>
+              </div>
+            </div>
+            <p class="persona-map-desc">모바일 네이티브 세대 — 빠르고 심플한 UX 선호</p>
+            <div class="persona-np-row">
+              <div class="persona-np-box">
+                <span class="persona-np-label">Needs</span>
+                <p>간편 인증, 직관적 UI, 빠른 비교</p>
+              </div>
+              <div class="persona-np-box">
+                <span class="persona-np-label">Pain</span>
+                <p>복잡한 메뉴, 범람하는 정보로 찾기 어려움</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="persona-map-card">
+            <div class="persona-map-avatar" aria-hidden="true">
+              <img src="./images/nicepayments/persona-02.png" width="112" height="112" alt="">
+            </div>
+            <div class="persona-map-top">
+              <div class="persona-map-identity">
+                <div class="persona-map-name-row">
+                  <span class="persona-map-name">박현우</span>
+                  <span class="persona-map-age">35세 · 30대</span>
+                </div>
+                <p class="persona-map-job">IT 기획자 · B2B 서비스 도입 검토</p>
+              </div>
+            </div>
+            <p class="persona-map-desc">기획 담당 — 업무 효율과 보안·정책 확인이 핵심</p>
+            <div class="persona-np-row">
+              <div class="persona-np-box">
+                <span class="persona-np-label">Needs</span>
+                <p>서비스 기능 범위, 보안 정책, 고객 지원 체계</p>
+              </div>
+              <div class="persona-np-box">
+                <span class="persona-np-label">Pain</span>
+                <p>분산된 정보로 전환 피로, 긴 비교 시간</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="persona-map-card">
+            <div class="persona-map-avatar" aria-hidden="true">
+              <img src="./images/nicepayments/persona-03.png" width="112" height="112" alt="">
+            </div>
+            <div class="persona-map-top">
+              <div class="persona-map-identity">
+                <div class="persona-map-name-row">
+                  <span class="persona-map-name">이성영</span>
+                  <span class="persona-map-age">42세 · 40대</span>
+                </div>
+                <p class="persona-map-job">카페 운영 · 소상공인</p>
+              </div>
+            </div>
+            <p class="persona-map-desc">자영업자 — 온라인 연동보다 빠른 실행이 중요</p>
+            <div class="persona-np-row">
+              <div class="persona-np-box">
+                <span class="persona-np-label">Needs</span>
+                <p>간결한 가이드, 즉시 문의, 실무용 솔루션</p>
+              </div>
+              <div class="persona-np-box">
+                <span class="persona-np-label">Pain</span>
+                <p>불분명한 용어, 복잡한 절차로 인한 실행 포기</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== IA Before / After (기획서: 구조 비교 — 혼란 → 정리) ===== -->
+    <section id="sec-ia-before-after" class="ia-ba-section">
+      <div class="section-kicker">IA · Before / After</div>
+      <h2 class="h2 reveal">정보 구조를 ‘디자인’처럼 보여주는 비교</h2>
+      <p class="lead reveal">
+        IA 표만이 아니라 <strong>AS-IS Pain Point(Why)</strong>, <strong>TO-BE 전략(How · 3가지 UX 키워드)</strong>, 그리고
+        <strong>와이어프레임·GNB에서의 시각화</strong>까지 한 흐름으로 정리했습니다.
+      </p>
+
+      <div style="height: 28px;"></div>
+
+      <!-- 한글 주석: 1. 문제 정의 — ‘복잡하다’가 아닌 구체적 페인 포인트 -->
+      <div class="ia-ba-block reveal">
+        <h3 class="ia-ba-h3">1. 문제 정의 (AS-IS 분석: Why?)</h3>
+        <p class="ia-ba-sub">
+          단순히 “구조가 복잡하다”는 표현 대신, 사용자 행동에 직접 닿는 Pain Point를 기준으로 AS-IS를 정의했습니다.
+        </p>
+        <ul class="ia-ba-pain-list">
+          <li>
+            <strong>인지 과부하 (Cognitive Overload)</strong>
+            ‘회사소개’ 하위에 펼쳐지는 7개 메뉴는, 정보를 찾기 전 단계에서 이미 선택지를 스캔해야 하므로 피로감(인지 부하)을 키웁니다.
+          </li>
+          <li>
+            <strong>낮은 효율성 (탐색·비교 비용)</strong>
+            제품군(단말기, POS, KIOSK, 리더기 등)이 나열 위주로 배치되어 있어, 유사 제품군 간 비교나 목적별 탐색이 번거롭습니다.
+          </li>
+          <li>
+            <strong>중복 경험 (경계 모호)</strong>
+            ‘사업영역’과 ‘서비스’의 역할 구분이 사용자에게 명확히 전달되지 않아, 동일·유사 콘텐츠(PG/VAN 등)를 어디에서 봐야 할지 혼란을 겪을 가능성이 큽니다.
+          </li>
+        </ul>
+      </div>
+
+      <p class="ia-ba-tagline reveal" aria-hidden="false">구조 비교 <span>→</span> 실행 전략</p>
+
+      <div class="ia-ba-split reveal" role="group" aria-label="AS-IS와 TO-BE 정보 구조 비교">
+        <div class="ia-ba-col ia-ba-before">
+          <div class="ia-ba-col-h">Before · AS-IS</div>
+          <!-- 한글 주석: After와 동일 라임/블랙 — 줄임·과밀만으로 AS-IS 구분 -->
+          <div class="ia-diag ia-diag--as-is" aria-label="AS-IS IA 다이어그램">
+            <div class="ia-diag-inner">
+              <div class="ia-diag-badge"><em>as-is</em> · 메뉴 과밀</div>
+              <div class="ia-diag-row ia-diag-row--squeeze">
+                <span class="ia-p ia-p--lime ia-p--mini">진입</span>
+                <span class="ia-diag-hline" aria-hidden="true"></span>
+                <span class="ia-p ia-p--lime ia-p--mini">gnb</span>
+                <span class="ia-diag-hline" aria-hidden="true"></span>
+                <span class="ia-p ia-p--blk ia-p--mini">depth 3+</span>
+              </div>
+              <div class="ia-diag-row ia-diag-row--squeeze">
+                <span class="ia-p ia-p--lime ia-p--mini">회사</span>
+                <span class="ia-p ia-p--lime ia-p--mini">사업</span>
+                <span class="ia-p ia-p--lime ia-p--mini">서비스</span>
+                <span class="ia-p ia-p--lime ia-p--mini">제품</span>
+                <span class="ia-p ia-p--lime ia-p--mini">고객</span>
+              </div>
+              <div class="ia-diag-row ia-diag-row--squeeze">
+                <span class="ia-p ia-p--blk ia-p--mini">인사·개요</span>
+                <span class="ia-p ia-p--blk ia-p--mini">전자결제</span>
+                <span class="ia-p ia-p--blk ia-p--mini">전자금융</span>
+                <span class="ia-p ia-p--blk ia-p--mini">단말</span>
+                <span class="ia-p ia-p--blk ia-p--mini">공지</span>
+              </div>
+              <p class="ia-diag-caption--as-is"><strong>dup</strong> 같은 서비스 이중 노출</p>
+              <div class="ia-dup-x2" aria-hidden="true"><span>×2</span> pg / van</div>
+              <div class="ia-diag-dup-grid ia-diag-dup-grid--as-is">
+                <div class="ia-dup-stack ia-dup-stack--as-is">
+                  <div class="ia-dup-label--as-is">사업영역 트리</div>
+                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center">
+                    <span class="ia-p ia-p--lime ia-p--mini">pg</span>
+                    <span class="ia-p ia-p--lime ia-p--mini">van</span>
+                  </div>
+                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center ia-diag-row--center-mt">
+                    <span class="ia-p ia-p--blk ia-p--mini">계좌간편</span>
+                    <span class="ia-p ia-p--blk ia-p--mini">cb</span>
+                  </div>
+                </div>
+                <div class="ia-dup-stack ia-dup-stack--as-is">
+                  <div class="ia-dup-label--as-is">서비스 메뉴</div>
+                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center">
+                    <span class="ia-p ia-p--lime ia-p--mini">pg</span>
+                    <span class="ia-p ia-p--lime ia-p--mini">van</span>
+                  </div>
+                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center ia-diag-row--center-mt">
+                    <span class="ia-p ia-p--blk ia-p--mini">for startups</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ia-ba-col ia-ba-after">
+          <div class="ia-ba-col-h">After · TO-BE</div>
+          <div class="ia-diag ia-diag--to-be" aria-label="TO-BE IA 다이어그램">
+            <div class="ia-diag-inner">
+              <div class="ia-diag-grid-main">
+                <span class="ia-p ia-p--lime">회사소개</span>
+                <span class="ia-p ia-p--lime">사업영역</span>
+                <span class="ia-p ia-p--lime">주요서비스</span>
+                <span class="ia-p ia-p--lime">제품</span>
+                <span class="ia-p ia-p--lime">고객지원</span>
+                <span class="ia-p ia-p--lime">입찰정보</span>
+              </div>
+              <div class="ia-diag-cols">
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">overview</span>
+                </div>
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">전자결제</span>
+                  <span class="ia-p ia-p--blk">van</span>
+                  <span class="ia-p ia-p--blk">cross-border</span>
+                </div>
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">pg 서비스</span>
+                  <span class="ia-p ia-p--blk">van 서비스</span>
+                  <span class="ia-p ia-p--blk">for startups</span>
+                </div>
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">단말기</span>
+                  <span class="ia-p ia-p--blk">pos</span>
+                  <span class="ia-p ia-p--blk">kiosk</span>
+                  <span class="ia-p ia-p--blk">tablet</span>
+                  <span class="ia-p ia-p--blk">리더기</span>
+                </div>
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">공지</span>
+                  <span class="ia-p ia-p--blk">제휴</span>
+                </div>
+                <div class="ia-col">
+                  <span class="ia-p ia-p--blk">bid</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 한글 주석: 2. TO-BE — 3가지 UX 키워드 -->
+      <div class="ia-ba-block ia-ba-block--wide reveal">
+        <h3 class="ia-ba-h3">2. 개선 전략 (TO-BE 설계: How?)</h3>
+        <p class="ia-ba-sub">
+          이미지·IA에서 수정한 방향을 세 가지 UX 키워드로 압축했습니다. 각 키워드는 화면 설계(와이어프레임)에 그대로 연결됩니다.
+        </p>
+        <div class="ia-ba-strategy-grid">
+          <article class="ia-strategy-card">
+            <h4>① Flattening</h4>
+            <span class="ia-kw">정보의 통합 및 효율화</span>
+            <p>
+              회사소개를 여러 개의 깊은 페이지로 나누지 않고, 하나의 <strong>원페이지 스토리(One-page Branding)</strong>로 통합합니다.
+              사용자는 7번 클릭할 일을 <strong>1번의 스크롤</strong>로 연속 탐색할 수 있고, Depth 축소로 정보 접근성이 향상됩니다.
+            </p>
+          </article>
+          <article class="ia-strategy-card">
+            <h4>② Hierarchical Grouping</h4>
+            <span class="ia-kw">위계 질서 재정립 (제품)</span>
+            <p>
+              제품을 나열형에서 <strong>큰 범주 → 세부</strong>로 읽히도록 구조화합니다. 예: 유선/무선을 ‘단말기’로, IC/RF를 ‘리더기’로 묶어
+              <strong>Top-down</strong> 탐색이 가능해지고, 유사 제품군 간 비교·이동이 쉬워집니다.
+            </p>
+          </article>
+          <article class="ia-strategy-card">
+            <h4>③ Labeling</h4>
+            <span class="ia-kw">명확한 레이블링</span>
+            <p>
+              단순 ‘서비스’ 대신 <strong>주요서비스</strong>처럼 수식어를 붙여, 기업의 핵심 비즈니스 라인에 대한 <strong>주목도·신뢰도</strong>를
+              메뉴 단계에서부터 전달합니다.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="ia-ba-results reveal" aria-label="IA 개선 결과">
+        <div class="ia-ba-res">
+          <strong>Flattening</strong>
+          <span>Depth 축소 · 회사소개 스크롤형 통합으로 클릭·탐색 비용 절감</span>
+        </div>
+        <div class="ia-ba-res">
+          <strong>Hierarchical Grouping</strong>
+          <span>제품군 카테고리화로 비교·탐색 효율 개선</span>
+        </div>
+        <div class="ia-ba-res">
+          <strong>Labeling + 중복 정리</strong>
+          <span>명확한 레이블과 PG/VAN 이중 노출 정리로 경로 혼란 완화</span>
+        </div>
+      </div>
+
+
+      <!-- 한글 주석: 보완 — 사업영역 vs 주요서비스 / 입찰정보 위치 -->
+      <aside class="ia-ba-callout reveal" aria-label="IA 보완 제안">
+        <strong>보완: ‘사업영역’ vs ‘주요서비스’</strong><br />
+        GNB에서 두 항목이 나란히 있으면 사용자는 “차이가 뭐지?”라고 느낄 수 있습니다.
+
+        사업영역이 비전·큰 틀, 주요서비스가 실제 가입·신청 가능한 상품이라면,
+        <strong>사업영역을 회사소개 하위로 편입</strong>하거나, 둘을 <strong>[서비스/사업 소개]</strong>처럼 한 축으로 묶는 검토도 가능합니다.
+
+        (본 덱의 TO-BE 다이어그램은 1차 GNB 정리안을 유지하며, 위는 포트폴리오에서 의사결정을 보여 주기 위한 대안입니다.)
+      </aside>
+
+      <aside class="ia-ba-callout ia-ba-callout--bid reveal" aria-label="입찰정보 GNB 배치 의도">
+        <strong>포트폴리오 엣지: ‘입찰정보’ 위치</strong><br />
+        GNB 1차에 입찰정보가 보인다는 것은 <strong>정부·공공·B2B 입찰이 비즈니스의 핵심 채널</strong>이라는 가정을 전제로 한 배치입니다.
+
+        만약 메인 타겟이 일반 소상공인 등이라면, 입찰정보는 <strong>푸터 또는 고객지원 하위</strong>로 내려 GNB를 더 가볍게 가져가는 편이 낫습니다.
+
+        반대로 입찰이 전략적으로 핵심이면 지금처럼 유지하는 것이 맞고, <strong>그 이유를 한 줄이라도 덱에 적으면</strong> 기획 근거가 분명해집니다.
+      </aside>
+
+      <p class="lead reveal" style="margin-top: 28px; font-size: 13px; color: rgba(11,13,18,.55); max-width: 62ch;">
+        UI 가이드: Before·After 다이어그램은 동일 라임/블랙 팔레트로, Before는 미니 알약·과밀 레이아웃으로 AS-IS만 표현합니다.
+
+        위 표의 Mega Menu·Anchor·아이콘은 다음 섹션의 화면 목업과 연결해 보여 주면 포트폴리오 완성도가 올라갑니다.
+      </p>
+    </section>
+
+    <!-- ===== Trust-Layer / Solutions ===== -->
+    <section id="sec-trust" style="padding-top: 40px;">
+      <div class="section-kicker">Trust-Layer · Solutions</div>
+      <h2 class="h2 reveal">신뢰를 ‘레이어’로 재정의</h2>
+      <p class="lead reveal">
+        히어로에서 제시한 비즈니스 임팩트를 기술적 근거로 증명하는 Trust-Layer는,
+        브랜드 스토리와 보안/기술 인증, 채용, Contact까지 연결됩니다.
+        또한 Company / Support / Inquiry 영역에서 서비스 탐색을 해결 중심으로 정리합니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="grid-2">
+        <article class="card reveal">
+          <h3>Trust-Layer (Evidence)</h3>
+          <p>
+            사용자가 “왜 믿어야 하는지”를 즉시 이해할 수 있도록, 핵심 신뢰 근거를 하나의 시선 흐름 안에 배치합니다.
+          </p>
+          <div style="height: 14px;"></div>
+          <div class="grid-2">
+            <div class="mock-media"
+              style="height: 150px; background: linear-gradient(145deg, rgba(1,109,213,.18), rgba(1,109,213,.06));">
+              <div class="label">MOCK: 브랜드 스토리</div>
+            </div>
+            <div class="mock-media"
+              style="height: 150px; background: linear-gradient(145deg, rgba(11,13,18,.10), rgba(1,109,213,.06));">
+              <div class="label">MOCK: 기술 & 보안 인증</div>
+            </div>
+            <div class="mock-media"
+              style="height: 150px; background: linear-gradient(145deg, rgba(1,109,213,.12), rgba(1,109,213,.05));">
+              <div class="label">MOCK: 채용</div>
+            </div>
+            <div class="mock-media"
+              style="height: 150px; background: linear-gradient(145deg, rgba(1,109,213,.16), rgba(11,13,18,.04));">
+              <div class="label">MOCK: Contact</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <h3>Solutions (Company / Support / Inquiry)</h3>
+          <p>
+            AS-IS는 회사 소개/사업/지원이 파편화되어 클릭 뎁스가 깊어집니다.
+            TO-BE는 목적 기반으로 그룹화해 탐색 비용을 줄입니다.
+          </p>
+          <div style="height: 14px;"></div>
+          <div class="mock-stack">
+            <div class="step-card reveal">
+              <div class="step">Online / Offline</div>
+              <b>전자결제 (온라인·오프라인)</b>
+              <p>결제 채널을 한 번에 인지하고 다음 행동(문의)으로 연결.</p>
+            </div>
+            <div class="step-card reveal">
+              <div class="step">Global PG</div>
+              <b>글로벌 PG · Cross Border</b>
+              <p>시장 점유율 및 신뢰 근거를 카드형으로 시각화.</p>
+            </div>
+            <div class="step-card reveal">
+              <div class="step">Startup Support</div>
+              <b>스타트업 지원 · For Startups</b>
+              <p>FAQ 중심 문제 해결형 모듈로 신청 포기 리스크를 낮춤.</p>
+            </div>
+            <div class="step-card reveal">
+              <div class="step">Support / Inquiry</div>
+              <b>고객지원 · 문의 · Contact</b>
+              <p>문의하기 CTA를 고정해 전환 루프를 안정화.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Key Screens Before/After ===== -->
+    <section id="sec-screens">
+      <div class="section-kicker">Key Screens · Before / After</div>
+      <h2 class="h2 reveal">구조/시각/CTA를 한 번에 맞춘 리빌드</h2>
+      <p class="lead reveal">
+        ‘비즈니스 신뢰’를 기술적으로 증명(Trust at Scale)하고, 서비스/FAQ를 문제 해결 중심 모듈로 재구성합니다.
+        아래는 목업 레이아웃이며, 실제 이미지는 나중에 교체하면 됩니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="cmp-grid">
+        <article class="cmp reveal">
+          <div class="cmp-top">
+            <h3>01) Main Page Redesign · Vision-driven Interface</h3>
+            <p>
+              기존의 인사형 구조 → 기술 신뢰를 상징하는 3D 보안 비주얼 + 실적 기반 메시지(CTA 영역 통합).
+            </p>
+          </div>
+          <div class="compare-row">
+            <div class="compare-card before">
+              <div class="cap">Before</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 인사형/텍스트 위주 메인</div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-card after">
+              <div class="cap">After</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 3D 보안 비주얼 + Data CTA</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meta-row" style="margin-top: 14px;">
+            <span class="pill">Hero: Trust Visual</span>
+            <span class="pill gray">CTA: KPI 통합</span>
+          </div>
+        </article>
+
+        <article class="cmp reveal">
+          <div class="cmp-top">
+            <h3>02) Business Section Renewal · 3D Card 구조</h3>
+            <p>
+              단조로운 정보 나열 → 사업 영역을 카드형 UI로 구조화하고, 파트너 로고를 브랜드 스토리 형태로 배열.
+            </p>
+          </div>
+          <div class="compare-row">
+            <div class="compare-card before">
+              <div class="cap">Before</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 텍스트/아이콘 나열</div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-card after">
+              <div class="cap">After</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 3D 카드 · 컬러 톤 분리</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meta-row" style="margin-top: 14px;">
+            <span class="pill">Business: 구조 명확화</span>
+            <span class="pill gray">Trust: 파트너 스토리</span>
+          </div>
+        </article>
+
+        <article class="cmp reveal">
+          <div class="cmp-top">
+            <h3>03) Service Section Redesign · Problem-solving UX</h3>
+            <p>
+              서비스 페이지를 ‘탐색형’에서 ‘문제 해결형’으로 전환하고, FAQ/문의 연결성을 강화.
+            </p>
+          </div>
+          <div class="compare-row">
+            <div class="compare-card before">
+              <div class="cap">Before</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 기능 중심 나열 + FAQ 약함</div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-card after">
+              <div class="cap">After</div>
+              <div class="mock-img">
+                <div class="mini">
+                  <div class="mock-bars" aria-hidden="true"></div>
+                  <div>MOCK: 카드형 서비스/FAQ + 다크 톤 푸터</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meta-row" style="margin-top: 14px;">
+            <span class="pill">FAQ: 해결 중심 모듈</span>
+            <span class="pill gray">Footer: 접근성 강화</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== User Flow ===== -->
+    <section id="sec-ia-flow">
+      <div class="section-kicker">User Flow</div>
+      <h2 class="h2 reveal">탐색이 아닌 ‘결정’으로 유도</h2>
+      <p class="lead reveal">
+        AS-IS는 파편화된 나열형 정보 구조로 인해 High Bounce Risk가 발생합니다.
+        TO-BE는 데이터 확신형 흐름으로 클릭 뎁스를 줄이고, 기억 부하를 낮춥니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="flow-wrap reveal" id="flowSection">
+        <div class="flow-grid">
+          <div class="flow-cards" aria-label="유저 플로우 요약">
+            <div class="step-card flow-node">
+              <div class="step">Step 01</div>
+              <b>문의하기 고정 GNB</b>
+              <p>탐색 중에도 최종 전환(문의하기)을 계속 노출해 ‘결정’을 고정합니다.</p>
+            </div>
+            <div class="step-card flow-node">
+              <div class="step">Step 02</div>
+              <b>Service: 3D Interactive Cards</b>
+              <p>서비스 가치를 체험하게 하고, 텍스트 해독 비용을 비주얼 이해로 대체합니다.</p>
+            </div>
+            <div class="step-card flow-node">
+              <div class="step">Step 03</div>
+              <b>Main: Real-time Data + Market Trust</b>
+              <p>실시간 지표와 시장 점유율/기술 신뢰도를 통해 ‘확신’을 완성합니다.</p>
+            </div>
+          </div>
+
+          <div class="flow-svg" aria-label="IA 변환 다이어그램 목업" id="flowDiagram">
+            <svg viewBox="0 0 680 320" aria-hidden="true">
+              <!--
+                실제 프로젝트에서는 IA 노드/라벨을 이미지/SVG로 교체할 수 있습니다.
+                여기서는 GSAP로 ‘흐름’이 드로우 되는 느낌만 구현합니다.
+              -->
+              <path id="flowPath" class="flow-path" d="M95 250 C 210 80, 330 80, 360 120 S 520 240, 585 150" />
+              <g class="flow-node" id="node1">
+                <circle cx="95" cy="250" r="18" fill="rgba(1,109,213,.16)" stroke="rgba(1,109,213,.75)"
+                  stroke-width="2" />
+                <text x="95" y="255" text-anchor="middle" font-family="Mona Sans, Noto Sans KR, sans-serif" font-size="12"
+                  fill="rgba(1,109,213,.95)" font-weight="700">GNB</text>
+              </g>
+              <g class="flow-node" id="node2">
+                <circle cx="290" cy="118" r="18" fill="rgba(1,109,213,.16)" stroke="rgba(1,109,213,.75)"
+                  stroke-width="2" />
+                <text x="290" y="123" text-anchor="middle" font-family="Mona Sans, Noto Sans KR, sans-serif" font-size="12"
+                  fill="rgba(1,109,213,.95)" font-weight="700">Cards</text>
+              </g>
+              <g class="flow-node" id="node3">
+                <circle cx="450" cy="210" r="18" fill="rgba(1,109,213,.16)" stroke="rgba(1,109,213,.75)"
+                  stroke-width="2" />
+                <text x="450" y="215" text-anchor="middle" font-family="Mona Sans, Noto Sans KR, sans-serif" font-size="12"
+                  fill="rgba(1,109,213,.95)" font-weight="700">Data</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Outcome / Reflection ===== -->
+    <section id="sec-outcome">
+      <div class="section-kicker">Final Outcome · Reflection</div>
+      <h2 class="h2 reveal">탐색을 줄이고, 확신을 빠르게</h2>
+      <p class="lead reveal">
+        목표는 ‘빠른 이해’가 아니라 ‘빠른 결정’입니다. IA에서 제시한 전환 경로 단축(클릭 뎁스 직선화),
+        유사 정보 그룹화로 인지 과부하를 낮추는 방향으로 설계했습니다.
+      </p>
+
+      <div style="height: 48px;"></div>
+
+      <div class="outcome-grid">
+        <div class="card reveal">
+          <p class="outcome-copy">
+            TO-BE의 핵심은 1) 복잡한 GNB 제거, 2) 데이터 확신형 메시지(Trust-Layer),
+            3) 카드형 정보 시각화로 해독 지연을 줄이는 것입니다. 결과적으로 사용자의 사고 과정을 직선화하고,
+            목표 지점까지의 클릭 뎁스와 머무름 시간을 합리화합니다.
+          </p>
+          <div class="metrics" style="margin-top: 16px;">
+            <div class="metric">
+              <div class="num">50%</div>
+              <small>GNB 제거 목표</small>
+            </div>
+            <div class="metric">
+              <div class="num">50%</div>
+              <small>전환 경로 클릭 뎁스 단축</small>
+            </div>
+            <div class="metric">
+              <div class="num">40%</div>
+              <small>텍스트 표 의존 해독 부담 완화</small>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card reveal">
+          <h3 style="font-size: 16px; margin-bottom: 10px;">정리 한 줄</h3>
+          <p class="outcome-copy">
+            NICEPAY의 리빌더는 ‘시각적으로 예쁜 디자인’이 아니라, 실적/보안을 데이터로 증명해 신뢰를
+            전환으로 연결하는 설계입니다.
+          </p>
+          <div class="meta-row" style="margin-top: 14px;">
+            <span class="pill">Navigation</span>
+            <span class="pill gray">Visualization</span>
+            <span class="pill">Trust</span>
+            <span class="pill gray">CTA</span>
+          </div>
+
+          <div style="height: 14px;"></div>
+          <div class="mock-media"
+            style="height: 210px; background: linear-gradient(145deg, rgba(1,109,213,.16), rgba(1,109,213,.05));">
+            <div class="label">MOCK: Outcome Summary 카드</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-title">JJY Portfolio · NICEPAY Rebuilder</h3>
+          <p class="footer-copy">
+            이 페이지는 기획서(Background/UX Issues/IA/User Flow/Key Screens) 문구를 기준으로,
+            비핸스 무드의 블루톤 deck 레이아웃 + GSAP 기반 스크롤 애니메이션을 적용한 목업입니다.
+          </p>
+        </div>
+        <div class="footer-links" aria-label="링크">
+          <a href="#sec-hero">Overview로 돌아가기</a>
+          <a href="#sec-screens">Key Screens 보기</a>
+          <a href="#sec-outcome">Outcome/Reflection</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.gsap && window.ScrollTrigger) { gsap.registerPlugin(ScrollTrigger); }
+
+      if (window.gsap && !prefersReduced) {
+        const tl2 = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        tl2
+          .to('#heroMetaL',   { opacity: 1, duration: 0.7 }, 0.1)
+          .to('#heroMetaR',   { opacity: 1, duration: 0.7 }, 0.2)
+          .to('#heroDevices', { opacity: 1, scale: 1, duration: 1.1, ease: 'power2.out' }, 0.3)
+          .to('#heroBigText', { opacity: 1, duration: 0.9, ease: 'power2.out' }, 0.55);
+
+        // Subtle monitor float
+        gsap.to('#heroDesktop', {
+          y: -10,
+          duration: 3.8,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        });
+
+        // Phone independent float
+        gsap.to('#heroPhone', {
+          y: -14,
+          duration: 3.1,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: 0.5
+        });
+
+        // Scroll parallax: big text moves up slower than scroll
+        gsap.to('#heroBigText', {
+          y: -60,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#sec-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+
+        // Devices move up slightly on scroll
+        gsap.to('#heroDevices', {
+          y: -30,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#sec-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5
+          }
+        });
+
+        // Mouse tilt on devices
+        const devWrap = document.getElementById('heroDevices');
+        if (devWrap) {
+          let mx = 0, my = 0, cx = 0, cy = 0;
+          document.addEventListener('mousemove', e => {
+            mx = (e.clientX / window.innerWidth  - .5) * 10;
+            my = (e.clientY / window.innerHeight - .5) * 5;
+          });
+          gsap.ticker.add(() => {
+            cx += (mx - cx) * 0.05;
+            cy += (my - cy) * 0.05;
+            gsap.set(devWrap, { rotateY: cx, rotateX: -cy, transformPerspective: 1200 });
+          });
+        }
+      } else {
+        ['heroMetaL','heroMetaR','heroDevices','heroBigText'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) { el.style.opacity = 1; el.style.transform = 'none'; }
+        });
+      }
+
+      // 버튼 동작
+      const btnScrollIssues = document.getElementById('btnScrollIssues');
+      const btnJumpFlow = document.getElementById('btnJumpFlow');
+      if (btnScrollIssues) btnScrollIssues.addEventListener('click', () => {
+        const t = document.getElementById('sec-issues');
+        if (t) t.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      });
+      if (btnJumpFlow) btnJumpFlow.addEventListener('click', () => {
+        const t = document.getElementById('sec-ia-flow');
+        if (t) t.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      });
+
+      // GSAP 초기화
+      if (window.gsap && window.ScrollTrigger && !prefersReduced) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 스크롤 리빌/인 애니
+        document.querySelectorAll('.reveal').forEach((el) => {
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          });
+        });
+
+        // 카드들이 더 "살아있는" 느낌(지나치게 흔들리진 않게)으로 순차 입장
+        const animatedCards = document.querySelectorAll('.card, .principle, .cmp, .compare-card, .metric');
+        if (animatedCards.length) {
+          gsap.utils.toArray(animatedCards).forEach((el, i) => {
+            gsap.fromTo(el, {
+              opacity: 0,
+              y: 16,
+              scale: 0.995,
+              filter: 'blur(1px)'
+            }, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power3.out',
+              delay: i * 0.02,
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+              }
+            });
+          });
+        }
+
+        // 카운터 애니
+        const counters = document.querySelectorAll('.count-up');
+        counters.forEach((c) => {
+          const v = Number(c.getAttribute('data-value') || '0');
+          const obj = { val: 0 };
+          gsap.to(obj, {
+            val: v,
+            duration: 1.3,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: c,
+              start: 'top 85%'
+            },
+            onUpdate: () => {
+              c.textContent = String(Math.round(obj.val));
+            }
+          });
+        });
+
+        // IA/Flow 다이어그램 드로우 애니메이션
+        const flowPath = document.getElementById('flowPath');
+        const flowNodes = document.querySelectorAll('#flowDiagram .flow-node');
+        if (flowPath && flowNodes.length) {
+          gsap.set(flowPath, { strokeDashoffset: 1000 });
+          gsap.to(flowPath, {
+            strokeDashoffset: 0,
+            duration: 1.25,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#flowSection',
+              start: 'top 70%'
+            }
+          });
+
+          // 노드 on 효과
+          gsap.utils.toArray(flowNodes).forEach((node, idx) => {
+            gsap.to(node, {
+              opacity: 1,
+              scale: 1.04,
+              duration: 0.55,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: '#flowSection',
+                start: 'top 75%',
+                onEnter: () => {
+                  node.classList.add('on');
+                  node.style.opacity = 1;
+                }
+              },
+              delay: idx * 0.12
+            });
+          });
+        }
+      } else {
+        // Reduced motion / GSAP 미로딩 시: 최소한 reveal 가시화
+        document.querySelectorAll('.reveal').forEach((el) => {
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        });
+      }
+
+      // (parallax/hover 기반 모션은 제거된 클린 버전)
+    })();
+  </script>
+</body>
+
+</html>
