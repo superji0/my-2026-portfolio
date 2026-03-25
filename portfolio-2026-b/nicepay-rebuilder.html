@@ -71,11 +71,16 @@
       --radius2: 22px;
       --lh: 1.7;
       --ease: cubic-bezier(.2, .9, .2, 1);
+      /* 기본 콘텐츠 폭 — 섹션에서 --sec-mw 로 덮어쓰기 */
       --container: 1200px;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
     }
 
     html,
@@ -87,6 +92,11 @@
       font-family: var(--font-sans);
       line-height: 1.4;
       overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
     }
 
     a {
@@ -114,6 +124,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
+      width: 100%;
       backdrop-filter: blur(6px);
       background: rgba(246, 248, 255, .62);
       border-bottom: 1px solid rgba(11, 13, 18, .08);
@@ -192,10 +203,31 @@
     }
 
     /* ====== Layout ====== */
+    /* 한글 주석: 풀폭(100%) 페이지 — 섹션마다 .sec-inner + --sec-mw 로 폭 조절 */
     .wrap {
+      width: 100%;
       max-width: var(--container);
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 clamp(20px, 4vw, 40px);
+      box-sizing: border-box;
+    }
+
+    .deck-full {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .sec-inner {
+      width: 100%;
+      max-width: var(--sec-mw, var(--container));
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: clamp(20px, 4vw, 48px);
+      padding-right: clamp(20px, 4vw, 48px);
+      box-sizing: border-box;
     }
 
     section {
@@ -204,6 +236,24 @@
 
     .deck {
       padding-top: 70px;
+    }
+
+    /*
+      섹션별 콘텐츠 max-width: 각 section에 --sec-mw 를 두고 .sec-inner 가 상속합니다.
+      예) #sec-screens { --sec-mw: 1400px; }  /  히어로는 #sec-hero { --sec-mw: 1400px; }
+    */
+    #sec-issues,
+    #sec-insights,
+    #sec-persona,
+    #sec-ia-before-after,
+    #sec-trust,
+    #sec-ia-flow,
+    #sec-outcome {
+      --sec-mw: var(--container);
+    }
+
+    #sec-screens {
+      --sec-mw: 1400px;
     }
 
     .section-kicker {
@@ -251,6 +301,10 @@
       will-change: transform, opacity, filter;
     }
 
+    #sec-hero {
+      --sec-mw: 1400px;
+    }
+
     .hero-new {
       position: relative;
       /* Exact pixel-sampled background from the mockup PNG: rgb(247,248,252) */
@@ -266,13 +320,15 @@
     .hero-new-inner {
       position: relative;
       z-index: 2;
-      max-width: 1400px;
+      max-width: var(--sec-mw, 1400px);
       margin: 0 auto;
       width: 100%;
-      padding: 0 32px;
+      padding-left: clamp(20px, 4vw, 40px);
+      padding-right: clamp(20px, 4vw, 40px);
       flex: 1;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
     }
 
     /* ── Meta bar ── */
@@ -422,7 +478,7 @@
     .h-scale-in { opacity: 0; transform: scale(.95); }
 
     @media (max-width: 768px) {
-      .hero-new-inner { padding: 0 18px; }
+      .hero-new-inner { padding-left: 18px; padding-right: 18px; }
       .hero-big-text { font-size: clamp(52px, 16vw, 80px); }
       .hero-devices-wrap { width: 96%; }
       .hero-phone-img { right: -2%; width: clamp(60px, 14vw, 90px); }
@@ -860,6 +916,56 @@
       }
     }
 
+    /* 한글 주석: Key Screens 상단 — UI 세션 도입(3D 히어로 프리뷰) */
+    .ui-preview-block {
+      margin: 0 0 8px;
+    }
+
+    .ui-preview-block .ui-preview-kicker {
+      display: block;
+      margin: 0 0 14px;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--blue);
+      font-family: var(--font-sans);
+    }
+
+    .ui-preview-block .ui-preview-frame {
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(11, 13, 18, .09);
+      background: linear-gradient(165deg, rgba(248, 250, 255, .95) 0%, #fff 55%);
+      box-shadow:
+        0 4px 0 rgba(255, 255, 255, .65) inset,
+        0 36px 100px rgba(11, 13, 18, .12);
+    }
+
+    .ui-preview-block .ui-preview-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ui-preview-block .ui-preview-caption {
+      margin: 14px 0 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(11, 13, 18, .5);
+      text-align: center;
+      max-width: 52ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 600px) {
+      .ui-preview-block .ui-preview-frame {
+        border-radius: 16px;
+      }
+    }
+
     /* ====== Comparisons ====== */
     .cmp-grid {
       display: grid;
@@ -1169,9 +1275,11 @@
 
     /* ====== Footer ====== */
     footer {
+      --sec-mw: var(--container);
       padding: 64px 0 80px;
       border-top: 1px solid rgba(11, 13, 18, .08);
       background: rgba(246, 248, 255, .68);
+      width: 100%;
     }
 
     .footer-grid {
@@ -1537,7 +1645,7 @@
     </div>
   </header>
 
-  <main class="wrap deck">
+  <main class="deck deck-full">
     <!-- ===== HERO REBUILD v2 — Portfolio Editorial ===== -->
     <section id="sec-hero" class="hero-new" aria-label="NICE 히어로 섹션">
       <div class="hero-new-inner">
@@ -1575,6 +1683,7 @@
 
     <!-- ===== UX Issues ===== -->
     <section id="sec-issues">
+      <div class="sec-inner">
       <div class="section-kicker">AS-IS · Web Site UX Issues</div>
       <h2 class="h2 reveal">파편화된 탐색이 이탈을 만든다</h2>
       <p class="lead reveal">
@@ -1619,10 +1728,12 @@
           </div>
         </article>
       </div>
+      </div>
     </section>
 
     <!-- ===== Key Insights ===== -->
     <section id="sec-insights">
+      <div class="sec-inner">
       <div class="section-kicker">Key Insights</div>
       <h2 class="h2 reveal">Pain Point를 4가지 과제로 정리</h2>
       <p class="lead reveal">
@@ -1665,10 +1776,12 @@
           </div>
         </article>
       </div>
+      </div>
     </section>
 
     <!-- ===== Persona / pain point mapping ===== -->
     <section id="sec-persona" style="padding-top: 30px;">
+      <div class="sec-inner">
       <div class="sec-persona-map reveal">
         <!-- 한글 주석: 레퍼런스 시안 — 아바타 + Needs/Pain 2열 그리드 -->
         <div class="section-kicker">Persona / pain point mapping</div>
@@ -1757,11 +1870,13 @@
           </article>
         </div>
       </div>
+      </div>
     </section>
 
 
     <!-- ===== IA Before / After (concept-b copy 통합: 6 메뉴 → 4 여정) ===== -->
     <section id="sec-ia-before-after" class="ia-ba-section ia-portfolio-section">
+      <div class="sec-inner">
       <div class="section-kicker">IA · Before / After</div>
       <div class="ia-pf-head reveal">
         <h2 class="ia-pf-h2">
@@ -1856,10 +1971,12 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- ===== Trust-Layer / Solutions ===== -->
     <section id="sec-trust" style="padding-top: 40px;">
+      <div class="sec-inner">
       <div class="section-kicker">Trust-Layer · Solutions</div>
       <h2 class="h2 reveal">신뢰를 ‘레이어’로 재정의</h2>
       <p class="lead reveal">
@@ -1928,10 +2045,28 @@
           </div>
         </article>
       </div>
+      </div>
     </section>
 
     <!-- ===== Key Screens Before/After ===== -->
     <section id="sec-screens">
+      <div class="sec-inner">
+      <!-- 한글 주석: UI 본문(비교·목업) 전 — 리빌드 메인 히어로 3D 목업으로 시선 고정 -->
+      <div class="ui-preview-block reveal">
+        <span class="ui-preview-kicker">UI · Vision preview</span>
+        <figure class="ui-preview-frame">
+          <img
+            src="./images/nicepayments/23shots_so.png"
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+            alt="NICEPAY 메인 히어로 리빌드: GNB, 실적 KPI, 3D 보안 비주얼 및 문의하기 CTA가 담긴 퍼스펙티브 목업" />
+        </figure>
+      </div>
+
+      <div style="height: 40px;"></div>
+
       <div class="section-kicker">Key Screens · Before / After</div>
       <h2 class="h2 reveal">구조/시각/CTA를 한 번에 맞춘 리빌드</h2>
       <p class="lead reveal">
@@ -2050,10 +2185,12 @@
           </div>
         </article>
       </div>
+      </div>
     </section>
 
     <!-- ===== User Flow ===== -->
     <section id="sec-ia-flow">
+      <div class="sec-inner">
       <div class="section-kicker">User Flow</div>
       <h2 class="h2 reveal">탐색이 아닌 ‘결정’으로 유도</h2>
       <p class="lead reveal">
@@ -2112,10 +2249,12 @@
           </div>
         </div>
       </div>
+      </div>
     </section>
 
     <!-- ===== Outcome / Reflection ===== -->
     <section id="sec-outcome">
+      <div class="sec-inner">
       <div class="section-kicker">Final Outcome · Reflection</div>
       <h2 class="h2 reveal">탐색을 줄이고, 확신을 빠르게</h2>
       <p class="lead reveal">
@@ -2168,11 +2307,12 @@
           </div>
         </aside>
       </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">
+    <div class="sec-inner">
       <div class="footer-grid">
         <div>
           <h3 class="footer-title">JJY Portfolio · NICEPAY Rebuilder</h3>
