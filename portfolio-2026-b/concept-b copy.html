@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NICEPAY IA Redesign</title>
+<style>
+  /* 기본 스타일 리셋 및 폰트 */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* 포트폴리오 컨테이너 */
+  .ia-portfolio-section {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+  }
+
+  /* 1. 타이틀 영역 */
+  .sec-title {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .sec-title h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 16px;
+    word-break: keep-all;
+  }
+  .sec-title .highlight {
+    color: #0052cc; /* NICEPAY 블루 */
+  }
+
+  /* 2. 텍스트 기획 영역 (개선 포인트 & 핵심 UI/UX) */
+  .strategy-cards {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .strategy-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .strategy-card h3 {
+    font-size: 1.25rem;
+    color: #0052cc;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .strategy-card p {
+    font-size: 1rem;
+    color: #555;
+    word-break: keep-all;
+  }
+  .strategy-card p strong {
+    color: #222;
+  }
+
+  /* 3. IA 다이어그램 영역 */
+  .ia-visual-board {
+    background: #fff;
+    border-radius: 24px;
+    padding: 60px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+  }
+  .ia-visual-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #666;
+  }
+
+  /* AS-IS (기존) */
+  .asis-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .asis-item {
+    background: #f1f3f5;
+    color: #868e96;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* 화살표 (흐름) */
+  .flow-arrow {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .flow-arrow::after {
+    content: '↓';
+    display: block;
+    font-size: 2rem;
+    color: #0052cc;
+    margin-top: 10px;
+  }
+  .flow-badge {
+    display: inline-block;
+    background: #ebf3ff;
+    color: #0052cc;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  /* TO-BE (개선) */
+  .tobe-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .tobe-card {
+    border: 2px solid #e1e4e8;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .tobe-card:hover {
+    border-color: #0052cc;
+    box-shadow: 0 8px 24px rgba(0,82,204,0.1);
+    transform: translateY(-5px);
+  }
+  .tobe-head {
+    background: #f8fbff;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e1e4e8;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #111;
+  }
+  .tobe-body {
+    padding: 20px;
+  }
+  .tobe-body ul {
+    list-style: none;
+  }
+  .tobe-body li {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 14px;
+  }
+  .tobe-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    background-color: #0052cc;
+    border-radius: 50%;
+  }
+
+  /* 모바일 반응형 */
+  @media (max-width: 900px) {
+    .strategy-cards { flex-direction: column; }
+    .tobe-wrap { grid-template-columns: repeat(2, 1fr); }
+    .ia-visual-board { padding: 30px 20px; }
+  }
+  @media (max-width: 500px) {
+    .tobe-wrap { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<section class="ia-portfolio-section reveal">
+  
+  <div class="sec-title">
+    <h2>6개의 파편화된 메뉴,<br><span class="highlight">4개의 목적형 여정</span>으로 압축하다</h2>
+  </div>
+
+  <div class="strategy-cards">
+    <div class="strategy-card">
+      <h3>🎯 개선 포인트 (Problem & Solution)</h3>
+      <p>기존에는 회사가 제공하는 결제 서비스(SW)와 단말기(HW)가 '사업영역, 주요서비스, 제품' 3개의 메뉴로 찢어져 있어 방문자가 길을 잃기 쉬웠습니다.<br><br>
+      이를 해결하기 위해 비슷한 비즈니스 정보들을 <strong>[BUSINESS]</strong>라는 하나의 큰 묶음으로 합쳤습니다. 또한, 단순한 게시판 같았던 입찰정보를 <strong>[PARTNERSHIP]</strong>으로 승격시켜 B2B 기업의 핵심인 '신뢰(Trust)'를 전면에 내세웠습니다.</p>
+    </div>
+    
+    <div class="strategy-card">
+      <h3>✨ 핵심 UI/UX (Mega Menu)</h3>
+      <p>메뉴 개수를 4개로 줄인 덕분에 시각적으로 훨씬 여유로운 상단 네비게이션 바(GNB)를 구축할 수 있었습니다.<br><br>
+      마우스를 올렸을 때 전체 비즈니스 포트폴리오가 한눈에 펼쳐지는 <strong>풀 드롭다운(메가 메뉴) UI</strong>를 적용하여, 방문자가 클릭 한 번 없이도 "이 회사가 어떤 결제 수단과 기기를 파는지" 즉각적으로 인지하도록 설계했습니다.</p>
+    </div>
+  </div>
+
+  <div class="ia-visual-board">
+    
+    <div class="ia-visual-title">AS-IS : 공급자 중심의 6개 메뉴</div>
+    <div class="asis-wrap">
+      <div class="asis-item">회사소개</div>
+      <div class="asis-item">사업영역</div>
+      <div class="asis-item">주요서비스</div>
+      <div class="asis-item">제품</div>
+      <div class="asis-item">고객지원</div>
+      <div class="asis-item">입찰정보</div>
+    </div>
+
+    <div class="flow-arrow">
+      <div class="flow-badge">결정 중심 UX & 신뢰망(Trust-Layer) 재구축</div>
+    </div>
+
+    <div class="ia-visual-title">TO-BE : 사용자 목적 중심의 4대 비즈니스 여정</div>
+    <div class="tobe-wrap" id="flowDiagram">
+      
+      <div class="tobe-card flow-node">
+        <div class="tobe-head">ABOUT US</div>
+        <div class="tobe-body">
+          <ul>
+            <li>NICEPAY 소개 (인사말/연혁)</li>
+            <li><strong>보안 및 인프라 (신뢰 강화)</strong></li>
+            <li>오시는 길</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tobe-card flow-node" style="border-color: #0052cc; box-shadow: 0 4px 12px rgba(0,82,204,0.08);">
+        <div class="tobe-head" style="background-color: #0052cc; color: #fff;">BUSINESS</div>
+        <div class="tobe-body">
+          <ul>
+            <li><strong>온라인 결제</strong> (PG/간편결제/에스크로)</li>
+            <li><strong>오프라인 인프라</strong> (POS/단말기/키오스크)</li>
+            <li><strong>IT 비즈니스</strong> (글로벌 결제)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tobe-card flow-node">
+        <div class="tobe-head">PARTNERSHIP</div>
+        <div class="tobe-body">
+          <ul>
+            <li>입찰 공고</li>
+            <li>제휴 문의 및 안내</li>
+            <li>PR 센터</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tobe-card flow-node">
+        <div class="tobe-head">SUPPORT</div>
+        <div class="tobe-body">
+          <ul>
+            <li>고객센터 (FAQ)</li>
+            <li>1:1 문의</li>
+            <li>자료실 / 공지사항</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

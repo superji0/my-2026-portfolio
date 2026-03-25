@@ -989,6 +989,136 @@
       opacity: .35;
     }
 
+    /* 한글 주석: Key Screens — 실제 목업 PNG(After) 삽입 시(absolute 해제로 높이 자연 확장) */
+    .compare-card.after:has(.mock-img--photo) {
+      min-height: 0;
+    }
+
+    .compare-card.after:has(.mock-img--photo) .mock-img.mock-img--photo {
+      position: relative;
+      inset: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      padding: 48px 12px 18px;
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .compare-card .mock-img--photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: min(78vh, 960px);
+      object-fit: contain;
+      object-position: top center;
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(11, 13, 18, .12);
+    }
+
+    /* 한글 주석: 01 메인 스크린 — 포트폴리오형 스태거드(After: 01 히어로 + 02 서브/블리드) */
+    .cmp--screen-redesign {
+      overflow: visible;
+    }
+
+    .cmp--screen-redesign .ks-before-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 22px;
+      align-items: start;
+      margin-top: 8px;
+      margin-bottom: 32px;
+    }
+
+    .cmp--screen-redesign .ks-before-row .compare-card {
+      min-height: 240px;
+    }
+
+    .cmp--screen-redesign .ks-after-block {
+      margin-top: 4px;
+    }
+
+    .cmp--screen-redesign .ks-after-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+      background: rgba(1, 109, 213, .1);
+      color: var(--blue);
+      border: 1px solid rgba(1, 109, 213, .22);
+    }
+
+
+
+    .cmp--screen-redesign .ks-frame--hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .cmp--screen-redesign .ks-sub-row {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(18px, 4vw, 36px);
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .cmp--screen-redesign .ks-frame--bleed {
+      position: relative;
+      margin-left: clamp(-12px, -4vw, -48px);
+      width: calc(100% + clamp(0px, 3vw, 36px));
+      max-width: none;
+      box-shadow: 0 26px 72px rgba(11, 13, 18, .11);
+    }
+
+    .cmp--screen-redesign .ks-frame--bleed img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .cmp--screen-redesign .ks-sub-copy h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+
+    .cmp--screen-redesign .ks-sub-copy p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.72;
+      color: rgba(11, 13, 18, .66);
+      max-width: 42ch;
+    }
+
+    @media (max-width: 900px) {
+      .cmp--screen-redesign .ks-before-row {
+        grid-template-columns: 1fr;
+      }
+
+      .cmp--screen-redesign .ks-sub-row {
+        grid-template-columns: 1fr;
+      }
+
+      .cmp--screen-redesign .ks-frame--bleed {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .cmp--screen-redesign .ks-sub-copy {
+        order: -1;
+      }
+    }
+
     /* ====== Outcome ====== */
     .outcome-grid {
       display: grid;
@@ -1122,642 +1252,253 @@
       }
     }
 
-    /* ====== IA Before / After (구조 비교 — 혼란 → 정리) ====== */
+    /* ====== IA Before / After (concept-b copy 통합: 6 메뉴 → 4 여정) ====== */
     .ia-ba-section {
       padding: 80px 0 72px;
     }
 
-    .ia-ba-tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 24px;
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--blue);
-    }
-
-    .ia-ba-tagline span {
-      opacity: .45;
-      font-weight: 600;
-    }
-
-    /* 한글 주석: AS-IS Pain / TO-BE 전략 / 와이어프레임 표 블록 */
-    .ia-ba-block {
+    .ia-portfolio-section .ia-pf-head {
+      text-align: center;
       margin-bottom: 40px;
     }
 
-    .ia-ba-block--wide {
-      max-width: none;
-    }
-
-    .ia-ba-h3 {
-      margin: 0 0 10px;
-      font-size: 16px;
+    .ia-portfolio-section .ia-pf-head .ia-pf-h2 {
+      font-size: clamp(1.35rem, 3.5vw, 2rem);
       font-weight: 800;
+      color: var(--ink);
+      margin: 0 0 8px;
+      line-height: 1.35;
       letter-spacing: -.02em;
-      color: var(--ink);
+      font-family: var(--font-sans);
     }
 
-    .ia-ba-sub {
-      margin: 0 0 18px;
-      font-size: 14px;
-      line-height: 1.75;
-      color: rgba(11, 13, 18, .72);
-      max-width: 68ch;
+    .ia-portfolio-section .ia-pf-highlight {
+      color: var(--blue);
     }
 
-    .ia-ba-pain-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      max-width: 72ch;
+    .ia-portfolio-section .ia-pf-strategy-row {
+      display: flex;
+      gap: 22px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
     }
 
-    .ia-ba-pain-list li {
-      padding: 14px 16px 14px 18px;
-      margin-bottom: 12px;
-      border-left: 3px solid rgba(1, 109, 213, .45);
-      border-radius: 0 12px 12px 0;
-      font-size: 14px;
-      line-height: 1.75;
-      color: rgba(11, 13, 18, .84);
-      background: rgba(255, 255, 255, .78);
-      box-shadow: 0 4px 18px rgba(11, 13, 18, .04);
-    }
-
-    .ia-ba-pain-list li strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .ia-ba-strategy-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 8px;
-    }
-
-    @media (min-width: 900px) {
-      .ia-ba-strategy-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    .ia-strategy-card {
-      padding: 18px 16px;
-      border-radius: 14px;
+    .ia-portfolio-section .ia-pf-card {
+      flex: 1 1 280px;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 26px 24px;
       border: 1px solid rgba(11, 13, 18, .08);
-      background: rgba(255, 255, 255, .92);
       box-shadow: var(--shadow2);
     }
 
-    .ia-strategy-card h4 {
-      margin: 0 0 10px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+    .ia-portfolio-section .ia-pf-card h3 {
+      font-size: 1.05rem;
       color: var(--blue);
+      margin: 0 0 14px;
+      font-weight: 800;
+      letter-spacing: -.01em;
     }
 
-    .ia-strategy-card p {
+    .ia-portfolio-section .ia-pf-card p {
       margin: 0;
-      font-size: 13px;
-      line-height: 1.68;
-      color: rgba(11, 13, 18, .74);
-    }
-
-    .ia-strategy-card .ia-kw {
-      display: block;
-      margin-bottom: 8px;
       font-size: 14px;
-      font-weight: 800;
-      color: var(--ink);
-      letter-spacing: -.01em;
-    }
-
-    .ia-wf-table-wrap {
-      overflow-x: auto;
-      margin-top: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(11, 13, 18, .08);
-      background: rgba(255, 255, 255, .85);
-    }
-
-    .ia-wf-table {
-      width: 100%;
-      min-width: 520px;
-      border-collapse: collapse;
-      font-size: 13px;
-      color: rgba(11, 13, 18, .82);
-    }
-
-    .ia-wf-table th,
-    .ia-wf-table td {
-      padding: 12px 14px;
-      text-align: left;
-      vertical-align: top;
-      border-bottom: 1px solid rgba(11, 13, 18, .06);
-      line-height: 1.6;
-    }
-
-    .ia-wf-table th {
-      background: rgba(1, 109, 213, .07);
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .02em;
-    }
-
-    .ia-wf-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .ia-ba-callout {
-      margin: 16px 0 0;
-      padding: 16px 18px;
-      border-radius: 14px;
-      border: 1px dashed rgba(11, 13, 18, .14);
-      background: rgba(248, 250, 255, .95);
-      font-size: 13px;
-      line-height: 1.68;
+      line-height: 1.72;
       color: rgba(11, 13, 18, .76);
-      max-width: 72ch;
     }
 
-    .ia-ba-callout strong {
+    .ia-portfolio-section .ia-pf-card strong {
       color: var(--ink);
+      font-weight: 700;
     }
 
-    .ia-ba-callout--bid {
-      border-color: rgba(1, 109, 213, .28);
-      background: rgba(1, 109, 213, .05);
-    }
-
-    .ia-ba-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-radius: var(--radius2);
-      overflow: hidden;
-      border: 1px solid rgba(11, 13, 18, .1);
-      margin-bottom: 32px;
-    }
-
-    .ia-ba-col {
-      padding: 20px 18px 24px;
-      min-height: auto;
-    }
-
-    /* 한글 주석: After와 동일 톤(화이트) — 차이는 ‘압축 레이아웃’으로만 표현 */
-    .ia-ba-before {
-      background: #fff;
-      border-right: 1px solid rgba(11, 13, 18, .08);
-      color: #111;
-      font-size: 14px;
-      line-height: 1.75;
-      letter-spacing: -.01em;
-    }
-
-    .ia-ba-after {
-      background: #fff;
-      color: #111;
-      font-size: 14px;
-      line-height: 1.75;
-      letter-spacing: -.01em;
-    }
-
-    /* ── IA 다이어그램 (알약 노드 + 라임 주요 / 블랙 서브) ── */
-    .ia-diag {
-      --ia-lime: #d4ff3d;
-      --ia-lime-border: #b8e020;
-      --ia-ink: #0b0d12;
-      --ia-paper: #f2f0ea;
-    }
-
-    .ia-diag-inner {
-      background: var(--ia-paper);
-      border-radius: 14px;
-      padding: 18px 14px 22px;
+    .ia-portfolio-section .ia-pf-visual {
+      background: rgba(255, 255, 255, .88);
+      border-radius: 22px;
+      padding: 40px 22px 48px;
       border: 1px solid rgba(11, 13, 18, .08);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+      box-shadow: var(--shadow);
     }
 
-    /* ── AS-IS: After와 같은 라임/블랙 색상, 레이아웃만 과밀·단축 ── */
-    .ia-diag--as-is .ia-diag-inner {
+    .ia-portfolio-section .ia-pf-visual-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      color: rgba(11, 13, 18, .55);
+      letter-spacing: .04em;
+    }
+
+    /* 한글 주석: AS-IS IA 시안 이미지 + 하단 페이드(끝없는 뎁스·과다 메뉴 강조) */
+    .ia-pf-asis-lead {
+      margin: 0 auto 18px;
+      max-width: 52ch;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(11, 13, 18, .58);
+    }
+
+    .ia-pf-asis-lead strong {
+      color: rgba(11, 13, 18, .88);
+      font-weight: 700;
+    }
+
+    .ia-pf-asis-diagram {
       position: relative;
-      padding: 10px 8px 12px;
+      margin: 0 0 32px;
+      border-radius: 16px;
       overflow: hidden;
+      border: 1px solid rgba(11, 13, 18, .08);
+      background: #fff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9);
     }
 
-    .ia-diag--as-is .ia-diag-inner::before {
+    .ia-pf-asis-diagram img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ia-pf-asis-diagram::after {
       content: "";
       position: absolute;
-      inset: 0;
-      border-radius: 14px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: clamp(100px, 38%, 240px);
       pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(11, 13, 18, .06);
-      background:
-        linear-gradient(90deg, rgba(212, 255, 61, .14) 0%, transparent 18%, transparent 82%, rgba(212, 255, 61, .12) 100%);
+      background: linear-gradient(
+        to bottom,
+        rgba(248, 250, 255, 0) 0%,
+        rgba(248, 250, 255, .25) 22%,
+        rgba(255, 255, 255, .82) 68%,
+        rgba(255, 255, 255, .98) 100%
+      );
     }
 
-    .ia-diag-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--ia-ink);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .ia-diag-badge em {
-      font-style: normal;
-      color: var(--ia-lime);
-    }
-
-    .ia-diag-row--squeeze {
-      gap: 4px 5px;
-      margin-bottom: 8px;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 4px;
-      scrollbar-width: thin;
-    }
-
-    /* 한글 주석: 중복 블록 안은 가운데 정렬(스크롤 행과 병용) */
-    .ia-diag-row--squeeze.ia-diag-row--center {
-      justify-content: center;
-    }
-
-    .ia-diag-row--squeeze::-webkit-scrollbar {
-      height: 3px;
-    }
-
-    .ia-diag-row--squeeze::-webkit-scrollbar-thumb {
-      background: rgba(11, 13, 18, .2);
-      border-radius: 99px;
-    }
-
-    .ia-diag--as-is .ia-diag-hline {
-      min-width: 6px;
-      flex: 0.3 1 8px;
-      margin: 0 1px;
-    }
-
-    .ia-p--mini {
-      padding: 4px 8px !important;
-      font-size: 9px !important;
-      font-weight: 700 !important;
-      letter-spacing: -.01em;
-    }
-
-    .ia-diag--as-is .ia-p--lime.ia-p--mini {
-      box-shadow: 0 0 0 1px rgba(11, 13, 18, .08);
-    }
-
-    .ia-diag--as-is .ia-p--blk.ia-p--mini {
-      font-weight: 600 !important;
-    }
-
-    .ia-diag-caption--as-is {
-      color: var(--ia-ink);
-      opacity: .72;
-      font-size: 9px;
-      letter-spacing: .08em;
-      margin: 6px 0 8px;
-    }
-
-    .ia-diag-caption--as-is strong {
-      color: var(--ia-lime);
-      background: var(--ia-ink);
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-right: 6px;
-      font-weight: 800;
-    }
-
-    .ia-diag-dup-grid--as-is {
-      gap: 6px;
-    }
-
-    .ia-dup-stack--as-is {
-      border: 1px solid var(--ia-lime-border);
-      background: rgba(212, 255, 61, .1);
-      padding: 8px;
-    }
-
-    .ia-dup-label--as-is {
-      color: var(--ia-ink);
-      font-size: 8px;
-      letter-spacing: .04em;
-      margin-bottom: 6px;
-      font-weight: 800;
-      text-transform: uppercase;
-      opacity: .85;
-    }
-
-    .ia-dup-x2 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      margin: 4px 0 8px;
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--ia-ink);
-      letter-spacing: .06em;
-    }
-
-    .ia-dup-x2 span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: var(--ia-lime);
-      color: var(--ia-ink);
-      font-size: 10px;
-      border: 1px solid var(--ia-lime-border);
-    }
-
-    .ia-p {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 7px 14px;
-      border-radius: 999px;
+    .ia-pf-asis-caption {
+      margin: -20px 0 0;
+      padding: 0 8px 4px;
+      text-align: center;
       font-size: 11px;
-      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(11, 13, 18, .38);
+      position: relative;
+      z-index: 1;
+    }
+
+    .ia-portfolio-section .ia-pf-flow-arrow {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .ia-portfolio-section .ia-pf-flow-arrow::after {
+      content: '↓';
+      display: block;
+      font-size: 1.75rem;
+      color: var(--blue);
+      margin-top: 8px;
+    }
+
+    .ia-portfolio-section .ia-pf-flow-badge {
+      display: inline-block;
+      background: rgba(1, 109, 213, .08);
+      color: var(--blue);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 12px;
       letter-spacing: .02em;
-      white-space: nowrap;
-      max-width: 100%;
-      text-overflow: ellipsis;
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-card {
+      border: 2px solid rgba(11, 13, 18, .08);
+      border-radius: 12px;
       overflow: hidden;
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
     }
 
-    .ia-p--blk {
-      background: var(--ia-ink);
-      color: #fff;
-      border: 1px solid #1a1a1a;
+    .ia-portfolio-section .ia-pf-tobe-card:hover {
+      border-color: rgba(1, 109, 213, .35);
+      box-shadow: 0 12px 28px rgba(1, 109, 213, .1);
+      transform: translateY(-3px);
     }
 
-    .ia-p--lime {
-      background: var(--ia-lime);
-      color: var(--ia-ink);
-      border: 1px solid var(--ia-lime-border);
-      font-weight: 700;
-    }
-
-    .ia-p--muted {
-      background: #ddd;
-      color: #777;
-      border: 1px solid #c8c8c8;
-    }
-
-    .ia-p--wire {
-      background: #e5e5e5;
-      color: #888;
-      border: 1px dashed #bbb;
-    }
-
-    .ia-p--dup {
-      background: #2a2a2a;
-      color: #eee;
-      border: 1px dashed #ff6b6b;
-      opacity: .88;
-    }
-
-    .ia-diag-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 10px;
-      margin-bottom: 12px;
-    }
-
-    .ia-diag-row--tight {
-      gap: 6px 8px;
-      margin-bottom: 10px;
-    }
-
-    /* 한글 주석: 중복 블록 안 가운데 정렬 행 */
-    .ia-diag-row--center {
-      justify-content: center;
-    }
-
-    .ia-diag-row--center-mt {
-      margin-top: 6px;
-    }
-
-    .ia-p--xs {
-      font-size: 10px !important;
-      padding: 5px 9px !important;
-    }
-
-    .ia-diag-vrule {
-      width: 1px;
-      align-self: stretch;
-      min-height: 14px;
-      background: rgba(11, 13, 18, .2);
-      margin: 0 2px;
-    }
-
-    .ia-diag-hline {
-      height: 1px;
-      flex: 1;
-      min-width: 12px;
-      background: rgba(11, 13, 18, .18);
-      margin: 0 4px;
-    }
-
-    .ia-diag-caption {
-      font-size: 10px;
-      color: #c44;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin: 4px 0 8px;
-    }
-
-    .ia-diag-dup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .ia-dup-stack {
-      border: 1px dashed rgba(180, 80, 80, .45);
-      border-radius: 10px;
-      padding: 10px;
-      background: rgba(255, 255, 255, .35);
-    }
-
-    .ia-dup-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: #a66;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .ia-diag--to-be .ia-diag-grid-main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .ia-diag--to-be .ia-diag-cols {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px 12px;
-    }
-
-    @media (min-width: 720px) {
-      .ia-diag--to-be .ia-diag-cols {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-      }
-    }
-
-    /* 한글 주석: 모바일에서 중복 비교 2열 → 1열 */
-    @media (max-width: 600px) {
-      .ia-diag-dup-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .ia-diag-row--squeeze {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-
-    .ia-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .ia-col .ia-p--blk {
-      font-size: 10px;
-      padding: 6px 10px;
-      font-weight: 600;
-    }
-
-    .ia-ba-col-h {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(11, 13, 18, .12);
-    }
-
-    .ia-ba-before .ia-ba-col-h {
-      color: #111;
+    .ia-portfolio-section .ia-pf-tobe-head {
+      background: rgba(1, 109, 213, .06);
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(11, 13, 18, .08);
       font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .12em;
-      border-bottom-color: rgba(17, 17, 17, .15);
-    }
-
-    .ia-ba-after .ia-ba-col-h {
-      color: #111;
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .12em;
-      border-bottom-color: rgba(17, 17, 17, .15);
-    }
-
-    .ia-ba-insight {
-      margin-bottom: 28px;
-      padding: 22px 22px 20px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(1, 109, 213, .2);
-      background: linear-gradient(180deg, rgba(1, 109, 213, .06), rgba(1, 109, 213, 0));
-    }
-
-    .ia-ba-insight h3 {
-      margin: 0 0 14px;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: -.01em;
+      font-size: 15px;
       color: var(--ink);
     }
 
-    .ia-ba-insight ul {
+    .ia-portfolio-section .ia-pf-tobe-card--biz .ia-pf-tobe-head {
+      background: var(--blue);
+      color: #fff;
+      border-bottom-color: transparent;
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-card--biz {
+      border-color: rgba(1, 109, 213, .35);
+      box-shadow: 0 4px 16px rgba(1, 109, 213, .08);
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-body {
+      padding: 16px;
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-body ul {
+      list-style: none;
       margin: 0;
-      padding-left: 18px;
+      padding: 0;
+    }
+
+    .ia-portfolio-section .ia-pf-tobe-body li {
+      font-size: 13px;
       color: rgba(11, 13, 18, .72);
-      font-size: 14px;
-      line-height: 1.75;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 14px;
+      line-height: 1.55;
     }
 
-    .ia-ba-insight li {
-      margin: 8px 0;
+    .ia-portfolio-section .ia-pf-tobe-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 4px;
+      height: 4px;
+      background: var(--blue);
+      border-radius: 50%;
     }
 
-    .ia-ba-results {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .ia-ba-res {
-      padding: 18px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(11, 13, 18, .08);
-      background: rgba(255, 255, 255, .72);
-      text-align: center;
-    }
-
-    .ia-ba-res strong {
-      display: block;
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--blue);
-      margin-bottom: 6px;
-      letter-spacing: -.02em;
-    }
-
-    .ia-ba-res span {
-      font-size: 12px;
-      color: rgba(11, 13, 18, .62);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 960px) {
-      .ia-ba-split {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      .ia-portfolio-section .ia-pf-strategy-row {
+        flex-direction: column;
       }
 
-      .ia-ba-before {
-        border-right: none;
-        border-bottom: 1px solid rgba(11, 13, 18, .1);
+      .ia-portfolio-section .ia-pf-tobe-wrap {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .ia-ba-results {
+      .ia-portfolio-section .ia-pf-visual {
+        padding: 28px 16px 32px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .ia-portfolio-section .ia-pf-tobe-wrap {
         grid-template-columns: 1fr;
       }
     }
@@ -2019,218 +1760,102 @@
     </section>
 
 
-    <!-- ===== IA Before / After (기획서: 구조 비교 — 혼란 → 정리) ===== -->
-    <section id="sec-ia-before-after" class="ia-ba-section">
+    <!-- ===== IA Before / After (concept-b copy 통합: 6 메뉴 → 4 여정) ===== -->
+    <section id="sec-ia-before-after" class="ia-ba-section ia-portfolio-section">
       <div class="section-kicker">IA · Before / After</div>
-      <h2 class="h2 reveal">정보 구조를 ‘디자인’처럼 보여주는 비교</h2>
-      <p class="lead reveal">
-        IA 표만이 아니라 <strong>AS-IS Pain Point(Why)</strong>, <strong>TO-BE 전략(How · 3가지 UX 키워드)</strong>, 그리고
-        <strong>와이어프레임·GNB에서의 시각화</strong>까지 한 흐름으로 정리했습니다.
-      </p>
-
-      <div style="height: 28px;"></div>
-
-      <!-- 한글 주석: 1. 문제 정의 — ‘복잡하다’가 아닌 구체적 페인 포인트 -->
-      <div class="ia-ba-block reveal">
-        <h3 class="ia-ba-h3">1. 문제 정의 (AS-IS 분석: Why?)</h3>
-        <p class="ia-ba-sub">
-          단순히 “구조가 복잡하다”는 표현 대신, 사용자 행동에 직접 닿는 Pain Point를 기준으로 AS-IS를 정의했습니다.
-        </p>
-        <ul class="ia-ba-pain-list">
-          <li>
-            <strong>인지 과부하 (Cognitive Overload)</strong>
-            ‘회사소개’ 하위에 펼쳐지는 7개 메뉴는, 정보를 찾기 전 단계에서 이미 선택지를 스캔해야 하므로 피로감(인지 부하)을 키웁니다.
-          </li>
-          <li>
-            <strong>낮은 효율성 (탐색·비교 비용)</strong>
-            제품군(단말기, POS, KIOSK, 리더기 등)이 나열 위주로 배치되어 있어, 유사 제품군 간 비교나 목적별 탐색이 번거롭습니다.
-          </li>
-          <li>
-            <strong>중복 경험 (경계 모호)</strong>
-            ‘사업영역’과 ‘서비스’의 역할 구분이 사용자에게 명확히 전달되지 않아, 동일·유사 콘텐츠(PG/VAN 등)를 어디에서 봐야 할지 혼란을 겪을 가능성이 큽니다.
-          </li>
-        </ul>
+      <div class="ia-pf-head reveal">
+        <h2 class="ia-pf-h2">
+          6개의 파편화된 메뉴,<br>
+          <span class="ia-pf-highlight">4개의 목적형 여정</span>으로 압축하다
+        </h2>
       </div>
 
-      <p class="ia-ba-tagline reveal" aria-hidden="false">구조 비교 <span>→</span> 실행 전략</p>
+      <div class="ia-pf-strategy-row reveal">
+        <div class="ia-pf-card">
+          <h3>개선 포인트 (Problem &amp; Solution)</h3>
+          <p>
+            기존에는 회사가 제공하는 결제 서비스(SW)와 단말기(HW)가 ‘사업영역, 주요서비스, 제품’ 3개의 메뉴로 찢어져 있어 방문자가 길을 잃기 쉬웠습니다.<br><br>
+            이를 해결하기 위해 비슷한 비즈니스 정보들을 <strong>[BUSINESS]</strong>라는 하나의 큰 묶음으로 합쳤습니다. 또한, 단순한 게시판 같았던 입찰정보를 <strong>[PARTNERSHIP]</strong>으로 승격시켜 B2B 기업의 핵심인 ‘신뢰(Trust)’를 전면에 내세웠습니다.
+          </p>
+        </div>
+        <div class="ia-pf-card">
+          <h3>핵심 UI/UX (Mega Menu)</h3>
+          <p>
+            메뉴 개수를 4개로 줄인 덕분에 시각적으로 훨씬 여유로운 상단 네비게이션 바(GNB)를 구축할 수 있었습니다.<br><br>
+            마우스를 올렸을 때 전체 비즈니스 포트폴리오가 한눈에 펼쳐지는 <strong>풀 드롭다운(메가 메뉴) UI</strong>를 적용하여, 방문자가 클릭 한 번 없이도 “이 회사가 어떤 결제 수단과 기기를 파는지” 즉각적으로 인지하도록 설계했습니다.
+          </p>
+        </div>
+      </div>
 
-      <div class="ia-ba-split reveal" role="group" aria-label="AS-IS와 TO-BE 정보 구조 비교">
-        <div class="ia-ba-col ia-ba-before">
-          <div class="ia-ba-col-h">Before · AS-IS</div>
-          <!-- 한글 주석: After와 동일 라임/블랙 — 줄임·과밀만으로 AS-IS 구분 -->
-          <div class="ia-diag ia-diag--as-is" aria-label="AS-IS IA 다이어그램">
-            <div class="ia-diag-inner">
-              <div class="ia-diag-badge"><em>as-is</em> · 메뉴 과밀</div>
-              <div class="ia-diag-row ia-diag-row--squeeze">
-                <span class="ia-p ia-p--lime ia-p--mini">진입</span>
-                <span class="ia-diag-hline" aria-hidden="true"></span>
-                <span class="ia-p ia-p--lime ia-p--mini">gnb</span>
-                <span class="ia-diag-hline" aria-hidden="true"></span>
-                <span class="ia-p ia-p--blk ia-p--mini">depth 3+</span>
-              </div>
-              <div class="ia-diag-row ia-diag-row--squeeze">
-                <span class="ia-p ia-p--lime ia-p--mini">회사</span>
-                <span class="ia-p ia-p--lime ia-p--mini">사업</span>
-                <span class="ia-p ia-p--lime ia-p--mini">서비스</span>
-                <span class="ia-p ia-p--lime ia-p--mini">제품</span>
-                <span class="ia-p ia-p--lime ia-p--mini">고객</span>
-              </div>
-              <div class="ia-diag-row ia-diag-row--squeeze">
-                <span class="ia-p ia-p--blk ia-p--mini">인사·개요</span>
-                <span class="ia-p ia-p--blk ia-p--mini">전자결제</span>
-                <span class="ia-p ia-p--blk ia-p--mini">전자금융</span>
-                <span class="ia-p ia-p--blk ia-p--mini">단말</span>
-                <span class="ia-p ia-p--blk ia-p--mini">공지</span>
-              </div>
-              <p class="ia-diag-caption--as-is"><strong>dup</strong> 같은 서비스 이중 노출</p>
-              <div class="ia-dup-x2" aria-hidden="true"><span>×2</span> pg / van</div>
-              <div class="ia-diag-dup-grid ia-diag-dup-grid--as-is">
-                <div class="ia-dup-stack ia-dup-stack--as-is">
-                  <div class="ia-dup-label--as-is">사업영역 트리</div>
-                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center">
-                    <span class="ia-p ia-p--lime ia-p--mini">pg</span>
-                    <span class="ia-p ia-p--lime ia-p--mini">van</span>
-                  </div>
-                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center ia-diag-row--center-mt">
-                    <span class="ia-p ia-p--blk ia-p--mini">계좌간편</span>
-                    <span class="ia-p ia-p--blk ia-p--mini">cb</span>
-                  </div>
-                </div>
-                <div class="ia-dup-stack ia-dup-stack--as-is">
-                  <div class="ia-dup-label--as-is">서비스 메뉴</div>
-                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center">
-                    <span class="ia-p ia-p--lime ia-p--mini">pg</span>
-                    <span class="ia-p ia-p--lime ia-p--mini">van</span>
-                  </div>
-                  <div class="ia-diag-row ia-diag-row--squeeze ia-diag-row--center ia-diag-row--center-mt">
-                    <span class="ia-p ia-p--blk ia-p--mini">for startups</span>
-                  </div>
-                </div>
-              </div>
+      <!-- 한글 주석: AS-IS 6칩 → 화살표 → TO-BE 4카드 (concept-b 시각 보드) -->
+      <div class="ia-pf-visual reveal">
+        <div class="ia-pf-visual-title">AS-IS : 공급자 중심의 6개 메뉴</div>
+        <p class="ia-pf-asis-lead reveal">
+          1차 메뉴 6개 아래로 <strong>하위 항목이 과밀·장문으로 쌓이는 구조</strong>입니다. 열(특히 회사소개·사업영역·제품)이 길수록 스캔·탐색 부담이 커집니다.
+        </p>
+        <!-- 한글 주석: 시안 PNG — 하단 그라데이션으로 ‘메뉴가 끝없이 이어지는’ 인지 과부하 표현 -->
+        <figure class="ia-pf-asis-diagram reveal" role="group" aria-label="AS-IS 정보구조 다이어그램">
+          <img
+            src="./images/nicepayments/ia-as-is.png"
+            width="356"
+            height="249"
+            loading="lazy"
+            decoding="async"
+            alt="AS-IS GNB 6개 열(회사소개, 사업영역, 서비스, 제품, 고객지원, 입찰정보)과 각 열별 다수의 하위 메뉴가 세로로 길게 배치된 회색조 IA 다이어그램" />
+        </figure>
+        <p class="ia-pf-asis-caption" aria-hidden="true">depth overload · 메뉴는 아래로 계속 이어짐</p>
+
+        <div class="ia-pf-flow-arrow">
+          <div class="ia-pf-flow-badge">결정 중심 UX &amp; 신뢰망(Trust-Layer) 재구축</div>
+        </div>
+
+        <div class="ia-pf-visual-title">TO-BE : 사용자 목적 중심의 4대 비즈니스 여정</div>
+        <div class="ia-pf-tobe-wrap">
+          <div class="ia-pf-tobe-card">
+            <div class="ia-pf-tobe-head">ABOUT US</div>
+            <div class="ia-pf-tobe-body">
+              <ul>
+                <li>NICEPAY 소개 (인사말/연혁)</li>
+                <li><strong>보안 및 인프라 (신뢰 강화)</strong></li>
+                <li>오시는 길</li>
+              </ul>
             </div>
           </div>
-        </div>
-        <div class="ia-ba-col ia-ba-after">
-          <div class="ia-ba-col-h">After · TO-BE</div>
-          <div class="ia-diag ia-diag--to-be" aria-label="TO-BE IA 다이어그램">
-            <div class="ia-diag-inner">
-              <div class="ia-diag-grid-main">
-                <span class="ia-p ia-p--lime">회사소개</span>
-                <span class="ia-p ia-p--lime">사업영역</span>
-                <span class="ia-p ia-p--lime">주요서비스</span>
-                <span class="ia-p ia-p--lime">제품</span>
-                <span class="ia-p ia-p--lime">고객지원</span>
-                <span class="ia-p ia-p--lime">입찰정보</span>
-              </div>
-              <div class="ia-diag-cols">
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">overview</span>
-                </div>
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">전자결제</span>
-                  <span class="ia-p ia-p--blk">van</span>
-                  <span class="ia-p ia-p--blk">cross-border</span>
-                </div>
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">pg 서비스</span>
-                  <span class="ia-p ia-p--blk">van 서비스</span>
-                  <span class="ia-p ia-p--blk">for startups</span>
-                </div>
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">단말기</span>
-                  <span class="ia-p ia-p--blk">pos</span>
-                  <span class="ia-p ia-p--blk">kiosk</span>
-                  <span class="ia-p ia-p--blk">tablet</span>
-                  <span class="ia-p ia-p--blk">리더기</span>
-                </div>
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">공지</span>
-                  <span class="ia-p ia-p--blk">제휴</span>
-                </div>
-                <div class="ia-col">
-                  <span class="ia-p ia-p--blk">bid</span>
-                </div>
-              </div>
+
+          <div class="ia-pf-tobe-card ia-pf-tobe-card--biz">
+            <div class="ia-pf-tobe-head">BUSINESS</div>
+            <div class="ia-pf-tobe-body">
+              <ul>
+                <li><strong>온라인 결제</strong> (PG/간편결제/에스크로)</li>
+                <li><strong>오프라인 인프라</strong> (POS/단말기/키오스크)</li>
+                <li><strong>IT 비즈니스</strong> (글로벌 결제)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ia-pf-tobe-card">
+            <div class="ia-pf-tobe-head">PARTNERSHIP</div>
+            <div class="ia-pf-tobe-body">
+              <ul>
+                <li>입찰 공고</li>
+                <li>제휴 문의 및 안내</li>
+                <li>PR 센터</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ia-pf-tobe-card">
+            <div class="ia-pf-tobe-head">SUPPORT</div>
+            <div class="ia-pf-tobe-body">
+              <ul>
+                <li>고객센터 (FAQ)</li>
+                <li>1:1 문의</li>
+                <li>자료실 / 공지사항</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- 한글 주석: 2. TO-BE — 3가지 UX 키워드 -->
-      <div class="ia-ba-block ia-ba-block--wide reveal">
-        <h3 class="ia-ba-h3">2. 개선 전략 (TO-BE 설계: How?)</h3>
-        <p class="ia-ba-sub">
-          이미지·IA에서 수정한 방향을 세 가지 UX 키워드로 압축했습니다. 각 키워드는 화면 설계(와이어프레임)에 그대로 연결됩니다.
-        </p>
-        <div class="ia-ba-strategy-grid">
-          <article class="ia-strategy-card">
-            <h4>① Flattening</h4>
-            <span class="ia-kw">정보의 통합 및 효율화</span>
-            <p>
-              회사소개를 여러 개의 깊은 페이지로 나누지 않고, 하나의 <strong>원페이지 스토리(One-page Branding)</strong>로 통합합니다.
-              사용자는 7번 클릭할 일을 <strong>1번의 스크롤</strong>로 연속 탐색할 수 있고, Depth 축소로 정보 접근성이 향상됩니다.
-            </p>
-          </article>
-          <article class="ia-strategy-card">
-            <h4>② Hierarchical Grouping</h4>
-            <span class="ia-kw">위계 질서 재정립 (제품)</span>
-            <p>
-              제품을 나열형에서 <strong>큰 범주 → 세부</strong>로 읽히도록 구조화합니다. 예: 유선/무선을 ‘단말기’로, IC/RF를 ‘리더기’로 묶어
-              <strong>Top-down</strong> 탐색이 가능해지고, 유사 제품군 간 비교·이동이 쉬워집니다.
-            </p>
-          </article>
-          <article class="ia-strategy-card">
-            <h4>③ Labeling</h4>
-            <span class="ia-kw">명확한 레이블링</span>
-            <p>
-              단순 ‘서비스’ 대신 <strong>주요서비스</strong>처럼 수식어를 붙여, 기업의 핵심 비즈니스 라인에 대한 <strong>주목도·신뢰도</strong>를
-              메뉴 단계에서부터 전달합니다.
-            </p>
-          </article>
-        </div>
-      </div>
-
-      <div class="ia-ba-results reveal" aria-label="IA 개선 결과">
-        <div class="ia-ba-res">
-          <strong>Flattening</strong>
-          <span>Depth 축소 · 회사소개 스크롤형 통합으로 클릭·탐색 비용 절감</span>
-        </div>
-        <div class="ia-ba-res">
-          <strong>Hierarchical Grouping</strong>
-          <span>제품군 카테고리화로 비교·탐색 효율 개선</span>
-        </div>
-        <div class="ia-ba-res">
-          <strong>Labeling + 중복 정리</strong>
-          <span>명확한 레이블과 PG/VAN 이중 노출 정리로 경로 혼란 완화</span>
-        </div>
-      </div>
-
-
-      <!-- 한글 주석: 보완 — 사업영역 vs 주요서비스 / 입찰정보 위치 -->
-      <aside class="ia-ba-callout reveal" aria-label="IA 보완 제안">
-        <strong>보완: ‘사업영역’ vs ‘주요서비스’</strong><br />
-        GNB에서 두 항목이 나란히 있으면 사용자는 “차이가 뭐지?”라고 느낄 수 있습니다.
-
-        사업영역이 비전·큰 틀, 주요서비스가 실제 가입·신청 가능한 상품이라면,
-        <strong>사업영역을 회사소개 하위로 편입</strong>하거나, 둘을 <strong>[서비스/사업 소개]</strong>처럼 한 축으로 묶는 검토도 가능합니다.
-
-        (본 덱의 TO-BE 다이어그램은 1차 GNB 정리안을 유지하며, 위는 포트폴리오에서 의사결정을 보여 주기 위한 대안입니다.)
-      </aside>
-
-      <aside class="ia-ba-callout ia-ba-callout--bid reveal" aria-label="입찰정보 GNB 배치 의도">
-        <strong>포트폴리오 엣지: ‘입찰정보’ 위치</strong><br />
-        GNB 1차에 입찰정보가 보인다는 것은 <strong>정부·공공·B2B 입찰이 비즈니스의 핵심 채널</strong>이라는 가정을 전제로 한 배치입니다.
-
-        만약 메인 타겟이 일반 소상공인 등이라면, 입찰정보는 <strong>푸터 또는 고객지원 하위</strong>로 내려 GNB를 더 가볍게 가져가는 편이 낫습니다.
-
-        반대로 입찰이 전략적으로 핵심이면 지금처럼 유지하는 것이 맞고, <strong>그 이유를 한 줄이라도 덱에 적으면</strong> 기획 근거가 분명해집니다.
-      </aside>
-
-      <p class="lead reveal" style="margin-top: 28px; font-size: 13px; color: rgba(11,13,18,.55); max-width: 62ch;">
-        UI 가이드: Before·After 다이어그램은 동일 라임/블랙 팔레트로, Before는 미니 알약·과밀 레이아웃으로 AS-IS만 표현합니다.
-
-        위 표의 Mega Menu·Anchor·아이콘은 다음 섹션의 화면 목업과 연결해 보여 주면 포트폴리오 완성도가 올라갑니다.
-      </p>
     </section>
 
     <!-- ===== Trust-Layer / Solutions ===== -->
@@ -2311,20 +1936,22 @@
       <h2 class="h2 reveal">구조/시각/CTA를 한 번에 맞춘 리빌드</h2>
       <p class="lead reveal">
         ‘비즈니스 신뢰’를 기술적으로 증명(Trust at Scale)하고, 서비스/FAQ를 문제 해결 중심 모듈로 재구성합니다.
-        아래는 목업 레이아웃이며, 실제 이미지는 나중에 교체하면 됩니다.
+        메인 화면(01)은 히어로·하위 구간을 스태거드로 풀어 포트폴리오형 시선 흐름을 만듭니다.
       </p>
 
       <div style="height: 48px;"></div>
 
       <div class="cmp-grid">
-        <article class="cmp reveal">
+        <article class="cmp reveal cmp--screen-redesign">
           <div class="cmp-top">
             <h3>01) Main Page Redesign · Vision-driven Interface</h3>
             <p>
               기존의 인사형 구조 → 기술 신뢰를 상징하는 3D 보안 비주얼 + 실적 기반 메시지(CTA 영역 통합).
             </p>
           </div>
-          <div class="compare-row">
+
+          <!-- 한글 주석: 상단 — Before 카드 + 짧은 맥락(레퍼런스의 텍스트+디테일 역할) -->
+          <div class="ks-before-row reveal">
             <div class="compare-card before">
               <div class="cap">Before</div>
               <div class="mock-img">
@@ -2334,19 +1961,26 @@
                 </div>
               </div>
             </div>
-            <div class="compare-card after">
-              <div class="cap">After</div>
-              <div class="mock-img">
-                <div class="mini">
-                  <div class="mock-bars" aria-hidden="true"></div>
-                  <div>MOCK: 3D 보안 비주얼 + Data CTA</div>
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="meta-row" style="margin-top: 14px;">
+
+          <!-- 한글 주석: After — 01 풀폭 히어로 + 02 좌측 블리드 + 우측 카피(스태거드) -->
+          <div class="ks-after-block reveal">
+            <span class="ks-after-tag">After</span>
+            <figure class="ks-frame ks-frame--hero">
+              <img
+                src="./images/nicepayments/m01.png"
+                width="1920"
+                height="1536"
+                loading="lazy"
+                decoding="async"
+                alt="메인 페이지 리빌드 After: 비전·신뢰 중심 히어로, 3D 보안 비주얼 및 데이터 CTA" />
+            </figure>
+          </div>
+
+          <div class="meta-row" style="margin-top: 22px;">
             <span class="pill">Hero: Trust Visual</span>
             <span class="pill gray">CTA: KPI 통합</span>
+            <span class="pill gray">After: 01 + 02 스태거드</span>
           </div>
         </article>
 
