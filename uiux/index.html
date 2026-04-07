@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>장지영 — UI/UX Product Designer 2026 Portfolio</title>
+  <meta name="description" content="UI/UX 프로덕트 디자이너 장지영의 2026 포트폴리오" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "name": "장지영 UI/UX 포트폴리오 2026",
+    "description": "UI/UX Product Designer 장지영의 포트폴리오",
+    "url": "https://superji0.github.io/uiux/",
+    "inLanguage": "ko-KR",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "장지영",
+      "jobTitle": "UI/UX Product Designer"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #ffffff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══ 01. COVER — SVG 풀스크린 + 패럴랙스 ═══ */
+    .cover {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      min-height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    .cover__img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      will-change: transform;
+      transform: scale(1.05);
+      padding: clamp(16px, 3vw, 48px);
+    }
+
+    /* ═══ ABOUT ME ═══ */
+    .about {
+      position: relative;
+      background: #1a1a1a;
+      padding: clamp(60px, 8vh, 120px) clamp(24px, 5vw, 80px);
+      overflow: hidden;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif;
+    }
+
+    /* 한글 주석: 좌우 파란 그라데이션 보더 */
+    .about::before,
+    .about::after {
+      display: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #2563eb 0%, #06b6d4 50%, #2563eb 100%);
+      z-index: 1;
+    }
+    .about::before { left: 0; }
+    .about::after { right: 0; }
+
+    .about__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about__label {
+      font-size: clamp(10px, 1vw, 13px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: clamp(24px, 4vh, 48px);
+      letter-spacing: 0.02em;
+    }
+
+    .about__top {
+      display: flex;
+      gap: clamp(32px, 5vw, 80px);
+      align-items: flex-start;
+      margin-bottom: clamp(48px, 6vh, 80px);
+    }
+
+    .about__title {
+      flex-shrink: 0;
+      font-size: clamp(48px, 7vw, 100px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    /* 한글 주석: 스킬 카드 그리드 */
+    .about__skills {
+      flex: 1;
+      min-width: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 1vw, 14px);
+      align-self: center;
+    }
+
+    .skill-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: clamp(14px, 1.5vw, 22px) clamp(14px, 1.5vw, 20px);
+    }
+
+    .skill-card__name {
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .skill-card__desc {
+      font-size: clamp(10px, 0.75vw, 12px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+
+    /* 한글 주석: 이력 테이블 */
+    .about__career {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .career-row {
+      display: grid;
+      grid-template-columns: clamp(48px, 5vw, 72px) clamp(140px, 16vw, 220px) 1fr;
+      gap: clamp(8px, 1.5vw, 24px);
+      padding: clamp(16px, 2vh, 24px) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      align-items: baseline;
+    }
+
+    .career-row__label {
+      font-size: clamp(12px, 0.9vw, 14px);
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .career-row__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .career-row__period {
+      font-size: clamp(11px, 0.85vw, 14px);
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .career-row__company {
+      font-size: clamp(12px, 0.9vw, 14px);
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .career-row__detail {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .career-row__desc {
+      font-size: clamp(11px, 0.85vw, 14px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .about__top {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .about__title {
+        font-size: clamp(40px, 12vw, 64px);
+      }
+      .about__skills {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .career-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .career-row__label {
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+    }
+
+    /* ═══ 02. PICKLY 핑크 커버 ═══ */
+    .pickly-hero {
+      position: relative;
+      background: #ff68b0;
+      overflow: clip;
+    }
+
+    /* 한글 주석: 좌측 상단 Pickly 로고 */
+    .pickly-hero__logo {
+      position: absolute;
+      top: clamp(24px, 4vh, 48px);
+      left: clamp(24px, 4vw, 60px);
+      width: clamp(100px, 12vw, 200px);
+      height: auto;
+      z-index: 2;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .pickly-hero__inner {
+      position: relative;
+      max-width: 1920px;
+      margin: 0 auto;
+      min-height: min(100vh, 900px);
+      display: flex;
+      align-items: center;
+      gap: clamp(24px, 4vw, 64px);
+      padding: clamp(40px, 6vh, 80px) clamp(24px, 4vw, 60px);
+    }
+
+    /* 한글 주석: 좌측 — 그래픽 영역 (패럴랙스) */
+    .pickly-hero__visual {
+      flex: 1.2;
+      min-width: 0;
+      will-change: transform;
+    }
+
+    .pickly-hero__scroll {
+      width: 100%;
+      will-change: transform;
+    }
+
+    .pickly-hero__tilt {
+      transform-origin: 50% 45%;
+      will-change: transform;
+    }
+
+    .pickly-hero__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* 한글 주석: 우측 — 프로젝트 정보 텍스트 */
+    .pickly-hero__info {
+      flex: 0 0 clamp(200px, 22vw, 320px);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-self: center;
+    }
+
+    .pickly-info__row {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+    }
+    .pickly-info__row:last-child { border-bottom: none; }
+
+    .pickly-info__label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 3px;
+    }
+
+    .pickly-info__value {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(11px, 1vw, 14px);
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .pickly-info__note {
+      margin-top: 16px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .pickly-hero__inner {
+        flex-direction: column;
+        min-height: auto;
+        padding: 48px 20px 56px;
+        gap: 32px;
+      }
+      .pickly-hero__info {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+      }
+      .pickly-hero__visual {
+        flex: none;
+        width: 100%;
+        max-width: 520px;
+      }
+    }
+
+    /* ═══ 03. PICKLY 프로젝트 콘텐츠 슬라이드 ═══ */
+    .pickly-slides {
+      background: #1a1a1a;
+    }
+
+    .pickly-slide {
+      width: 100%;
+      line-height: 0;
+    }
+
+    .pickly-slide__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ═══ 프로젝트 간 여백 스페이서 ═══ */
+    .project-spacer {
+      width: 100%;
+      height: clamp(100px, 14vh, 200px);
+      background: #111;
+    }
+
+    /* ═══ 04. NICE PAYMENTS 프로젝트 ═══ */
+    .nice-slides {
+      background: #f5f5f5;
+    }
+
+    .nice-slide {
+      width: 100%;
+      line-height: 0;
+    }
+
+    .nice-slide__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ═══ DESIGN GALLERY ═══ */
+    .gallery {
+      background: #fff;
+      padding: clamp(48px, 8vh, 88px) clamp(20px, 4vw, 36px);
+      font-family: 'Pretendard Variable', Pretendard, sans-serif;
+    }
+
+    .gallery__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(24px, 4vh, 36px);
+    }
+
+    .gallery__eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1847f5;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .gallery__eyebrow::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: #1847f5;
+    }
+
+    .gallery__title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: #0d0d0b;
+    }
+
+    .gallery__hint {
+      font-size: 11px;
+      color: rgba(13,13,11,0.44);
+      text-align: right;
+      max-width: 160px;
+      line-height: 1.6;
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .gallery__grid .gi:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery__grid .gi:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .gi {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .gi:first-child { aspect-ratio: auto; }
+
+    .gi img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.76,0,0.24,1), filter 0.5s;
+    }
+    .gi:hover img {
+      transform: scale(1.07);
+      filter: brightness(0.5);
+    }
+
+    .gi__info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px 14px;
+      background: linear-gradient(transparent 40%, rgba(13,13,11,0.75));
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .gi:hover .gi__info { opacity: 1; }
+
+    .gi__info b {
+      font-size: clamp(14px, 1.2vw, 18px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .gi__info small {
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 3px;
+    }
+
+    @media (max-width: 960px) {
+      .gallery__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery__grid .gi:first-child { grid-column: span 2; }
+      .gallery__grid .gi:nth-child(4) { grid-column: span 1; }
+    }
+    @media (max-width: 600px) {
+      .gallery__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery__grid .gi:nth-child(4) { grid-column: span 1; }
+    }
+
+    /* ═══ ETC 프로모션 리디자인 ═══ */
+    .etc-slides { background: #1a1a1a; }
+    .etc-slide { width: 100%; line-height: 0; }
+    .etc-slide__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ═══ 갤러리 라이트박스 ═══ */
+    .lb {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .lb.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lb__wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 48px;
+    }
+
+    .lb__img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      user-select: none;
+    }
+    .lb.open .lb__img {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .lb__caption {
+      margin-top: 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s 0.1s, transform 0.4s 0.1s;
+    }
+    .lb.open .lb__caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .lb__caption b {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .lb__caption small {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    .lb__close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 22px;
+      cursor: pointer;
+      background: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      z-index: 2;
+    }
+    .lb__close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.4);
+      color: #fff;
+    }
+
+    .lb__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      z-index: 2;
+    }
+    .lb__arrow:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+    }
+    .lb__arrow--prev { left: 20px; }
+    .lb__arrow--next { right: 20px; }
+
+    .lb__counter {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.4);
+      z-index: 2;
+    }
+
+    @media (max-width: 600px) {
+      .lb__wrap { padding: 24px 12px; }
+      .lb__arrow { width: 38px; height: 38px; font-size: 16px; }
+      .lb__arrow--prev { left: 8px; }
+      .lb__arrow--next { right: 8px; }
+      .lb__close { top: 12px; right: 12px; width: 38px; height: 38px; }
+      .lb__counter { top: 18px; left: 16px; }
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Pretendard Variable', Pretendard, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer__top {
+      padding: clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px) clamp(60px, 8vh, 100px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer__cta-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: clamp(16px, 2vh, 28px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer__cta-label::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .footer__display {
+      font-size: clamp(40px, 7vw, 96px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: clamp(32px, 5vh, 56px);
+      max-width: 700px;
+    }
+    .footer__display em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer__contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 60px);
+      max-width: 700px;
+    }
+
+    .footer__contact-item {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 16px;
+    }
+    .footer__contact-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+    }
+    .footer__contact-value {
+      font-size: clamp(14px, 1.2vw, 16px);
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-block;
+    }
+    a.footer__contact-value:hover {
+      color: #fff;
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px clamp(24px, 5vw, 80px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .footer__copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.02em;
+    }
+    .footer__links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer__link {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .footer__link:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .footer__bg-text {
+      position: absolute;
+      bottom: -0.12em;
+      right: -0.02em;
+      font-size: clamp(120px, 20vw, 280px);
+      font-weight: 800;
+      line-height: 0.8;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @media (max-width: 600px) {
+      .footer__contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .footer__bottom {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ 01. COVER ═══ -->
+  <section class="cover" id="cover">
+    <img
+      class="cover__img"
+      id="coverImg"
+      src="images/01 cover.png"
+      alt="장지영 UI/UX Product Designer 2026 Portfolio"
+      draggable="false"
+    />
+  </section>
+
+  <!-- ═══ ABOUT ME ═══ -->
+  <section class="about" id="about">
+    <div class="about__inner">
+
+      <p class="about__label">02 about me</p>
+
+      <div class="about__top">
+        <h2 class="about__title">About<br>Me.</h2>
+
+        <div class="about__skills">
+          <div class="skill-card">
+            <div class="skill-card__name">Figma</div>
+            <div class="skill-card__desc">와이어프레임, 프로토타입, UI 디자인</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">Photoshop</div>
+            <div class="skill-card__desc">시안 제작, 사진 편집, 웹 이미지 최적화</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">Illustrator</div>
+            <div class="skill-card__desc">로고, 아이콘, 기초 일러스트 작업</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">Git</div>
+            <div class="skill-card__desc">브랜치 전략, 협업 기반 형상관리</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">HTML5</div>
+            <div class="skill-card__desc">시맨틱 태그와 웹 접근성을 고려한 구조적 마크업</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">CSS3 / SCSS</div>
+            <div class="skill-card__desc">Flex, Grid, 반응형 단위, 변수·믹스인 활용</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">JavaScript</div>
+            <div class="skill-card__desc">ES6+, DOM 조작, 이벤트, 비동기 처리</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card__name">GSAP</div>
+            <div class="skill-card__desc">ScrollTrigger, 타임라인 애니메이션</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__career">
+        <div class="career-row">
+          <div class="career-row__label">이름</div>
+          <div class="career-row__meta">
+            <span class="career-row__company">장지영&nbsp; Jangjiyoung</span>
+          </div>
+          <div class="career-row__detail"></div>
+        </div>
+
+        <div class="career-row">
+          <div class="career-row__label">경력</div>
+          <div class="career-row__meta">
+            <span class="career-row__period">2024. 08 – 재직중</span>
+            <span class="career-row__company">티디에스 디자인팀 매니저</span>
+          </div>
+          <div class="career-row__detail">
+            <span class="career-row__desc">자사 서비스 UI/UX 디자인 및 퍼블리싱</span>
+            <span class="career-row__desc">보험사(삼성화재, DB손보, KB손보 등) 여행보험 웹페이지 운영</span>
+          </div>
+        </div>
+
+        <div class="career-row">
+          <div class="career-row__label"></div>
+          <div class="career-row__meta">
+            <span class="career-row__period">2019. 08 – 2020. 11</span>
+            <span class="career-row__company">(주)셀러허브 개발팀 사원 팀원</span>
+          </div>
+          <div class="career-row__detail">
+            <span class="career-row__desc">커머스 통합관리 솔루션 UI 퍼블리싱 및 반응형 웹 구현</span>
+            <span class="career-row__desc">자사 Web/App 리뉴얼 프로젝트 구축 및 운영</span>
+          </div>
+        </div>
+
+        <div class="career-row">
+          <div class="career-row__label">경험</div>
+          <div class="career-row__meta">
+            <span class="career-row__period">2021. 01 – 2024. 05</span>
+            <span class="career-row__company">(주)웨이팅리스트</span>
+          </div>
+          <div class="career-row__detail">
+            <span class="career-row__desc">최신 트렌드 기반 SNS 채널(인스타그램, 페이스북)</span>
+            <span class="career-row__desc">브랜드 콘텐츠 기획 및 디자인 제작</span>
+          </div>
+        </div>
+
+        <div class="career-row">
+          <div class="career-row__label">수상</div>
+          <div class="career-row__meta">
+            <span class="career-row__company">파주시 캐릭터 공모전 수상</span>
+          </div>
+          <div class="career-row__detail">
+            <span class="career-row__desc">파주시가 주최한 파주시 캐릭터 공모전에서 시민투표 1위 선정</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 한글 주석: 프로젝트 간 여백 -->
+  <div class="project-spacer"></div>
+
+  <!-- ═══ 02. PICKLY 핑크 커버 ═══ -->
+  <section class="pickly-hero" id="pickly-hero">
+    <img class="pickly-hero__logo" id="picklyLogo" src="images/pickly-logo.png" alt="Pickly" draggable="false" />
+    <div class="pickly-hero__inner">
+
+      <!-- 좌측: 그래픽 -->
+      <div class="pickly-hero__visual">
+        <div class="pickly-hero__scroll" id="picklyScroll">
+          <div class="pickly-hero__tilt" id="picklyTilt">
+            <img class="pickly-hero__img" src="assets/pickly-hero/group-48097235.svg"
+              width="1614" height="1080" decoding="async" alt="Pickly 비주얼 그래픽" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 우측: 프로젝트 정보 -->
+      <div class="pickly-hero__info" id="picklyInfo">
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Service</div>
+          <div class="pickly-info__value">Mobile App service</div>
+        </div>
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Project</div>
+          <div class="pickly-info__value">Pickly · 숏폼 비디오 저장, 관리 플랫폼</div>
+        </div>
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Type</div>
+          <div class="pickly-info__value">Personal Project</div>
+        </div>
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Role</div>
+          <div class="pickly-info__value">UI/UX Design 100%</div>
+        </div>
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Duration</div>
+          <div class="pickly-info__value">2025.09 – 2025.10</div>
+        </div>
+        <div class="pickly-info__row">
+          <div class="pickly-info__label">Tools</div>
+          <div class="pickly-info__value">Figma, Photoshop, Illustrator</div>
+        </div>
+        <p class="pickly-info__note">100% 개인 작업 포트폴리오입니다.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ 03. PICKLY 프로젝트 콘텐츠 슬라이드 ═══ -->
+  <section class="pickly-slides">
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-02.png" alt="Overview" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-03.png" alt="Background — 트렌드 조사" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-04.png" alt="Background — 숏폼 시청 데이터" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-05.png" alt="Survey — 설문 조사 결과" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-06.png" alt="User Research — 타겟층 조사" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-07.png" alt="User Research — Affinity Diagram" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-08.png" alt="Service Direction" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-09.png" alt="Onboarding" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-10.png" alt="외부 숏폼 저장 플로우" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-11.png" alt="User Flow" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-12.png" alt="새 포켓 저장 기능" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-13.png" alt="친구 초대 및 공유" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-14.png" alt="Information Architecture" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-15.png" alt="Branding — Logo & Typography" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-16.png" alt="Component" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-17.png" alt="UI — Main Home" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-18.png" alt="UI — 마이 픽 AI Pick" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-19.png" alt="UI — 마이 픽 내 포켓" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-20.png" alt="UI — 리마인더" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-21.png" alt="UI — 그룹피커 커뮤니티" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-22.png" alt="UI — 그룹피커 투표" loading="lazy" decoding="async" /></div>
+    <div class="pickly-slide"><img class="pickly-slide__img" src="assets/pickly-pages/page-23.png" alt="Project Retrospective" loading="lazy" decoding="async" /></div>
+  </section>
+
+  <!-- 한글 주석: 프로젝트 간 여백 -->
+  <div class="project-spacer"></div>
+
+  <!-- ═══ 04. NICE PAYMENTS 프로젝트 슬라이드 ═══ -->
+  <section class="nice-slides">
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-01.png" alt="NICE PAYMENTS — 커버" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-02.png" alt="Background" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-03.png" alt="Competitive Analysis" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-04.png" alt="Persona / Pain Point Mapping" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-05.png" alt="Key Insights" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-06.png" alt="IA Before / After" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-07.png" alt="Wireframe" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-08.png" alt="AI 비주얼 시스템 구축" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-09.png" alt="AI Exploration — Midjourney" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-10.png" alt="비주얼 시스템 정립" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-11.png" alt="Typography / Color / Component" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-12.png" alt="Main Page — AS-IS / TO-BE" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-13.png" alt="Main Page UI" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-14.png" alt="Service 블록 구조" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-15.png" alt="Footer / FAQ" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-16.png" alt="Sub Page — AS-IS / TO-BE" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-17.png" alt="Service 상세 페이지" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-18.png" alt="반응형 모바일 UI" loading="lazy" decoding="async" /></div>
+    <div class="nice-slide"><img class="nice-slide__img" src="assets/nice-pages/page-19.png" alt="Project Retrospective" loading="lazy" decoding="async" /></div>
+  </section>
+
+  <!-- 한글 주석: 프로젝트 간 여백 -->
+  <div class="project-spacer"></div>
+
+  <!-- ═══ ETC 현대카드 프로모션 리디자인 ═══ -->
+  <section class="etc-slides">
+    <div class="etc-slide"><img class="etc-slide__img" src="assets/etc-pages/page-01.png" alt="현대카드 프로모션 리디자인 — 01" loading="lazy" decoding="async" /></div>
+    <div class="etc-slide"><img class="etc-slide__img" src="assets/etc-pages/page-02.png" alt="현대카드 프로모션 리디자인 — 02" loading="lazy" decoding="async" /></div>
+    <div class="etc-slide"><img class="etc-slide__img" src="assets/etc-pages/page-03.png" alt="현대카드 프로모션 리디자인 — 03" loading="lazy" decoding="async" /></div>
+  </section>
+
+  <!-- 한글 주석: 프로젝트 간 여백 -->
+  <div class="project-spacer"></div>
+
+  <!-- ═══ DESIGN GALLERY ═══ -->
+  <section class="gallery" id="gallery">
+    <div class="gallery__head">
+      <div>
+        <div class="gallery__eyebrow">ETC</div>
+        <div class="gallery__title">DESIGN GALLERY</div>
+      </div>
+      <div class="gallery__hint">클릭하면 원본으로<br>확인할 수 있습니다</div>
+    </div>
+    <div class="gallery__grid">
+      <div class="gi"><img src="assets/gallery/design_typo_mok.jpg" alt="가구 브랜드 타이포그래피" loading="lazy"><div class="gi__info"><b>가구 브랜드 타이포그래피</b><small>Photoshop · Brand Identity</small></div></div>
+      <div class="gi"><img src="assets/gallery/design_site_01.jpg" alt="플르부아 리디자인" loading="lazy"><div class="gi__info"><b>플르부아 웹사이트 리디자인</b><small>Photoshop · Web Design</small></div></div>
+      <div class="gi"><img src="assets/gallery/design_pace.jpg" alt="페이스 갤러리" loading="lazy"><div class="gi__info"><b>페이스 갤러리 리디자인</b><small>Photoshop · Web Design</small></div></div>
+      <div class="gi"><img src="assets/gallery/design_h&m.png" alt="H&M 리디자인" loading="lazy"><div class="gi__info"><b>H&amp;M 웹사이트 리디자인</b><small>Photoshop · Fashion</small></div></div>
+      <!-- <div class="gi"><img src="assets/gallery/design_bookcover.png" alt="북커버" loading="lazy"><div class="gi__info"><b>북커버 그래픽 디자인</b><small>Photoshop · Graphic Design</small></div></div> -->
+      <div class="gi"><img src="assets/gallery/design_graphic_mok.png" alt="포스터" loading="lazy"><div class="gi__info"><b>그래픽 포스터 디자인</b><small>Photoshop · Poster</small></div></div>
+      <div class="gi"><img src="assets/gallery/design_typo.jpg" alt="타이포1" loading="lazy"><div class="gi__info"><b>타이포그래피 워크</b><small>Photoshop · Typography</small></div></div>
+      <div class="gi"><img src="assets/gallery/design_hmmain.jpg" alt="현대카드 메인" loading="lazy"><div class="gi__info"><b>H&M 웹사이트 리디자인</b><small>Photoshop · 개인 프로젝트</small></div></div>
+      <!-- <div class="gi"><img src="assets/gallery/design_typo2.jpg" alt="타이포2" loading="lazy"><div class="gi__info"><b>타이포그래피 시리즈 2</b><small>Photoshop · Typography</small></div></div> -->
+      <div class="gi"><img src="assets/gallery/design_hmsub.jpg" alt="현대카드 서브" loading="lazy"><div class="gi__info"><b>H&M 웹사이트 리디자인</b><small>Photoshop · Banner Design</small></div></div>
+      <!-- <div class="gi"><img src="assets/gallery/design_graphic.jpg" alt="그래픽아트" loading="lazy"><div class="gi__info"><b>그래픽 아트워크</b><small>Illustrator · Graphic Art</small></div></div> -->
+      <!-- <div class="gi"><img src="assets/gallery/design_typo3.jpg" alt="타이포3" loading="lazy"><div class="gi__info"><b>타이포그래피 시리즈 3</b><small>Photoshop · Typography</small></div></div> -->
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer" id="footer">
+    <div class="footer__bg-text">JJY</div>
+    <div class="footer__top">
+      <div class="footer__cta-label">감사합니다.</div>
+      <h2 class="footer__display">Let's<br><em>work</em><br>together.</h2>
+      <div class="footer__contact-grid">
+        <div class="footer__contact-item">
+          <div class="footer__contact-label">Email</div>
+          <a class="footer__contact-value" href="mailto:o_o0789@naver.com">o_o0789@naver.com</a>
+        </div>
+        <div class="footer__contact-item">
+          <div class="footer__contact-label">Phone</div>
+          <a class="footer__contact-value" href="tel:+821041727389">010-4172-7389</a>
+        </div>
+        <div class="footer__contact-item">
+          <div class="footer__contact-label">GitHub</div>
+          <a class="footer__contact-value" href="https://github.com/superji0" target="_blank" rel="noopener">github.com/superji0 ↗</a>
+        </div>
+        <div class="footer__contact-item">
+          <div class="footer__contact-label">Portfolio</div>
+          <a class="footer__contact-value" href="https://superji0.github.io/" target="_blank" rel="noopener">superji0.github.io ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 장지영. All rights reserved.</span>
+      <div class="footer__links">
+        <a class="footer__link" href="#cover">Top ↑</a>
+        <a class="footer__link" href="https://github.com/superji0" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 한글 주석: 갤러리 라이트박스 팝업 -->
+  <div class="lb" id="lb">
+    <span class="lb__counter" id="lbCounter"></span>
+    <button class="lb__close" id="lbClose" aria-label="닫기">✕</button>
+    <button class="lb__arrow lb__arrow--prev" id="lbPrev" aria-label="이전">‹</button>
+    <button class="lb__arrow lb__arrow--next" id="lbNext" aria-label="다음">›</button>
+    <div class="lb__wrap" id="lbWrap">
+      <img class="lb__img" id="lbImg" src="" alt="">
+      <div class="lb__caption" id="lbCaption">
+        <b id="lbTitle"></b>
+        <small id="lbSub"></small>
+      </div>
+    </div>
+  </div>
+
+  <!-- 한글 주석: GSAP — 패럴랙스 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function() {
+    gsap.registerPlugin(ScrollTrigger);
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── 01. 커버 패럴랙스 ── */
+    var coverImg = document.getElementById('coverImg');
+    if (coverImg) {
+      gsap.fromTo(coverImg,
+        { yPercent: 0, scale: 1.05 },
+        {
+          yPercent: -3, scale: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: '#cover', start: 'top top', end: 'bottom top', scrub: 1.2 }
+        }
+      );
+    }
+
+    /* ── About Me 진입 애니메이션 ── */
+    var aboutSection = document.getElementById('about');
+    if (aboutSection && !reduced) {
+      var aboutTitle = aboutSection.querySelector('.about__title');
+      var aboutCards = aboutSection.querySelectorAll('.skill-card');
+      var aboutRows = aboutSection.querySelectorAll('.career-row');
+
+      var aboutTl = gsap.timeline({
+        scrollTrigger: { trigger: '#about', start: 'top 80%', toggleActions: 'play none none none' }
+      });
+      aboutTl.fromTo(aboutTitle, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0);
+      aboutCards.forEach(function(card, i) {
+        aboutTl.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.1 + i * 0.06);
+      });
+      aboutRows.forEach(function(row, i) {
+        aboutTl.fromTo(row, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.5 + i * 0.08);
+      });
+    }
+
+    /* ── 02. Pickly 핑크 커버 — 스크롤 패럴랙스 + 포인터 틸트 ── */
+    var hero = document.getElementById('pickly-hero');
+    var scroll = document.getElementById('picklyScroll');
+    var tilt = document.getElementById('picklyTilt');
+
+    var info = document.getElementById('picklyInfo');
+    var logo = document.getElementById('picklyLogo');
+
+    if (hero && scroll && tilt && !reduced) {
+      /* 한글 주석: 진입 시 페이드 + 스케일업 */
+      gsap.timeline({
+        scrollTrigger: { trigger: '#pickly-hero', start: 'top 88%', toggleActions: 'play none none none' }
+      })
+        .fromTo(logo, { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0)
+        .from(scroll, { opacity: 0, duration: 0.75, ease: 'power2.out' }, 0)
+        .fromTo(tilt, { opacity: 0, scale: 0.965 }, { opacity: 1, scale: 1, duration: 1.05, ease: 'power3.out' }, 0.05)
+        .fromTo(info, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }, 0.3);
+
+      /* 한글 주석: 스크롤 패럴랙스 — 바깥 레이어 크게, 안쪽 작게 */
+      var triggerBase = { trigger: '#pickly-hero', start: 'top bottom', end: 'bottom top', invalidateOnRefresh: true };
+
+      gsap.fromTo(scroll, { y: '14vh' }, { y: '-14vh', ease: 'none', scrollTrigger: Object.assign({}, triggerBase, { scrub: 3.2 }) });
+      gsap.fromTo(tilt, { y: '5vh' }, { y: '-7vh', ease: 'none', scrollTrigger: Object.assign({}, triggerBase, { scrub: 3.8 }) });
+      gsap.fromTo(scroll, { scale: 1.06 }, { scale: 1, ease: 'none', scrollTrigger: Object.assign({}, triggerBase, { scrub: 4 }) });
+
+      /* 한글 주석: 포인터 틸트 — 마우스 따라 미세 이동 */
+      var nxTo = gsap.quickTo(tilt, 'x', { duration: 0.65, ease: 'power3.out' });
+      var rotTo = gsap.quickTo(tilt, 'rotation', { duration: 0.75, ease: 'power3.out' });
+
+      hero.addEventListener('pointermove', function(e) {
+        var r = hero.getBoundingClientRect();
+        var nx = (e.clientX - r.left) / r.width - 0.5;
+        var ny = (e.clientY - r.top) / r.height - 0.5;
+        nxTo(nx * 26);
+        rotTo(nx * 2.2 + ny * 0.5);
+      });
+      hero.addEventListener('pointerleave', function() {
+        nxTo(0);
+        rotTo(0);
+      });
+    }
+
+    /* ── 갤러리 라이트박스 ── */
+    var giItems = document.querySelectorAll('.gi');
+    var lb      = document.getElementById('lb');
+    var lbImg   = document.getElementById('lbImg');
+    var lbTitle = document.getElementById('lbTitle');
+    var lbSub   = document.getElementById('lbSub');
+    var lbCnt   = document.getElementById('lbCounter');
+    var lbIdx   = 0;
+
+    window.lbOpen = function(i) {
+      lbIdx = i;
+      lbUpdate();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    window.lbClose = function() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    function lbUpdate() {
+      var item = giItems[lbIdx];
+      var img  = item.querySelector('img');
+      var info = item.querySelector('.gi__info');
+      lbImg.src = img ? img.src : '';
+      lbImg.alt = img ? img.alt : '';
+      lbTitle.textContent = info ? (info.querySelector('b') || {}).textContent || '' : '';
+      lbSub.textContent   = info ? (info.querySelector('small') || {}).textContent || '' : '';
+      lbCnt.textContent   = (lbIdx + 1) + ' / ' + giItems.length;
+    }
+    function lbPrev() { lbIdx = (lbIdx - 1 + giItems.length) % giItems.length; lbUpdate(); }
+    function lbNext() { lbIdx = (lbIdx + 1) % giItems.length; lbUpdate(); }
+
+    giItems.forEach(function(item, i) {
+      item.addEventListener('click', function() { lbOpen(i); });
+    });
+    document.getElementById('lbClose').addEventListener('click', lbClose);
+    document.getElementById('lbPrev').addEventListener('click', lbPrev);
+    document.getElementById('lbNext').addEventListener('click', lbNext);
+    document.getElementById('lbWrap').addEventListener('click', function(e) {
+      if (e.target === this) lbClose();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbPrev();
+      if (e.key === 'ArrowRight') lbNext();
+    });
+
+    ScrollTrigger.refresh();
+    window.addEventListener('load', function() { ScrollTrigger.refresh(); });
+  })();
+  </script>
+
+</body>
+</html>
