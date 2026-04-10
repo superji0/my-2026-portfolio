@@ -47,11 +47,12 @@
       background: #fff url('images/01 cover.png') center center / cover no-repeat;
       will-change: transform;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .cover {
-        height: 56vh;
-        height: 56svh;
-        min-height: 280px;
+        height: auto;
+        min-height: unset;
+        aspect-ratio: 5334 / 3000;
+        background-size: contain;
         background-position: center center;
       }
     }
@@ -1114,9 +1115,9 @@
     gsap.registerPlugin(ScrollTrigger);
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ── 01. 커버 패럴랙스 ── */
+    /* ── 01. 커버 패럴랙스 (데스크탑만) ── */
     var coverEl = document.getElementById('cover');
-    if (coverEl) {
+    if (coverEl && window.innerWidth > 1024) {
       gsap.fromTo(coverEl,
         { backgroundPosition: 'center 40%' },
         {
