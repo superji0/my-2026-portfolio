@@ -44,20 +44,16 @@
       height: 100svh;
       min-height: 400px;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-    }
-
-    .cover__img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
+      background: #fff url('images/01 cover.png') center center / cover no-repeat;
       will-change: transform;
-      transform: scale(1.05);
-      padding: clamp(16px, 3vw, 48px);
+    }
+    @media (max-width: 768px) {
+      .cover {
+        height: 56vh;
+        height: 56svh;
+        min-height: 280px;
+        background-position: center center;
+      }
     }
 
     /* ═══ ABOUT ME ═══ */
@@ -665,11 +661,11 @@
     }
 
     .footer__cta-label {
-      font-size: 11px;
+      font-size: 16px;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: #ffffffc2;
       margin-bottom: clamp(16px, 2vh, 28px);
       display: flex;
       align-items: center;
@@ -679,13 +675,13 @@
       content: '';
       width: 20px;
       height: 1px;
-      background: rgba(255,255,255,0.25);
+      background: #ffffffc2;
     }
 
     .footer__display {
-      font-size: clamp(40px, 7vw, 96px);
+      font-size: clamp(40px, 7vw, 72px);
       font-weight: 700;
-      line-height: 0.95;
+      line-height: 1;
       letter-spacing: -0.03em;
       margin-bottom: clamp(32px, 5vh, 56px);
       max-width: 700px;
@@ -746,13 +742,13 @@
       gap: 20px;
     }
     .footer__link {
-      font-size: 12px;
+      font-size: 17px;
       font-weight: 600;
       letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.862);
       text-decoration: none;
       padding: 8px 16px;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.399);
       border-radius: 100px;
       transition: color 0.2s, background 0.2s, border-color 0.2s;
     }
@@ -777,15 +773,40 @@
       z-index: 0;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .footer__top {
+        padding: 60px 24px 48px;
+      }
+      .footer__display {
+        font-size: clamp(32px, 8vw, 48px);
+        line-height: 1.05;
+      }
+      .footer__cta-label {
+        font-size: 13px;
+      }
       .footer__contact-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+        max-width: 100%;
+      }
+      .footer__contact-value {
+        font-size: 15px;
       }
       .footer__bottom {
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         align-items: flex-start;
+        padding: 20px 24px;
+      }
+      .footer__links {
+        gap: 12px;
+      }
+      .footer__link {
+        font-size: 14px;
+        padding: 7px 14px;
+      }
+      .footer__bg-text {
+        font-size: clamp(80px, 18vw, 140px);
       }
     }
   </style>
@@ -794,15 +815,7 @@
 <body>
 
   <!-- ═══ 01. COVER ═══ -->
-  <section class="cover" id="cover">
-    <img
-      class="cover__img"
-      id="coverImg"
-      src="images/01 cover.png"
-      alt="장지영 UI/UX Product Designer 2026 Portfolio"
-      draggable="false"
-    />
-  </section>
+  <section class="cover" id="cover"></section>
 
   <!-- ═══ ABOUT ME ═══ -->
   <section class="about" id="about">
@@ -1054,7 +1067,7 @@
     <div class="footer__bg-text">JJY</div>
     <div class="footer__top">
       <div class="footer__cta-label">감사합니다.</div>
-      <h2 class="footer__display">Let's<br><em>work</em><br>together.</h2>
+      <h2 class="footer__display">Thank you<br><em>for your time</em><br>and<br>consideration.</h2>
       <div class="footer__contact-grid">
         <div class="footer__contact-item">
           <div class="footer__contact-label">Email</div>
@@ -1068,17 +1081,12 @@
           <div class="footer__contact-label">GitHub</div>
           <a class="footer__contact-value" href="https://github.com/superji0" target="_blank" rel="noopener">github.com/superji0 ↗</a>
         </div>
-        <div class="footer__contact-item">
-          <div class="footer__contact-label">Portfolio</div>
-          <a class="footer__contact-value" href="https://superji0.github.io/" target="_blank" rel="noopener">superji0.github.io ↗</a>
-        </div>
       </div>
     </div>
     <div class="footer__bottom">
       <span class="footer__copy">© 2026 장지영. All rights reserved.</span>
       <div class="footer__links">
         <a class="footer__link" href="#cover">Top ↑</a>
-        <a class="footer__link" href="https://github.com/superji0" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </footer>
@@ -1107,12 +1115,12 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ── 01. 커버 패럴랙스 ── */
-    var coverImg = document.getElementById('coverImg');
-    if (coverImg) {
-      gsap.fromTo(coverImg,
-        { yPercent: 0, scale: 1.05 },
+    var coverEl = document.getElementById('cover');
+    if (coverEl) {
+      gsap.fromTo(coverEl,
+        { backgroundPosition: 'center 40%' },
         {
-          yPercent: -3, scale: 1,
+          backgroundPosition: 'center 60%',
           ease: 'none',
           scrollTrigger: { trigger: '#cover', start: 'top top', end: 'bottom top', scrub: 1.2 }
         }
