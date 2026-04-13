@@ -40,21 +40,15 @@
     .cover {
       position: relative;
       width: 100%;
-      height: 100vh;
-      height: 100svh;
-      min-height: 400px;
       overflow: hidden;
-      background: #fff url('images/01 cover.png') center center / cover no-repeat;
-      will-change: transform;
+      background: #fff;
+      line-height: 0;
     }
-    @media (max-width: 1024px) {
-      .cover {
-        height: auto;
-        min-height: unset;
-        aspect-ratio: 5334 / 3000;
-        background-size: contain;
-        background-position: center center;
-      }
+    .cover__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      will-change: transform;
     }
 
     /* ═══ ABOUT ME ═══ */
@@ -816,7 +810,9 @@
 <body>
 
   <!-- ═══ 01. COVER ═══ -->
-  <section class="cover" id="cover"></section>
+  <section class="cover" id="cover">
+    <img class="cover__img" id="coverImg" src="images/01 cover.png" alt="Portfolio Cover" />
+  </section>
 
   <!-- ═══ ABOUT ME ═══ -->
   <section class="about" id="about">
@@ -1115,13 +1111,13 @@
     gsap.registerPlugin(ScrollTrigger);
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ── 01. 커버 패럴랙스 (데스크탑만) ── */
-    var coverEl = document.getElementById('cover');
-    if (coverEl && window.innerWidth > 1024) {
-      gsap.fromTo(coverEl,
-        { backgroundPosition: 'center 40%' },
+    /* ── 01. 커버 패럴랙스 ── */
+    var coverImg = document.getElementById('coverImg');
+    if (coverImg) {
+      gsap.fromTo(coverImg,
+        { yPercent: 0, scale: 1 },
         {
-          backgroundPosition: 'center 60%',
+          yPercent: -8, scale: 1.05,
           ease: 'none',
           scrollTrigger: { trigger: '#cover', start: 'top top', end: 'bottom top', scrub: 1.2 }
         }
